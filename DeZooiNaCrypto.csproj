@@ -50,10 +50,11 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.9.141-beta" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Model\" />
+	  <Folder Include="Data\" />
 	  <Folder Include="ViewModel\" />
 	</ItemGroup>
 
