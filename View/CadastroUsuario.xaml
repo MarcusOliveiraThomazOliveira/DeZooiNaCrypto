@@ -39,6 +39,7 @@
         <Entry
             Placeholder="Senha"
             PlaceholderColor="Azure"
+            IsPassword="True"
             />
 
         <Button
