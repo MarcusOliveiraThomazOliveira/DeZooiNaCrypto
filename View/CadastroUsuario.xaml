@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DeZooiNaCrypto.View.CadastroUsuario"
+             Title="Cadastro de Usuário">
+    <StackLayout VerticalOptions="CenterAndExpand" Margin="16" Padding="16">
+        <Label
+            Text="Nome"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            />
+
+        <Entry
+            Placeholder="Nome"
+            x:Name="txtNome"
+            PlaceholderColor="Azure"
+            Keyboard="Default"
+            />
+        
+        <Label
+            Text="E-mail"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            />
+
+        <Entry
+            Placeholder="E-mail"
+            x:Name="txtEmail"
+            PlaceholderColor="Azure"
+            Keyboard="Default"
+            />
+
+        <Label
+            Text="Senha"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            />
+
+        <Entry
+            Placeholder="Senha"
+            PlaceholderColor="Azure"
+            />
+
+        <Button
+            x:Name="bntGravar"
+            Text="Gravar"
+            Clicked="Gravar"
+            Margin="7"
+            />
+    </StackLayout>
+</ContentPage>
