@@ -11,7 +11,11 @@ namespace DeZooiNaCrypto.Data
     {
         public UsuarioRepositorio(string connectionString) : base(connectionString)
         {
+        }
 
+        public Usuario AutenticarUsuario(string login, string password)
+        {
+            return _connection.QueryAsync<Usuario>("select * from usuario where email = {login} and senha = {password}", login, password).Result.FirstOrDefault();
         }
     }
 }

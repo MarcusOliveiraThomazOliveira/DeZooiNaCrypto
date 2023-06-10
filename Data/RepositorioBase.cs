@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DeZooiNaCrypto.Data
 {
-    public class RepositorioBase<T> where T : ObjetoBase
+    public class RepositorioBase<T> where T : new()
     {
         protected readonly SQLiteAsyncConnection _connection;
 
@@ -22,5 +22,17 @@ namespace DeZooiNaCrypto.Data
         {
             _connection.CreateTableAsync<Usuario>().Wait();
         }
+
+        public Task<List<T>> Lista()
+        {
+            return _connection.Table<T>().ToListAsync();
+        }
+
+        public T Obter(Guid guid)
+        {
+            var nomeTabela = (new T()).GetType().Name;
+            return _connection.QueryAsync<T>("select * from " + nomeTabela + " where {guid} = ", guid).Result.FirstOrDefault();
+        }
+
     }
 }
