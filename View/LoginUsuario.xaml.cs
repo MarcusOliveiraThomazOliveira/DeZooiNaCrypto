@@ -13,10 +13,13 @@ public partial class LoginUsuario : ContentPage
 
     private void Logar(object sender, EventArgs e)
     {
-        var usuario = _usuarioRepositorio.AutenticarUsuario(txtEmail.Text, txtSenha.Text);
-        if (usuario == null)
+        if (_usuarioRepositorio.AutenticarUsuario(txtEmail.Text, txtSenha.Text) == null)
         {
             DisplayAlert("Autenticar", "Login ou senha incorreto.", "Cancelar");
+        }
+        else
+        {
+            Navigation.PushAsync(new ListaMinhasCryptos());
         }
     }
 

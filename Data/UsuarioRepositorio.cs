@@ -1,4 +1,5 @@
 ﻿using DeZooiNaCrypto.Model;
+using DeZooiNaCrypto.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,8 @@ namespace DeZooiNaCrypto.Data
         {
             try
             {
-                return _connection.QueryAsync<Usuario>("select * from usuario where email = @login and senha = @password", login, password).Result.FirstOrDefault();
+                var senhaCriptografada = Criptografia.GerarCriptografia(password);
+                return _connection.QueryAsync<Usuario>("select * from usuario where email = @login and senha = @password", login, senhaCriptografada).Result.FirstOrDefault();
             }
             catch
             {
