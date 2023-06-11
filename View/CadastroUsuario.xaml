@@ -38,6 +38,7 @@
 
         <Entry
             Placeholder="Senha"
+            x:Name="txtSenha"
             PlaceholderColor="Azure"
             IsPassword="True"
             />

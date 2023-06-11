@@ -1,4 +1,5 @@
 ﻿using DeZooiNaCrypto.Model;
+using Microsoft.VisualBasic;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -11,11 +12,24 @@ namespace DeZooiNaCrypto.Data
     public class RepositorioBase<T> where T : new()
     {
         protected readonly SQLiteAsyncConnection _connection;
+        const string _dataBaseName = "DeZooiNaCrypto.db3";
+        public const SQLite.SQLiteOpenFlags _flags =
+            SQLite.SQLiteOpenFlags.ReadWrite |
+            SQLite.SQLiteOpenFlags.Create |
+            SQLite.SQLiteOpenFlags.SharedCache;
 
-        public RepositorioBase(string connectionString)
+        public RepositorioBase()
         {
-            _connection = new SQLiteAsyncConnection(connectionString);
+            _connection = GetConnection();
             BuildTables();
+        }
+
+        private SQLiteAsyncConnection GetConnection()
+        {
+            var basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var fullBasePath = Path.Combine(basePath, _dataBaseName); 
+            
+            return new SQLiteAsyncConnection(fullBasePath, _flags);
         }
 
         private void BuildTables()
@@ -23,15 +37,43 @@ namespace DeZooiNaCrypto.Data
             _connection.CreateTableAsync<Usuario>().Wait();
         }
 
-        public Task<List<T>> Lista()
+        public Task<List<T>> Listar()
         {
-            return _connection.Table<T>().ToListAsync();
+            try
+            {
+                return _connection.Table<T>().ToListAsync();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.Message);
+            }
         }
 
         public T Obter(Guid guid)
         {
-            var nomeTabela = (new T()).GetType().Name;
-            return _connection.QueryAsync<T>("select * from " + nomeTabela + " where {guid} = ", guid).Result.FirstOrDefault();
+            try
+            {
+                var nomeTabela = (new T()).GetType().Name;
+                return _connection.QueryAsync<T>("select * from " + nomeTabela + " where {guid} = ", guid).Result.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.Message);
+            }
+
+        }
+
+        public int Salvar(T objeto)
+        {
+            try
+            {
+               return _connection.InsertAsync(objeto).Result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.Message);
+            }
         }
 
     }

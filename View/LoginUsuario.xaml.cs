@@ -1,10 +1,11 @@
 using DeZooiNaCrypto.Data;
+using DeZooiNaCrypto.Model;
 
 namespace DeZooiNaCrypto.View;
 
 public partial class LoginUsuario : ContentPage
 {
-    UsuarioRepositorio _usuarioRepositorio = new UsuarioRepositorio("");
+    UsuarioRepositorio _usuarioRepositorio = new UsuarioRepositorio();
     public LoginUsuario()
     {
         InitializeComponent();
