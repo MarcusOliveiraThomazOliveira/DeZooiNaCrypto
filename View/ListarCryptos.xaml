@@ -10,6 +10,7 @@
                 Text="+ Crypto"
                 x:Name="btnAddCrypto"
                 Margin="16"
+                Clicked="CadastrarCrypto"
          />
             <Button
                 Grid.Column="1"
