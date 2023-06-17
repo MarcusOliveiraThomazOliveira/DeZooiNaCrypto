@@ -17,6 +17,7 @@ public partial class ListarCryptos : ContentPage
     private void CarregarCryptos()
     {
         var lista = _cryptoRepositorio.Listar(_usuario);
+        lvCryptos.ItemsSource = lista;
     }
 
     private void CadastrarCrypto(object sender, EventArgs e)

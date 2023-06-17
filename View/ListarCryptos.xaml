@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DeZooiNaCrypto.View.ListarCryptos"
              NavigationPage.HasNavigationBar="False">
-    
+
     <VerticalStackLayout Spacing="10" Margin="5">
-        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+
+        <Grid x:Name="gridBotoes" ColumnDefinitions="*,*" ColumnSpacing="4">
             <Button
                 Text="+ Crypto"
                 x:Name="btnAddCrypto"
@@ -20,5 +21,17 @@
                 Clicked="Sair"
          />
         </Grid>
+        <ListView 
+            x:Name="lvCryptos"
+            BackgroundColor="Transparent"
+            SeparatorColor="Silver"
+            RowHeight="50">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Nome}">
+                    </TextCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </VerticalStackLayout>
 </ContentPage>
