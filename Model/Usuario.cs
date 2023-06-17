@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SQLiteNetExtensions.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace DeZooiNaCrypto.Model
 {
@@ -11,5 +12,7 @@ namespace DeZooiNaCrypto.Model
         public string Email { get; set; }
         [Required, MaxLength(100)]
         public string Senha { get; set; }
+        [OneToMany]
+        public List<Crypto> Cryptos { get; set; }
     }
 }

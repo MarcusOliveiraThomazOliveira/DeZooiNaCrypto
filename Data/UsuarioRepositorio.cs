@@ -19,7 +19,7 @@ namespace DeZooiNaCrypto.Data
             try
             {
                 if (string.IsNullOrEmpty(login)) { throw new Exception("É preciso informar um login válido"); }
-                if (!Validacao.ehEmail(login)) { throw new Exception("É preciso informar um login válido"); }
+                if (!Validacao.ehEmail(login)) { throw new Exception("Não é um e-mail válido"); }
                 if (string.IsNullOrEmpty(password)) { throw new Exception("É preciso informar uma senha válida"); }
                 
 

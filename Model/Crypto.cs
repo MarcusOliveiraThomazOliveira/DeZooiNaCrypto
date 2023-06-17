@@ -9,7 +9,6 @@ namespace DeZooiNaCrypto.Model
         [Required, MaxLength(100)]
         public string Nome { get; set; }
 
-
         [ForeignKey(typeof(Usuario))]
         public int IdUsuario { get; set; }
 
