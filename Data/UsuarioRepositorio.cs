@@ -18,13 +18,18 @@ namespace DeZooiNaCrypto.Data
         {
             try
             {
+                if (string.IsNullOrEmpty(login)) { throw new Exception("É preciso informar um login válido"); }
+                if (!Validacao.ehEmail(login)) { throw new Exception("É preciso informar um login válido"); }
+                if (string.IsNullOrEmpty(password)) { throw new Exception("É preciso informar uma senha válida"); }
+                
+
                 var senhaCriptografada = Criptografia.GerarCriptografia(password);
                 return _connection.QueryAsync<Usuario>("select * from usuario where email = @login and senha = @password", login, senhaCriptografada).Result.FirstOrDefault();
             }
             catch
             {
                 throw;
-            }                                                                                                                                                                     
+            }
         }
 
     }

@@ -13,14 +13,22 @@ public partial class LoginUsuario : ContentPage
 
     private void Logar(object sender, EventArgs e)
     {
-        var usuarioLogado = _usuarioRepositorio.AutenticarUsuario(txtEmail.Text, txtSenha.Text);
-        if (usuarioLogado == null)
+        try
         {
-            DisplayAlert("Autenticar", "Login ou senha incorreto.", "Cancelar");
+            var usuarioLogado = _usuarioRepositorio.AutenticarUsuario(txtEmail.Text, txtSenha.Text);
+            if (usuarioLogado == null)
+            {
+                DisplayAlert("Autenticar", "Login ou senha incorreto.", "OK");
+            }
+            else
+            {
+                Navigation.PushAsync(new ListarCryptos(usuarioLogado));
+            }
         }
-        else
+        catch (Exception ex)
         {
-            Navigation.PushAsync(new ListarCryptos(usuarioLogado));
+
+            DisplayAlert("Autenticar", ex.Message, "OK");
         }
     }
 

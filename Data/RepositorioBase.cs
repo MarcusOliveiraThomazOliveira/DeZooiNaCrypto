@@ -35,6 +35,7 @@ namespace DeZooiNaCrypto.Data
         private void BuildTables()
         {
             _connection.CreateTableAsync<Usuario>().Wait();
+            _connection.CreateTableAsync<Crypto>().Wait();
         }
 
         public Task<List<T>> Listar()
@@ -69,6 +70,18 @@ namespace DeZooiNaCrypto.Data
             try
             {
                return _connection.InsertAsync(objeto).Result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.Message);
+            }
+        }
+
+        public int Deletar(T objeto)
+        {
+            try
+            {
+                return _connection.DeleteAsync(objeto).Result;
             }
             catch (Exception ex)
             {

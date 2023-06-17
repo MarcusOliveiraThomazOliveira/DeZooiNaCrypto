@@ -15,4 +15,10 @@ public partial class ListarCryptos : ContentPage
     {
         Navigation.PushAsync(new CadastroCrypto(_usuario));
     }
+
+    private void Sair(object sender, EventArgs e)
+    {
+        _usuario = null;
+        Navigation.PushAsync(new LoginUsuario());
+    }
 }

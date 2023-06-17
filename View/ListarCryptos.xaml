@@ -17,6 +17,7 @@
                 Text="Sair"
                 x:Name="btnSair"
                 Margin="16"
+                Clicked="Sair"
          />
         </Grid>
     </VerticalStackLayout>

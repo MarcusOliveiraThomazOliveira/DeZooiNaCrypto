@@ -13,6 +13,6 @@ public partial class CadastroCrypto : ContentPage
 
     private void Gravar(object sender, EventArgs e)
     {
-
+       
     }
 }
