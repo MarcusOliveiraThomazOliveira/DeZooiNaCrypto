@@ -73,7 +73,7 @@ namespace DeZooiNaCrypto.Data
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.InnerException.Message);
+                throw new Exception(ex.Message);
             }
         }
 

@@ -10,7 +10,7 @@ namespace DeZooiNaCrypto.Model
         public string Nome { get; set; }
 
         [ForeignKey(typeof(Usuario))]
-        public int IdUsuario { get; set; }
+        public Guid IdUsuario { get; set; }
 
         [ManyToOne]
         public Usuario Usuario { get; set; }
