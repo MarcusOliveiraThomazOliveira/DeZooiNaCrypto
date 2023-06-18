@@ -27,13 +27,17 @@ namespace DeZooiNaCrypto.Data
         private SQLiteAsyncConnection GetConnection()
         {
             var basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            var fullBasePath = Path.Combine(basePath, _dataBaseName); 
-            
+            var fullBasePath = Path.Combine(basePath, _dataBaseName);
+
             return new SQLiteAsyncConnection(fullBasePath, _flags);
         }
 
         private void BuildTables()
         {
+
+            //_connection.DropTableAsync<Usuario>().Wait();
+            //_connection.DropTableAsync<Crypto>().Wait();
+
             _connection.CreateTableAsync<Usuario>().Wait();
             _connection.CreateTableAsync<Crypto>().Wait();
         }
@@ -69,7 +73,7 @@ namespace DeZooiNaCrypto.Data
         {
             try
             {
-               return _connection.InsertAsync(objeto).Result;
+                return _connection.InsertAsync(objeto).Result;
             }
             catch (Exception ex)
             {

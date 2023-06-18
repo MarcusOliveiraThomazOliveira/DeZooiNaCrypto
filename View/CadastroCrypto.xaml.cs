@@ -19,7 +19,14 @@ public partial class CadastroCrypto : ContentPage
         try
         {
             if (string.IsNullOrEmpty(txtNome.Text)) { DisplayAlert("Cadastro Crypto", "É preciso informar um nome para a crypto.", "OK"); }
-            _cryptoRepositorio.Salvar(new Crypto() { Nome = txtNome.Text, Usuario = _usuario, IdUsuario  = _usuario.Id});
+            _cryptoRepositorio.Salvar(new Crypto()
+            {
+                Nome = txtNome.Text.ToUpper(),
+                NomeLongo = txtNomeLongo.Text,
+                MoedaPar = pckMoedaPar.Items[pckMoedaPar.SelectedIndex],
+                IdUsuario = _usuario.Id,
+                Usuario = _usuario
+            }); ; ;
             Navigation.PushAsync(new ListarCryptos(_usuario));
         }
         catch (Exception ex)

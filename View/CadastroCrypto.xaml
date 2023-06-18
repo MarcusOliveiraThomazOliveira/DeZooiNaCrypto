@@ -16,7 +16,41 @@
             Placeholder="Nome"
             x:Name="txtNome"
             Keyboard="Default"
+            MaxLength="100"
             />
+
+        <Label
+            Text="Nome Longo"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            Margin="16
+            "
+            />
+
+        <Entry
+            Placeholder="Nome Longo"
+            x:Name="txtNomeLongo"
+            Keyboard="Default"
+            MaxLength="100"
+            />
+
+        <Label
+            Text="Moeda Par"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            Margin="16
+            "
+            />
+
+        <Picker x:Name="pckMoedaPar" Title="Selecione a Moeda Par">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>BRL</x:String>
+                    <x:String>USD</x:String>
+                    <x:String>USDT</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
 
         <Button
             x:Name="bntGravar"

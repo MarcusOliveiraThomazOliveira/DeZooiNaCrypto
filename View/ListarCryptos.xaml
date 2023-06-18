@@ -28,7 +28,9 @@
             RowHeight="50">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Nome}">
+                    <TextCell 
+                        Text="{Binding NomeMoedaPar}"
+                        Detail="{Binding NomeLongo}">
                     </TextCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
