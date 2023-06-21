@@ -18,7 +18,9 @@ public partial class CadastroCrypto : ContentPage
     {
         try
         {
-            if (string.IsNullOrEmpty(txtNome.Text)) { DisplayAlert("Cadastro Crypto", "É preciso informar um nome para a crypto.", "OK"); }
+            if (string.IsNullOrEmpty(txtNome.Text)) { DisplayAlert("Cadastro Crypto", "É preciso informar um nome para a crypto.", "OK"); return; }
+            if (pckMoedaPar.SelectedIndex < 0) { DisplayAlert("Cadastro Crypto", "É preciso informar uma moeda par para a crypto.", "OK"); return; }
+            if (_cryptoRepositorio.Obter(_usuario, txtNome.Text.ToUpper(), pckMoedaPar.Items[pckMoedaPar.SelectedIndex]) != null) { DisplayAlert("Cadastro Crypto", "Essa Crypto já foi cadastrada.", "OK"); return; }
             _cryptoRepositorio.Salvar(new Crypto()
             {
                 Nome = txtNome.Text.ToUpper(),
