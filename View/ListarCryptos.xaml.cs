@@ -47,7 +47,7 @@ public partial class ListarCryptos : ContentPage
     {
         foreach (var crypto in _lstCryptos)
         {
-            crypto.NomeLongo = DateTime.Now.Second.ToString();
+            crypto.Valor = DateTime.Now.Second;
         }
         lvCryptos.ItemsSource = _lstCryptos;
     }
