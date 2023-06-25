@@ -3,8 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DeZooiNaCrypto.View.ListarCryptos"
              NavigationPage.HasNavigationBar="False">
+    <StackLayout>
+        <ListView 
+            x:Name="lvCryptos"
+            BackgroundColor="Transparent"
+            SeparatorColor="Silver"
+            RowHeight="50"
+            ItemsSource="{Binding _lstCryptos}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell 
+                        Text="{Binding NomeMoedaPar}"
+                        Detail="{Binding NomeLongo}"
+                        Tapped="Historico">
+                    </TextCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 
-    <VerticalStackLayout Spacing="10" Margin="5">
+    <!--<VerticalStackLayout Spacing="10" Margin="5">
 
         <Grid x:Name="gridBotoes" ColumnDefinitions="*,*" ColumnSpacing="4">
             <Button
@@ -25,15 +43,17 @@
             x:Name="lvCryptos"
             BackgroundColor="Transparent"
             SeparatorColor="Silver"
-            RowHeight="50">
+            RowHeight="50"
+            ItemsSource="{Binding _lstCryptos}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell 
                         Text="{Binding NomeMoedaPar}"
-                        Detail="{Binding NomeLongo}">
+                        Detail="{Binding NomeLongo}"
+                        Tapped="Historico">
                     </TextCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </VerticalStackLayout>
+    </VerticalStackLayout>-->
 </ContentPage>
