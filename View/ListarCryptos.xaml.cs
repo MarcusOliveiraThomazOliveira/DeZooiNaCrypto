@@ -45,11 +45,7 @@ public partial class ListarCryptos : ContentPage
 
     private void AtualizaDados(object sender, EventArgs e)
     {
-        foreach (var crypto in _lstCryptos)
-        {
-            crypto.Valor = DateTime.Now.Second;
-        }
-        lvCryptos.ItemsSource = _lstCryptos;
+        var retorno = _cryptoRepositorio.ObterPrecos(_lstCryptos.Select(x => (x.Nome + x.MoedaPar).Replace(" ", "")));
     }
 
     private void CadastrarCrypto(object sender, EventArgs e)
