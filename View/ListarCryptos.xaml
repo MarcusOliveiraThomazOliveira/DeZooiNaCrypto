@@ -25,31 +25,89 @@
         </CollectionView.Header>
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <Grid Padding="10">
+                <Grid x:Name="lvCryptos">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="1"
+                           Text="{Binding NomeMoedaPar}"
+                           FontAttributes="Bold"                           
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="Center"/>
+                    <Label Grid.Column="1"
+                           Text="{Binding Valor}"
+                           FontAttributes="Bold"
+                           HorizontalOptions="EndAndExpand"
+                           VerticalOptions="Center"/>
+                    <Button Grid.Column="2"
+                            Text="Histórico"
+                            FontAttributes="Bold"
+                            TextColor="Black"
+                            BackgroundColor="Transparent"
+                            HorizontalOptions="EndAndExpand"
+                            VerticalOptions="Center"
+                            Clicked="Historico"/>
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+    <!--<CollectionView
+        x:Name="lvCryptos"
+        ItemsSource="{Binding _lstCryptos}">
+        <CollectionView.Header>
+            <Grid x:Name="gridBotoes" ColumnDefinitions="*,*" ColumnSpacing="4">
+                <Button
+                Text="+ Crypto"
+                x:Name="btnAddCrypto"
+                Margin="16"
+                Clicked="CadastrarCrypto"
+         />
+                <Button
+                Grid.Column="1"
+                Text="Sair"
+                x:Name="btnSair"
+                Margin="16"
+                Clicked="Sair"
+         />
+            </Grid>
+        </CollectionView.Header>
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Grid>                    
                     <Label Grid.Column="1"
                        Text="{Binding NomeMoedaPar}"
                        FontAttributes="Bold"
                        WidthRequest="250"
                        HorizontalOptions="Start"/>
-                    <Label Grid.Column="2"
-                       Text="{Binding NomeLongo}"
-                       FontAttributes="Italic"
-                       WidthRequest="60"
-                       HorizontalOptions="Center" />
                     <Label Grid.Column="3"
                        Text="{Binding Valor}"
-                       FontAttributes="Italic"
-                       HorizontalOptions="End" />
+                       FontAttributes="Bold"
+                       HorizontalOptions="End"/>
                 </Grid>
             </DataTemplate>
         </CollectionView.ItemTemplate>
-    </CollectionView>
+    </CollectionView>-->
+    <!--<StackLayout>
+        <ListView
+            x:Name="lvCryptos"
+            BackgroundColor="Transparent"
+            SeparatorColor="Silver"
+            RowHeight="50"
+            ItemsSource="{Binding _lstCryptos}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell                        
+                        Text="{Binding NomeMoedaPar}"
+                        Detail="{Binding Valor}"
+                        Tapped="Historico">
+                    </TextCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>-->
 </ContentPage>

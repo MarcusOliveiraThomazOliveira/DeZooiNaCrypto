@@ -34,7 +34,6 @@ namespace DeZooiNaCrypto.Data
 
         private void BuildTables()
         {
-
             //_connection.DropTableAsync<Usuario>().Wait();
             //_connection.DropTableAsync<Crypto>().Wait();
 

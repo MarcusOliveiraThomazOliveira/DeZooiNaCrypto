@@ -45,8 +45,8 @@
         <Picker x:Name="pckMoedaPar" Title="Selecione a Moeda Par">
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
-                    <x:String>BRL</x:String>
-                    <x:String>USD</x:String>
+                    <!--<x:String>BRL</x:String>
+                    <x:String>USD</x:String>-->
                     <x:String>USDT</x:String>
                 </x:Array>
             </Picker.ItemsSource>

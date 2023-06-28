@@ -34,18 +34,28 @@ public partial class ListarCryptos : ContentPage
     {
         _lstCryptos = _cryptoRepositorio.Listar(_usuario).ToList();
         lvCryptos.ItemsSource = _lstCryptos;
+        AtualizaDados(null, null);
     }
 
     private void ConfiguraCarregamentoAutomatico()
     {
-        timerAtualizaDados.Interval = TimeSpan.FromSeconds(5);
+        timerAtualizaDados.Interval = TimeSpan.FromSeconds(3);
         timerAtualizaDados.Tick += (sender, e) => AtualizaDados(sender, e);
         timerAtualizaDados.Start();
     }
 
     private void AtualizaDados(object sender, EventArgs e)
     {
-        var retorno = _cryptoRepositorio.ObterPrecos(_lstCryptos.Select(x => (x.Nome + x.MoedaPar).Replace(" ", "")));
+        if (_lstCryptos.Count > 0)
+        {
+            var retorno = _cryptoRepositorio.ObterPrecos(_lstCryptos.Select(x => (x.Nome + x.MoedaPar).Replace(" ", "")));
+            foreach (var cryptoAtualizada in retorno)
+            {
+                var crypto = _lstCryptos.Where(c => c.Nome + c.MoedaPar == cryptoAtualizada.Symbol).FirstOrDefault();
+                if (crypto != null)
+                    crypto.Valor = cryptoAtualizada.Price;
+            }
+        }
     }
 
     private void CadastrarCrypto(object sender, EventArgs e)
@@ -65,5 +75,10 @@ public partial class ListarCryptos : ContentPage
     {
         timerAtualizaDados.Stop();
         Navigation.PushAsync(new HistoricoCrypto(_usuario));
+    }
+
+    private void ApagarCrypto(object sender, EventArgs e)
+    {
+
     }
 }
