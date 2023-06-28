@@ -8,7 +8,7 @@ namespace DeZooiNaCrypto.View;
 public partial class ListarCryptos : ContentPage
 {
     private Usuario _usuario;
-    private List<Crypto> _lstCryptos;
+    private ObservableCollection<Crypto> _lstCryptos;
     private CryptoRepositorio _cryptoRepositorio = new CryptoRepositorio();
     private IDispatcherTimer timerAtualizaDados;
     public ListarCryptos(Usuario usuario)
@@ -32,7 +32,7 @@ public partial class ListarCryptos : ContentPage
 
     private void CarregarCryptos()
     {
-        _lstCryptos = _cryptoRepositorio.Listar(_usuario).ToList();
+        _lstCryptos = new ObservableCollection<Crypto>(_cryptoRepositorio.Listar(_usuario));
         lvCryptos.ItemsSource = _lstCryptos;
         AtualizaDados(null, null);
     }
@@ -83,7 +83,7 @@ public partial class ListarCryptos : ContentPage
         if (crypto != null)
         {
             _cryptoRepositorio.Deletar(crypto);
-            _lstCryptos.Remove(crypto);
+            _lstCryptos.Remove(_lstCryptos.Where(x => x.Id == crypto.Id).FirstOrDefault());
         }
     }
 }
