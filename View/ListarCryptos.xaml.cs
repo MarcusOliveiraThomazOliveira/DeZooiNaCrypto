@@ -79,6 +79,5 @@ public partial class ListarCryptos : ContentPage
 
     private void ApagarCrypto(object sender, EventArgs e)
     {
-
     }
 }
