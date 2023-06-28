@@ -32,26 +32,30 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Margin="1"
                            Text="{Binding NomeMoedaPar}"
-                           FontAttributes="Bold"                           
+                           FontAttributes="Bold"
                            HorizontalOptions="StartAndExpand"
                            VerticalOptions="Center"/>
                     <Label Grid.Column="1"
                            Text="{Binding Valor}"
                            FontAttributes="Bold"
                            HorizontalOptions="EndAndExpand"
-                           VerticalOptions="Center"/>
-                    <Button Grid.Column="2"
-                            Text="Histórico"
-                            FontAttributes="Bold"
-                            TextColor="Black"
-                            BackgroundColor="Transparent"
-                            HorizontalOptions="EndAndExpand"
-                            VerticalOptions="Center"
-                            Clicked="Historico"/>
+                           VerticalOptions="Center"/>                    
+                    <ImageButton Grid.Column="2"
+                                 Source="historico.png" 
+                                 WidthRequest="50"
+                                 HeightRequest="30"
+                                 HorizontalOptions="Start"
+                                 Clicked="Historico"/>
+                    <ImageButton Grid.Column="2"
+                                 Source="lixeira.png"
+                                 WidthRequest="60"
+                                 HeightRequest="30"
+                                 HorizontalOptions="End"
+                                 Clicked="ApagarCrypto"/>
                 </Grid>
             </DataTemplate>
         </CollectionView.ItemTemplate>
