@@ -79,5 +79,11 @@ public partial class ListarCryptos : ContentPage
 
     private void ApagarCrypto(object sender, EventArgs e)
     {
+        var crypto = _cryptoRepositorio.Obter((Guid)((ImageButton)sender).CommandParameter);
+        if (crypto != null)
+        {
+            _cryptoRepositorio.Deletar(crypto);
+            _lstCryptos.Remove(crypto);
+        }
     }
 }
