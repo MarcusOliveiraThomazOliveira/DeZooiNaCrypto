@@ -1,9 +1,19 @@
+using DeZooiNaCrypto.Model;
+
 namespace DeZooiNaCrypto.View;
 
 public partial class CompraCrypto : ContentPage
 {
-	public CompraCrypto()
+    private Usuario _usuario;
+    public CompraCrypto()
 	{
 		InitializeComponent();
 	}
+
+    public CompraCrypto(Usuario usuario)
+    {
+        _usuario = usuario;
+
+        InitializeComponent();
+    }
 }

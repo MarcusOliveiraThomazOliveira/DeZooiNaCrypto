@@ -25,95 +25,51 @@
         </CollectionView.Header>
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <Grid x:Name="lvCryptos">
+                <Grid x:Name="lvCryptos" Padding="5">
                     <Grid.RowDefinitions>
+                        <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="30"/>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Margin="1"
+                    <Label Grid.Row="0" Grid.Column="0"
                            Text="{Binding NomeMoedaPar}"
                            FontAttributes="Bold"
                            HorizontalOptions="StartAndExpand"
                            VerticalOptions="Center"/>
-                    <Label Grid.Column="1"
+                    <Label Grid.Row="0" Grid.Column="1"
                            Text="{Binding Valor}"
                            FontAttributes="Bold"
                            HorizontalOptions="EndAndExpand"
-                           VerticalOptions="Center"/>                    
-                    <ImageButton Grid.Column="2"
-                                 Source="historico.png" 
-                                 WidthRequest="50"
+                           VerticalOptions="Center"/>
+                    <ImageButton Grid.Row="1" Grid.Column="2"
+                                 Source="historico.png"
+                                 WidthRequest="30"
                                  HeightRequest="30"
-                                 HorizontalOptions="Start"
-                                 Clicked="Historico"
+                                 HorizontalOptions="StartAndExpand"
+                                 Clicked="Compra"
                                  CommandParameter="{Binding Id}"/>
-                    <ImageButton Grid.Column="2"
-                                 Source="lixeira.png"
-                                 WidthRequest="60"
+                    <ImageButton Grid.Row="1" Grid.Column="3"
+                                 Source="historico.png"
+                                 WidthRequest="30"
                                  HeightRequest="30"
-                                 HorizontalOptions="End"
-                                 Clicked="ApagarCrypto"
+                                 HorizontalOptions="StartAndExpand"
+                                 Clicked="Venda"
+                                 CommandParameter="{Binding Id}"/>
+                    <ImageButton Grid.Row="1" Grid.Column="4"
+                                 Source="lixeira.png"
+                                 WidthRequest="30"
+                                 HeightRequest="30"
+                                 HorizontalOptions="StartAndExpand"
+                                 Clicked="ApagarCrypto"                             
                                  CommandParameter="{Binding Id}"/>
                 </Grid>
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>
-    <!--<CollectionView
-        x:Name="lvCryptos"
-        ItemsSource="{Binding _lstCryptos}">
-        <CollectionView.Header>
-            <Grid x:Name="gridBotoes" ColumnDefinitions="*,*" ColumnSpacing="4">
-                <Button
-                Text="+ Crypto"
-                x:Name="btnAddCrypto"
-                Margin="16"
-                Clicked="CadastrarCrypto"
-         />
-                <Button
-                Grid.Column="1"
-                Text="Sair"
-                x:Name="btnSair"
-                Margin="16"
-                Clicked="Sair"
-         />
-            </Grid>
-        </CollectionView.Header>
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Grid>                    
-                    <Label Grid.Column="1"
-                       Text="{Binding NomeMoedaPar}"
-                       FontAttributes="Bold"
-                       WidthRequest="250"
-                       HorizontalOptions="Start"/>
-                    <Label Grid.Column="3"
-                       Text="{Binding Valor}"
-                       FontAttributes="Bold"
-                       HorizontalOptions="End"/>
-                </Grid>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>-->
-    <!--<StackLayout>
-        <ListView
-            x:Name="lvCryptos"
-            BackgroundColor="Transparent"
-            SeparatorColor="Silver"
-            RowHeight="50"
-            ItemsSource="{Binding _lstCryptos}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell                        
-                        Text="{Binding NomeMoedaPar}"
-                        Detail="{Binding Valor}"
-                        Tapped="Historico">
-                    </TextCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>-->
 </ContentPage>

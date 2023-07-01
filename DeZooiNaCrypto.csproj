@@ -82,9 +82,6 @@
 	  <MauiXaml Update="View\CompraCrypto.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\HistoricoCrypto.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="View\ListarCryptos.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

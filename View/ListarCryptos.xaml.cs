@@ -71,10 +71,16 @@ public partial class ListarCryptos : ContentPage
         Navigation.PushAsync(new LoginUsuario());
     }
 
-    private void Historico(object sender, EventArgs e)
+    private void Compra(object sender, EventArgs e)
     {
         timerAtualizaDados.Stop();
-        Navigation.PushAsync(new HistoricoCrypto(_usuario));
+        Navigation.PushAsync(new CompraCrypto(_usuario));
+    }
+
+    private void Venda(object sender, EventArgs e)
+    {
+        timerAtualizaDados.Stop();
+        Navigation.PushAsync(new VendaCrypto(_usuario));
     }
 
     private void ApagarCrypto(object sender, EventArgs e)
@@ -86,4 +92,6 @@ public partial class ListarCryptos : ContentPage
             _lstCryptos.Remove(_lstCryptos.Where(x => x.Id == crypto.Id).FirstOrDefault());
         }
     }
+
+    
 }
