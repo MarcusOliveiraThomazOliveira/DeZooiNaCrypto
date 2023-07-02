@@ -1,19 +1,29 @@
+using DeZooiNaCrypto.Data;
 using DeZooiNaCrypto.Model;
 
 namespace DeZooiNaCrypto.View;
 
 public partial class ListaCompraCrypto : ContentPage
 {
-    private Usuario _usuario;
+    Usuario _usuario;
+    CompraRepositorio _compraRepositorio = new CompraRepositorio();
     public ListaCompraCrypto()
-	{
-		InitializeComponent();
-	}
+    {
+        InitializeComponent();
+    }
 
     public ListaCompraCrypto(Usuario usuario)
     {
         _usuario = usuario;
 
         InitializeComponent();
+
+        CarregaCompras();
     }
-}                                                     
+
+    private void CarregaCompras()
+    {
+        lvCompras.ItemsSource = _compraRepositorio.Listar(_usuario); 
+
+    }
+}

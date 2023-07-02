@@ -11,6 +11,8 @@ namespace DeZooiNaCrypto.Model
     [SQLite.Table("Compra")]
     public class Compra : ObjetoBase
     {
+        [ForeignKey(typeof(Crypto))]
+        public Guid IdCrypto { get; set; }
         [ManyToOne]
         public Crypto Crypto { get; set; }
         [Required]
