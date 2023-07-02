@@ -36,9 +36,11 @@ namespace DeZooiNaCrypto.Data
         {
             //_connection.DropTableAsync<Usuario>().Wait();
             //_connection.DropTableAsync<Crypto>().Wait();
+            //_connection.DropTableAsync<Compra>().Wait();
 
             _connection.CreateTableAsync<Usuario>().Wait();
             _connection.CreateTableAsync<Crypto>().Wait();
+            _connection.CreateTableAsync<Compra>().Wait();
         }
 
         public Task<List<T>> Listar()

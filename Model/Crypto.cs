@@ -21,5 +21,7 @@ namespace DeZooiNaCrypto.Model
         public Guid IdUsuario { get; set; }
         [ManyToOne]
         public Usuario Usuario { get; set; }
+        [OneToMany]
+        public List<Compra> Cryptos { get; set; }
     }
 }

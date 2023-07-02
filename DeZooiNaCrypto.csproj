@@ -70,6 +70,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="View\ListaCompraCrypto.xaml.cs">
+	    <DependentUpon>ListaCompraCrypto.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\ListarCryptos.xaml.cs">
 	    <DependentUpon>ListarCryptos.xaml</DependentUpon>
 	  </Compile>
@@ -82,7 +85,7 @@
 	  <MauiXaml Update="View\CadastroUsuario.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\CompraCrypto.xaml">
+	  <MauiXaml Update="View\ListaCompraCrypto.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\ListarCryptos.xaml">
