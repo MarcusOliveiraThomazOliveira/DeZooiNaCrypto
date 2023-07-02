@@ -45,8 +45,7 @@
                     <Label Grid.Row="1" Grid.Column="0"
                            Text="{Binding Valor}"
                            FontAttributes="Bold"
-                           WidthRequest="160"
-                           HorizontalOptions="StartAndExpand"
+                           HorizontalOptions="End"
                            VerticalOptions="Center"/>
                     <ImageButton Grid.Row="1" Grid.Column="2"
                                  Source="compra.png"

@@ -21,12 +21,21 @@ namespace DeZooiNaCrypto.Data
         }
         public IEnumerable<BinanceCrypto> ObterPrecos(IEnumerable<string> binanceCriptos)
         {
-            var queryString = $"[{string.Join(",", binanceCriptos.Select(s => $"\"{s}\""))}]";
-            var urlParametros = @"?symbols=" + queryString;
-            var url = new Uri(@"https://api.binance.com/api/v3/ticker/price" + urlParametros);
+            try
+            {
+                var queryString = $"[{string.Join(",", binanceCriptos.Select(s => $"\"{s}\""))}]";
+                var urlParametros = @"?symbols=" + queryString;
+                var url = new Uri(@"https://api.binance.com/api/v3/ticker/price" + urlParametros);
 
-            var client = new HttpClient();
-            return client.GetFromJsonAsync<List<BinanceCrypto>>(url).Result;
+                var client = new HttpClient();
+                return client.GetFromJsonAsync<List<BinanceCrypto>>(url).Result;
+            }
+            catch
+            {
+
+                throw new Exception("Crypto moeda não encontrada");
+            }
+            
         }
     }
 }
