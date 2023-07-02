@@ -7,55 +7,56 @@
         x:Name="lvCryptos"
         ItemsSource="{Binding _lstCryptos}">
         <CollectionView.Header>
-            <Grid x:Name="gridBotoes" ColumnDefinitions="*,*" ColumnSpacing="4">
+            <Grid x:Name="gridBotoes" ColumnDefinitions="*,*" ColumnSpacing="2">
                 <Button
                 Text="+ Crypto"
                 x:Name="btnAddCrypto"
                 Margin="16"
-                Clicked="CadastrarCrypto"
-         />
+                Clicked="CadastrarCrypto"/>
                 <Button
                 Grid.Column="1"
                 Text="Sair"
                 x:Name="btnSair"
                 Margin="16"
-                Clicked="Sair"
-         />
+                Clicked="Sair"/>
             </Grid>
         </CollectionView.Header>
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <Grid x:Name="lvCryptos" Padding="5">
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="30"/>
-                        <ColumnDefinition Width="30"/>
-                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Row="0" Grid.Column="0"
                            Text="{Binding NomeMoedaPar}"
                            FontAttributes="Bold"
+                           FontSize="15"
+                           WidthRequest="160"
                            HorizontalOptions="StartAndExpand"
                            VerticalOptions="Center"/>
-                    <Label Grid.Row="0" Grid.Column="1"
+                    <Label Grid.Row="1" Grid.Column="0"
                            Text="{Binding Valor}"
                            FontAttributes="Bold"
-                           HorizontalOptions="EndAndExpand"
+                           WidthRequest="160"
+                           HorizontalOptions="StartAndExpand"
                            VerticalOptions="Center"/>
                     <ImageButton Grid.Row="1" Grid.Column="2"
-                                 Source="historico.png"
+                                 Source="compra.png"
                                  WidthRequest="30"
                                  HeightRequest="30"
                                  HorizontalOptions="StartAndExpand"
                                  Clicked="Compra"
                                  CommandParameter="{Binding Id}"/>
                     <ImageButton Grid.Row="1" Grid.Column="3"
-                                 Source="historico.png"
+                                 Source="venda.png"
                                  WidthRequest="30"
                                  HeightRequest="30"
                                  HorizontalOptions="StartAndExpand"

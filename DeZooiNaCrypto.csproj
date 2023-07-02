@@ -51,8 +51,11 @@
 	<ItemGroup>
 	  <None Remove="Resources\AppIcon\appicon_original.svg" />
 	  <None Remove="Resources\AppIcon\lixeira.png" />
+	  <None Remove="Resources\AppIcon\venda.png" />
+	  <None Remove="Resources\Images\Compra.png" />
 	  <None Remove="Resources\Images\historico.png" />
 	  <None Remove="Resources\Images\lixeira.png" />
+	  <None Remove="Resources\Images\venda.png" />
 	</ItemGroup>
 
 	<ItemGroup>
