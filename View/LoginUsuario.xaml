@@ -9,47 +9,39 @@
             Text="De Zooi Na Crypto"
             Margin="20"
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center"/>
 
         <Label
             Text="E-mail"
             VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            />
+            HorizontalOptions="Center"/>
 
         <Entry
             Placeholder="E-mail"
             x:Name="txtEmail"
-            Keyboard="Default"
-            />
+            Keyboard="Default"/>
 
         <Label
             Text="Senha"
             VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            />
+            HorizontalOptions="Center"/>
 
         <Entry
             Placeholder="Senha"
             x:Name="txtSenha"
             Keyboard="Default"
-            />
+            IsPassword="True"/>
 
         <Button
             x:Name="bntLogar"
             Text="Logar"
             Clicked="Logar"
-            Margin="7"
-            />
+            Margin="7"/>
 
         <Button
             x:Name="bntCadastrarUsuario"
             Text="Cadastrar"
             Clicked="CadastrarUsuario"
-            Margin="7"
-            />
-
-
-
+            Margin="7"/>
     </StackLayout>
 </ContentPage>

@@ -23,7 +23,11 @@ public partial class ListaCompraCrypto : ContentPage
 
     private void CarregaCompras()
     {
-        lvCompras.ItemsSource = _compraRepositorio.Listar(_usuario); 
+        lvCompras.ItemsSource = _compraRepositorio.Listar(_usuario);
+    }
 
+    public void Cadastrar(Object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new CadastroCompraCrypto());
     }
 }

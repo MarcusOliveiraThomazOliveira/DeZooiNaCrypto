@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="DeZooiNaCrypto.View.CadastroCompraCrypto"
+             Title="Cadastro Compra Crypto">
+    <VerticalStackLayout>
+        <Label
+            Text="Data"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            Margin="16"/>
+
+        <DatePicker
+            x:Name="pckData"
+            MinimumDate="01/01/2000"
+            MaximumDate="12/31/9999"
+            Format="dd/MM/yyyy"/>
+
+        <Label
+            Text="Quantidade"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            Margin="16"/>
+
+        <Entry
+            Keyboard="Numeric"
+            Placeholder="Quantidadde"/>
+
+        <Label
+            Text="Valor Unitário"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            Margin="16"/>
+
+        <Entry
+            Keyboard="Numeric"
+            Placeholder="Valor Unitário">            
+        </Entry>
+        
+        <Button
+            x:Name="bntGravar"
+            Text="Gravar"
+            Clicked="Gravar"
+            Margin="7"
+            />
+    </VerticalStackLayout>
+</ContentPage>

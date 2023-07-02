@@ -2,17 +2,20 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DeZooiNaCrypto.View.ListaCompraCrypto"
-             NavigationPage.HasNavigationBar="False">
-    <CollectionView
-        x:Name="lvCompras"
-        ItemsSource="{Binding _lstCompras}">
+             NavigationPage.HasNavigationBar="false">
+    <CollectionView x:Name="lvCompras">
         <CollectionView.Header>
             <Grid x:Name="gridBotoes" ColumnDefinitions="*,*" ColumnSpacing="2">
+                <Button
+                Text="+ Compra"
+                x:Name="btnAddCompra"
+                Margin="16"
+                Clicked="Cadastrar"/>
             </Grid>
         </CollectionView.Header>
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <Grid x:Name="lvCompras" Padding="5">
+                <Grid Padding="5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
