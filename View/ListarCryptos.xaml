@@ -6,18 +6,36 @@
     <CollectionView
         x:Name="lvCryptos">
         <CollectionView.Header >
-            <Grid x:Name="gridBotoes" ColumnDefinitions="*,*" ColumnSpacing="2">
+            <Grid x:Name="gridBotoes" >
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
                 <Button
-                Text="+ Crypto"
-                x:Name="btnAddCrypto"
-                Margin="16"
-                Clicked="CadastrarCrypto"/>
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Text="+ Crypto"
+                    x:Name="btnAddCrypto"
+                    Margin="16"
+                    Clicked="CadastrarCrypto"/>
                 <Button
-                Grid.Column="1"
-                Text="Sair"
-                x:Name="btnSair"
-                Margin="16"
-                Clicked="Sair"/>
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Text="Posições"
+                    x:Name="btnSPosicao"
+                    Margin="16"
+                    Clicked="Posicoes"/>
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Text="Sair"
+                    x:Name="btnSair"
+                    Margin="16"
+                    Clicked="Sair"/>
             </Grid>
         </CollectionView.Header>
         <CollectionView.ItemTemplate>

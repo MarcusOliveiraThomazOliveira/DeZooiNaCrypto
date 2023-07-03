@@ -94,5 +94,8 @@ public partial class ListarCryptos : ContentPage
         }
     }
 
-    
+    private void Posicoes(object sender, EventArgs e)
+    {
+
+    }
 }
