@@ -11,12 +11,12 @@ namespace DeZooiNaCrypto.Data
     {
         public CompraRepositorio() { }
 
-        public List<Compra> Listar(Usuario usuario)
+        public List<Compra> Listar(Usuario usuario, Crypto crypto)
         {
             string query = @"select * from compra compra " +
                 "inner join crypto crypto on(compra.IdCrypto = crypto.Id) " +
-                "where crypto.IdUsuario = @Id";
-            return _connection.QueryAsync<Compra>(query, usuario.Id).Result;
+                "where crypto.IdUsuario = @IdUsuario and crypto.Id = @IdCrypto ";
+            return _connection.QueryAsync<Compra>(query, usuario.Id, crypto.Id).Result;
         }
     }
 }

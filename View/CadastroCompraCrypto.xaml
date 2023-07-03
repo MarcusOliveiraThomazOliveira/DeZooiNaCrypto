@@ -25,7 +25,8 @@
 
         <Entry
             Keyboard="Numeric"
-            Placeholder="Quantidadde"/>
+            Placeholder="Quantidadde"
+            x:Name="txtQuantidade"/>
 
         <Label
             Text="Valor Unitário"
@@ -35,9 +36,9 @@
 
         <Entry
             Keyboard="Numeric"
-            Placeholder="Valor Unitário">            
-        </Entry>
-        
+            Placeholder="Valor Unitário"
+            x:Name="txtValorUnitario"/>
+
         <Button
             x:Name="bntGravar"
             Text="Gravar"

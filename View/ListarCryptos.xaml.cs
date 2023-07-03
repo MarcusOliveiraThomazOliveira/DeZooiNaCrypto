@@ -74,7 +74,8 @@ public partial class ListarCryptos : ContentPage
     private void Compra(object sender, EventArgs e)
     {
         timerAtualizaDados.Stop();
-        Navigation.PushAsync(new ListaCompraCrypto(_usuario));
+        var crypto = _cryptoRepositorio.Obter((Guid)((ImageButton)sender).CommandParameter);
+        Navigation.PushAsync(new ListaCompraCrypto(_usuario, crypto));
     }
 
     private void Venda(object sender, EventArgs e)

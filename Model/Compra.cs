@@ -21,12 +21,7 @@ namespace DeZooiNaCrypto.Model
         public decimal Quantidade { get; set; }
         [Required]
         public decimal ValorUnitario { get; set; }
-        public int DiasComprado
-        {
-            get
-            {
-                return (DateTime.Now.Date - DataCompra.Date).Days;
-            }
-        }
+        public String DataCompraStr { get { return DataCompra.ToString("dd/MM/yyyy"); } }
+        public int DiasComprado { get { return (DateTime.Now.Date - DataCompra.Date).Days; } }
     }
 }
