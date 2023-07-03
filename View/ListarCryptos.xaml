@@ -4,9 +4,8 @@
              x:Class="DeZooiNaCrypto.View.ListarCryptos"
              NavigationPage.HasNavigationBar="False">
     <CollectionView
-        x:Name="lvCryptos"
-        ItemsSource="{Binding _lstCryptos}">
-        <CollectionView.Header>
+        x:Name="lvCryptos">
+        <CollectionView.Header >
             <Grid x:Name="gridBotoes" ColumnDefinitions="*,*" ColumnSpacing="2">
                 <Button
                 Text="+ Crypto"
@@ -29,8 +28,8 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="95"/>
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="40"/>
                         <ColumnDefinition Width="40"/>
                         <ColumnDefinition Width="40"/>
                         <ColumnDefinition Width="40"/>
@@ -38,35 +37,32 @@
                     <Label Grid.Row="0" Grid.Column="0"
                            Text="{Binding NomeMoedaPar}"
                            FontAttributes="Bold"
-                           FontSize="15"
-                           HorizontalOptions="StartAndExpand"
-                           VerticalOptions="Center"/>
+                           FontSize="18"
+                           HorizontalOptions="StartAndExpand"/>
                     <Label Grid.Row="0" Grid.Column="1"
-                           Grid.ColumnSpan="2"
+                           Grid.ColumnSpan="4"
                            Text="{Binding Valor}"
                            FontAttributes="Bold"
-                           FontSize="15"
-                           HorizontalOptions="End"
-                           VerticalOptions="Center"/>
+                           FontSize="18"
+                           HorizontalOptions="End"/>
+                    <Label Grid.Row="1" Grid.Column="0"
+                           Grid.ColumnSpan="4"
+                           Text="(Binance)"
+                           FontAttributes="Bold"
+                           HorizontalOptions="StartAndExpand"/>
                     <ImageButton Grid.Row="1" Grid.Column="2"
                                  Source="compra.png"
-                                 WidthRequest="30"
                                  HeightRequest="30"
-                                 HorizontalOptions="StartAndExpand"
                                  Clicked="Compra"
                                  CommandParameter="{Binding Id}"/>
                     <ImageButton Grid.Row="1" Grid.Column="3"
                                  Source="venda.png"
-                                 WidthRequest="30"
                                  HeightRequest="30"
-                                 HorizontalOptions="StartAndExpand"
                                  Clicked="Venda"
                                  CommandParameter="{Binding Id}"/>
                     <ImageButton Grid.Row="1" Grid.Column="4"
                                  Source="lixeira.png"
-                                 WidthRequest="30"
                                  HeightRequest="30"
-                                 HorizontalOptions="StartAndExpand"
                                  Clicked="ApagarCrypto"                             
                                  CommandParameter="{Binding Id}"/>
                 </Grid>

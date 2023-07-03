@@ -39,7 +39,7 @@ public partial class ListarCryptos : ContentPage
 
     private void ConfiguraCarregamentoAutomatico()
     {
-        timerAtualizaDados.Interval = TimeSpan.FromSeconds(3);
+        timerAtualizaDados.Interval = TimeSpan.FromSeconds(2);
         timerAtualizaDados.Tick += (sender, e) => AtualizaDados(sender, e);
         timerAtualizaDados.Start();
     }
