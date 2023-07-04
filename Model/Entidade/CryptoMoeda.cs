@@ -9,7 +9,9 @@ namespace DeZooiNaCrypto.Model.Entidade
     {
         [Required, MaxLength(15)]
         public string Nome { get; set; }
-        [ManyToMany(typeof(Corretora))]
-        public List<Corretora>  Corretoras { get; set; }
+        [ForeignKey(typeof(Configuracao))]
+        public Guid IdConfiguracao { get; set; }
+        [ManyToOne]
+        public Configuracao Configuracao { get; set; }
     }
 }
