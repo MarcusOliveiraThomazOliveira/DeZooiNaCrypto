@@ -8,9 +8,9 @@ public partial class MainPage : ContentPage
     Usuario _usuario;
     private IDispatcherTimer timerAtualizaDados;
     public MainPage()
-	{
-		InitializeComponent();
-	}
+    {
+        InitializeComponent();
+    }
 
     public MainPage(Usuario usuario)
     {
@@ -37,7 +37,7 @@ public partial class MainPage : ContentPage
 
     private void ApresentaMenu(object sender, EventArgs e)
     {
-		DisplayAlert("","Em construção.","OK");
+        actionsPopup.IsOpen = !actionsPopup.IsOpen;
     }
 }
 

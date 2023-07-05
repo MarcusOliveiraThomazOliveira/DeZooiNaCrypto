@@ -3,19 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DeZooiNaCrypto.MainPage"
              NavigationPage.HasBackButton="False"
-             Title="De Zooi na Crypto" 
+             Title="De Zooi na Crypto"              
              xmlns:dxg="clr-namespace:DevExpress.Maui.DataGrid;assembly=DevExpress.Maui.DataGrid"
+             xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
              xmlns:local="clr-namespace:DeZooiNaCrypto.Model.ViewModel">
-    
+
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="verticaldots" Clicked="ApresentaMenu"/>
+        <ToolbarItem x:Name="btnApresentarMenu" IconImageSource="verticaldots" Clicked="ApresentaMenu"/>
     </ContentPage.ToolbarItems>
 
-    <dxg:DataGridView ItemsSource="{Binding CryptoMoedas}">
-        <dxg:DataGridView.Columns>
-            <dxg:TextColumn Caption="Nome" FieldName="Nome" VerticalContentAlignment="Start"/>
-            <dxg:NumberColumn Caption="Valor" FieldName="Valor" VerticalContentAlignment="End"/>
-        </dxg:DataGridView.Columns>
-    </dxg:DataGridView>
+    <Grid>
+        <dxg:DataGridView ItemsSource="{Binding CryptoMoedas}">
+            <dxg:DataGridView.Columns>
+                <dxg:TextColumn Caption="Nome" FieldName="Nome" VerticalContentAlignment="Start"/>
+                <dxg:NumberColumn Caption="Valor" FieldName="Valor" VerticalContentAlignment="End"/>
+            </dxg:DataGridView.Columns>
+        </dxg:DataGridView>
+
+        <dxco:DXPopup x:Name="actionsPopup" PlacementTarget="{x:Reference btnApresentarMenu}">
+            <StackLayout Padding="8,6">
+                <dxco:SimpleButton Text="Cadastrar Crypto Moeda"/>
+                <dxco:SimpleButton Text="Sair"/>
+            </StackLayout>
+        </dxco:DXPopup>
+    </Grid>    
 
 </ContentPage>

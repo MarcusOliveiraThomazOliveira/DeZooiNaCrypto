@@ -23,8 +23,7 @@ public partial class LoginUsuario : ContentPage
             else
             {
                 txtEmail.Text = txtSenha.Text = string.Empty;
-                //Navigation.PushAsync(new ListaCryptoMoeda(usuarioLogado));
-                Navigation.PushAsync(new MainPage());
+                Navigation.PushAsync(new MainPage(usuarioLogado));
             }
         }
         catch (Exception ex)
