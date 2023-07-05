@@ -1,24 +1,24 @@
-﻿using DeZooiNaCrypto.Model;
+
+using DeZooiNaCrypto.Model;
 using DeZooiNaCrypto.Model.ViewModel;
 
-namespace DeZooiNaCrypto;
+namespace DeZooiNaCrypto.View.Lista;
 
-public partial class MainPage : ContentPage
+public partial class ListaCryptoMoeda : ContentPage
 {
     Usuario _usuario;
     private IDispatcherTimer timerAtualizaDados;
-    public MainPage()
+    public ListaCryptoMoeda()
 	{
 		InitializeComponent();
 	}
 
-    public MainPage(Usuario usuario)
+    public ListaCryptoMoeda(Usuario usuario)
     {
-        _usuario = usuario;
+        _usuario = usuario;       
 
         InitializeComponent();
     }
-
     protected override void OnAppearing()
     {
         base.OnAppearing();
@@ -34,10 +34,4 @@ public partial class MainPage : ContentPage
     {
         this.BindingContext = new CryptoMoedaViewModel(_usuario);
     }
-
-    private void ApresentaMenu(object sender, EventArgs e)
-    {
-		DisplayAlert("","Em construção.","OK");
-    }
 }
-

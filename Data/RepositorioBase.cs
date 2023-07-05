@@ -1,4 +1,5 @@
 ﻿using DeZooiNaCrypto.Model;
+using DeZooiNaCrypto.Model.Entidade;
 using Microsoft.VisualBasic;
 using SQLite;
 using System;
@@ -41,6 +42,9 @@ namespace DeZooiNaCrypto.Data
             _connection.CreateTableAsync<Usuario>().Wait();
             _connection.CreateTableAsync<Crypto>().Wait();
             _connection.CreateTableAsync<Compra>().Wait();
+
+            //_connection.DropTableAsync<CryptoMoeda>().Wait();
+            _connection.CreateTableAsync<CryptoMoeda>().Wait();
         }
 
         public Task<List<T>> Listar()

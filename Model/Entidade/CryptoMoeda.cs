@@ -9,6 +9,7 @@ namespace DeZooiNaCrypto.Model.Entidade
     {
         [Required, MaxLength(15)]
         public string Nome { get; set; }
+        public decimal Valor { get; set; }
         [ForeignKey(typeof(Configuracao))]
         public Guid IdConfiguracao { get; set; }
         [ManyToOne]

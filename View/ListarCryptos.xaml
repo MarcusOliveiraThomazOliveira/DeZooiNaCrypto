@@ -2,9 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DeZooiNaCrypto.View.ListarCryptos"
-             NavigationPage.HasNavigationBar="False">
-    <CollectionView
-        x:Name="lvCryptos">
+             NavigationPage.HasNavigationBar="False">    
+    <CollectionView x:Name="lvCryptos">
         <CollectionView.Header >
             <Grid x:Name="gridBotoes" >
                 <Grid.RowDefinitions>
