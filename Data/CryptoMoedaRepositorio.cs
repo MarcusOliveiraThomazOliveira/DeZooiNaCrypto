@@ -39,5 +39,10 @@ namespace DeZooiNaCrypto.Data
                 }
             }
         }
+
+        public CryptoMoeda Obter(Usuario usuario,string nome, int IdCorretora, int IdMoedaPar)
+        {
+            return  _connection.QueryAsync<CryptoMoeda>("select * from CryptoMoeda where IdUsuario = @Id and TipoCorretora = @IdCorretora and TipoMoedaPar  order by nome", usuario.Id).Result.FirstOrDefault();
+        }
     }
 }
