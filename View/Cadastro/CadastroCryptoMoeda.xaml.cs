@@ -1,7 +1,5 @@
 using DeZooiNaCrypto.Data;
-using DeZooiNaCrypto.Model;
 using DeZooiNaCrypto.Model.Entidade;
-using DeZooiNaCrypto.View.Lista;
 
 namespace DeZooiNaCrypto.View.Cadastro;
 
@@ -55,19 +53,19 @@ public partial class CadastroCryptoMoeda : ContentPage
         _cryptoMoedaRepositorio
             .Salvar(new CryptoMoeda()
             {
-                Nome = txtNome.Text.Trim().ToLower(),
+                Nome = txtNome.Text.Trim().ToUpper(),
                 TipoCorretora = tipoCorretoraEnum,
                 TipoMoedaPar = tipoMoedaParEnum,
                 IdUsuario = _usuario.Id,
                 Usuario = _usuario
             });
 
-        Navigation.PushAsync(new ListaCryptoMoeda(_usuario));
+        Navigation.PushAsync(new MainPage(_usuario));
 
     }
 
     private void Cancelar(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new ListaCryptoMoeda(_usuario));
+        Navigation.PushAsync(new MainPage(_usuario));
     }
 }

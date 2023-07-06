@@ -1,6 +1,6 @@
 ﻿using SQLite;
 using SQLiteNetExtensions.Attributes;
-using Required=System.ComponentModel.DataAnnotations.RequiredAttribute;
+using Required = System.ComponentModel.DataAnnotations.RequiredAttribute;
 
 namespace DeZooiNaCrypto.Model.Entidade
 {

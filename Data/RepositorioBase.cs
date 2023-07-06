@@ -1,5 +1,4 @@
-﻿using DeZooiNaCrypto.Model;
-using DeZooiNaCrypto.Model.Entidade;
+﻿using DeZooiNaCrypto.Model.Entidade;
 using Microsoft.VisualBasic;
 using SQLite;
 using System;
@@ -36,14 +35,9 @@ namespace DeZooiNaCrypto.Data
         private void BuildTables()
         {
             //_connection.DropTableAsync<Usuario>().Wait();
-            //_connection.DropTableAsync<Crypto>().Wait();
-            //_connection.DropTableAsync<Compra>().Wait();
-
             _connection.CreateTableAsync<Usuario>().Wait();
-            _connection.CreateTableAsync<Crypto>().Wait();
-            _connection.CreateTableAsync<Compra>().Wait();
 
-            //_connection.DropTableAsync<CryptoMoeda>().Wait();
+           //_connection.DropTableAsync<CryptoMoeda>().Wait();
             _connection.CreateTableAsync<CryptoMoeda>().Wait();
         }
 

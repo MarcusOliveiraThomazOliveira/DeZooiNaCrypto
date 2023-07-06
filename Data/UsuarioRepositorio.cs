@@ -1,4 +1,4 @@
-﻿using DeZooiNaCrypto.Model;
+﻿using DeZooiNaCrypto.Model.Entidade;
 using DeZooiNaCrypto.Util;
 using System;
 using System.Collections.Generic;

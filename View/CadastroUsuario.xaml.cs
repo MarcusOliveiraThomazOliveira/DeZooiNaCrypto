@@ -1,4 +1,5 @@
 using DeZooiNaCrypto.Data;
+using DeZooiNaCrypto.Model.Entidade;
 using DeZooiNaCrypto.Util;
 
 namespace DeZooiNaCrypto.View;
@@ -16,7 +17,7 @@ public partial class CadastroUsuario : ContentPage
         try
         {
             var senhaCriptografada = Criptografia.GerarCriptografia(txtSenha.Text);
-            var retorno = _usuarioRepositorio.Salvar(new Model.Usuario() { Nome = txtNome.Text, Email = txtEmail.Text, Senha = senhaCriptografada });
+            var retorno = _usuarioRepositorio.Salvar(new Usuario() { Nome = txtNome.Text, Email = txtEmail.Text, Senha = senhaCriptografada });
             Navigation.PushAsync(new View.LoginUsuario());
         }
         catch (Exception ex)

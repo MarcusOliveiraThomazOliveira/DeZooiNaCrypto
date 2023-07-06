@@ -13,7 +13,8 @@
                 PlaceholderText="Nome Crypto Moeda"
                 BorderColor="Blue"
                 BoxMode="Outlined"
-                CornerRadius="10" Margin="10"/>
+                CornerRadius="10" 
+                Margin="10"/>
 
             <dxe:ChoiceChipGroup x:Name="ccgCorretora" ChipBorderColor="Blue" BoxMode="Outlined" >
                 <dxe:Chip x:Name="ccgBinance" Text="Binance"/>

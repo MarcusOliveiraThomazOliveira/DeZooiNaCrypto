@@ -14,7 +14,7 @@
             <Setter Property="CornerRadius" Value="0"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="IconColor" Value="{StaticResource Gray500}"/>
-            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Popup_Text_Dark}}"/>
+            <!--<Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Popup_Text_Dark}}"/>-->
             <Setter Property="Command" Value="{Binding PopupActionCommand}"/>
             <Setter Property="CommandParameter" Value="{Binding Source={RelativeSource Mode=Self}, Path=Text}"/>
             <Setter Property="HorizontalOptions" Value="Start"/>

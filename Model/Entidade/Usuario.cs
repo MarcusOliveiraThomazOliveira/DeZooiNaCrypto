@@ -1,10 +1,10 @@
 ﻿using SQLiteNetExtensions.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace DeZooiNaCrypto.Model
+namespace DeZooiNaCrypto.Model.Entidade
 {
     [SQLite.Table("Usuario")]
-    public class Usuario : ObjetoBase
+    public class Usuario : EntidadeBase
     {
         [Required, MaxLength(100)]
         public string Nome { get; set; }
@@ -13,6 +13,6 @@ namespace DeZooiNaCrypto.Model
         [Required, MaxLength(100)]
         public string Senha { get; set; }
         [OneToMany]
-        public List<Crypto> Cryptos { get; set; }
+        public List<CryptoMoeda> CryptoMoedas { get; set; }
     }
 }

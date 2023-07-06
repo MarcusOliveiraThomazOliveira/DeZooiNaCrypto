@@ -17,6 +17,12 @@ namespace DeZooiNaCrypto.Model.ViewModel
         public CryptoMoedaViewModel(Usuario usuario)
         {
             _cryptoMoedas = _cryptoMoedaRepositorio.Listar(usuario);
+            AtualizarValor();
+        }
+
+        public void AtualizarValor()
+        {
+            _cryptoMoedaRepositorio.ObterValores(_cryptoMoedas);
         }
 
         protected void RaisePropertyChanged(string Valor)

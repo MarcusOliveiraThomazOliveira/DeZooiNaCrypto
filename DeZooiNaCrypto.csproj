@@ -49,6 +49,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="View\NewFolder1\**" />
+	  <AndroidResource Remove="View\NewFolder\**" />
+	  <Compile Remove="View\NewFolder1\**" />
+	  <Compile Remove="View\NewFolder\**" />
+	  <EmbeddedResource Remove="View\NewFolder1\**" />
+	  <EmbeddedResource Remove="View\NewFolder\**" />
+	  <MauiCss Remove="View\NewFolder1\**" />
+	  <MauiCss Remove="View\NewFolder\**" />
+	  <MauiXaml Remove="View\NewFolder1\**" />
+	  <MauiXaml Remove="View\NewFolder\**" />
+	  <None Remove="View\NewFolder1\**" />
+	  <None Remove="View\NewFolder\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Resources\AppIcon\appicon_original.svg" />
 	  <None Remove="Resources\AppIcon\lixeira.png" />
 	  <None Remove="Resources\AppIcon\venda.png" />
@@ -67,45 +82,17 @@
 
 	<ItemGroup>
 	  <Folder Include="ViewModel\" />
-	  <Folder Include="View\NewFolder1\" />
-	  <Folder Include="View\NewFolder\" />
+	  <Folder Include="View\Lista\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="View\ListaCompraCrypto.xaml.cs">
-	    <DependentUpon>ListaCompraCrypto.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="View\ListarCryptos.xaml.cs">
-	    <DependentUpon>ListarCryptos.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="View\CadastroCompraCrypto.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\CadastroCrypto.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="View\CadastroUsuario.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Cadastro\CadastroCryptoMoeda.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\ListaCompraCrypto.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\Lista\ListaCryptoMoeda.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\ListarCryptos.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="View\LoginUsuario.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\VendaCrypto.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
