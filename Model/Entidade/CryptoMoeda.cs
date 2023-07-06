@@ -14,7 +14,7 @@ namespace DeZooiNaCrypto.Model.Entidade
         [Required]
         public TipoCorretoraEnum TipoCorretora { get; set; }
         [Required]
-        public TipoMoedaPar TipoMoedaPar { get; set; }  
+        public TipoMoedaParEnum TipoMoedaPar { get; set; }  
         [ForeignKey(typeof(Usuario))]
         public Guid IdUsuario { get; set; }
         [ManyToOne]
@@ -23,14 +23,16 @@ namespace DeZooiNaCrypto.Model.Entidade
 
     public enum TipoCorretoraEnum
     {
-        Binance,
-        BitGet,
-        CoinMarketCap
+        Binance = 0,
+        BitGet = 1,
+        CoinMarketCap = 2,
+        NaoDefinida = 999
     }
 
     public enum TipoMoedaParEnum
     {
-        USDT,
-        USD
+        USDT = 0,
+        USD = 1,
+        NaoDefinida = 999
     }
 }

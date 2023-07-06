@@ -3,22 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DeZooiNaCrypto.View.Cadastro.CadastroCryptoMoeda"
              Title="Cadastro Crypto Moeda"
-             xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors">
+             xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+             xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls">
     <ScrollView>
         <StackLayout Padding="5">
             <dxe:TextEdit
                 x:Name="txtNome"
                 LabelText="Nome"
-                PlaceholderText="Nome Crypto Moeda"/>
-            <dxe:ChoiceChipGroup ChipBorderColor="Blue">
+                PlaceholderText="Nome Crypto Moeda"
+                BorderColor="Blue"
+                BoxMode="Outlined"
+                CornerRadius="10" Margin="10"/>
+
+            <dxe:ChoiceChipGroup x:Name="ccgCorretora" ChipBorderColor="Blue" BoxMode="Outlined" >
                 <dxe:Chip x:Name="ccgBinance" Text="Binance"/>
                 <dxe:Chip x:Name="ccgBitGet" Text="BitGet"/>
                 <dxe:Chip x:Name="ccgCoinMarketCap" Text="CoinMarketCap"/>
             </dxe:ChoiceChipGroup>
-            <dxe:ChoiceChipGroup ChipBorderColor="Blue">
+
+            <dxe:ChoiceChipGroup x:Name="ccgMoedaPar" ChipBorderColor="Blue" BoxMode="Outlined">
                 <dxe:Chip x:Name="ccgUSD" Text="USD"/>
                 <dxe:Chip x:Name="ccgUSDT" Text="USDT"/>
             </dxe:ChoiceChipGroup>
+
+            <dxco:SimpleButton Text="Gravar" Clicked="Gravar" BackgroundColor="blue" Margin="10"/>
+            <dxco:SimpleButton Text="Cancelar" Clicked="Cancelar" BackgroundColor="PaleVioletRed" Margin="10"/>
 
         </StackLayout>
     </ScrollView>
