@@ -1,5 +1,7 @@
 ﻿using DeZooiNaCrypto.Model;
 using DeZooiNaCrypto.Model.ViewModel;
+using DeZooiNaCrypto.View;
+using DeZooiNaCrypto.View.Cadastro;
 
 namespace DeZooiNaCrypto;
 
@@ -38,6 +40,21 @@ public partial class MainPage : ContentPage
     private void ApresentaMenu(object sender, EventArgs e)
     {
         actionsPopup.IsOpen = !actionsPopup.IsOpen;
+    }
+
+    private void Sair(object sender, EventArgs e)
+    {
+        ApresentaMenu(null, null);
+        timerAtualizaDados.Stop();
+        _usuario = null;
+        Navigation.PushAsync(new LoginUsuario());
+    }
+
+    private void CadastrarCryptoMoeda(object sender, EventArgs e)
+    {
+        ApresentaMenu(null, null);
+        timerAtualizaDados.Stop();
+        Navigation.PushAsync(new CadastroCryptoMoeda());
     }
 }
 
