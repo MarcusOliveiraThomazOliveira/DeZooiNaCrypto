@@ -62,6 +62,8 @@ public partial class CadastroCryptoMoeda : ContentPage
                 Usuario = _usuario
             });
 
+        Navigation.PushAsync(new ListaCryptoMoeda(_usuario));
+
     }
 
     private void Cancelar(object sender, EventArgs e)

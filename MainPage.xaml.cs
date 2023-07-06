@@ -54,7 +54,7 @@ public partial class MainPage : ContentPage
     {
         ApresentaMenu(null, null);
         timerAtualizaDados.Stop();
-        Navigation.PushAsync(new CadastroCryptoMoeda());
+        Navigation.PushAsync(new CadastroCryptoMoeda(_usuario));
     }
 }
 

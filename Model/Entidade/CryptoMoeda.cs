@@ -31,8 +31,8 @@ namespace DeZooiNaCrypto.Model.Entidade
 
     public enum TipoMoedaParEnum
     {
-        USDT = 0,
-        USD = 1,
+        USD = 0,
+        USDT = 1,
         NaoDefinida = 999
     }
 }
