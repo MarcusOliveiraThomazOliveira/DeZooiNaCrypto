@@ -18,31 +18,37 @@ namespace DeZooiNaCrypto.Data
         }
         public async void ObterValores(ObservableCollection<CryptoMoeda> cryptoMoedas)
         {
-            foreach (var cryptoMoeda in cryptoMoedas)
+            try
             {
-                if (cryptoMoeda.TipoCorretora == TipoCorretoraEnum.Binance)
+                foreach (var cryptoMoeda in cryptoMoedas)
                 {
-                    try
+                    if (cryptoMoeda.TipoCorretora == TipoCorretoraEnum.Binance)
                     {
-                        string moedaPar = Enum.GetName(typeof(TipoMoedaParEnum), (int)cryptoMoeda.TipoMoedaPar);
-                        var queryString = $"[{string.Join(",", (new List<string> { cryptoMoeda.Nome.ToUpper() + moedaPar }).Select(s => $"\"{s}\""))}]";
-                        var urlParametros = @"?symbols=" + queryString;
-                        var url = new Uri(@"https://api.binance.com/api/v3/ticker/price" + urlParametros);
+                        try
+                        {
+                            string moedaPar = Enum.GetName(typeof(TipoMoedaParEnum), (int)cryptoMoeda.TipoMoedaPar);
+                            var queryString = $"[{string.Join(",", (new List<string> { cryptoMoeda.Nome.ToUpper() + moedaPar }).Select(s => $"\"{s}\""))}]";
+                            var urlParametros = @"?symbols=" + queryString;
+                            var url = new Uri(@"https://api.binance.com/api/v3/ticker/price" + urlParametros);
 
-                        var client = new HttpClient();
-                        List<BinanceCrypto> binanceCryptos = await client.GetFromJsonAsync<List<BinanceCrypto>>(url);
-                        cryptoMoeda.Valor = binanceCryptos.FirstOrDefault().Price;
-                    }
-                    catch
-                    {
+                            var client = new HttpClient();
+                            List<BinanceCrypto> binanceCryptos = await client.GetFromJsonAsync<List<BinanceCrypto>>(url);
+                            cryptoMoeda.Valor = Decimal.Parse(binanceCryptos.FirstOrDefault().Price.ToString().TrimEnd('0'));
+                        }
+                        catch
+                        {
+                        }
                     }
                 }
             }
+            catch
+            {
+            }
         }
 
-        public CryptoMoeda Obter(Usuario usuario,string nome, int idCorretora, int idMoedaPar)
+        public CryptoMoeda Obter(Usuario usuario, string nome, int idCorretora, int idMoedaPar)
         {
-            return  _connection.QueryAsync<CryptoMoeda>("select * from CryptoMoeda where IdUsuario = @Id and Nome = @nome and TipoCorretora = @idCorretora and TipoMoedaPar = @idMoedaPar order by nome", usuario.Id, nome, idCorretora, idMoedaPar).Result.FirstOrDefault();
+            return _connection.QueryAsync<CryptoMoeda>("select * from CryptoMoeda where IdUsuario = @Id and Nome = @nome and TipoCorretora = @idCorretora and TipoMoedaPar = @idMoedaPar order by nome", usuario.Id, nome, idCorretora, idMoedaPar).Result.FirstOrDefault();
         }
     }
 }

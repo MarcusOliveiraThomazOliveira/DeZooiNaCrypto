@@ -70,7 +70,14 @@ public partial class MainPage : ContentPage
 
     private void Apagar(object sender, EventArgs e)
     {
+        timerAtualizaDados.Stop();
         _cryptoMoedaViewModel.Apagar((Guid)((SimpleButton)sender).CommandParameter);
+        timerAtualizaDados.Start();
+    }
+
+    private void Venda(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new VendaCryptoMoeda(_usuario, (Guid)((SimpleButton)sender).CommandParameter));
     }
 }
 

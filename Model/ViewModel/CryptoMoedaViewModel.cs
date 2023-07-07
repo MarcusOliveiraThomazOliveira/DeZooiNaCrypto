@@ -35,8 +35,8 @@ namespace DeZooiNaCrypto.Model.ViewModel
             var cryptoMoeda = _cryptoMoedas.Where(cm => cm.Id.Equals(id)).FirstOrDefault();
             if (cryptoMoeda != null)
             {
-                _cryptoMoedas.Remove(cryptoMoeda);
                 _cryptoMoedaRepositorio.Deletar(cryptoMoeda);
+                _cryptoMoedas.Remove(cryptoMoeda);
             }
         }
     }
