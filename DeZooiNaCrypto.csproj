@@ -68,6 +68,8 @@
 	  <None Remove="Resources\AppIcon\lixeira.png" />
 	  <None Remove="Resources\AppIcon\venda.png" />
 	  <None Remove="Resources\Images\Compra.png" />
+	  <None Remove="Resources\Images\face_black_24dp.svg" />
+	  <None Remove="Resources\Images\face_black_24dp_filled.svg" />
 	  <None Remove="Resources\Images\historico.png" />
 	  <None Remove="Resources\Images\lixeira.png" />
 	  <None Remove="Resources\Images\venda.png" />

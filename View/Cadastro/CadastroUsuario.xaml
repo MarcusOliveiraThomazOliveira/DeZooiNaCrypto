@@ -2,46 +2,38 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DeZooiNaCrypto.View.CadastroUsuario"
+             xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
              Title="Cadastro de Usuário">
     <StackLayout VerticalOptions="CenterAndExpand" Margin="16" Padding="16">
-        <Label
-            Text="Nome"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            />
-
-        <Entry
-            Placeholder="Nome"
+        <dxe:TextEdit
             x:Name="txtNome"
-            PlaceholderColor="Azure"
-            Keyboard="Default"
-            />
-        
-        <Label
-            Text="E-mail"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            />
+            StartIcon="face_black_24dp"
+            LabelText="Nome"
+            PlaceholderText="fulano de tal"
+            BorderColor="Blue"
+            BoxMode="Outlined"
+            CornerRadius="10" 
+            Margin="10"/>
 
-        <Entry
-            Placeholder="E-mail"
+        <dxe:TextEdit
             x:Name="txtEmail"
-            PlaceholderColor="Azure"
-            Keyboard="Default"
-            />
+            StartIcon="email_black_24dp"
+            LabelText="E-mail"
+            PlaceholderText="dezooinacrypto@dezooinacrypto.com"
+            BorderColor="Blue"
+            BoxMode="Outlined"
+            CornerRadius="10" 
+            Margin="10"/>
 
-        <Label
-            Text="Senha"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            />
-
-        <Entry
-            Placeholder="Senha"
+        <dxe:PasswordEdit
             x:Name="txtSenha"
-            PlaceholderColor="Azure"
-            IsPassword="True"
-            />
+            StartIcon="password_black_24dp"
+            LabelText="Senha"
+            PlaceholderText="Senha"
+            BorderColor="Blue"
+            BoxMode="Outlined"
+            CornerRadius="10" 
+            Margin="10"/>
 
         <Button
             x:Name="bntGravar"
