@@ -30,7 +30,7 @@ public partial class MainPage : ContentPage
     {
         base.OnAppearing();
 
-        this.BindingContext = new CryptoMoedaViewModel(_usuario);
+        this.BindingContext = _cryptoMoedaViewModel;
 
         timerAtualizaDados = this.Dispatcher.CreateTimer();
         timerAtualizaDados.Interval = TimeSpan.FromSeconds(2);
@@ -39,8 +39,7 @@ public partial class MainPage : ContentPage
     }
     private void AtualizaDados(object sender, EventArgs e)
     {
-        this.BindingContext = new CryptoMoedaViewModel(_usuario);
-
+        _cryptoMoedaViewModel.AtualizarValor();
     }
 
     private void ApresentaMenu(object sender, EventArgs e)

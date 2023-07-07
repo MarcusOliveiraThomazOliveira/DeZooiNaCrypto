@@ -86,7 +86,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="View\CadastroUsuario.xaml">
+	  <MauiXaml Update="View\Cadastro\CadastroUsuario.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Cadastro\CadastroCryptoMoeda.xaml">

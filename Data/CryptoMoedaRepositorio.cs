@@ -24,7 +24,7 @@ namespace DeZooiNaCrypto.Data
                 {
                     try
                     {
-                        string moedaPar = (cryptoMoeda.TipoMoedaPar == TipoMoedaParEnum.USDT ? "USDT" : "USD");
+                        string moedaPar = Enum.GetName(typeof(TipoMoedaParEnum), (int)cryptoMoeda.TipoMoedaPar);
                         var queryString = $"[{string.Join(",", (new List<string> { cryptoMoeda.Nome.ToUpper() + moedaPar }).Select(s => $"\"{s}\""))}]";
                         var urlParametros = @"?symbols=" + queryString;
                         var url = new Uri(@"https://api.binance.com/api/v3/ticker/price" + urlParametros);
@@ -42,7 +42,7 @@ namespace DeZooiNaCrypto.Data
 
         public CryptoMoeda Obter(Usuario usuario,string nome, int IdCorretora, int IdMoedaPar)
         {
-            return  _connection.QueryAsync<CryptoMoeda>("select * from CryptoMoeda where IdUsuario = @Id and TipoCorretora = @IdCorretora and TipoMoedaPar  order by nome", usuario.Id).Result.FirstOrDefault();
+            return  _connection.QueryAsync<CryptoMoeda>("select * from CryptoMoeda where IdUsuario = @Id and TipoCorretora = @IdCorretora and TipoMoedaPar = @IdMoedaPar order by nome", usuario.Id, IdCorretora, IdMoedaPar).Result.FirstOrDefault();
         }
     }
 }
