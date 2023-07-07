@@ -16,7 +16,7 @@ namespace DeZooiNaCrypto.Data
         {
             return new ObservableCollection<CryptoMoeda>(_connection.QueryAsync<CryptoMoeda>("select * from CryptoMoeda where IdUsuario = @Id order by nome", usuario.Id).Result);
         }
-        public void ObterValores(ObservableCollection<CryptoMoeda> cryptoMoedas)
+        public async void ObterValores(ObservableCollection<CryptoMoeda> cryptoMoedas)
         {
             foreach (var cryptoMoeda in cryptoMoedas)
             {
@@ -30,7 +30,7 @@ namespace DeZooiNaCrypto.Data
                         var url = new Uri(@"https://api.binance.com/api/v3/ticker/price" + urlParametros);
 
                         var client = new HttpClient();
-                        List<BinanceCrypto> binanceCryptos = client.GetFromJsonAsync<List<BinanceCrypto>>(url).Result;
+                        List<BinanceCrypto> binanceCryptos = await client.GetFromJsonAsync<List<BinanceCrypto>>(url);
                         cryptoMoeda.Valor = binanceCryptos.FirstOrDefault().Price;
                     }
                     catch
