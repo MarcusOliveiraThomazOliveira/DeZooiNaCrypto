@@ -26,10 +26,36 @@
         <ToolbarItem x:Name="btnApresentarMenu" IconImageSource="verticaldots" Clicked="ApresentaMenu"/>
     </ContentPage.ToolbarItems>
 
+    <!--<ListView ItemsSource="{Binding CryptoMoedas}"
+              CachingStrategy="RecycleElement"
+              RowHeight="60">
+
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid Padding="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"></RowDefinition>
+                            <RowDefinition Height="25"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="150"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding NomeLongo}" Style="{StaticResource labelStyle}"></Label>
+                        <Label Grid.Row="1" Grid.Column="0" Text="{Binding Valor}" Style="{StaticResource labelStyle}"></Label>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+    </ListView>-->
+
     <!--<Grid BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundThemeColor}, Dark={StaticResource Black}}">
         <dxg:DataGridView ItemsSource="{Binding CryptoMoedas}">
             <dxg:DataGridView.Columns>
-                <dxg:TextColumn Caption="Nome" FieldName="Nome" VerticalContentAlignment="Start"/>
+                <dxg:TextColumn Caption="Nome" FieldName="NomeLongo" VerticalContentAlignment="Start"/>
                 <dxg:NumberColumn Caption="Valor" FieldName="Valor" VerticalContentAlignment="End"/>
             </dxg:DataGridView.Columns>
         </dxg:DataGridView>
@@ -50,11 +76,12 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="{x:Type local:CryptoMoeda}">
                     <Border StrokeShape="{OnPlatform RoundRectangle 10, iOS=RoundRectangle 1}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Card_Background_Dark}}" StrokeThickness="1">
-                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto" Padding="16" BackgroundColor="Transparent">
-                            <Label Text="{Binding NomeLongo}" FontSize="18" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
-                            <Label Text="{Binding NomeCorretora}" FontSize="18" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
-                            <Label Text="{Binding Valor}" FontSize="18" FontAttributes="Bold" Grid.Row="0" Grid.Column="2"/>
-                            <dxco:SimpleButton HorizontalContentAlignment="Start" Text="Apagar" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource Card_Background_Dark}}" BackgroundColor="Transparent" Grid.Row="2" Grid.Column="0"/>
+                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto" Padding="10" BackgroundColor="Transparent">
+                            <Label Text="{Binding NomeLongo}" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
+                            <Label Text="{Binding Valor}" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="2"/>
+
+                            <Label Text="{Binding NomeCorretora}" FontSize="15" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
+                            <dxco:SimpleButton Text="Apagar" HorizontalContentAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Red}, Dark={StaticResource Card_Background_Dark}}" BackgroundColor="Transparent" Grid.Row="1" Grid.Column="1"/>
                         </Grid>
                     </Border>
                 </DataTemplate>

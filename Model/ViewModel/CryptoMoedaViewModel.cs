@@ -1,4 +1,6 @@
 ﻿
+using Android.Database;
+using CommunityToolkit.Mvvm.ComponentModel;
 using DeZooiNaCrypto.Data;
 using DeZooiNaCrypto.Model.Entidade;
 using System.Collections.ObjectModel;
@@ -6,13 +8,13 @@ using System.ComponentModel;
 
 namespace DeZooiNaCrypto.Model.ViewModel
 {
-    public class CryptoMoedaViewModel : INotifyPropertyChanged
+    public partial class CryptoMoedaViewModel
     {
-        private CryptoMoedaRepositorio _cryptoMoedaRepositorio = new CryptoMoedaRepositorio();
-        readonly ObservableCollection<CryptoMoeda> _cryptoMoedas;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public IReadOnlyList<CryptoMoeda> CryptoMoedas { get => _cryptoMoedas; }
+        CryptoMoedaRepositorio _cryptoMoedaRepositorio = new CryptoMoedaRepositorio();
+        ObservableCollection<CryptoMoeda> _cryptoMoedas;
+        public ObservableCollection<CryptoMoeda> CryptoMoedas { 
+            get { return _cryptoMoedas; }
+            set { _cryptoMoedas = value; } }
 
         public CryptoMoedaViewModel(Usuario usuario)
         {
@@ -23,12 +25,6 @@ namespace DeZooiNaCrypto.Model.ViewModel
         public void AtualizarValor()
         {
             _cryptoMoedaRepositorio.ObterValores(_cryptoMoedas);
-        }
-
-        protected void RaisePropertyChanged(string Valor)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(Valor));
         }
     }
 }

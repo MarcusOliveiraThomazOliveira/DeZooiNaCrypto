@@ -15,7 +15,7 @@ namespace DeZooiNaCrypto.Model.Entidade
         [Ignore]
         public string NomeLongo { get { return Nome + " / " + NomeMoedaPar; } }
         [Ignore]
-        public decimal Valor { get { return _valor; } set { _valor = value; OnPropertyChanged(); } }
+        public decimal Valor { get { return _valor; } set { _valor = value; OnPropertyChanged("Valor"); } }
         [Required]
         public TipoCorretoraEnum TipoCorretora { get; set; }
         [Ignore]
