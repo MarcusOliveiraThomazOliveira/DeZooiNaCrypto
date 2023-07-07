@@ -1,5 +1,4 @@
 using DeZooiNaCrypto.Data;
-using DeZooiNaCrypto.Model;
 
 namespace DeZooiNaCrypto.View;
 

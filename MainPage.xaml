@@ -6,28 +6,16 @@
              Title="De Zooi na Crypto"
              xmlns:dxg="clr-namespace:DevExpress.Maui.DataGrid;assembly=DevExpress.Maui.DataGrid"
              xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
              xmlns:local="clr-namespace:DeZooiNaCrypto.Model.ViewModel;clr-namespace:DeZooiNaCrypto.Model.Entidade"
-             BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
-
-    <ContentPage.Resources>
-        <Style TargetType="dxco:SimpleButton" x:Key="popupButtonStyle">
-            <Setter Property="CornerRadius" Value="0"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="IconColor" Value="{StaticResource Gray500}"/>
-            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Popup_Text_Dark}}"/>
-            <Setter Property="Command" Value="{Binding PopupActionCommand}"/>
-            <Setter Property="CommandParameter" Value="{Binding Source={RelativeSource Mode=Self}, Path=Text}"/>
-            <Setter Property="HorizontalOptions" Value="Start"/>
-            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}"/>
-        </Style>
-    </ContentPage.Resources>
+             BackgroundColor="{AppThemeBinding Light={StaticResource Gray50}, Dark={StaticResource Gray925}}">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="btnApresentarMenu" IconImageSource="verticaldots" Clicked="ApresentaMenu"/>
     </ContentPage.ToolbarItems>   
 
     <Grid>
-        <CollectionView ItemsSource="{Binding CryptoMoedas}">
+        <CollectionView ItemsSource="{Binding CryptoMoedas}" SelectionMode="Single" Margin="10,10,10,0">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
             </CollectionView.ItemsLayout>
@@ -48,8 +36,8 @@
 
         <dxco:DXPopup x:Name="actionsPopup"  CornerRadius="8" ShadowRadius="5" BackgroundColor="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}" ShadowColor="{AppThemeBinding Light={StaticResource Gray500}, Dark=Black}">
             <StackLayout Padding="8,6">
-                <dxco:SimpleButton Text="Cadastrar Crypto Moeda" Clicked="CadastrarCryptoMoeda" Style="{StaticResource popupButtonStyle}"  PressedTextColor="{AppThemeBinding Light=Black, Dark={StaticResource Popup_Icon_Dark}}"/>
-                <dxco:SimpleButton Text="Sair" Clicked="Sair" Style="{StaticResource popupButtonStyle}"  PressedTextColor="{AppThemeBinding Light=Black, Dark={StaticResource Popup_Icon_Dark}}"/>
+                <dxco:SimpleButton Text="Cadastrar Crypto Moeda" Clicked="CadastrarCryptoMoeda"  PressedTextColor="{AppThemeBinding Light=Black, Dark={StaticResource Popup_Icon_Dark}}"/>
+                <dxco:SimpleButton Text="Sair" Clicked="Sair"  PressedTextColor="{AppThemeBinding Light=Black, Dark={StaticResource Popup_Icon_Dark}}"/>
             </StackLayout>
         </dxco:DXPopup>
     </Grid>

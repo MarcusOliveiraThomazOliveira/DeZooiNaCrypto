@@ -2,10 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DeZooiNaCrypto.View.LoginUsuario"
+             xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+             xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
              NavigationPage.HasNavigationBar="False">
-    
+
     <StackLayout VerticalOptions="CenterAndExpand" Margin="16" Padding="16">
-        <Label 
+        <!--<Label 
             Text="De Zooi Na Crypto"
             Margin="20"
             VerticalOptions="Center" 
@@ -30,7 +32,27 @@
             Placeholder="Senha"
             x:Name="txtSenha"
             Keyboard="Default"
-            IsPassword="True"/>
+            IsPassword="True"/>-->
+
+        <dxe:TextEdit
+            x:Name="txtEmail"
+            StartIcon="email_black_24dp"
+            LabelText="E-mail"
+            PlaceholderText="dezooinacrypto@dezooinacrypto.com"
+            BorderColor="Blue"
+            BoxMode="Outlined"
+            CornerRadius="10" 
+            Margin="10"/>
+
+        <dxe:PasswordEdit
+            x:Name="txtSenha"
+            StartIcon="password_black_24dp"
+            LabelText="Senha"
+            PlaceholderText="Senha"
+            BorderColor="Blue"
+            BoxMode="Outlined"
+            CornerRadius="10" 
+            Margin="10"/>
 
         <Button
             x:Name="bntLogar"
