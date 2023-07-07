@@ -1,9 +1,8 @@
-﻿using DeZooiNaCrypto.Data;
+﻿using DevExpress.Maui.Controls;
 using DeZooiNaCrypto.Model.Entidade;
 using DeZooiNaCrypto.Model.ViewModel;
 using DeZooiNaCrypto.View;
 using DeZooiNaCrypto.View.Cadastro;
-using System.Collections.ObjectModel;
 
 namespace DeZooiNaCrypto;
 
@@ -11,7 +10,6 @@ public partial class MainPage : ContentPage
 {
     Usuario _usuario;
     IDispatcherTimer timerAtualizaDados;
-    CryptoMoedaRepositorio _cryptoMoedaRepositorio = new CryptoMoedaRepositorio();
     CryptoMoedaViewModel _cryptoMoedaViewModel;
     public MainPage()
     {
@@ -28,14 +26,22 @@ public partial class MainPage : ContentPage
 
     protected override void OnAppearing()
     {
-        base.OnAppearing();
+        try
+        {
+            base.OnAppearing();
 
-        this.BindingContext = _cryptoMoedaViewModel;
+            this.BindingContext = _cryptoMoedaViewModel;
 
-        timerAtualizaDados = this.Dispatcher.CreateTimer();
-        timerAtualizaDados.Interval = TimeSpan.FromSeconds(2);
-        timerAtualizaDados.Tick += (sender, e) => AtualizaDados(sender, e);
-        timerAtualizaDados.Start();
+            timerAtualizaDados = this.Dispatcher.CreateTimer();
+            timerAtualizaDados.Interval = TimeSpan.FromSeconds(2);
+            timerAtualizaDados.Tick += (sender, e) => AtualizaDados(sender, e);
+            timerAtualizaDados.Start();
+        }
+        catch (Exception ex)
+        {
+            DisplayAlert("Crypto Moeda", ex.Message, "Que triste ;(");
+        }
+        
     }
     private void AtualizaDados(object sender, EventArgs e)
     {
@@ -60,6 +66,11 @@ public partial class MainPage : ContentPage
         ApresentaMenu(null, null);
         timerAtualizaDados.Stop();
         Navigation.PushAsync(new CadastroCryptoMoeda(_usuario));
+    }
+
+    private void Apagar(object sender, EventArgs e)
+    {
+        _cryptoMoedaViewModel.Apagar((Guid)((SimpleButton)sender).CommandParameter);
     }
 }
 

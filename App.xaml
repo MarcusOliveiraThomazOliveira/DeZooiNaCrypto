@@ -18,6 +18,7 @@
             <Color x:Key="Popup_Text_Dark">#E6E1E5</Color>
             <Color x:Key="Popup_Icon_Dark">#D0BCFF</Color>
 
+            <Color x:Key="Card_Background_Dark">#322F37</Color>
             <Color x:Key="Red">#f44336</Color>
             <Color x:Key="Tertiary">#2B0B98</Color>
             <Color x:Key="White">White</Color>
