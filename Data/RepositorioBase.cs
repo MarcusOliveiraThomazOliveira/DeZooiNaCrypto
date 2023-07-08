@@ -39,6 +39,9 @@ namespace DeZooiNaCrypto.Data
 
            //_connection.DropTableAsync<CryptoMoeda>().Wait();
             _connection.CreateTableAsync<CryptoMoeda>().Wait();
+
+            //_connection.DropTableAsync<VendaCryptoMoeda>().Wait();
+            _connection.CreateTableAsync<VendaCryptoMoeda>().Wait();
         }
 
         public Task<List<T>> Listar()

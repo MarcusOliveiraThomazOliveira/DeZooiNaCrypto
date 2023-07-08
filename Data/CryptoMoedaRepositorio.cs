@@ -45,7 +45,6 @@ namespace DeZooiNaCrypto.Data
             {
             }
         }
-
         public CryptoMoeda Obter(Usuario usuario, string nome, int idCorretora, int idMoedaPar)
         {
             return _connection.QueryAsync<CryptoMoeda>("select * from CryptoMoeda where IdUsuario = @Id and Nome = @nome and TipoCorretora = @idCorretora and TipoMoedaPar = @idMoedaPar order by nome", usuario.Id, nome, idCorretora, idMoedaPar).Result.FirstOrDefault();

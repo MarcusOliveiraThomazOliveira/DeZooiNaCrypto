@@ -24,7 +24,7 @@ namespace DeZooiNaCrypto.Data
                 
 
                 var senhaCriptografada = Criptografia.GerarCriptografia(password);
-                return _connection.QueryAsync<Usuario>("select * from usuario where email = @login and senha = @password", login, senhaCriptografada).Result.FirstOrDefault();
+                return _connection.QueryAsync<Usuario>("select * from usuario where email = @login and senha = @password", login.ToLower(), senhaCriptografada).Result.FirstOrDefault();
             }
             catch
             {

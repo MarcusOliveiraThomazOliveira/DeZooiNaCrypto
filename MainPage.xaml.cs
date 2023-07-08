@@ -77,7 +77,7 @@ public partial class MainPage : ContentPage
 
     private void Venda(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new VendaCryptoMoeda(_usuario, (Guid)((SimpleButton)sender).CommandParameter));
+        Navigation.PushAsync(new VendaCryptoMoedaView(_usuario, (Guid)((SimpleButton)sender).CommandParameter));
     }
 }
 
