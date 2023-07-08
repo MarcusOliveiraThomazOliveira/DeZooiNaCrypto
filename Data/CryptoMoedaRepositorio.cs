@@ -33,7 +33,7 @@ namespace DeZooiNaCrypto.Data
 
                             var client = new HttpClient();
                             List<BinanceCrypto> binanceCryptos = await client.GetFromJsonAsync<List<BinanceCrypto>>(url);
-                            cryptoMoeda.Valor = Decimal.Parse(binanceCryptos.FirstOrDefault().Price.ToString().TrimEnd('0'));
+                            cryptoMoeda.Valor = binanceCryptos.FirstOrDefault().Price;
                         }
                         catch
                         {

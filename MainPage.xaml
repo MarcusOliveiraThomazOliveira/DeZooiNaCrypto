@@ -22,10 +22,10 @@
             <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}"/>
         </Style>
     </ContentPage.Resources>
-    
+
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="btnApresentarMenu" IconImageSource="verticaldots" Clicked="ApresentaMenu"/>
-    </ContentPage.ToolbarItems>   
+    </ContentPage.ToolbarItems>
 
     <Grid>
         <CollectionView ItemsSource="{Binding CryptoMoedas}" SelectionMode="Single" Margin="10,10,10,0">
@@ -40,10 +40,13 @@
                             <Label Text="{Binding Valor}" HorizontalOptions="End" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="2"/>
 
                             <Label Text="{Binding NomeCorretora}" FontSize="15" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
-                            <dxco:SimpleButton Clicked="Apagar" CommandParameter="{Binding Id}" Text="Apagar" HorizontalContentAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Red}, Dark={StaticResource Card_Background_Dark}}" BackgroundColor="Transparent" Grid.Row="1" Grid.Column="2"/>
-                            <dxco:SimpleButton Clicked="Venda" CommandParameter="{Binding Id}" Text="Venda" HorizontalContentAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" BackgroundColor="Transparent" Grid.Row="1" Grid.Column="1"/>
+
+                            <Grid Grid.Row="2" Grid.ColumnSpan="3" ColumnDefinitions="*,*,*" RowDefinitions="Auto" BackgroundColor="Transparent">
+                                <dxco:SimpleButton Clicked="Apagar" CommandParameter="{Binding Id}" Text="Apagar" HorizontalContentAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Red}, Dark={StaticResource Card_Background_Dark}}" BackgroundColor="Transparent" Grid.Row="1" Grid.Column="2"/>
+                                <dxco:SimpleButton Clicked="Venda" CommandParameter="{Binding Id}" Text="Venda" HorizontalContentAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" BackgroundColor="Transparent" Grid.Row="1" Grid.Column="1"/>
+                            </Grid>
                         </Grid>
-                    </Border>
+                    </Border>                    
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
