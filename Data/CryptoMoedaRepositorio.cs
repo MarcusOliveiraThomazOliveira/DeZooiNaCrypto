@@ -20,25 +20,24 @@ namespace DeZooiNaCrypto.Data
         {
             try
             {
-                foreach (var cryptoMoeda in cryptoMoedas)
-                {
-                    if (cryptoMoeda.TipoCorretora == TipoCorretoraEnum.Binance)
-                    {
-                        try
-                        {
-                            string moedaPar = Enum.GetName(typeof(TipoMoedaParEnum), (int)cryptoMoeda.TipoMoedaPar);
-                            var queryString = $"[{string.Join(",", (new List<string> { cryptoMoeda.Nome.ToUpper() + moedaPar }).Select(s => $"\"{s}\""))}]";
-                            var urlParametros = @"?symbols=" + queryString;
-                            var url = new Uri(@"https://api.binance.com/api/v3/ticker/price" + urlParametros);
+                var queryString = $"[{string.Join(",", cryptoMoedas.Where(x => x.TipoCorretora == TipoCorretoraEnum.Binance && x.TipoMoedaPar == TipoMoedaParEnum.USDT).Select(x => $"\"{x.Nome + x.NomeMoedaPar}\""))}]";
 
-                            var client = new HttpClient();
-                            List<BinanceCrypto> binanceCryptos = await client.GetFromJsonAsync<List<BinanceCrypto>>(url);
-                            cryptoMoeda.Valor = binanceCryptos.FirstOrDefault().Price;
-                        }
-                        catch
-                        {
-                        }
+                try
+                {
+                    var urlParametros = @"?symbols=" + queryString;
+                    var url = new Uri(@"https://api.binance.com/api/v3/ticker/price" + urlParametros);
+
+                    var client = new HttpClient();
+                    List<BinanceCrypto> binanceCryptos = await client.GetFromJsonAsync<List<BinanceCrypto>>(url);
+                    foreach (var binance in binanceCryptos)
+                    {
+                        var cryptoMoeda = cryptoMoedas.Where(x => (x.Nome + x.NomeMoedaPar) == binance.Symbol).FirstOrDefault();
+                        if (cryptoMoeda != null)
+                            cryptoMoeda.Valor = binance.Price;
                     }
+                }
+                catch
+                {
                 }
             }
             catch

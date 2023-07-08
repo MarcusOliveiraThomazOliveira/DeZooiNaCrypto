@@ -40,9 +40,9 @@ namespace DeZooiNaCrypto.Model.ViewModel
         {
             if (_vendaCryptoMoeda.DataVenda == DateTime.MinValue) { _messageService.ShowAsync("E preciso infomar a data da venda válida"); return; }
             if (string.IsNullOrEmpty(_quantidadeVendida) || !Util.Validacao.ehDecimal(_quantidadeVendida) || 
-                (Util.Validacao.ehDecimal(_quantidadeVendida) && Decimal.Parse(_quantidadeVendida) < 0)) { _messageService.ShowAsync("E preciso infomar a quantidade de venda válida");  return; }
+                (Util.Validacao.ehDecimal(_quantidadeVendida) && Decimal.Parse(_quantidadeVendida) <= 0)) { _messageService.ShowAsync("E preciso infomar a quantidade de venda válida");  return; }
             if (string.IsNullOrEmpty(_valorVenda) || !Util.Validacao.ehDecimal(_valorVenda) ||
-                (Util.Validacao.ehDecimal(_valorVenda) && Decimal.Parse(_valorVenda) < 0)) { _messageService.ShowAsync("E preciso infomar o valor da venda válido");  return; }
+                (Util.Validacao.ehDecimal(_valorVenda) && Decimal.Parse(_valorVenda) <= 0)) { _messageService.ShowAsync("E preciso infomar o valor da venda válido");  return; }
 
             _vendaCryptoMoeda.QuantidadeVenda = Decimal.Parse(_quantidadeVendida);
             _vendaCryptoMoeda.ValorVenda = Decimal.Parse(_valorVenda);
