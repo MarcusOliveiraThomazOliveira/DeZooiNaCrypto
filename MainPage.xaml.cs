@@ -75,7 +75,12 @@ public partial class MainPage : ContentPage
         timerAtualizaDados.Start();
     }
 
-    private void Venda(object sender, EventArgs e)
+    private void Comprar(object sender, EventArgs e)
+    {
+
+    }
+
+    private void Vender(object sender, EventArgs e)
     {
         Navigation.PushAsync(new VendaCryptoMoedaView(_usuario, (Guid)((SimpleButton)sender).CommandParameter));
     }
