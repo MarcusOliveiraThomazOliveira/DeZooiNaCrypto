@@ -7,10 +7,10 @@ public partial class CadastroOperacaoFuturoView : ContentPage
 {
     Usuario _usuario;
     Guid _idCryptoMoeda;
-	public CadastroOperacaoFuturoView()
-	{
-		InitializeComponent();
-	}
+    public CadastroOperacaoFuturoView()
+    {
+        InitializeComponent();
+    }
     public CadastroOperacaoFuturoView(Usuario usuario, Guid idCryptoMoeda)
     {
         _usuario = usuario;
@@ -18,5 +18,10 @@ public partial class CadastroOperacaoFuturoView : ContentPage
         BindingContext = new OperacaoFuturoViewModel();
 
         InitializeComponent();
+    }
+
+    private void ApresentaMenu(object sender, EventArgs e)
+    {
+        actionsPopup.IsOpen = !actionsPopup.IsOpen;
     }
 }
