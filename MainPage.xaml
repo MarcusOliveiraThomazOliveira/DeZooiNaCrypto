@@ -6,6 +6,7 @@
              Title="De Zooi na Crypto"
              xmlns:dxg="clr-namespace:DevExpress.Maui.DataGrid;assembly=DevExpress.Maui.DataGrid"
              xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+             xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
              xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
              xmlns:local="clr-namespace:DeZooiNaCrypto.Model.ViewModel;clr-namespace:DeZooiNaCrypto.Model.Entidade"
              BackgroundColor="{AppThemeBinding Light={StaticResource Gray50}, Dark={StaticResource Gray925}}">
@@ -28,7 +29,7 @@
     </ContentPage.ToolbarItems>
 
     <Grid>
-        <CollectionView  ItemsSource="{Binding CryptoMoedas}" SelectionMode="Single" Margin="10,10,10,0">
+        <CollectionView  ItemsSource="{Binding CryptoMoedas}" SelectionMode="Single" Margin="10,10,10,0" SelectionChanged="SelectionChanged" Scrolled="Scrolled">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
             </CollectionView.ItemsLayout>
@@ -45,13 +46,13 @@
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition />
-                                    <ColumnDefinition Width="45"/>
-                                    <ColumnDefinition Width="45"/>
-                                    <ColumnDefinition Width="45"/>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="75"/>
+                                    <ColumnDefinition Width="40"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Text="{Binding NomeCorretora}" VerticalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
-                                <dxco:SimpleButton Clicked="Comprar" WidthRequest="50" Icon="shopping_cart" IconColor="DarkRed" BackgroundColor="Transparent" CommandParameter="{Binding Id}" VerticalContentAlignment="Start" HorizontalContentAlignment="Start" TextColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" Grid.Row="1" Grid.Column="2"/>
-                                <dxco:SimpleButton Clicked="Vender" WidthRequest="45" Icon="shopping_cart" IconColor="Green" BackgroundColor="Transparent" CommandParameter="{Binding Id}" VerticalContentAlignment="End" HorizontalContentAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" Grid.Row="1" Grid.Column="2"/>
+                                <Label Text="{Binding NomeCorretora}"  VerticalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
+                                <dxco:SimpleButton Clicked="Comprar" Text="Spot"  BackgroundColor="Transparent" CommandParameter="{Binding Id}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" Grid.Row="1" Grid.Column="1"/>
+                                <dxco:SimpleButton Clicked="Vender" Text="Futuro"  BackgroundColor="Transparent" CommandParameter="{Binding Id}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" Grid.Row="1" Grid.Column="2"/>
                                 <dxco:SimpleButton Clicked="Apagar" WidthRequest="45" Icon="deletetask" IconColor="DarkRed" BackgroundColor="Transparent" CommandParameter="{Binding Id}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Red}, Dark={StaticResource Card_Background_Dark}}" Grid.Row="1" Grid.Column="3"/>
                             </Grid>
                         </Grid>
@@ -65,6 +66,17 @@
                 <dxco:SimpleButton Text="Sair" Clicked="Sair" Style="{StaticResource popupButtonStyle}"  PressedTextColor="{AppThemeBinding Light=Black, Dark={StaticResource Popup_Icon_Dark}}"/>
             </StackLayout>
         </dxco:DXPopup>
+        <dxco:BottomSheet x:Name="bsDetalheCryptoMoeda" ShowGrabber="True" AllowDismiss="True" IsModal="false" HalfExpandedRatio="0.4">
+            <Grid x:Name="gridCryptoMoeda" RowDefinitions="Auto, Auto, Auto, *">
+                <Border Grid.Row="1" HeightRequest="2" BackgroundColor="{AppThemeBinding Light={StaticResource BottomSheet_Separator_Light}, Dark={StaticResource BottomSheet_Separator_Dark}}" HorizontalOptions="Fill" StrokeThickness="0" Margin="16,0,16,0"/>
+                <Grid x:Name="gridCompra" ColumnDefinitions="*" RowDefinitions="Auto,Auto">
+                    <VerticalStackLayout>
+
+                    </VerticalStackLayout>
+                </Grid>
+            </Grid>
+
+        </dxco:BottomSheet>
     </Grid>
 
 </ContentPage>

@@ -22,6 +22,11 @@ namespace DeZooiNaCrypto.Model.Entidade
         public Guid IdCryptoMoeda { get; set; }
         [ManyToOne]
         public CryptoMoeda CryptoMoeda { get; set; }
+        public decimal ValorUnitarioCompra { get; set; }
+        [ForeignKey(typeof(CompraCryptoMoeda))]
+        public Guid IdCompraCryptoMoeda { get; set; }
+        [ManyToOne]
+        public CompraCryptoMoeda CompraCryptoMoeda { get; set; }
 
     }
 }

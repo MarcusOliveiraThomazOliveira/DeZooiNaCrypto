@@ -14,5 +14,7 @@ namespace DeZooiNaCrypto.Model.Entidade
         public string Senha { get; set; }
         [OneToMany]
         public List<CryptoMoeda> CryptoMoedas { get; set; }
+        [OneToMany]
+        public List<CompraCryptoMoeda> CompraCryptoMoedas { get; set; }
     }
 }
