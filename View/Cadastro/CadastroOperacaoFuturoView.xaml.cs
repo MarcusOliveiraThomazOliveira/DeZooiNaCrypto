@@ -1,4 +1,5 @@
 using DeZooiNaCrypto.Model.Entidade;
+using DeZooiNaCrypto.Model.ViewModel;
 
 namespace DeZooiNaCrypto.View.Cadastro;
 
@@ -14,6 +15,7 @@ public partial class CadastroOperacaoFuturoView : ContentPage
     {
         _usuario = usuario;
         _idCryptoMoeda = idCryptoMoeda;
+        BindingContext = new OperacaoFuturoViewModel();
 
         InitializeComponent();
     }

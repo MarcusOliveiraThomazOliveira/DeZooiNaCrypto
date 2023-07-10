@@ -17,7 +17,7 @@
 
             <dxe:DateEdit
                 x:Name="deDataVenda"
-                Date="{Binding _vendaCryptoMoeda.DataOperacaoFuturo}"
+                Date="{Binding OpercaoFuturoCryptoMoeda.DataOperacaoFuturo}"
                 LabelText="Data da operação"
                 PlaceholderText="Data da venda"
                 BorderColor="Blue"
@@ -38,7 +38,7 @@
 
             <dxe:NumericEdit
                 x:Name="txtAlavancagem"
-                Value="{Binding _alavancagem}"
+                Value="{Binding OpercaoFuturoCryptoMoeda.Alavancagem}"
                 LabelText="Alavancagem"
                 PlaceholderText="0.000,00"
                 TextHorizontalAlignment="End"
@@ -70,7 +70,6 @@
                 Margin="10"/>
 
             <dxco:SimpleButton Text="Gravar" Command="{Binding Gravar}" BackgroundColor="blue" Margin="10"/>
-            <dxco:SimpleButton Text="Cancelar" BackgroundColor="PaleVioletRed" Margin="10"/>
         </StackLayout>
     </ScrollView>
 

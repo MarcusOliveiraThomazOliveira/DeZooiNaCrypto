@@ -91,12 +91,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="View\Cadastro\VendaCryptoMoedaView.xaml.cs">
-	    <DependentUpon>VendaCryptoMoedaView.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
 	  <MauiXaml Update="View\Cadastro\CadastroOperacaoFuturoView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -104,12 +98,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Cadastro\CadastroCryptoMoeda.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\Cadastro\CompraCryptoMoedaView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\Cadastro\VendaCryptoMoedaView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\LoginUsuario.xaml">

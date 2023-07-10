@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace DeZooiNaCrypto.Model.Entidade
 {
-    public class OpercaoFuturoCryptoMoeda : EntidadeBase
+    public class OperacaoFuturoCryptoMoeda : EntidadeBase
     {
-        public OpercaoFuturoCryptoMoeda()
+        public OperacaoFuturoCryptoMoeda()
         {
             DataOperacaoFuturo = DateTime.Now.Date;
         }
@@ -26,6 +26,9 @@ namespace DeZooiNaCrypto.Model.Entidade
         public decimal ValorInvestido { get; set; }
         [Required]
         public int Alavancagem { get; set; }
+        [Required]
+        public decimal ValorCompra{ get; set; }
+        [ForeignKey(typeof(CryptoMoeda))]
         [Required]
         public decimal ValorVenda { get; set; }
         [ForeignKey(typeof(CryptoMoeda))]
