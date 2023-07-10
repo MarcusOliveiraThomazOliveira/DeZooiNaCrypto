@@ -9,7 +9,6 @@
     
     <ScrollView Padding="{OnPlatform iOS='30,60,30,30', Default='30'}">
         <StackLayout Padding="5">
-
             <dxe:DateEdit
                 x:Name="deDataVenda"
                 Date="{Binding _vendaCryptoMoeda.DataVenda}"

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DeZooiNaCrypto.View.Cadastro.CadastroOperacaoFuturoView"
+             Title="Cadastro Operação Futuro"
+             xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+             xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"             
+             BackgroundColor="{AppThemeBinding Light={StaticResource Gray50}, Dark={StaticResource Gray925}}">
+
+    <ScrollView Padding="{OnPlatform iOS='30,60,30,30', Default='30'}">
+        <StackLayout Padding="5">
+
+            <dxe:ChoiceChipGroup x:Name="ccgMoedaPar" BoxMode="Outlined">
+                <dxe:Chip x:Name="ccgLong" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Long"/>
+                <dxe:Chip x:Name="ccgShort" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Short"/>
+            </dxe:ChoiceChipGroup>
+
+            <dxe:DateEdit
+                x:Name="deDataVenda"
+                Date="{Binding _vendaCryptoMoeda.DataOperacaoFuturo}"
+                LabelText="Data da operação"
+                PlaceholderText="Data da venda"
+                BorderColor="Blue"
+                BoxMode="Outlined"
+                CornerRadius="10" 
+                Margin="10"/>
+
+            <dxe:TextEdit
+                x:Name="txtValorInvestido"
+                Text="{Binding _valorInvestido}"
+                LabelText="Valor investido"
+                PlaceholderText="0.000,00"
+                TextHorizontalAlignment="End"
+                BorderColor="Blue"
+                BoxMode="Outlined"
+                CornerRadius="10" 
+                Margin="10"/>
+
+            <dxe:NumericEdit
+                x:Name="txtAlavancagem"
+                Value="{Binding _alavancagem}"
+                LabelText="Alavancagem"
+                PlaceholderText="0.000,00"
+                TextHorizontalAlignment="End"
+                BorderColor="Blue"
+                BoxMode="Outlined"
+                CornerRadius="10" 
+                Margin="10"/>
+
+            <dxe:TextEdit
+                x:Name="txtValorCompra"
+                Text="{Binding _valorCompra}"
+                LabelText="Valor da compra"
+                PlaceholderText="0.000,00"
+                TextHorizontalAlignment="End"
+                BorderColor="Blue"
+                BoxMode="Outlined"
+                CornerRadius="10" 
+                Margin="10"/>
+
+            <dxe:TextEdit
+                x:Name="txtValorVenda"
+                Text="{Binding _valorVenda}"
+                LabelText="Valor da venda"
+                PlaceholderText="0.000,00"
+                TextHorizontalAlignment="End"
+                BorderColor="Blue"
+                BoxMode="Outlined"
+                CornerRadius="10" 
+                Margin="10"/>
+
+            <dxco:SimpleButton Text="Gravar" Command="{Binding Gravar}" BackgroundColor="blue" Margin="10"/>
+            <dxco:SimpleButton Text="Cancelar" BackgroundColor="PaleVioletRed" Margin="10"/>
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

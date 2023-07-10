@@ -51,8 +51,8 @@
                                     <ColumnDefinition Width="40"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Text="{Binding NomeCorretora}"  VerticalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
-                                <dxco:SimpleButton Clicked="Comprar" Text="Spot"  BackgroundColor="Transparent" CommandParameter="{Binding Id}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" Grid.Row="1" Grid.Column="1"/>
-                                <dxco:SimpleButton Clicked="Vender" Text="Futuro"  BackgroundColor="Transparent" CommandParameter="{Binding Id}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" Grid.Row="1" Grid.Column="2"/>
+                                <dxco:SimpleButton Clicked="Spot" Text="Spot"  BackgroundColor="Transparent" CommandParameter="{Binding Id}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" Grid.Row="1" Grid.Column="1"/>
+                                <dxco:SimpleButton Clicked="Futuro" Text="Futuro"  BackgroundColor="Transparent" CommandParameter="{Binding Id}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" Grid.Row="1" Grid.Column="2"/>
                                 <dxco:SimpleButton Clicked="Apagar" WidthRequest="45" Icon="deletetask" IconColor="DarkRed" BackgroundColor="Transparent" CommandParameter="{Binding Id}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Red}, Dark={StaticResource Card_Background_Dark}}" Grid.Row="1" Grid.Column="3"/>
                             </Grid>
                         </Grid>

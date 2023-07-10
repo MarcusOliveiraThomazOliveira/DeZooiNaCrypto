@@ -75,16 +75,6 @@ public partial class MainPage : ContentPage
         timerAtualizaDados.Start();
     }
 
-    private void Comprar(object sender, EventArgs e)
-    {
-
-    }
-
-    private void Vender(object sender, EventArgs e)
-    {
-        Navigation.PushAsync(new VendaCryptoMoedaView(_usuario, (Guid)((SimpleButton)sender).CommandParameter));
-    }
-
     private void SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         bsDetalheCryptoMoeda.State = BottomSheetState.HalfExpanded;
@@ -94,6 +84,16 @@ public partial class MainPage : ContentPage
     private void Scrolled(object sender, ItemsViewScrolledEventArgs e)
     {
         if (bsDetalheCryptoMoeda.HalfExpandedRatio == 0.4) bsDetalheCryptoMoeda.Animate("bottomsheet", x => bsDetalheCryptoMoeda.HalfExpandedRatio = x, 0.4, 0.2);
+    }
+
+    private void Futuro(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new CadastroOperacaoFuturoView(_usuario, (Guid)((SimpleButton)sender).CommandParameter));
+    }
+
+    private void Spot(object sender, EventArgs e)
+    {
+
     }
 }
 

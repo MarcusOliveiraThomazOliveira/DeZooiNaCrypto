@@ -1,0 +1,20 @@
+using DeZooiNaCrypto.Model.Entidade;
+
+namespace DeZooiNaCrypto.View.Cadastro;
+
+public partial class CadastroOperacaoFuturoView : ContentPage
+{
+    Usuario _usuario;
+    Guid _idCryptoMoeda;
+	public CadastroOperacaoFuturoView()
+	{
+		InitializeComponent();
+	}
+    public CadastroOperacaoFuturoView(Usuario usuario, Guid idCryptoMoeda)
+    {
+        _usuario = usuario;
+        _idCryptoMoeda = idCryptoMoeda;
+
+        InitializeComponent();
+    }
+}
