@@ -2,22 +2,39 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DeZooiNaCrypto.View.Cadastro.CadastroOperacaoFuturoView"
-             Title="Cadastro Operação Futuro"
+             Title="Operação Futuro"
+             xmlns:dxg="clr-namespace:DevExpress.Maui.DataGrid;assembly=DevExpress.Maui.DataGrid"
+             xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
              xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
-             xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"             
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:local="clr-namespace:DeZooiNaCrypto.Model.ViewModel;clr-namespace:DeZooiNaCrypto.Model.Entidade"
              BackgroundColor="{AppThemeBinding Light={StaticResource Gray50}, Dark={StaticResource Gray925}}">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="btnApresentarMenu" IconImageSource="verticaldots" Clicked="ApresentaMenu"/>
     </ContentPage.ToolbarItems>
 
-    <ScrollView Padding="{OnPlatform iOS='30,60,30,30', Default='30'}">
-        <StackLayout Padding="5">
-            <Label Text="Lançamentos"></Label>
+    <StackLayout Padding="5">
+        <CollectionView ItemsSource="{Binding OperacaoFuturoCryptoMoedas}" SelectionMode="Single" Margin="10,10,10,0">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type local:OperacaoFuturoCryptoMoeda}">
+                    <Border StrokeShape="{OnPlatform RoundRectangle 10, iOS=RoundRectangle 1}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Card_Background_Dark}}" StrokeThickness="1">
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" BackgroundColor="Transparent">
+                            <Label Text="{Binding NomeOperacaoFuturo}" VerticalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
+                            <Label Text="{Binding DataOperacaoFuturoStr}" VerticalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
-            <dxco:DXPopup x:Name="actionsPopup" CornerRadius="8" ShadowRadius="5" BackgroundColor="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}" ShadowColor="{AppThemeBinding Light={StaticResource Gray500}, Dark=Black}">
+        <dxco:DXPopup x:Name="actionsPopup" CornerRadius="8" ShadowRadius="5" BackgroundColor="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}" ShadowColor="{AppThemeBinding Light={StaticResource Gray500}, Dark=Black}">
+            <ScrollView HeightRequest="470">
                 <StackLayout Padding="8,6">
-                    <dxe:ChoiceChipGroup x:Name="ccgMoedaPar" BoxMode="Outlined">
+                    <dxe:ChoiceChipGroup x:Name="ccgMoedaPar" BoxMode="Outlined" Padding="5">
                         <dxe:Chip x:Name="ccgLong" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Long"/>
                         <dxe:Chip x:Name="ccgShort" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Short"/>
                     </dxe:ChoiceChipGroup>
@@ -28,7 +45,7 @@
                         BorderColor="Blue"
                         BoxMode="Outlined"
                         CornerRadius="10" 
-                        Margin="10"/>
+                        Margin="5"/>
 
                     <dxe:TextEdit
                         x:Name="txtValorInvestido"
@@ -39,7 +56,7 @@
                         BorderColor="Blue"
                         BoxMode="Outlined"
                         CornerRadius="10" 
-                        Margin="10"/>
+                        Margin="5"/>
 
                     <dxe:NumericEdit
                         x:Name="txtAlavancagem"
@@ -50,7 +67,7 @@
                         BorderColor="Blue"
                         BoxMode="Outlined"
                         CornerRadius="10" 
-                        Margin="10"/>
+                        Margin="5"/>
 
                     <dxe:TextEdit
                         x:Name="txtValorCompra"
@@ -61,7 +78,7 @@
                         BorderColor="Blue"
                         BoxMode="Outlined"
                         CornerRadius="10" 
-                        Margin="10"/>
+                        Margin="5"/>
 
                     <dxe:TextEdit
                         x:Name="txtValorVenda"
@@ -72,14 +89,11 @@
                         BorderColor="Blue"
                         BoxMode="Outlined"
                         CornerRadius="10"
-                        Margin="10"/>
+                        Margin="5"/>
 
-                    <dxco:SimpleButton Text="Gravar" Command="{Binding Gravar}" BackgroundColor="blue" Margin="10"/>
-
+                    <dxco:SimpleButton Text="Gravar" Command="{Binding Gravar}" BackgroundColor="blue" Margin="1"/>
                 </StackLayout>
-            </dxco:DXPopup>
-
-        </StackLayout>
-    </ScrollView>
-
+            </ScrollView>
+        </dxco:DXPopup>
+    </StackLayout>
 </ContentPage>

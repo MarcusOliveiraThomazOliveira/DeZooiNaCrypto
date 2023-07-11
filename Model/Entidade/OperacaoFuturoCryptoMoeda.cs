@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace DeZooiNaCrypto.Model.Entidade
 {
+    [Table("OperacaoFuturoCryptoMoeda")]
     public class OperacaoFuturoCryptoMoeda : EntidadeBase
     {
         public OperacaoFuturoCryptoMoeda()
@@ -22,6 +23,8 @@ namespace DeZooiNaCrypto.Model.Entidade
         public string NomeOperacaoFuturo { get { return Enum.GetName(typeof(TipoOperacaoFuturoEnum), (int)TipoOperacaoFuturo); } }
         [Required]
         public DateTime DataOperacaoFuturo { get; set; }
+        [Ignore]
+        public string DataOperacaoFuturoStr { get { return DataOperacaoFuturo.ToString("dd/MM/yyyy"); } }
         [Required]
         public decimal ValorInvestido { get; set; }
         [Required]
@@ -31,7 +34,7 @@ namespace DeZooiNaCrypto.Model.Entidade
         [ForeignKey(typeof(CryptoMoeda))]
         [Required]
         public decimal ValorVenda { get; set; }
-        [ForeignKey(typeof(CryptoMoeda))]
+        [Required, ForeignKey(typeof(CryptoMoeda))]
         public Guid IdCryptoMoeda { get; set; }
         [ManyToOne]
         public CryptoMoeda CryptoMoeda { get; set; }

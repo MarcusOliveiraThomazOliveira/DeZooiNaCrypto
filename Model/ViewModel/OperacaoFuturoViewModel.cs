@@ -3,6 +3,7 @@ using DeZooiNaCrypto.Model.Entidade;
 using DeZooiNaCrypto.Util;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -15,17 +16,21 @@ namespace DeZooiNaCrypto.Model.ViewModel
     {
         private readonly IMessageService _messageService;
         private OperacaoFuturoRepositorio _operacaoFuturoRepositorio = new OperacaoFuturoRepositorio();
+        private Guid _idCryptoMoeda;
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public ObservableCollection<OperacaoFuturoCryptoMoeda> OperacaoFuturoCryptoMoedas { get; set; }
         public OperacaoFuturoCryptoMoeda OperacaoFuturoCryptoMoeda { get; set; }
         public string _valorInvestido { get; set; }
         public string _valorCompra { get; set; }
         public string _valorVenda { get; set; }
         public ICommand Gravar { get; private set; }
-        public OperacaoFuturoViewModel()
+        public OperacaoFuturoViewModel(Guid IdCryptoMoeda)
         {
             _messageService = DependencyService.Get<IMessageService>();
             OperacaoFuturoCryptoMoeda = new OperacaoFuturoCryptoMoeda();
+            OperacaoFuturoCryptoMoedas = _operacaoFuturoRepositorio.Listar(IdCryptoMoeda);
+            _idCryptoMoeda = IdCryptoMoeda;
 
             Gravar = new Command(GravarOperacaoFuturo);
         }
@@ -47,6 +52,7 @@ namespace DeZooiNaCrypto.Model.ViewModel
             OperacaoFuturoCryptoMoeda.ValorInvestido = Decimal.Parse(_valorInvestido);
             OperacaoFuturoCryptoMoeda.ValorCompra = Decimal.Parse(_valorCompra);
             OperacaoFuturoCryptoMoeda.ValorVenda = Decimal.Parse(_valorVenda);
+            OperacaoFuturoCryptoMoeda.IdCryptoMoeda = _idCryptoMoeda;
             _operacaoFuturoRepositorio.Salvar(OperacaoFuturoCryptoMoeda);
         }
 

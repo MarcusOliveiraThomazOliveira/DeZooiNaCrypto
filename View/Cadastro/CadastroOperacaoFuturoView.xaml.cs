@@ -15,7 +15,7 @@ public partial class CadastroOperacaoFuturoView : ContentPage
     {
         _usuario = usuario;
         _idCryptoMoeda = idCryptoMoeda;
-        BindingContext = new OperacaoFuturoViewModel();
+        BindingContext = new OperacaoFuturoViewModel(idCryptoMoeda);
 
         InitializeComponent();
     }
