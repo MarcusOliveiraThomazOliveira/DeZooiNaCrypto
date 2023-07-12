@@ -17,6 +17,7 @@ namespace DeZooiNaCrypto.Model.Entidade
         {
             DataOperacaoFuturo = DateTime.Now.Date;
         }
+
         [Required]
         public TipoOperacaoFuturoEnum TipoOperacaoFuturo { get; set; }
         [Ignore]
@@ -25,15 +26,18 @@ namespace DeZooiNaCrypto.Model.Entidade
         public DateTime DataOperacaoFuturo { get; set; }
         [Ignore]
         public string DataOperacaoFuturoStr { get { return DataOperacaoFuturo.ToString("dd/MM/yyyy"); } }
+        [Ignore]
+        public string TipoOperacaoFuturoDataOperacaoStr { get { return NomeOperacaoFuturo + " em " + DataOperacaoFuturoStr; } }
+
+
         [Required]
-        public decimal ValorInvestido { get; set; }
+        public decimal ValorRetorno { get; set; }
         [Required]
-        public int Alavancagem { get; set; }
-        [Required]
-        public decimal ValorCompra{ get; set; }
-        [ForeignKey(typeof(CryptoMoeda))]
-        [Required]
-        public decimal ValorVenda { get; set; }
+        public decimal ValorTaxa { get; set; }
+        [Ignore]
+        public string ValorTotalStr { get { return (ValorRetorno - ValorTaxa).ToString(); } }
+
+
         [Required, ForeignKey(typeof(CryptoMoeda))]
         public Guid IdCryptoMoeda { get; set; }
         [ManyToOne]

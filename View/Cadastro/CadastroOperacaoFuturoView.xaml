@@ -22,37 +22,28 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="{x:Type local:OperacaoFuturoCryptoMoeda}">
                     <Border StrokeShape="{OnPlatform RoundRectangle 10, iOS=RoundRectangle 1}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Card_Background_Dark}}" StrokeThickness="1">
-                        <Grid ColumnDefinitions="45,61, 120,*" RowDefinitions="Auto,Auto,Auto">
-                            <Label Text="Tipo : " HorizontalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
-                            <Label Text="{Binding NomeOperacaoFuturo}" HorizontalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="1"/>
-
-                            <Label Text="Data Operação : " HorizontalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="2"/>
-                            <Label Text="{Binding DataOperacaoFuturoStr}" VerticalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="3"/>
-
+                        <Grid ColumnDefinitions="45,61,120,*" RowDefinitions="Auto,Auto,Auto, Auto" Padding="10">
+                            <Label Text="{Binding TipoOperacaoFuturoDataOperacaoStr}" HorizontalOptions="Start" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.ColumnSpan="4"/>
+                            
                             <Grid Grid.Row="1" ColumnDefinitions="Auto,80,Auto, Auto" RowDefinitions="Auto">
-                                <Label Text="Val. Investido : " HorizontalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
-                                <Label Text="{Binding ValorInvestido}" VerticalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="1"/>
+                                <Label Text="Val. Retorno : " HorizontalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
+                                <Label Text="{Binding ValorRetorno}" VerticalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="1"/>
 
-                                <Label Text="Alavancagem : " HorizontalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="2"/>
-                                <Label Text="{Binding Alavancagem}" VerticalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="3"/>
+                                <Label Text="Val. Taxa : " HorizontalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="2"/>
+                                <Label Text="{Binding ValorTaxa}" VerticalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="3"/>
                             </Grid>
-
-                            <Grid Grid.Row="2" ColumnDefinitions="Auto,80,Auto, Auto" RowDefinitions="Auto">
-                                <Label Text="Val. Compra : " HorizontalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
-                                <Label Text="{Binding ValorCompra}" VerticalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="1"/>
-
-                                <Label Text="Val. Venda : " HorizontalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="2"/>
-                                <Label Text="{Binding ValorVenda}" VerticalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="3"/>
+                            
+                            <Grid Grid.Row="3" Grid.Column="3" ColumnDefinitions="Auto" RowDefinitions="Auto" HorizontalOptions="End">
+                                <dxco:SimpleButton Clicked="Apagar" CommandParameter="{Binding Id}" Icon="deletetask" IconColor="DarkRed" BackgroundColor="Transparent" TextColor="{AppThemeBinding Light={StaticResource Red}, Dark={StaticResource Card_Background_Dark}}" />
                             </Grid>
                         </Grid>
-                        
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
         <dxco:DXPopup x:Name="actionsPopup" CornerRadius="8" ShadowRadius="5" BackgroundColor="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}" ShadowColor="{AppThemeBinding Light={StaticResource Gray500}, Dark=Black}">
-            <ScrollView HeightRequest="490">
+            <ScrollView HeightRequest="350">
                 <StackLayout Padding="8,6">
                     <dxe:ChoiceChipGroup x:Name="ccgMoedaPar" BoxMode="Outlined" ChipTapCommand="{Binding SetTipoOperacaoFuturo}" Padding="3">
                         <dxe:Chip x:Name="ccgLong" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Long"/>
@@ -69,47 +60,25 @@
 
                     <dxe:TextEdit
                         x:Name="txtValorInvestido"
-                        Text="{Binding _valorInvestido}"
-                        LabelText="Valor investido"
+                        Text="{Binding valorRetorno}"
+                        LabelText="Valor do retorno"
                         PlaceholderText="0.000,00"
                         TextHorizontalAlignment="End"
                         BorderColor="Blue"
                         BoxMode="Outlined"
                         CornerRadius="10" 
                         Margin="3"/>
-
-                    <dxe:NumericEdit
-                        x:Name="txtAlavancagem"
-                        Value="{Binding OperacaoFuturoCryptoMoeda.Alavancagem}"
-                        LabelText="Alavancagem"
-                        PlaceholderText="0.000,00"
-                        TextHorizontalAlignment="End"
-                        BorderColor="Blue"
-                        BoxMode="Outlined"
-                        CornerRadius="10" 
-                        Margin="3"/>
-
+                    
                     <dxe:TextEdit
                         x:Name="txtValorCompra"
-                        Text="{Binding _valorCompra}"
-                        LabelText="Valor da compra"
+                        Text="{Binding valorTaxa}"
+                        LabelText="Valor da taxa"
                         PlaceholderText="0.000,00"
                         TextHorizontalAlignment="End"
                         BorderColor="Blue"
                         BoxMode="Outlined"
                         CornerRadius="10" 
                         Margin="3"/>
-
-                    <dxe:TextEdit
-                        x:Name="txtValorVenda"
-                        Text="{Binding _valorVenda}"
-                        LabelText="Valor da venda"
-                        PlaceholderText="0.000,00"
-                        TextHorizontalAlignment="End"
-                        BorderColor="Blue"
-                        BoxMode="Outlined"
-                        CornerRadius="10"
-                        Margin="4"/>
 
                     <dxco:SimpleButton Text="Gravar" Clicked="Gravar" BackgroundColor="blue" Margin="1"/>
                     <dxco:SimpleButton Text="Cancelar" Clicked="Cancelar" BackgroundColor="PaleVioletRed" Margin="1"/>

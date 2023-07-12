@@ -1,3 +1,4 @@
+using DevExpress.Maui.Controls;
 using DevExpress.Maui.Editors;
 using DeZooiNaCrypto.Model.Entidade;
 using DeZooiNaCrypto.Model.ViewModel;
@@ -36,5 +37,10 @@ public partial class CadastroOperacaoFuturoView : ContentPage
     private void Cancelar(object sender, EventArgs e)
     {
         actionsPopup.IsOpen = false;
+    }
+
+    private void Apagar(object sender, EventArgs e)
+    {
+        _operacaoFuturoViewModel.Apagar((Guid)((SimpleButton)sender).CommandParameter);
     }
 }
