@@ -6,7 +6,7 @@
              xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
              xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls">
     <ScrollView>
-        <StackLayout Padding="5">
+        <StackLayout Padding="3">
             <dxe:TextEdit
                 x:Name="txtNome"
                 LabelText="Nome"
@@ -22,8 +22,8 @@
                 <dxe:Chip x:Name="ccgCoinMarketCap" Text="CoinMarketCap"/>
             </dxe:ChoiceChipGroup>
 
-            <dxe:ChoiceChipGroup x:Name="ccgMoedaPar" ChipBorderColor="Blue" BoxMode="Outlined">
-                <dxe:Chip x:Name="ccgUSD" Text="USD"/>
+            <dxe:ChoiceChipGroup x:Name="ccgMoedaPar" ChipBorderColor="Blue" BoxMode="Outlined" >
+                <dxe:Chip x:Name="ccgUSD" Text="USD" />
                 <dxe:Chip x:Name="ccgUSDT" Text="USDT"/>
             </dxe:ChoiceChipGroup>
 

@@ -14,7 +14,7 @@
         <ToolbarItem x:Name="btnApresentarMenu" IconImageSource="verticaldots" Clicked="ApresentaMenu"/>
     </ContentPage.ToolbarItems>
 
-    <StackLayout Padding="5">
+    <Grid>
         <CollectionView ItemsSource="{Binding OperacaoFuturoCryptoMoedas}" SelectionMode="Single" Margin="10,10,10,0">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
@@ -22,19 +22,39 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="{x:Type local:OperacaoFuturoCryptoMoeda}">
                     <Border StrokeShape="{OnPlatform RoundRectangle 10, iOS=RoundRectangle 1}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Card_Background_Dark}}" StrokeThickness="1">
-                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" BackgroundColor="Transparent">
-                            <Label Text="{Binding NomeOperacaoFuturo}" VerticalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
-                            <Label Text="{Binding DataOperacaoFuturoStr}" VerticalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
+                        <Grid ColumnDefinitions="45,61, 120,*" RowDefinitions="Auto,Auto,Auto">
+                            <Label Text="Tipo : " HorizontalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
+                            <Label Text="{Binding NomeOperacaoFuturo}" HorizontalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="1"/>
+
+                            <Label Text="Data Operação : " HorizontalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="2"/>
+                            <Label Text="{Binding DataOperacaoFuturoStr}" VerticalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="3"/>
+
+                            <Grid Grid.Row="1" ColumnDefinitions="Auto,80,Auto, Auto" RowDefinitions="Auto">
+                                <Label Text="Val. Investido : " HorizontalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
+                                <Label Text="{Binding ValorInvestido}" VerticalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="1"/>
+
+                                <Label Text="Alavancagem : " HorizontalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="2"/>
+                                <Label Text="{Binding Alavancagem}" VerticalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="3"/>
+                            </Grid>
+
+                            <Grid Grid.Row="2" ColumnDefinitions="Auto,80,Auto, Auto" RowDefinitions="Auto">
+                                <Label Text="Val. Compra : " HorizontalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
+                                <Label Text="{Binding ValorCompra}" VerticalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="1"/>
+
+                                <Label Text="Val. Venda : " HorizontalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="2"/>
+                                <Label Text="{Binding ValorVenda}" VerticalOptions="Start" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="3"/>
+                            </Grid>
                         </Grid>
+                        
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
         <dxco:DXPopup x:Name="actionsPopup" CornerRadius="8" ShadowRadius="5" BackgroundColor="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}" ShadowColor="{AppThemeBinding Light={StaticResource Gray500}, Dark=Black}">
-            <ScrollView HeightRequest="470">
+            <ScrollView HeightRequest="490">
                 <StackLayout Padding="8,6">
-                    <dxe:ChoiceChipGroup x:Name="ccgMoedaPar" BoxMode="Outlined" Padding="5">
+                    <dxe:ChoiceChipGroup x:Name="ccgMoedaPar" BoxMode="Outlined" ChipTapCommand="{Binding SetTipoOperacaoFuturo}" Padding="3">
                         <dxe:Chip x:Name="ccgLong" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Long"/>
                         <dxe:Chip x:Name="ccgShort" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Short"/>
                     </dxe:ChoiceChipGroup>
@@ -45,7 +65,7 @@
                         BorderColor="Blue"
                         BoxMode="Outlined"
                         CornerRadius="10" 
-                        Margin="5"/>
+                        Margin="3"/>
 
                     <dxe:TextEdit
                         x:Name="txtValorInvestido"
@@ -56,7 +76,7 @@
                         BorderColor="Blue"
                         BoxMode="Outlined"
                         CornerRadius="10" 
-                        Margin="5"/>
+                        Margin="3"/>
 
                     <dxe:NumericEdit
                         x:Name="txtAlavancagem"
@@ -67,7 +87,7 @@
                         BorderColor="Blue"
                         BoxMode="Outlined"
                         CornerRadius="10" 
-                        Margin="5"/>
+                        Margin="3"/>
 
                     <dxe:TextEdit
                         x:Name="txtValorCompra"
@@ -78,7 +98,7 @@
                         BorderColor="Blue"
                         BoxMode="Outlined"
                         CornerRadius="10" 
-                        Margin="5"/>
+                        Margin="3"/>
 
                     <dxe:TextEdit
                         x:Name="txtValorVenda"
@@ -89,11 +109,12 @@
                         BorderColor="Blue"
                         BoxMode="Outlined"
                         CornerRadius="10"
-                        Margin="5"/>
+                        Margin="4"/>
 
-                    <dxco:SimpleButton Text="Gravar" Command="{Binding Gravar}" BackgroundColor="blue" Margin="1"/>
+                    <dxco:SimpleButton Text="Gravar" Clicked="Gravar" BackgroundColor="blue" Margin="1"/>
+                    <dxco:SimpleButton Text="Cancelar" Clicked="Cancelar" BackgroundColor="PaleVioletRed" Margin="1"/>
                 </StackLayout>
             </ScrollView>
         </dxco:DXPopup>
-    </StackLayout>
+    </Grid>
 </ContentPage>
