@@ -14,5 +14,16 @@ namespace DeZooiNaCrypto.Data
         {
             return new ObservableCollection<OperacaoFuturoCryptoMoeda>(_connection.QueryAsync<OperacaoFuturoCryptoMoeda>("select * from OperacaoFuturoCryptoMoeda where IdCryptoMoeda = @idCryptoMoeda order by DataOperacaoFuturo ", idCryptoMoeda).Result);
         }
+        public decimal TotalOperacaoFuturo(Guid? idCryptoMoeda, DateTime? dataInicial, DateTime? dataFinal)
+        {
+            StringBuilder query = new StringBuilder();
+            query.Append("select sum(valorretorno - valortaxa) from OperacaoFuturoCryptoMoeda ");
+            query.Append(" Where 1 = 1 ")
+                .Append(idCryptoMoeda.HasValue ? " and IdCryptoMoeda = " + idCryptoMoeda : string.Empty)
+                .Append(dataInicial.HasValue ? " and DataOperacaoFuturo >= " + dataInicial.Value.ToString("dd/MM/yyyy") : string.Empty)
+                .Append(dataInicial.HasValue ? " and DataOperacaoFuturo <= " + dataFinal.Value.ToString("dd/MM/yyyy") : string.Empty);
+
+            return _connection.QueryScalarsAsync<decimal>(query.ToString()).Result.FirstOrDefault();
+        }
     }
 }
