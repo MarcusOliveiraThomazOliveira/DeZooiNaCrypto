@@ -69,13 +69,12 @@
         <dxco:BottomSheet x:Name="bsDetalheCryptoMoeda" ShowGrabber="True" AllowDismiss="True" IsModal="false" HalfExpandedRatio="0.4">
             <Grid x:Name="gridCryptoMoeda" RowDefinitions="Auto, Auto, Auto, *">
                 <Border Grid.Row="1" HeightRequest="2" BackgroundColor="{AppThemeBinding Light={StaticResource BottomSheet_Separator_Light}, Dark={StaticResource BottomSheet_Separator_Dark}}" HorizontalOptions="Fill" StrokeThickness="0" Margin="16,0,16,0"/>
-                <Grid x:Name="gridCompra" ColumnDefinitions="*" RowDefinitions="Auto,Auto">
+                <Grid ColumnDefinitions="*" RowDefinitions="Auto,Auto">
                     <VerticalStackLayout>
 
                     </VerticalStackLayout>
                 </Grid>
             </Grid>
-
         </dxco:BottomSheet>
     </Grid>
 

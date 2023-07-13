@@ -3,6 +3,7 @@ using DeZooiNaCrypto.Model.Entidade;
 using DeZooiNaCrypto.Model.ViewModel;
 using DeZooiNaCrypto.View;
 using DeZooiNaCrypto.View.Cadastro;
+using DevExpress.Maui.CollectionView;
 
 namespace DeZooiNaCrypto;
 
