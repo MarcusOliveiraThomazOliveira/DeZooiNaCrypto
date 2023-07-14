@@ -32,11 +32,20 @@ public partial class CadastroOperacaoFuturoView : ContentPage
     private void Gravar(object sender, EventArgs e)
     {
         _operacaoFuturoViewModel.Gravar();
+        LimparTela();
     }
 
     private void Cancelar(object sender, EventArgs e)
     {
+        LimparTela();
         actionsPopup.IsOpen = false;
+    }
+
+    private void LimparTela()
+    {
+        txtValorRetorno.Text = string.Empty;
+        txtValorTaxa.Text = string.Empty;
+        dtDataVenda.Focus();
     }
 
     private void Apagar(object sender, EventArgs e)

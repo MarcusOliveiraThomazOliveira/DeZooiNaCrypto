@@ -71,11 +71,16 @@ namespace DeZooiNaCrypto.Model.ViewModel
             OperacaoFuturoCryptoMoeda.ValorRetorno = Decimal.Parse(valorRetorno);
             OperacaoFuturoCryptoMoeda.ValorTaxa = Decimal.Parse(valorTaxa);
             OperacaoFuturoCryptoMoeda.IdCryptoMoeda = _idCryptoMoeda;
+
+            valorRetorno = string.Empty;
+            valorTaxa = string.Empty;
+
             _operacaoFuturoRepositorio.Salvar(OperacaoFuturoCryptoMoeda);
 
             _operacaoFuturoCryptoMoedas.Clear();
             _operacaoFuturoCryptoMoedas.InsertRange<OperacaoFuturoCryptoMoeda>(0, _operacaoFuturoRepositorio.Listar(_idCryptoMoeda));
 
+            
             _actionsPopup.IsOpen = false;
         }
 

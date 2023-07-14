@@ -38,7 +38,7 @@
                             <Grid Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="0" ColumnDefinitions="280,45" RowDefinitions="Auto">
                                 <Label Grid.Column="0" Text="{Binding ValorTotalStr}" TextColor="{Binding ValorTotal, Converter={StaticResource valueToColorConverter}}" FontSize="16" FontAttributes="Bold"/> 
                             </Grid>
-                            <dxco:SimpleButton Grid.Row="2" Grid.Column="3" HorizontalOptions="End" Clicked="Apagar" CommandParameter="{Binding Id}" Icon="deletetask" IconColor="DarkRed" BackgroundColor="Transparent" TextColor="{AppThemeBinding Light={StaticResource Red}, Dark={StaticResource Card_Background_Dark}}" />
+                            <dxco:SimpleButton Grid.Row="2" Grid.Column="3" HorizontalOptions="End" VerticalOptions="Center" Clicked="Apagar" CommandParameter="{Binding Id}" Icon="deletetask" IconColor="DarkRed" BackgroundColor="Transparent" TextColor="{AppThemeBinding Light={StaticResource Red}, Dark={StaticResource Card_Background_Dark}}" />
                         </Grid>
                     </Border>
                 </DataTemplate>
@@ -54,7 +54,7 @@
                     </dxe:ChoiceChipGroup>
 
                     <dxe:DateEdit
-                        x:Name="deDataVenda"
+                        x:Name="dtDataVenda"
                         Date="{Binding OperacaoFuturoCryptoMoeda.DataOperacaoFuturo}"
                         BorderColor="Blue"
                         BoxMode="Outlined"
@@ -62,8 +62,8 @@
                         Margin="3"/>
 
                     <dxe:TextEdit
-                        x:Name="txtValorInvestido"
-                        Text="{Binding valorRetorno}"
+                        x:Name="txtValorRetorno"
+                        Text="{Binding valorRetorno, Mode=TwoWay}"
                         LabelText="Valor do retorno"
                         PlaceholderText="0.000,00"
                         TextHorizontalAlignment="End"
@@ -73,8 +73,8 @@
                         Margin="3"/>
 
                     <dxe:TextEdit
-                        x:Name="txtValorCompra"
-                        Text="{Binding valorTaxa}"
+                        x:Name="txtValorTaxa"
+                        Text="{Binding valorTaxa, Mode=TwoWay}"
                         LabelText="Valor da taxa"
                         PlaceholderText="0.000,00"
                         TextHorizontalAlignment="End"
