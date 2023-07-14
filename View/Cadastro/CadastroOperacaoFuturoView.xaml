@@ -8,11 +8,16 @@
              xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
              xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
              xmlns:local="clr-namespace:DeZooiNaCrypto.Model.ViewModel;clr-namespace:DeZooiNaCrypto.Model.Entidade"
+             xmlns:util="clr-namespace:DeZooiNaCrypto.Util"
              BackgroundColor="{AppThemeBinding Light={StaticResource Gray50}, Dark={StaticResource Gray925}}">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="btnApresentarMenu" IconImageSource="verticaldots" Clicked="ApresentaMenu"/>
     </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <util:ValueToColorConverter x:Key="valueToColorConverter"/>
+    </ContentPage.Resources>
 
     <Grid>
         <CollectionView ItemsSource="{Binding OperacaoFuturoCryptoMoedas}" SelectionMode="Single" Margin="10,10,10,0">
@@ -26,12 +31,12 @@
                             <Label Text="{Binding TipoOperacaoFuturoDataOperacaoStr}" HorizontalOptions="Start" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.ColumnSpan="4"/>
 
                             <Grid Grid.Row="1" ColumnDefinitions="150,30,150" RowDefinitions="Auto">
-                                <Label Text="{Binding ValorRetornoStr}"  FontSize="15" FontAttributes="Bold"  Grid.Column="0"/>
-                                <Label Text="{Binding ValorTaxaStr}" FontSize="15" FontAttributes="Bold" Grid.Column="2"/>
+                                <Label Text="{Binding ValorRetornoStr}" TextColor="{Binding ValorRetorno, Converter={StaticResource valueToColorConverter}}"  FontSize="16" FontAttributes="Bold"  Grid.Column="0"/>
+                                <Label Text="{Binding ValorTaxaStr}" TextColor="#f44336" FontSize="16" FontAttributes="Bold" Grid.Column="2"/>
                             </Grid>
 
                             <Grid Grid.Row="2" ColumnDefinitions="280,Auto" RowDefinitions="Auto">
-                                <Label Text="{Binding ValorTotalStr}" FontSize="15" FontAttributes="Bold" Grid.Column="0"/>
+                                <Label Text="{Binding ValorTotalStr}" TextColor="{Binding ValorTotal, Converter={StaticResource valueToColorConverter}}" FontSize="16" FontAttributes="Bold" Grid.Column="0"/>
                                 <dxco:SimpleButton Clicked="Apagar" VerticalOptions="End" CommandParameter="{Binding Id}" Icon="deletetask" IconColor="DarkRed" BackgroundColor="Transparent" TextColor="{AppThemeBinding Light={StaticResource Red}, Dark={StaticResource Card_Background_Dark}}" Grid.Column="1"/>
                             </Grid>
                         </Grid>
