@@ -8,7 +8,9 @@
              xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
              xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
              xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
-             xmlns:local="clr-namespace:DeZooiNaCrypto.Model.ViewModel;clr-namespace:DeZooiNaCrypto.Model.Entidade"
+             xmlns:local="clr-namespace:DeZooiNaCrypto.Model.Entidade"
+             xmlns:viewmodel="clr-namespace:DeZooiNaCrypto.Model.ViewModel"
+             xmlns:util="clr-namespace:DeZooiNaCrypto.Util"
              BackgroundColor="{AppThemeBinding Light={StaticResource Gray50}, Dark={StaticResource Gray925}}">
 
     <ContentPage.Resources>
@@ -22,14 +24,19 @@
             <Setter Property="HorizontalOptions" Value="Start"/>
             <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}"/>
         </Style>
+        <util:ValueToColorConverter x:Key="valueToColorConverter"/>
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="btnApresentarMenu" IconImageSource="verticaldots" Clicked="ApresentaMenu"/>
     </ContentPage.ToolbarItems>
 
+    <ContentPage.BindingContext>
+        <viewmodel:CryptoMoedaViewModel/>
+    </ContentPage.BindingContext>
+
     <Grid>
-        <CollectionView  ItemsSource="{Binding CryptoMoedas}" SelectionMode="Single" Margin="10,10,10,0" SelectionChanged="SelectionChanged" Scrolled="Scrolled">
+        <CollectionView  ItemsSource="{Binding CryptoMoedas}" SelectedItem="{Binding CryptoMoedaSelecionada, Mode=TwoWay}" SelectionMode="Single" Margin="10,10,10,0" SelectionChanged="SelectionChanged" Scrolled="Scrolled">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
             </CollectionView.ItemsLayout>
@@ -68,10 +75,10 @@
         </dxco:DXPopup>
         <dxco:BottomSheet x:Name="bsDetalheCryptoMoeda" ShowGrabber="True" AllowDismiss="True" IsModal="false" HalfExpandedRatio="0.4">
             <Grid x:Name="gridCryptoMoeda" RowDefinitions="Auto, Auto, Auto, *">
-                <Border Grid.Row="1" HeightRequest="2" BackgroundColor="{AppThemeBinding Light={StaticResource BottomSheet_Separator_Light}, Dark={StaticResource BottomSheet_Separator_Dark}}" HorizontalOptions="Fill" StrokeThickness="0" Margin="16,0,16,0"/>
-                <Grid ColumnDefinitions="*" RowDefinitions="Auto,Auto">
-                    <VerticalStackLayout>
-
+                <Border Grid.Row="0" HeightRequest="2" BackgroundColor="{AppThemeBinding Light={StaticResource BottomSheet_Separator_Light}, Dark={StaticResource BottomSheet_Separator_Dark}}" HorizontalOptions="Fill" StrokeThickness="0" Margin="16,0,16,0"/>
+                <Grid Grid.Row="1" ColumnDefinitions="*" RowDefinitions="Auto,Auto">
+                    <VerticalStackLayout Margin="15">
+                        <Label Grid.Row="0" Text="{Binding SaldoStr}" TextColor="{Binding Saldo, Converter={StaticResource valueToColorConverter}}" FontSize="15" FontAttributes="Bold"/>
                     </VerticalStackLayout>
                 </Grid>
             </Grid>

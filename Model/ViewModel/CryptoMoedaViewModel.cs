@@ -11,19 +11,34 @@ namespace DeZooiNaCrypto.Model.ViewModel
     public partial class CryptoMoedaViewModel : ModelViewBase
     {
         CryptoMoedaRepositorio _cryptoMoedaRepositorio = new CryptoMoedaRepositorio();
+        OperacaoFuturoRepositorio _operacaoFuturoRepositorio = new OperacaoFuturoRepositorio();
         ObservableCollection<CryptoMoeda> _cryptoMoedas;
         IDispatcherTimer timerAtualizaDados;
+        CryptoMoeda cryptoMoedaSelecionada;
+        decimal saldo;
 
         public ObservableCollection<CryptoMoeda> CryptoMoedas
         {
             get { return _cryptoMoedas; }
             set { _cryptoMoedas = value; }
         }
+        public CryptoMoeda CryptoMoedaSelecionada { get { return cryptoMoedaSelecionada; } set { cryptoMoedaSelecionada = value; PreencheValores(); } }
+        public decimal Saldo { get { return saldo; } set { saldo = value; RaisePropertyChanged("Saldo"); RaisePropertyChanged("SaldoStr"); } }
+        public string SaldoStr { get { return "Saldo : " + Saldo.ToString(); } }
         public CryptoMoedaViewModel()
         {
             _cryptoMoedas = _cryptoMoedaRepositorio.Listar(JsonConvert.DeserializeObject<Usuario>(Preferences.Get(Constantes.UsuarioLogado, string.Empty)));
             AtualizarValor();
             ConfiguraAtualizacao();
+        }
+        public void Apagar(Guid id)
+        {
+            var cryptoMoeda = _cryptoMoedas.Where(cm => cm.Id.Equals(id)).FirstOrDefault();
+            if (cryptoMoeda != null)
+            {
+                _cryptoMoedaRepositorio.Deletar(cryptoMoeda);
+                _cryptoMoedas.Remove(cryptoMoeda);
+            }
         }
         private void AtualizarValor()
         {
@@ -36,14 +51,10 @@ namespace DeZooiNaCrypto.Model.ViewModel
             timerAtualizaDados.Tick += (sender, e) => AtualizarValor();
             timerAtualizaDados.Start();
         }
-        public void Apagar(Guid id)
+        private void PreencheValores()
         {
-            var cryptoMoeda = _cryptoMoedas.Where(cm => cm.Id.Equals(id)).FirstOrDefault();
-            if (cryptoMoeda != null)
-            {
-                _cryptoMoedaRepositorio.Deletar(cryptoMoeda);
-                _cryptoMoedas.Remove(cryptoMoeda);
-            }
+            Saldo = _operacaoFuturoRepositorio.TotalOperacaoFuturo(CryptoMoedaSelecionada.Id);
         }
+
     }
 }
