@@ -76,9 +76,16 @@
         <dxco:BottomSheet x:Name="bsDetalheCryptoMoeda" ShowGrabber="True" AllowDismiss="True" IsModal="false" HalfExpandedRatio="0.4">
             <Grid x:Name="gridCryptoMoeda" RowDefinitions="Auto, Auto, Auto, *">
                 <Border Grid.Row="0" HeightRequest="2" BackgroundColor="{AppThemeBinding Light={StaticResource BottomSheet_Separator_Light}, Dark={StaticResource BottomSheet_Separator_Dark}}" HorizontalOptions="Fill" StrokeThickness="0" Margin="16,0,16,0"/>
-                <Grid Grid.Row="1" ColumnDefinitions="*" RowDefinitions="Auto,Auto">
+                <Grid Grid.Row="1" ColumnDefinitions="*,*" RowDefinitions="Auto,Auto">
                     <VerticalStackLayout Margin="15">
-                        <Label Grid.Row="0" Text="{Binding SaldoStr}" TextColor="{Binding Saldo, Converter={StaticResource valueToColorConverter}}" FontSize="15" FontAttributes="Bold"/>
+                        <Grid Grid.Row="0" ColumnDefinitions="60,250" RowDefinitions="Auto">
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Source={x:Static util:Constantes.Valor_Saldo}}" TextColor="{Binding Saldo, Converter={StaticResource valueToColorConverter}}" FontSize="15" FontAttributes="Bold"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Saldo}" TextColor="{Binding Saldo, Converter={StaticResource valueToColorConverter}}" FontSize="15" FontAttributes="Bold"/>
+                        </Grid>
+                        <Grid Grid.Row="1" ColumnDefinitions="200,250" RowDefinitions="Auto">
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Source={x:Static util:Constantes.Quantidade_Operacoes}}"  FontSize="15" FontAttributes="Bold"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding QuantidadeOperacoes}"  FontSize="15" FontAttributes="Bold"/>
+                        </Grid>
                     </VerticalStackLayout>
                 </Grid>
             </Grid>

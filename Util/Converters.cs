@@ -13,12 +13,23 @@ namespace DeZooiNaCrypto.Util
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null) return null;
-            decimal valor = (decimal)value;
+            Type type = value.GetType();
 
-            if (valor > 0) { return Color.FromArgb("#039C23"); }
-            else if (valor < 0) { return Color.FromArgb("#f44336"); }
+            if (type == typeof(decimal))
+            {
+                decimal decimalValue = (decimal)value;
 
-            return null;
+                if (decimalValue > 0) { return Color.FromArgb("#039C23"); }
+                else if (decimalValue < 0) { return Color.FromArgb("#f44336"); }
+            } else if (type == typeof(int))
+            {
+                int intValue = (int)value;
+
+                if (intValue > 0) { return Color.FromArgb("#039C23"); }
+                else if (intValue < 0) { return Color.FromArgb("#f44336"); }
+            }
+
+                return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

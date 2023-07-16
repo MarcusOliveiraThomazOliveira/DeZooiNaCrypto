@@ -15,7 +15,7 @@ public partial class MainPage : ContentPage
     CryptoMoedaViewModel _cryptoMoedaViewModel;
     public MainPage()
     {
-        _usuario = JsonConvert.DeserializeObject<Usuario>(Preferences.Get(Constantes.UsuarioLogado, string.Empty));
+        _usuario = JsonConvert.DeserializeObject<Usuario>(Preferences.Get(Constantes.Usuario_Logado, string.Empty));
         _cryptoMoedaViewModel = new CryptoMoedaViewModel();
 
         InitializeComponent();

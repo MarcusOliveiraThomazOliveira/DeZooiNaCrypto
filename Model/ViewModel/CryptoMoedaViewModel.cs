@@ -16,6 +16,7 @@ namespace DeZooiNaCrypto.Model.ViewModel
         IDispatcherTimer timerAtualizaDados;
         CryptoMoeda cryptoMoedaSelecionada;
         decimal saldo;
+        int quantidadeOperacoes;
 
         public ObservableCollection<CryptoMoeda> CryptoMoedas
         {
@@ -23,11 +24,12 @@ namespace DeZooiNaCrypto.Model.ViewModel
             set { _cryptoMoedas = value; }
         }
         public CryptoMoeda CryptoMoedaSelecionada { get { return cryptoMoedaSelecionada; } set { cryptoMoedaSelecionada = value; PreencheValores(); } }
-        public decimal Saldo { get { return saldo; } set { saldo = value; RaisePropertyChanged("Saldo"); RaisePropertyChanged("SaldoStr"); } }
-        public string SaldoStr { get { return "Saldo : " + Saldo.ToString(); } }
+        public decimal Saldo { get { return saldo; } set { saldo = value; RaisePropertyChanged(); } }
+        public int QuantidadeOperacoes { get { return quantidadeOperacoes; } set { quantidadeOperacoes = value; RaisePropertyChanged(); } }
+        public decimal ParticipacaoTotal { get; set; }
         public CryptoMoedaViewModel()
         {
-            _cryptoMoedas = _cryptoMoedaRepositorio.Listar(JsonConvert.DeserializeObject<Usuario>(Preferences.Get(Constantes.UsuarioLogado, string.Empty)));
+            _cryptoMoedas = _cryptoMoedaRepositorio.Listar(JsonConvert.DeserializeObject<Usuario>(Preferences.Get(Constantes.Usuario_Logado, string.Empty)));
             AtualizarValor();
             ConfiguraAtualizacao();
         }
@@ -54,6 +56,8 @@ namespace DeZooiNaCrypto.Model.ViewModel
         private void PreencheValores()
         {
             Saldo = _operacaoFuturoRepositorio.TotalOperacaoFuturo(CryptoMoedaSelecionada.Id);
+            QuantidadeOperacoes = _operacaoFuturoRepositorio.QuantidadeOperacoes(CryptoMoedaSelecionada.Id);
+
         }
 
     }

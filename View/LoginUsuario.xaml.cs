@@ -24,7 +24,7 @@ public partial class LoginUsuario : ContentPage
             else
             {
                 txtEmail.Text = txtSenha.Text = string.Empty;
-                Preferences.Set(Constantes.UsuarioLogado, JsonConvert.SerializeObject(usuarioLogado));
+                Preferences.Set(Constantes.Usuario_Logado, JsonConvert.SerializeObject(usuarioLogado));
                 Navigation.PushAsync(new MainPage());
             }
         }
