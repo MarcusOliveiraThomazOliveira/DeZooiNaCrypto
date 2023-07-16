@@ -86,6 +86,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Model\DTO\" />
 	  <Folder Include="ViewModel\" />
 	  <Folder Include="View\Lista\" />
 	</ItemGroup>

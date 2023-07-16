@@ -1,4 +1,6 @@
 using DeZooiNaCrypto.Data;
+using DeZooiNaCrypto.Util;
+using Newtonsoft.Json;
 
 namespace DeZooiNaCrypto.View;
 
@@ -22,7 +24,8 @@ public partial class LoginUsuario : ContentPage
             else
             {
                 txtEmail.Text = txtSenha.Text = string.Empty;
-                Navigation.PushAsync(new MainPage(usuarioLogado));
+                Preferences.Set(Constantes.UsuarioLogado, JsonConvert.SerializeObject(usuarioLogado));
+                Navigation.PushAsync(new MainPage());
             }
         }
         catch (Exception ex)

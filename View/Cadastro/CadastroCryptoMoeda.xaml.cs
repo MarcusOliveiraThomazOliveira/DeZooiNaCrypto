@@ -60,19 +60,16 @@ public partial class CadastroCryptoMoeda : ContentPage
                     IdUsuario = _usuario.Id,
                     Usuario = _usuario
                 });
-            Navigation.PushAsync(new MainPage(_usuario));
+            Navigation.PushAsync(new MainPage());
         }
         else
         {
             DisplayAlert("Cadastro Crypto Moeda", "Crypto Moeda já cadastrda.", "Ok");
         }
-
-
-
     }
 
     private void Cancelar(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new MainPage(_usuario));
+        Navigation.PushAsync(new MainPage());
     }
 }
