@@ -1,7 +1,9 @@
 using DevExpress.Maui.Controls;
 using DevExpress.Maui.Editors;
+using DeZooiNaCrypto.Data;
 using DeZooiNaCrypto.Model.Entidade;
 using DeZooiNaCrypto.Model.ViewModel;
+using DeZooiNaCrypto.Util;
 
 namespace DeZooiNaCrypto.View.Cadastro;
 
@@ -10,6 +12,7 @@ public partial class CadastroOperacaoFuturoView : ContentPage
     Usuario _usuario;
     Guid _idCryptoMoeda;
     OperacaoFuturoViewModel _operacaoFuturoViewModel;
+    CryptoMoedaRepositorio _cryptoMoedaRepositorio = new CryptoMoedaRepositorio();
     public CadastroOperacaoFuturoView()
     {
         InitializeComponent();
@@ -21,6 +24,7 @@ public partial class CadastroOperacaoFuturoView : ContentPage
         _usuario = usuario;
         _idCryptoMoeda = idCryptoMoeda;
         _operacaoFuturoViewModel = new OperacaoFuturoViewModel(idCryptoMoeda, ccgMoedaPar, actionsPopup);
+        this.Title = Constantes.Operacao_Futuro + " - " + _cryptoMoedaRepositorio.Obter(_idCryptoMoeda).NomeLongo;
         BindingContext = _operacaoFuturoViewModel;
     }
 

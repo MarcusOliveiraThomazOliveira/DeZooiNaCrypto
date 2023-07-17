@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using Microsoft.Maui.Dispatching;
 using Newtonsoft.Json;
 using DeZooiNaCrypto.Util;
+using Org.Xmlpull.V1.Sax2;
 
 namespace DeZooiNaCrypto.Model.ViewModel
 {

@@ -82,7 +82,7 @@
                             <Label Grid.Row="0" Grid.Column="0" Text="{Binding Source={x:Static util:Constantes.Valor_Saldo}}" TextColor="{Binding Saldo, Converter={StaticResource valueToColorConverter}}" FontSize="15" FontAttributes="Bold"/>
                             <Label Grid.Row="0" Grid.Column="1" Text="{Binding Saldo}" TextColor="{Binding Saldo, Converter={StaticResource valueToColorConverter}}" FontSize="15" FontAttributes="Bold"/>
                         </Grid>
-                        <Grid Grid.Row="1" ColumnDefinitions="200,250" RowDefinitions="Auto">
+                        <Grid Grid.Row="1" ColumnDefinitions="155,250" RowDefinitions="Auto">
                             <Label Grid.Row="0" Grid.Column="0" Text="{Binding Source={x:Static util:Constantes.Quantidade_Operacoes}}"  FontSize="15" FontAttributes="Bold"/>
                             <Label Grid.Row="0" Grid.Column="1" Text="{Binding QuantidadeOperacoes}"  FontSize="15" FontAttributes="Bold"/>
                         </Grid>
