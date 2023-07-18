@@ -8,7 +8,7 @@ namespace DeZooiNaCrypto.Model.DTO
 {
     public class OperacaoDTO
     {
-        public DateTime DataOperacao { get; set; }
+        public string DataOperacao { get; set; }
         public string NomeCryptoMoeda { get; set; }
         public decimal ValorOperacao { get; set; }
     }

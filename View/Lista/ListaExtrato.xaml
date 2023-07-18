@@ -5,7 +5,7 @@
              xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
              xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"             
              xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
-              xmlns:local="clr-namespace:DeZooiNaCrypto.Model.Entidade;clr-namespace:DeZooiNaCrypto.Model.DTO"
+             xmlns:local="clr-namespace:DeZooiNaCrypto.Model.Entidade;clr-namespace:DeZooiNaCrypto.Model.DTO"
              xmlns:viewmodel="clr-namespace:DeZooiNaCrypto.Model.ViewModel"
              xmlns:util="clr-namespace:DeZooiNaCrypto.Util"
              Title="Extrato"
@@ -15,30 +15,36 @@
         <util:ValueToColorConverter x:Key="valueToColorConverter"/>
     </ContentPage.Resources>
 
-        <ContentPage.BindingContext>
+    <ContentPage.BindingContext>
         <viewmodel:ExtratoViewModel/>
     </ContentPage.BindingContext>
-    
+
     <Grid Margin="20" RowDefinitions="Auto,*,Auto">
-        <ScrollView x:Name="swExtrato" Grid.Row="1" VerticalOptions="FillAndExpand">
-            <StackLayout>
-                <CollectionView ItemsSource="{Binding OperacoesDTO}">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="{x:Type local:OperacaoDTO}">
-                            <Border>
-                                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*">
-                                    <Label Text="{Binding DataOperacao}" FontSize="15" FontAttributes="Bold"/>
-                                    <Label Grid.Row="1" Grid.Column="0" Text="{Binding NomeCryptoMoeda}" FontSize="15" FontAttributes="Bold"/>
-                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding ValorOperacao}" TextColor="{Binding ValorOperacao, Converter={StaticResource valueToColorConverter}}" FontSize="15" FontAttributes="Bold"/>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </StackLayout>
-        </ScrollView>
+        <Grid Grid.Row="0">
+            <ScrollView x:Name="swExtrato" VerticalOptions="FillAndExpand">
+                <StackLayout>
+                    <CollectionView ItemsSource="{Binding OperacoesDTO}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="{x:Type local:OperacaoDTO}">
+                                <Border StrokeShape="{OnPlatform RoundRectangle 10, iOS=RoundRectangle 1}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Card_Background_Dark}}" StrokeThickness="1">
+                                    <Grid RowDefinitions="Auto,5,Auto" ColumnDefinitions="*,*" Padding="5" BackgroundColor="Transparent">
+                                        <Label Text="{Binding DataOperacao}" FontSize="15" FontAttributes="Bold"/>
+                                        <Label Grid.Row="2" Grid.Column="0" Text="{Binding NomeCryptoMoeda}" FontSize="15" FontAttributes="Bold" HorizontalOptions="Center"/>
+                                        <Label Grid.Row="2" Grid.Column="1" Text="{Binding ValorOperacao}" TextColor="{Binding ValorOperacao, Converter={StaticResource valueToColorConverter}}" FontSize="15" FontAttributes="Bold" HorizontalOptions="End"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Label Text="{Binding Source={viewmodel:ExtratoViewModel}, Path=ValorTotalStr}" TextColor="{Binding Source={viewmodel:ExtratoViewModel}, Path=ValorTotal, Converter={StaticResource valueToColorConverter}}" FontSize="20" FontAttributes="Bold" HorizontalOptions="End"/>
+        </Grid>
     </Grid>
+
 </ContentPage>

@@ -14,22 +14,27 @@ namespace DeZooiNaCrypto.Model.ViewModel
         CryptoMoedaRepositorio _cryptoMoedaRepositorio = new CryptoMoedaRepositorio();
         public List<OperacaoDTO> OperacoesDTO { get; set; }
         public OperacaoDTO OperacaoDTO { get; set; }
+        public decimal ValorTotal { get; set; }
+        public string ValorTotalStr { get; set; }
         public ExtratoViewModel()
         {
             OperacoesDTO = new List<OperacaoDTO>();
-            CarregaExtrato();            
+            CarregaExtrato();
         }
 
         private void CarregaExtrato()
-        {            
+        {
             foreach (var operacaoFuturoCrypto in _operacaoFuturoRepositorio.Listar().Result.OrderByDescending(x => x.DataOperacaoFuturo))
             {
-                OperacoesDTO.Add( new OperacaoDTO() { 
-                    DataOperacao = operacaoFuturoCrypto.DataOperacaoFuturo,
+                OperacoesDTO.Add(new OperacaoDTO()
+                {
+                    DataOperacao = operacaoFuturoCrypto.DataOperacaoFuturo.ToString("dd/MM/yyyy"),
                     NomeCryptoMoeda = _cryptoMoedaRepositorio.Obter(operacaoFuturoCrypto.IdCryptoMoeda).NomeLongo,
                     ValorOperacao = operacaoFuturoCrypto.ValorTotal
                 });
             }
+            ValorTotal = OperacoesDTO.Sum(x => x.ValorOperacao);
+            ValorTotalStr = "Total : " + ValorTotal.ToString();
         }
     }
 }
