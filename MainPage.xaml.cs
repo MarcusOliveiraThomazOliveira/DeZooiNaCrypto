@@ -44,6 +44,7 @@ public partial class MainPage : ContentPage
     private void Sair(object sender, EventArgs e)
     {
         ApresentaMenu(null, null);
+        Preferences.Clear();
         _usuario = null;
         Navigation.PushAsync(new LoginUsuario());
     }

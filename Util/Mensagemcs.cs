@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.Maui.Core.Internal;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace DeZooiNaCrypto.Util
     {
         public async Task ShowAsync(string message)
         {
-            await App.Current.MainPage.DisplayAlert("De Zooi na Crypto", message, "Ok");
+            await App.Current.MainPage.DisplayAlert("De Zooi na Crypto", message, Constantes.Caption_DisplayAlert_OK);
         }
     }
 }

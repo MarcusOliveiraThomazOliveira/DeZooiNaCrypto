@@ -4,14 +4,8 @@ using DevExpress.Maui.Editors;
 using DeZooiNaCrypto.Data;
 using DeZooiNaCrypto.Model.Entidade;
 using DeZooiNaCrypto.Util;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace DeZooiNaCrypto.Model.ViewModel
@@ -83,7 +77,6 @@ namespace DeZooiNaCrypto.Model.ViewModel
             
             _actionsPopup.IsOpen = false;
         }
-
         public void Apagar(Guid idOperacaoFuturo)
         {
             OperacaoFuturoCryptoMoeda operacaoFuturoCryptoMoeda = _operacaoFuturoCryptoMoedas.Where(x => x.Id == idOperacaoFuturo).FirstOrDefault();

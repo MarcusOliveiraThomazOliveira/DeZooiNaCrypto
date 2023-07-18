@@ -2,15 +2,15 @@
 using DeZooiNaCrypto.Data;
 using DeZooiNaCrypto.Model.Entidade;
 using System.Collections.ObjectModel;
-using Microsoft.Maui.Dispatching;
 using Newtonsoft.Json;
 using DeZooiNaCrypto.Util;
-using Org.Xmlpull.V1.Sax2;
+using DevExpress.Maui.Core.Internal;
 
 namespace DeZooiNaCrypto.Model.ViewModel
 {
     public partial class CryptoMoedaViewModel : ModelViewBase
     {
+        readonly IMessageService _messageService;
         CryptoMoedaRepositorio _cryptoMoedaRepositorio = new CryptoMoedaRepositorio();
         OperacaoFuturoRepositorio _operacaoFuturoRepositorio = new OperacaoFuturoRepositorio();
         ObservableCollection<CryptoMoeda> _cryptoMoedas;
@@ -30,6 +30,7 @@ namespace DeZooiNaCrypto.Model.ViewModel
         public decimal ParticipacaoTotal { get; set; }
         public CryptoMoedaViewModel()
         {
+            _messageService = DependencyService.Get<IMessageService>();
             _cryptoMoedas = _cryptoMoedaRepositorio.Listar(JsonConvert.DeserializeObject<Usuario>(Preferences.Get(Constantes.Usuario_Logado, string.Empty)));
             AtualizarValor();
             ConfiguraAtualizacao();
