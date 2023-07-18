@@ -20,31 +20,28 @@
     </ContentPage.BindingContext>
 
     <Grid Margin="20" RowDefinitions="Auto,*,Auto">
-        <Grid Grid.Row="0">
-            <ScrollView x:Name="swExtrato" VerticalOptions="FillAndExpand">
-                <StackLayout>
-                    <CollectionView ItemsSource="{Binding OperacoesDTO}">
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
-                        </CollectionView.ItemsLayout>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="{x:Type local:OperacaoDTO}">
-                                <Border StrokeShape="{OnPlatform RoundRectangle 10, iOS=RoundRectangle 1}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Card_Background_Dark}}" StrokeThickness="1">
-                                    <Grid RowDefinitions="Auto,5,Auto" ColumnDefinitions="*,*" Padding="5" BackgroundColor="Transparent">
-                                        <Label Text="{Binding DataOperacao}" FontSize="15" FontAttributes="Bold"/>
-                                        <Label Grid.Row="2" Grid.Column="0" Text="{Binding NomeCryptoMoeda}" FontSize="15" FontAttributes="Bold" HorizontalOptions="Center"/>
-                                        <Label Grid.Row="2" Grid.Column="1" Text="{Binding ValorOperacao}" TextColor="{Binding ValorOperacao, Converter={StaticResource valueToColorConverter}}" FontSize="15" FontAttributes="Bold" HorizontalOptions="End"/>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </StackLayout>
-            </ScrollView>
-        </Grid>
-        <Grid Grid.Row="2">
-            <Label Text="{Binding Source={viewmodel:ExtratoViewModel}, Path=ValorTotalStr}" TextColor="{Binding Source={viewmodel:ExtratoViewModel}, Path=ValorTotal, Converter={StaticResource valueToColorConverter}}" FontSize="20" FontAttributes="Bold" HorizontalOptions="End"/>
-        </Grid>
+        <!--<Label Text="THE BLACK CAT by Edgar Allan Poe" TextColor="Blue" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" />-->
+        <ScrollView x:Name="scrollView" Grid.Row="1" VerticalOptions="FillAndExpand">
+            <StackLayout>
+                <CollectionView ItemsSource="{Binding OperacoesDTO}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="{x:Type local:OperacaoDTO}">
+                            <Border StrokeShape="{OnPlatform RoundRectangle 10, iOS=RoundRectangle 1}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Card_Background_Dark}}" StrokeThickness="1">
+                                <Grid RowDefinitions="Auto,5,Auto" ColumnDefinitions="*,*" Padding="5" BackgroundColor="Transparent">
+                                    <Label Text="{Binding DataOperacao}" FontSize="15" FontAttributes="Bold"/>
+                                    <Label Grid.Row="2" Grid.Column="0" Text="{Binding NomeCryptoMoeda}" FontSize="15" FontAttributes="Bold" HorizontalOptions="Center"/>
+                                    <Label Grid.Row="2" Grid.Column="1" Text="{Binding ValorOperacao}" TextColor="{Binding ValorOperacao, Converter={StaticResource valueToColorConverter}}" FontSize="15" FontAttributes="Bold" HorizontalOptions="End"/>
+                                </Grid>
+                            </Border>                            
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+        <Label Grid.Row="2" Text="{Binding Source={viewmodel:ExtratoViewModel}, Path=ValorTotalStr}" TextColor="{Binding Source={viewmodel:ExtratoViewModel}, Path=ValorTotal, Converter={StaticResource valueToColorConverter}}" FontSize="20" FontAttributes="Bold" HorizontalOptions="End"/>
     </Grid>
-
+    
 </ContentPage>
