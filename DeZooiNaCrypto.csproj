@@ -87,9 +87,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Model\DTO\" />
 	  <Folder Include="ViewModel\" />
-	  <Folder Include="View\Lista\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -100,6 +98,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Cadastro\CadastroCryptoMoeda.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Lista\ListaExtrato.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\LoginUsuario.xaml">

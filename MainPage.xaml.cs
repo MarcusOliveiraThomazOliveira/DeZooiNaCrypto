@@ -3,9 +3,9 @@ using DeZooiNaCrypto.Model.Entidade;
 using DeZooiNaCrypto.Model.ViewModel;
 using DeZooiNaCrypto.View;
 using DeZooiNaCrypto.View.Cadastro;
-using DevExpress.Maui.CollectionView;
 using Newtonsoft.Json;
 using DeZooiNaCrypto.Util;
+using DeZooiNaCrypto.View.Lista;
 
 namespace DeZooiNaCrypto;
 
@@ -79,6 +79,12 @@ public partial class MainPage : ContentPage
     private void Spot(object sender, EventArgs e)
     {
 
+    }
+
+    private void Extrato(object sender, EventArgs e)
+    {
+        ApresentaMenu(null, null);
+        Navigation.PushAsync(new ListaExtrato());
     }
 }
 

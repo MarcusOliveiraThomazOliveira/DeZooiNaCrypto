@@ -62,7 +62,8 @@ namespace DeZooiNaCrypto.Data
             try
             {
                 var nomeTabela = (new T()).GetType().Name;
-                return _connection.QueryAsync<T>("select * from " + nomeTabela + " where Id = @guid ", guid).Result.FirstOrDefault();
+                var objeto = _connection.QueryAsync<T>("select * from " + nomeTabela + " where Id = @guid ", guid).Result.FirstOrDefault();
+                return objeto;
             }
             catch (Exception ex)
             {
