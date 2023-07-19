@@ -20,10 +20,16 @@
     </ContentPage.BindingContext>
 
     <Grid Margin="20" RowDefinitions="Auto,*,Auto">
-        <!--<Label Text="THE BLACK CAT by Edgar Allan Poe" TextColor="Blue" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" />-->
+        <dxe:ChoiceChipGroup x:Name="ccgPeriodo" BoxMode="Outlined" Padding="3" SelectedIndex="{Binding Source={viewmodel:ExtratoViewModel}, Path=Filtrar}">
+            <dxe:Chip x:Name="ccgTodos" IsSelected="True" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Todos" />            
+            <dxe:Chip x:Name="ccgDia" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Dia"/>
+            <dxe:Chip x:Name="ccgSemana" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Semana"/>
+            <dxe:Chip x:Name="ccgMes" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Mês" />
+            <dxe:Chip x:Name="ccgAno" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Ano" />
+        </dxe:ChoiceChipGroup>
         <ScrollView x:Name="scrollView" Grid.Row="1" VerticalOptions="FillAndExpand">
             <StackLayout>
-                <CollectionView ItemsSource="{Binding OperacoesDTO}">
+                <CollectionView ItemsSource="{Binding OperacoesDTO, Mode=TwoWay}">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
                     </CollectionView.ItemsLayout>
@@ -35,7 +41,7 @@
                                     <Label Grid.Row="2" Grid.Column="0" Text="{Binding NomeCryptoMoeda}" FontSize="15" FontAttributes="Bold" HorizontalOptions="Center"/>
                                     <Label Grid.Row="2" Grid.Column="1" Text="{Binding ValorOperacao}" TextColor="{Binding ValorOperacao, Converter={StaticResource valueToColorConverter}}" FontSize="15" FontAttributes="Bold" HorizontalOptions="End"/>
                                 </Grid>
-                            </Border>                            
+                            </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
@@ -43,5 +49,5 @@
         </ScrollView>
         <Label Grid.Row="2" Text="{Binding Source={viewmodel:ExtratoViewModel}, Path=ValorTotalStr}" TextColor="{Binding Source={viewmodel:ExtratoViewModel}, Path=ValorTotal, Converter={StaticResource valueToColorConverter}}" FontSize="20" FontAttributes="Bold" HorizontalOptions="End"/>
     </Grid>
-    
+
 </ContentPage>
