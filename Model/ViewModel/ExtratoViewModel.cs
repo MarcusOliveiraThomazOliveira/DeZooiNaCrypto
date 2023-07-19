@@ -44,13 +44,13 @@ namespace DeZooiNaCrypto.Model.ViewModel
             for (int i = operacoesDTO.Count - 1; i >= 0; i--)
             {
                 operacoesDTO.Remove(operacoesDTO[i]);
-            }            
+            }
 
             ObservableCollection<OperacaoFuturoCryptoMoeda> listaRetorno;
             switch (tipoFiltro)
             {
                 case 0:
-                    listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>(operacaoFuturoRepositorio.Listar().Result);
+                    listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>(operacaoFuturoRepositorio.Listar().Result.OrderByDescending(x => x.DataOperacaoFuturo));
                     break;
                 case 1:
                     listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>(operacaoFuturoRepositorio.Listar(DateTime.Now.Date, DateTime.Now.Date));

@@ -17,14 +17,14 @@
                 Margin="10"/>
 
             <dxe:ChoiceChipGroup x:Name="ccgCorretora" ChipBorderColor="Blue" BoxMode="Outlined" >
-                <dxe:Chip x:Name="ccgBinance" Text="Binance"/>
-                <dxe:Chip x:Name="ccgBitGet" Text="BitGet"/>
-                <dxe:Chip x:Name="ccgCoinMarketCap" Text="CoinMarketCap"/>
+                <dxe:Chip x:Name="ccgBinance" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Binance"/>
+                <dxe:Chip x:Name="ccgBitGet" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="BitGet"/>
+                <dxe:Chip x:Name="ccgCoinMarketCap" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="CoinMarketCap"/>
             </dxe:ChoiceChipGroup>
 
             <dxe:ChoiceChipGroup x:Name="ccgMoedaPar" ChipBorderColor="Blue" BoxMode="Outlined" >
-                <dxe:Chip x:Name="ccgUSD" Text="USD" />
-                <dxe:Chip x:Name="ccgUSDT" Text="USDT"/>
+                <dxe:Chip x:Name="ccgUSD" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="USD" />
+                <dxe:Chip x:Name="ccgUSDT" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="USDT"/>
             </dxe:ChoiceChipGroup>
 
             <dxco:SimpleButton Text="Gravar" Clicked="Gravar" BackgroundColor="blue" Margin="10"/>

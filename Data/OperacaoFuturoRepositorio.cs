@@ -24,7 +24,7 @@ namespace DeZooiNaCrypto.Data
         }
         public List<OperacaoFuturoCryptoMoeda> Listar(DateTime dataInicial, DateTime dataFinal)
         {
-            return _connection.QueryAsync<OperacaoFuturoCryptoMoeda>("select * from OperacaoFuturoCryptoMoeda inner join CryptoMoeda on(OperacaoFuturoCryptoMoeda.IdCryptoMoeda = CryptoMoeda.Id) where DataOperacaoFuturo >= @dataInicial and DataOperacaoFuturo <= @dataFinal", dataInicial, dataFinal).Result;
+            return _connection.QueryAsync<OperacaoFuturoCryptoMoeda>("select * from OperacaoFuturoCryptoMoeda inner join CryptoMoeda on(OperacaoFuturoCryptoMoeda.IdCryptoMoeda = CryptoMoeda.Id) where DataOperacaoFuturo >= @dataInicial and DataOperacaoFuturo <= @dataFinal order by DataOperacaoFuturo desc", dataInicial, dataFinal).Result;
         }
     }
 }
