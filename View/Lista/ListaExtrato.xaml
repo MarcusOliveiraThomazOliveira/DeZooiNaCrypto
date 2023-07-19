@@ -20,7 +20,7 @@
     </ContentPage.BindingContext>
 
     <Grid Margin="20" RowDefinitions="Auto,*,Auto">
-        <dxe:ChoiceChipGroup x:Name="ccgPeriodo" BoxMode="Outlined" Padding="3" SelectedIndex="{Binding Source={viewmodel:ExtratoViewModel}, Path=Filtrar}">
+        <dxe:ChoiceChipGroup x:Name="ccgPeriodo" BoxMode="Outlined" Padding="3" SelectedIndex="{Binding Filtrar}">
             <dxe:Chip x:Name="ccgTodos" IsSelected="True" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Todos" />            
             <dxe:Chip x:Name="ccgDia" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Dia"/>
             <dxe:Chip x:Name="ccgSemana" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Semana"/>
@@ -47,7 +47,7 @@
                 </CollectionView>
             </StackLayout>
         </ScrollView>
-        <Label Grid.Row="2" Text="{Binding Source={viewmodel:ExtratoViewModel}, Path=ValorTotalStr}" TextColor="{Binding Source={viewmodel:ExtratoViewModel}, Path=ValorTotal, Converter={StaticResource valueToColorConverter}}" FontSize="20" FontAttributes="Bold" HorizontalOptions="End"/>
+        <Label Grid.Row="2" Text="{Binding ValorTotalStr, Mode=TwoWay}" TextColor="{Binding ValorTotal, Converter={StaticResource valueToColorConverter}}" FontSize="20" FontAttributes="Bold" HorizontalOptions="End"/>
     </Grid>
 
 </ContentPage>

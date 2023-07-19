@@ -1,9 +1,10 @@
-namespace DeZooiNaCrypto.View.Lista;
+using DeZooiNaCrypto.Model.ViewModel;
 
+namespace DeZooiNaCrypto.View.Lista;
 public partial class ListaExtrato : ContentPage
 {
-	public ListaExtrato()
-	{
-		InitializeComponent();
-	}
+    public ListaExtrato()
+    {
+        InitializeComponent();
+    }
 }
