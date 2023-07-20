@@ -12,7 +12,7 @@ namespace DeZooiNaCrypto.Model.Entidade
         public string Email { get; set; }
         [Required, MaxLength(100)]
         public string Senha { get; set; }
-        [OneToMany]
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<CryptoMoeda> CryptoMoedas { get; set; }
     }
 }

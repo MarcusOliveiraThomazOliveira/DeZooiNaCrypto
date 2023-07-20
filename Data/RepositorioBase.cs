@@ -42,6 +42,14 @@ namespace DeZooiNaCrypto.Data
 
             //_connection.DropTableAsync<OperacaoFuturoCryptoMoeda>().Wait();
             _connection.CreateTableAsync<OperacaoFuturoCryptoMoeda>().Wait();
+
+            //_connection.DropTableAsync<OperacaoSpotCryptoMoeda>().Wait();
+            _connection.CreateTableAsync<OperacaoSpotCryptoMoeda>().Wait();
+
+            //_connection.DropTableAsync<OperacaoSpotVendaCryptoMoeda>().Wait();
+            _connection.CreateTableAsync<OperacaoSpotVendaCryptoMoeda>().Wait();
+
+            _connection.ExecuteAsync("PRAGMA foreign_keys = ON");
         }
 
         public Task<List<T>> Listar()
@@ -61,9 +69,7 @@ namespace DeZooiNaCrypto.Data
         {
             try
             {
-                var nomeTabela = (new T()).GetType().Name;
-                var objeto = _connection.QueryAsync<T>("select * from " + nomeTabela + " where Id = @guid ", guid).Result.FirstOrDefault();
-                return objeto;
+                return _connection.GetAsync<T>(guid).Result;
             }
             catch (Exception ex)
             {

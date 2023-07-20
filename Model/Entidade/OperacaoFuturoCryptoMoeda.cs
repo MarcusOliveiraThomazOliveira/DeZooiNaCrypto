@@ -42,9 +42,7 @@ namespace DeZooiNaCrypto.Model.Entidade
         public decimal ValorTotal { get { return (ValorRetorno - ValorTaxa); } }
         [Ignore]
         public string ValorTotalStr { get { return "Ganho/Perda : " + (ValorRetorno - ValorTaxa).ToString(); } }
-
-
-        [Required, ForeignKey(typeof(CryptoMoeda))]
+        [Required, Column("IdCryptoMoeda"), ForeignKey(typeof(CryptoMoeda))]
         public Guid IdCryptoMoeda { get; set; }
         [ManyToOne]
         public CryptoMoeda CryptoMoeda { get; set; }

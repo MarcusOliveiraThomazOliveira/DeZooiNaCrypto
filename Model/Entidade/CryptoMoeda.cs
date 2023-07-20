@@ -24,10 +24,12 @@ namespace DeZooiNaCrypto.Model.Entidade
         public TipoMoedaParEnum TipoMoedaPar { get; set; }
         [Ignore]
         public string NomeMoedaPar { get { return Enum.GetName(typeof(TipoMoedaParEnum), (int)TipoMoedaPar); } }
-        [ForeignKey(typeof(Usuario))]
+        [Required, Column("IdUsuario"), ForeignKey(typeof(Usuario))]
         public Guid IdUsuario { get; set; }
         [ManyToOne]
         public Usuario Usuario { get; set; }
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        public List<OperacaoFuturoCryptoMoeda> OperacoesFuturo { get; set; }
     }
 
     public enum TipoCorretoraEnum
