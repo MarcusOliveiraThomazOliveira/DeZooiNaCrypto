@@ -17,7 +17,6 @@ namespace DeZooiNaCrypto.Model.ViewModel
 {
     public class ExtratoViewModel : ModelViewBase
     {
-        readonly IMessageService messageService;
         OperacaoFuturoRepositorio operacaoFuturoRepositorio = new();
         CryptoMoedaRepositorio cryptoMoedaRepositorio = new();
         ObservableCollection<OperacaoDTO> operacoesDTO;
@@ -35,7 +34,6 @@ namespace DeZooiNaCrypto.Model.ViewModel
         }
         public ExtratoViewModel()
         {
-            messageService = DependencyService.Get<IMessageService>();
             OperacoesDTO = new();
             FiltrarPeriodo(0);
         }

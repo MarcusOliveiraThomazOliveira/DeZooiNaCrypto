@@ -2,12 +2,12 @@ namespace DeZooiNaCrypto.View.Cadastro;
 
 public partial class CadastroOperacaoSpotView : ContentPage
 {
-	public CadastroOperacaoSpotView()
-	{
-		InitializeComponent();
-	}
+    public CadastroOperacaoSpotView()
+    {
+        InitializeComponent();
+    }
 
-    private void ApresentaMenu(object sender, EventArgs e)
+    private async void ApresentaMenu(object sender, EventArgs e)
     {
         actionsPopup.IsOpen = !actionsPopup.IsOpen;
     }

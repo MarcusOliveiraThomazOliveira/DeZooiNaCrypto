@@ -12,7 +12,6 @@ namespace DeZooiNaCrypto.Model.ViewModel
 {
     public class OperacaoFuturoViewModel : ModelViewBase
     {
-        readonly IMessageService _messageService;
         OperacaoFuturoRepositorio _operacaoFuturoRepositorio = new OperacaoFuturoRepositorio();
         Guid _idCryptoMoeda;
         ChoiceChipGroup _choiceChipGroup;
@@ -30,7 +29,6 @@ namespace DeZooiNaCrypto.Model.ViewModel
         public ICommand SetTipoOperacaoFuturo { get; set; }
         public OperacaoFuturoViewModel(Guid IdCryptoMoeda, ChoiceChipGroup ccgMoedaPar, DXPopup actionsPopup)
         {
-            _messageService = DependencyService.Get<IMessageService>();
             OperacaoFuturoCryptoMoeda = new OperacaoFuturoCryptoMoeda();
             valorRetorno = string.Empty;
             valorTaxa = string.Empty;
@@ -55,11 +53,11 @@ namespace DeZooiNaCrypto.Model.ViewModel
         }
         public void Gravar()
         {
-            if (OperacaoFuturoCryptoMoeda.DataOperacaoFuturo == DateTime.MinValue) { _messageService.ShowAsync("E preciso infomar a data da venda válida"); return; }
+            if (OperacaoFuturoCryptoMoeda.DataOperacaoFuturo == DateTime.MinValue) { MessageService.DisplayAlert_OK("E preciso infomar a data da venda válida"); return; }
 
-            if (string.IsNullOrEmpty(valorRetorno) || !Util.Validacao.ehDecimal(valorRetorno)) { _messageService.ShowAsync("E preciso infomar o valor investido"); return; }
+            if (string.IsNullOrEmpty(valorRetorno) || !Util.Validacao.ehDecimal(valorRetorno)) { MessageService.DisplayAlert_OK("E preciso infomar o valor investido"); return; }
 
-            if (string.IsNullOrEmpty(valorTaxa) || !Util.Validacao.ehDecimal(valorTaxa)) { _messageService.ShowAsync("E preciso infomar o valor da compra"); return; }
+            if (string.IsNullOrEmpty(valorTaxa) || !Util.Validacao.ehDecimal(valorTaxa)) { MessageService.DisplayAlert_OK("E preciso infomar o valor da compra"); return; }
 
             OperacaoFuturoCryptoMoeda.ValorRetorno = Decimal.Parse(valorRetorno);
             OperacaoFuturoCryptoMoeda.ValorTaxa = Decimal.Parse(valorTaxa);

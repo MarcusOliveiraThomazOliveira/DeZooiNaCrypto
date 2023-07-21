@@ -7,15 +7,19 @@ using System.Threading.Tasks;
 
 namespace DeZooiNaCrypto.Util
 {
-    public interface IMessageService
+    public static class MessageService
     {
-        Task ShowAsync(string message);
-    }
-    public class MessageService : IMessageService
-    {
-        public async Task ShowAsync(string message)
+        public static async Task<bool> DisplayAlert_OK(string message)
         {
-            await App.Current.MainPage.DisplayAlert("De Zooi na Crypto", message, Constantes.Caption_DisplayAlert_OK);
+            var retorno = await App.Current.MainPage.DisplayActionSheet(message, null, Constantes.Caption_DisplayAlert_OK);
+
+            return true;
+        }
+        public static async Task<bool> DisplayAlert_OK_CANCEL(string message)
+        {
+            var retorno = await App.Current.MainPage.DisplayActionSheet(message, null, Constantes.Caption_DisplayAlert_OK, Constantes.Caption_DisplayAlert_Cancelar);
+
+            return retorno == Constantes.Caption_DisplayAlert_OK;
         }
     }
 }
