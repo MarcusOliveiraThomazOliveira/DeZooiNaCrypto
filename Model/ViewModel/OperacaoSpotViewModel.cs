@@ -1,6 +1,7 @@
 ﻿using DeZooiNaCrypto.Data;
 using DeZooiNaCrypto.Model.Entidade;
 using DeZooiNaCrypto.Util;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace DeZooiNaCrypto.Model.ViewModel
@@ -10,16 +11,14 @@ namespace DeZooiNaCrypto.Model.ViewModel
         OperacaoSpotRepositorio _operacaoSpotRepositorio = new OperacaoSpotRepositorio();
         OperacaoSpotCryptoMoeda operacaoSpotCryptoMoeda;
 
+        public ObservableCollection<OperacaoSpotCryptoMoeda> OperacoesSpotCryptoMoeda { get; set; }
         public OperacaoSpotCryptoMoeda OperacaoSpotCryptoMoeda { get { return operacaoSpotCryptoMoeda; } set { operacaoSpotCryptoMoeda = value; RaisePropertyChanged(); } }
         public ICommand Gravar { get; private set; }
         public OperacaoSpotViewModel()
         {
             operacaoSpotCryptoMoeda = new OperacaoSpotCryptoMoeda();
-
-            Gravar = new Command(() =>
-            {
-                Task<bool> returno = GravarSpot();
-            });
+            OperacoesSpotCryptoMoeda = new ObservableCollection<OperacaoSpotCryptoMoeda>(_operacaoSpotRepositorio.Listar().Result.ToList());
+            Gravar = new Command(() => { Task<bool> returno = GravarSpot(); });
         }
 
         public async Task<bool> GravarSpot()
@@ -33,6 +32,7 @@ namespace DeZooiNaCrypto.Model.ViewModel
                 _operacaoSpotRepositorio.Salvar(OperacaoSpotCryptoMoeda);
 
                 operacaoSpotCryptoMoeda = new OperacaoSpotCryptoMoeda();
+                OperacoesSpotCryptoMoeda.Add(OperacaoSpotCryptoMoeda);
 
                 return true;
             }

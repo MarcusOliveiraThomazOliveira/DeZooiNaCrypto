@@ -7,7 +7,7 @@ public partial class CadastroOperacaoSpotView : ContentPage
         InitializeComponent();
     }
 
-    private async void ApresentaMenu(object sender, EventArgs e)
+    private void ApresentaMenu(object sender, EventArgs e)
     {
         actionsPopup.IsOpen = !actionsPopup.IsOpen;
     }

@@ -25,6 +25,30 @@
     </ContentPage.Resources>
 
     <Grid>
+        <CollectionView  ItemsSource="{Binding OperacoesSpotCryptoMoeda, Mode=TwoWay}" SelectionMode="Single" Margin="10,10,10,0">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type local:OperacaoSpotCryptoMoeda}">
+                    <Border StrokeShape="{OnPlatform RoundRectangle 10, iOS=RoundRectangle 1}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Card_Background_Dark}}" StrokeThickness="1">
+                        <Grid ColumnDefinitions="*" RowDefinitions="Auto,Auto,Auto" Padding="10" BackgroundColor="Transparent">
+                            <Label Grid.Row="0" Text="{Binding DataOperacaoSpotStr}" FontSize="16" FontAttributes="Bold"/>
+
+                            <Grid Grid.Row="1" ColumnDefinitions="*" RowDefinitions="Auto">
+                                <Label Text="{Binding QuantidadeStr}" FontSize="16" FontAttributes="Bold"/>
+                            </Grid>
+
+                            <Grid Grid.Row="2" ColumnDefinitions="*" RowDefinitions="Auto">
+                                <Label Text="{Binding ValorUnitarioStr}" FontSize="16" FontAttributes="Bold"/>
+                            </Grid>
+
+                            <dxco:SimpleButton Grid.Row="3" HorizontalOptions="End" VerticalOptions="Center" Icon="deletetask" IconColor="DarkRed" BackgroundColor="Transparent" TextColor="{AppThemeBinding Light={StaticResource Red}, Dark={StaticResource Card_Background_Dark}}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
         <dxco:DXPopup x:Name="actionsPopup"  CornerRadius="8" ShadowRadius="5" BackgroundColor="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}" ShadowColor="{AppThemeBinding Light={StaticResource Gray500}, Dark=Black}">
             <ScrollView HeightRequest="350">
                 <StackLayout Padding="8,6">

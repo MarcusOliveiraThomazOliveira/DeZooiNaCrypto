@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DeZooiNaCrypto.Model.Entidade
 {
-    [Table("OperacaoSpotCryptoMoeda")]    
+    [Table("OperacaoSpotCryptoMoeda")]
     public class OperacaoSpotCryptoMoeda : EntidadeBase
     {
         public OperacaoSpotCryptoMoeda()
@@ -18,19 +18,25 @@ namespace DeZooiNaCrypto.Model.Entidade
         }
         [Required]
         public DateTime DataOperacaoSpot { get; set; }
-        [Required] 
+        [Ignore]
+        public string DataOperacaoSpotStr { get { return DataOperacaoSpot.ToString("dd/MM/yyyy"); } }
+        [Required]
         public decimal Quantidade { get; set; }
-        [Required] 
+        [Ignore]
+        public string QuantidadeStr { get { return "Quantidade : " + Quantidade.ToString(); } }
+        [Required]
         public decimal ValorUnitario { get; set; }
+        [Ignore]
+        public string ValorUnitarioStr { get { return "Val. Unitário : " + ValorUnitario.ToString(); } }
 
         [Required, Column("IdCryptoMoeda"), ForeignKey(typeof(CryptoMoeda))]
         public Guid IdCryptoMoeda { get; set; }
         [ManyToOne]
         public CryptoMoeda CryptoMoeda { get; set; }
         [OneToMany(CascadeOperations = CascadeOperation.All)]
-        public List<OperacaoSpotVendaCryptoMoeda> OperacoesSpotVenda{ get; set; }
+        public List<OperacaoSpotVendaCryptoMoeda> OperacoesSpotVenda { get; set; }
 
     }
 
-    
+
 }
