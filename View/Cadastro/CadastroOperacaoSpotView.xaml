@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DeZooiNaCrypto.View.Cadastro.CadastroOperacaoSpotView"
+             Title="Operação Spot"
+             xmlns:dxg="clr-namespace:DevExpress.Maui.DataGrid;assembly=DevExpress.Maui.DataGrid"
+             xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+             xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:local="clr-namespace:DeZooiNaCrypto.Model.ViewModel;clr-namespace:DeZooiNaCrypto.Model.Entidade"
+             xmlns:util="clr-namespace:DeZooiNaCrypto.Util"
+             xmlns:viewmodel="clr-namespace:DeZooiNaCrypto.Model.ViewModel"
+             BackgroundColor="{AppThemeBinding Light={StaticResource Gray50}, Dark={StaticResource Gray925}}">
+
+    <ContentPage.BindingContext>
+        <viewmodel:OperacaoSpotViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="btnApresentarMenu" IconImageSource="verticaldots" Clicked="ApresentaMenu" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <util:ValueToColorConverter x:Key="valueToColorConverter"/>
+    </ContentPage.Resources>
+
+    <Grid>
+        <dxco:DXPopup x:Name="actionsPopup"  CornerRadius="8" ShadowRadius="5" BackgroundColor="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}" ShadowColor="{AppThemeBinding Light={StaticResource Gray500}, Dark=Black}">
+            <ScrollView HeightRequest="350">
+                <StackLayout Padding="8,6">
+                    <dxe:DateEdit
+                        x:Name="dtDataOperacaoSpot"
+                        Date="{Binding OperacaoSpotCryptoMoeda.DataOperacaoSpot, Mode=TwoWay}"
+                        BorderColor="Blue"
+                        BoxMode="Outlined"
+                        CornerRadius="10" 
+                        Margin="3"/>
+
+                    <dxe:TextEdit
+                        x:Name="txtQuantidade"
+                        Text="{Binding OperacaoSpotCryptoMoeda.Quantidade, Mode=TwoWay}"
+                        LabelText="Quantidade Comprada"
+                        PlaceholderText="0.000,00"
+                        TextHorizontalAlignment="End"
+                        BorderColor="Blue"
+                        BoxMode="Outlined"
+                        CornerRadius="10" 
+                        Margin="3"/>
+
+                    <dxe:TextEdit
+                        x:Name="txtValorUnitario"
+                        Text="{Binding OperacaoSpotCryptoMoeda.ValorUnitario, Mode=TwoWay}"
+                        LabelText="Valor Unitário"
+                        PlaceholderText="0.000,00"
+                        TextHorizontalAlignment="End"
+                        BorderColor="Blue"
+                        BoxMode="Outlined"
+                        CornerRadius="10" 
+                        Margin="3"/>
+
+                    <dxco:SimpleButton Text="Gravar" Command="{Binding Gravar}"  BackgroundColor="blue" Margin="1"/>
+                    <dxco:SimpleButton Text="Cancelar" Clicked="ApresentaMenu" BackgroundColor="PaleVioletRed" Margin="1"/>
+                </StackLayout>
+            </ScrollView>
+        </dxco:DXPopup>
+    </Grid>
+</ContentPage>

@@ -78,7 +78,8 @@ public partial class MainPage : ContentPage
 
     private void Spot(object sender, EventArgs e)
     {
-
+        Preferences.Set("IdCryptoMoeda", ((Guid)((SimpleButton)sender).CommandParameter).ToString());
+        Navigation.PushAsync(new CadastroOperacaoSpotView());
     }
 
     private void Extrato(object sender, EventArgs e)

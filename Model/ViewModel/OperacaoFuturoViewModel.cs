@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace DeZooiNaCrypto.Model.ViewModel
 {
-    public class OperacaoFuturoViewModel : INotifyPropertyChanged
+    public class OperacaoFuturoViewModel : ModelViewBase
     {
         readonly IMessageService _messageService;
         OperacaoFuturoRepositorio _operacaoFuturoRepositorio = new OperacaoFuturoRepositorio();
@@ -19,7 +19,6 @@ namespace DeZooiNaCrypto.Model.ViewModel
         DXPopup _actionsPopup;
         ObservableCollection<OperacaoFuturoCryptoMoeda> _operacaoFuturoCryptoMoedas;
 
-        public event PropertyChangedEventHandler PropertyChanged;
         public ObservableCollection<OperacaoFuturoCryptoMoeda> OperacaoFuturoCryptoMoedas
         {
             get { return _operacaoFuturoCryptoMoedas; }

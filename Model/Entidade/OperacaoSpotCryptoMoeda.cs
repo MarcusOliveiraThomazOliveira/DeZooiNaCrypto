@@ -12,6 +12,10 @@ namespace DeZooiNaCrypto.Model.Entidade
     [Table("OperacaoSpotCryptoMoeda")]    
     public class OperacaoSpotCryptoMoeda : EntidadeBase
     {
+        public OperacaoSpotCryptoMoeda()
+        {
+            DataOperacaoSpot = DateTime.Now.Date;
+        }
         [Required]
         public DateTime DataOperacaoSpot { get; set; }
         [Required] 
