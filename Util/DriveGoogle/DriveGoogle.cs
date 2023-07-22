@@ -14,21 +14,21 @@ namespace DeZooiNaCrypto.Util.DriveGoogle
         {
             var tokenResponse = new TokenResponse
             {
-                AccessToken = "ya29.a0AbVbY6M91wCvFt78aIMRal2juVzhLHp9e-y-89d64IrTGYkQXUm1wJxJK8b_YZMNKBa5us0-df3RhbxVcOeB770kOT_hU8oFq8C6XIjvyNMs00WGYSuHhEEit9dQxfHTHDOZW4a8SZdKl44Wy3SoZ5IA_mSAaCgYKAVwSARESFQFWKvPlbaWsxa9I5TkT7B1fYy72VQ0163",
-                RefreshToken = "1//04TZW3UR8MWDCCgYIARAAGAQSNwF-L9IrsQGzLgetL9Zc7D9daOsYPGuTCLsbxN2wCgkCv3KTBo0zKxPQjLi8LYyal9NVlsb9A-o",
+                AccessToken = "",
+                RefreshToken = "",
             };
 
 
-            var applicationName = "DeZooiNaCrypto";// Use the name of the project in Google Cloud
-            var username = "mvthomazoliveira@gmail.com";// Use your email
+            var applicationName = "";// Use the name of the project in Google Cloud
+            var username = "";// Use your email
 
 
             var apiCodeFlow = new GoogleAuthorizationCodeFlow(new GoogleAuthorizationCodeFlow.Initializer
             {
                 ClientSecrets = new ClientSecrets
                 {
-                    ClientId = "434518053435-cp342n6i76e3151lnt01q0gk2rk9mbeo.apps.googleusercontent.com",
-                    ClientSecret = "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"
+                    ClientId = "",
+                    ClientSecret = ""
                 },
                 Scopes = new[] { Scope.Drive },
                 DataStore = new FileDataStore(applicationName)
