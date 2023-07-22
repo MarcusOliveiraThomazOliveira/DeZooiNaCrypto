@@ -1,5 +1,4 @@
 using DevExpress.Maui.Controls;
-using DevExpress.Maui.Editors;
 using DeZooiNaCrypto.Data;
 using DeZooiNaCrypto.Model.Entidade;
 using DeZooiNaCrypto.Model.ViewModel;

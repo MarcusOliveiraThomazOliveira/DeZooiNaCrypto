@@ -18,7 +18,7 @@ namespace DeZooiNaCrypto.Model.ViewModel
         {
             operacaoSpotCryptoMoeda = new OperacaoSpotCryptoMoeda();
             OperacoesSpotCryptoMoeda = new ObservableCollection<OperacaoSpotCryptoMoeda>(_operacaoSpotRepositorio.Listar().Result.ToList());
-            Gravar = new Command(() => { Task<bool> returno = GravarSpot(); });
+            Gravar = new Command(() => { Task<bool> retorno = GravarSpot(); });
         }
 
         public async Task<bool> GravarSpot()
@@ -31,13 +31,27 @@ namespace DeZooiNaCrypto.Model.ViewModel
 
                 _operacaoSpotRepositorio.Salvar(OperacaoSpotCryptoMoeda);
 
-                operacaoSpotCryptoMoeda = new OperacaoSpotCryptoMoeda();
-                OperacoesSpotCryptoMoeda.Add(OperacaoSpotCryptoMoeda);
+                OperacoesSpotCryptoMoeda.Add(new OperacaoSpotCryptoMoeda() { Id = operacaoSpotCryptoMoeda.Id, 
+                    DataOperacaoSpot = operacaoSpotCryptoMoeda.DataOperacaoSpot, Quantidade = operacaoSpotCryptoMoeda.Quantidade, 
+                    ValorUnitario = operacaoSpotCryptoMoeda.ValorUnitario});
+
+                OperacaoSpotCryptoMoeda = new();
+                OperacaoSpotCryptoMoeda.Quantidade = null;
+                OperacaoSpotCryptoMoeda.ValorUnitario = null;
 
                 return true;
             }
 
             return true;
+        }
+        public void Apagar(Guid arg)
+        {
+            var operacaoSpotCryptoMoeda = OperacoesSpotCryptoMoeda.Where(x => x.Id == arg).FirstOrDefault();
+            if (operacaoSpotCryptoMoeda != null)
+            {
+                _operacaoSpotRepositorio.Deletar(operacaoSpotCryptoMoeda);
+                OperacoesSpotCryptoMoeda.Remove(operacaoSpotCryptoMoeda);
+            }
         }
     }
 }
