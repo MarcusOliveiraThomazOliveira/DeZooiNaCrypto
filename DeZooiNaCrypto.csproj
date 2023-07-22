@@ -49,16 +49,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="ViewModel\**" />
 	  <AndroidResource Remove="View\NewFolder1\**" />
 	  <AndroidResource Remove="View\NewFolder\**" />
+	  <Compile Remove="ViewModel\**" />
 	  <Compile Remove="View\NewFolder1\**" />
 	  <Compile Remove="View\NewFolder\**" />
+	  <EmbeddedResource Remove="ViewModel\**" />
 	  <EmbeddedResource Remove="View\NewFolder1\**" />
 	  <EmbeddedResource Remove="View\NewFolder\**" />
+	  <MauiCss Remove="ViewModel\**" />
 	  <MauiCss Remove="View\NewFolder1\**" />
 	  <MauiCss Remove="View\NewFolder\**" />
+	  <MauiXaml Remove="ViewModel\**" />
 	  <MauiXaml Remove="View\NewFolder1\**" />
 	  <MauiXaml Remove="View\NewFolder\**" />
+	  <None Remove="ViewModel\**" />
 	  <None Remove="View\NewFolder1\**" />
 	  <None Remove="View\NewFolder\**" />
 	</ItemGroup>
@@ -84,10 +90,6 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.141-beta" />
 		<PackageReference Include="SQLiteNetExtensions" Version="2.1.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="ViewModel\" />
 	</ItemGroup>
 
 	<ItemGroup>
