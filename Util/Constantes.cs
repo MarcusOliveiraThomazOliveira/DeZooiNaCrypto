@@ -8,6 +8,7 @@ namespace DeZooiNaCrypto.Util
 {
     public static class Constantes
     {
+        public const string Id = "Id";
         public const string Usuario_Logado = "UsuarioLogado";
         public const string Operacao_Futuro = "Futuro";
         public const string Operacao_Spot = "Spot";

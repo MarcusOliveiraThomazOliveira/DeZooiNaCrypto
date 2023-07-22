@@ -6,6 +6,7 @@ using DeZooiNaCrypto.View.Cadastro;
 using Newtonsoft.Json;
 using DeZooiNaCrypto.Util;
 using DeZooiNaCrypto.View.Lista;
+using DeZooiNaCrypto.Util.DriveGoogle;
 
 namespace DeZooiNaCrypto;
 
@@ -78,7 +79,7 @@ public partial class MainPage : ContentPage
 
     private void Spot(object sender, EventArgs e)
     {
-        Preferences.Set("IdCryptoMoeda", ((Guid)((SimpleButton)sender).CommandParameter).ToString());
+        Preferences.Set(Constantes.Id, ((Guid)((SimpleButton)sender).CommandParameter).ToString());
         Navigation.PushAsync(new CadastroOperacaoSpotView());
     }
 

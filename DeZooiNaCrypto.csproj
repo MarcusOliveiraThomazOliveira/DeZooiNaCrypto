@@ -70,6 +70,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="client_secret_434518053435-fqvbof255msana1j5tl954sh3g7pkvr1.apps.googleusercontent.com.json" />
 	  <None Remove="Resources\AppIcon\appicon_original.svg" />
 	  <None Remove="Resources\AppIcon\lixeira.png" />
 	  <None Remove="Resources\AppIcon\venda.png" />
@@ -86,6 +87,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+		<PackageReference Include="Google.Apis.Drive.v3" Version="1.61.0.3110" />
 		<PackageReference Include="Microsoft.Data.Sqlite.Core" Version="7.0.9" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.141-beta" />
