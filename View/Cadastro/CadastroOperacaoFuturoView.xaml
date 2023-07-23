@@ -38,9 +38,10 @@
                                 <Label Text="{Binding ValorTaxaStr}" TextColor="#f44336" FontSize="16" FontAttributes="Bold" Grid.Column="2"/>
                             </Grid>
 
-                            <Grid Grid.Row="3" ColumnDefinitions="280,45" RowDefinitions="Auto">
-                                <Label Grid.Column="0" Text="{Binding ValorTotalStr}" TextColor="{Binding ValorTotal, Converter={StaticResource valueToColorConverter}}" FontSize="16" FontAttributes="Bold"/>
-                                <dxco:SimpleButton Grid.Row="4" Grid.Column="3" HorizontalOptions="End" VerticalOptions="Center" Clicked="Apagar" CommandParameter="{Binding Id}" Icon="deletetask" IconColor="DarkRed" BackgroundColor="Transparent" TextColor="{AppThemeBinding Light={StaticResource Red}, Dark={StaticResource Card_Background_Dark}}" />
+                            <Grid Grid.Row="3" ColumnDefinitions="*,55,51" RowDefinitions="Auto,Auto">
+                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding ValorTotalStr}" TextColor="{Binding ValorTotal, Converter={StaticResource valueToColorConverter}}" HorizontalOptions="Start" FontSize="16" FontAttributes="Bold"/>
+                                <dxco:SimpleButton Grid.Row="1" Grid.Column="1" Icon="pencil" IconColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" BackgroundColor="Transparent"/>
+                                <dxco:SimpleButton Grid.Row="1" Grid.Column="2" HorizontalOptions="End" VerticalOptions="Center" Clicked="Apagar" CommandParameter="{Binding Id}" Icon="bin2" IconColor="DarkRed" BackgroundColor="Transparent"/>
                             </Grid>
 
                         </Grid>

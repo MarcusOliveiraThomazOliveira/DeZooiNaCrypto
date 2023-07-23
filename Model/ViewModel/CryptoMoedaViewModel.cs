@@ -62,6 +62,5 @@ namespace DeZooiNaCrypto.Model.ViewModel
             QuantidadeOperacoes = _operacaoFuturoRepositorio.QuantidadeOperacoes(CryptoMoedaSelecionada.Id);
 
         }
-
     }
 }
