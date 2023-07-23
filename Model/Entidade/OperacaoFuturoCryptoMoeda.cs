@@ -13,6 +13,9 @@ namespace DeZooiNaCrypto.Model.Entidade
     [Table("OperacaoFuturoCryptoMoeda")]
     public class OperacaoFuturoCryptoMoeda : EntidadeBase
     {
+        DateTime dataOperacaoFuturo;
+        decimal valorRetorno;
+        decimal valorTaxa;
         public OperacaoFuturoCryptoMoeda()
         {
             DataOperacaoFuturo = DateTime.Now.Date;
@@ -23,7 +26,7 @@ namespace DeZooiNaCrypto.Model.Entidade
         [Ignore]
         public string NomeOperacaoFuturo { get { return Enum.GetName(typeof(TipoOperacaoFuturoEnum), (int)TipoOperacaoFuturo); } }
         [Required]
-        public DateTime DataOperacaoFuturo { get; set; }
+        public DateTime DataOperacaoFuturo { get { return dataOperacaoFuturo; } set { dataOperacaoFuturo = value; OnPropertyChanged(); } }
         [Ignore]
         public string DataOperacaoFuturoStr { get { return DataOperacaoFuturo.ToString("dd/MM/yyyy"); } }
         [Ignore]
@@ -31,11 +34,11 @@ namespace DeZooiNaCrypto.Model.Entidade
 
 
         [Required]
-        public decimal ValorRetorno { get; set; }
+        public decimal ValorRetorno { get { return valorRetorno; } set { valorRetorno = value; OnPropertyChanged(); } }
         [Ignore]
         public string ValorRetornoStr { get { return "Retorno : " + ValorRetorno.ToString(); } }
         [Required]
-        public decimal ValorTaxa { get; set; }
+        public decimal ValorTaxa { get { return valorTaxa; } set { valorTaxa = value; OnPropertyChanged(); } }
         [Ignore]
         public string ValorTaxaStr { get { return "Taxa : " + ValorTaxa.ToString(); } }
         [Ignore]

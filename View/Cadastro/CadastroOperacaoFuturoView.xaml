@@ -7,7 +7,8 @@
              xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
              xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
              xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
-             xmlns:local="clr-namespace:DeZooiNaCrypto.Model.ViewModel;clr-namespace:DeZooiNaCrypto.Model.Entidade"
+             xmlns:local="clr-namespace:DeZooiNaCrypto.Model.Entidade"
+             xmlns:viewmodel="clr-namespace:DeZooiNaCrypto.Model.ViewModel"
              xmlns:util="clr-namespace:DeZooiNaCrypto.Util"
              BackgroundColor="{AppThemeBinding Light={StaticResource Gray50}, Dark={StaticResource Gray925}}">
 
@@ -18,6 +19,10 @@
     <ContentPage.Resources>
         <util:ValueToColorConverter x:Key="valueToColorConverter"/>
     </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <viewmodel:OperacaoFuturoViewModel/>
+    </ContentPage.BindingContext>
 
     <Grid>
         <CollectionView ItemsSource="{Binding OperacaoFuturoCryptoMoedas}" SelectionMode="Single" Margin="10,10,10,0">
@@ -40,8 +45,8 @@
 
                             <Grid Grid.Row="3" ColumnDefinitions="*,55,51" RowDefinitions="Auto,Auto">
                                 <Label Grid.Row="0" Grid.Column="0" Text="{Binding ValorTotalStr}" TextColor="{Binding ValorTotal, Converter={StaticResource valueToColorConverter}}" HorizontalOptions="Start" FontSize="16" FontAttributes="Bold"/>
-                                <dxco:SimpleButton Grid.Row="1" Grid.Column="1" Icon="pencil" IconColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" BackgroundColor="Transparent"/>
-                                <dxco:SimpleButton Grid.Row="1" Grid.Column="2" HorizontalOptions="End" VerticalOptions="Center" Clicked="Apagar" CommandParameter="{Binding Id}" Icon="bin2" IconColor="DarkRed" BackgroundColor="Transparent"/>
+                                <dxco:SimpleButton Grid.Row="1" Grid.Column="1" Clicked="Editar" CommandParameter="{Binding Id}" Icon="pencil" IconColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" BackgroundColor="Transparent"/>
+                                <dxco:SimpleButton Grid.Row="1" Grid.Column="2" Clicked="Apagar" CommandParameter="{Binding Id}" Icon="bin2" IconColor="DarkRed" BackgroundColor="Transparent"/>
                             </Grid>
 
                         </Grid>
@@ -50,7 +55,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <dxco:DXPopup x:Name="actionsPopup" CornerRadius="8" ShadowRadius="5" BackgroundColor="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}" ShadowColor="{AppThemeBinding Light={StaticResource Gray500}, Dark=Black}">
+        <dxco:DXPopup x:Name="actionsPopup"  CornerRadius="8" ShadowRadius="5" BackgroundColor="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}" ShadowColor="{AppThemeBinding Light={StaticResource Gray500}, Dark=Black}">
             <ScrollView HeightRequest="350">
                 <StackLayout Padding="8,6">
                     <dxe:ChoiceChipGroup x:Name="ccgMoedaPar" BoxMode="Outlined" ChipTapCommand="{Binding SetTipoOperacaoFuturo}" Padding="3">

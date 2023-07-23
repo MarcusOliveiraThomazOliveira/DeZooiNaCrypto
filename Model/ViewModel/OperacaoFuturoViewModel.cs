@@ -14,8 +14,6 @@ namespace DeZooiNaCrypto.Model.ViewModel
     {
         OperacaoFuturoRepositorio _operacaoFuturoRepositorio = new OperacaoFuturoRepositorio();
         Guid _idCryptoMoeda;
-        ChoiceChipGroup _choiceChipGroup;
-        DXPopup _actionsPopup;
         ObservableCollection<OperacaoFuturoCryptoMoeda> _operacaoFuturoCryptoMoedas;
 
         public ObservableCollection<OperacaoFuturoCryptoMoeda> OperacaoFuturoCryptoMoedas
@@ -27,37 +25,35 @@ namespace DeZooiNaCrypto.Model.ViewModel
         public string valorRetorno { get; set; }
         public string valorTaxa { get; set; }
         public ICommand SetTipoOperacaoFuturo { get; set; }
-        public OperacaoFuturoViewModel(Guid IdCryptoMoeda, ChoiceChipGroup ccgMoedaPar, DXPopup actionsPopup)
+        public OperacaoFuturoViewModel()
         {
             OperacaoFuturoCryptoMoeda = new OperacaoFuturoCryptoMoeda();
             valorRetorno = string.Empty;
             valorTaxa = string.Empty;
+            _idCryptoMoeda = new(Preferences.Get(Constantes.Id, string.Empty));
 
-            _operacaoFuturoCryptoMoedas = _operacaoFuturoRepositorio.Listar(IdCryptoMoeda);
-            _idCryptoMoeda = IdCryptoMoeda;
-            _choiceChipGroup = ccgMoedaPar;
-            _actionsPopup = actionsPopup;
+            _operacaoFuturoCryptoMoedas = _operacaoFuturoRepositorio.Listar(_idCryptoMoeda);
 
-            SetTipoOperacaoFuturo = new Command(InformaTipoOperacaoFuturo);
+            SetTipoOperacaoFuturo = new Command<string>((string arg) => { InformaTipoOperacaoFuturo(arg); });
         }
-        private void InformaTipoOperacaoFuturo()
+        private void InformaTipoOperacaoFuturo(string arg)
         {
-            if (((Chip)_choiceChipGroup.SelectedItem).Text == "Short")
+            if (arg == "Short")
             {
                 OperacaoFuturoCryptoMoeda.TipoOperacaoFuturo = TipoOperacaoFuturoEnum.Short;
             }
-            else if (((Chip)_choiceChipGroup.SelectedItem).Text == "Long")
+            else if (arg == "Long")
             {
                 OperacaoFuturoCryptoMoeda.TipoOperacaoFuturo = TipoOperacaoFuturoEnum.Long;
             }
         }
-        public void Gravar()
+        public async void Gravar()
         {
-            if (OperacaoFuturoCryptoMoeda.DataOperacaoFuturo == DateTime.MinValue) { MessageService.DisplayAlert_OK("E preciso infomar a data da venda válida"); return; }
+            if (OperacaoFuturoCryptoMoeda.DataOperacaoFuturo == DateTime.MinValue) { await MessageService.DisplayAlert_OK("E preciso infomar a data da venda válida"); return; }
 
-            if (string.IsNullOrEmpty(valorRetorno) || !Util.Validacao.ehDecimal(valorRetorno)) { MessageService.DisplayAlert_OK("E preciso infomar o valor investido"); return; }
+            if (string.IsNullOrEmpty(valorRetorno) || !Util.Validacao.ehDecimal(valorRetorno)) { await MessageService.DisplayAlert_OK("E preciso infomar o valor investido"); return; }
 
-            if (string.IsNullOrEmpty(valorTaxa) || !Util.Validacao.ehDecimal(valorTaxa)) { MessageService.DisplayAlert_OK("E preciso infomar o valor da compra"); return; }
+            if (string.IsNullOrEmpty(valorTaxa) || !Util.Validacao.ehDecimal(valorTaxa)) { await MessageService.DisplayAlert_OK("E preciso infomar o valor da compra"); return; }
 
             OperacaoFuturoCryptoMoeda.ValorRetorno = Decimal.Parse(valorRetorno);
             OperacaoFuturoCryptoMoeda.ValorTaxa = Decimal.Parse(valorTaxa);
@@ -70,9 +66,6 @@ namespace DeZooiNaCrypto.Model.ViewModel
 
             _operacaoFuturoCryptoMoedas.Clear();
             _operacaoFuturoCryptoMoedas.InsertRange<OperacaoFuturoCryptoMoeda>(0, _operacaoFuturoRepositorio.Listar(_idCryptoMoeda));
-
-            
-            _actionsPopup.IsOpen = false;
         }
         public async void Apagar(Guid idOperacaoFuturo)
         {
@@ -85,6 +78,17 @@ namespace DeZooiNaCrypto.Model.ViewModel
                     _operacaoFuturoCryptoMoedas.Remove(operacaoFuturoCryptoMoeda);
                 }
             }
+        }
+        public void Editar(Guid idOperacaoFuturo)
+        {
+            var operacaoFuturoCryptoMoeda = _operacaoFuturoCryptoMoedas.Where(x => x.Id == idOperacaoFuturo).FirstOrDefault();
+            OperacaoFuturoCryptoMoeda.Id = operacaoFuturoCryptoMoeda.Id;
+            OperacaoFuturoCryptoMoeda.DataOperacaoFuturo = operacaoFuturoCryptoMoeda.DataOperacaoFuturo;
+            OperacaoFuturoCryptoMoeda.ValorRetorno = operacaoFuturoCryptoMoeda.ValorRetorno;
+            valorRetorno = operacaoFuturoCryptoMoeda.ValorRetorno.ToString();
+            OperacaoFuturoCryptoMoeda.ValorTaxa = operacaoFuturoCryptoMoeda.ValorTaxa;
+            valorTaxa = operacaoFuturoCryptoMoeda.ValorTaxa.ToString();
+            OperacaoFuturoCryptoMoeda.IdCryptoMoeda = OperacaoFuturoCryptoMoeda.IdCryptoMoeda;
         }
 
     }

@@ -74,7 +74,8 @@ public partial class MainPage : ContentPage
 
     private void Futuro(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new CadastroOperacaoFuturoView(_usuario, (Guid)((SimpleButton)sender).CommandParameter));
+        Preferences.Set(Constantes.Id, ((Guid)((SimpleButton)sender).CommandParameter).ToString());
+        Navigation.PushAsync(new CadastroOperacaoFuturoView());
     }
 
     private void Spot(object sender, EventArgs e)

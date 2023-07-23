@@ -3,26 +3,20 @@ using DeZooiNaCrypto.Data;
 using DeZooiNaCrypto.Model.Entidade;
 using DeZooiNaCrypto.Model.ViewModel;
 using DeZooiNaCrypto.Util;
+using Newtonsoft.Json;
 
 namespace DeZooiNaCrypto.View.Cadastro;
 
 public partial class CadastroOperacaoFuturoView : ContentPage
 {
-    Usuario _usuario;
-    Guid _idCryptoMoeda;
-    OperacaoFuturoViewModel _operacaoFuturoViewModel;
-    CryptoMoedaRepositorio _cryptoMoedaRepositorio = new CryptoMoedaRepositorio();
+    readonly Guid _idCryptoMoeda;
+    readonly OperacaoFuturoViewModel _operacaoFuturoViewModel = new();
+    readonly CryptoMoedaRepositorio _cryptoMoedaRepositorio = new();
     public CadastroOperacaoFuturoView()
     {
         InitializeComponent();
-    }
-    public CadastroOperacaoFuturoView(Usuario usuario, Guid idCryptoMoeda)
-    {
-        InitializeComponent();
 
-        _usuario = usuario;
-        _idCryptoMoeda = idCryptoMoeda;
-        _operacaoFuturoViewModel = new OperacaoFuturoViewModel(idCryptoMoeda, ccgMoedaPar, actionsPopup);
+        _idCryptoMoeda = new(Preferences.Get(Constantes.Id, string.Empty));
         this.Title = Constantes.Operacao_Futuro + " - " + _cryptoMoedaRepositorio.Obter(_idCryptoMoeda).NomeLongo;
         BindingContext = _operacaoFuturoViewModel;
     }
@@ -54,5 +48,11 @@ public partial class CadastroOperacaoFuturoView : ContentPage
     private void Apagar(object sender, EventArgs e)
     {
         _operacaoFuturoViewModel.Apagar((Guid)((SimpleButton)sender).CommandParameter);
+    }
+
+    private void Editar(object sender, EventArgs e)
+    {
+        _operacaoFuturoViewModel.Editar((Guid)((SimpleButton)sender).CommandParameter);
+        ApresentaMenu(null, null);
     }
 }
