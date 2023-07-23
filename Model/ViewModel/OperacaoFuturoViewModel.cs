@@ -74,13 +74,16 @@ namespace DeZooiNaCrypto.Model.ViewModel
             
             _actionsPopup.IsOpen = false;
         }
-        public void Apagar(Guid idOperacaoFuturo)
+        public async void Apagar(Guid idOperacaoFuturo)
         {
-            OperacaoFuturoCryptoMoeda operacaoFuturoCryptoMoeda = _operacaoFuturoCryptoMoedas.Where(x => x.Id == idOperacaoFuturo).FirstOrDefault();
-            if (operacaoFuturoCryptoMoeda != null)
+            if (await MessageService.DisplayAlert_CONFIRMAR_CANCELAR("Deseja realmente apagar esse registro?") == true)
             {
-                _operacaoFuturoRepositorio.Deletar(operacaoFuturoCryptoMoeda);
-                _operacaoFuturoCryptoMoedas.Remove(operacaoFuturoCryptoMoeda);
+                OperacaoFuturoCryptoMoeda operacaoFuturoCryptoMoeda = _operacaoFuturoCryptoMoedas.Where(x => x.Id == idOperacaoFuturo).FirstOrDefault();
+                if (operacaoFuturoCryptoMoeda != null)
+                {
+                    _operacaoFuturoRepositorio.Deletar(operacaoFuturoCryptoMoeda);
+                    _operacaoFuturoCryptoMoedas.Remove(operacaoFuturoCryptoMoeda);
+                }
             }
         }
 
