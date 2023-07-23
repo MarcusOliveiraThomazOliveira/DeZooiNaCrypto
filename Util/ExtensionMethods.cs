@@ -10,12 +10,13 @@ namespace DeZooiNaCrypto.Util
     {
         public static DateTime FirstDayOfWeek(this DateTime date)
         {
+            if (date.DayOfWeek == 0) return date.Date;
             return date.AddDays(((((int)date.DayOfWeek) - 1) + 1) * -1);
         }
         public static DateTime LastDayOfWeek(this DateTime date)
         {
-            //(7 - DiaDaSemana) - 1
-            return date.AddDays((7 - ((int)date.DayOfWeek)) - 1);
+            if (date.DayOfWeek == 0) return date.AddDays(6).Date;
+            return date.AddDays((7 - ((int)date.DayOfWeek)) - 1);//(7 - DiaDaSemana) - 1
         }
         public static DateTime FirstDayOfMonth(this DateTime date)
         {

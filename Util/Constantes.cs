@@ -16,7 +16,7 @@ namespace DeZooiNaCrypto.Util
         public const string Quantidade_Operacoes = "Qtd. de operações : ";
 
         public const string Caption_DisplayAlert_OK = "Ok";
-        public const string Caption_DisplayAlert_Cancelar = "Concelar";
+        public const string Caption_DisplayAlert_Cancelar = "Cancelar";
         public const string Caption_DisplayAlert_Confirmar = "Confirmar";
     }
 }

@@ -33,14 +33,17 @@ namespace DeZooiNaCrypto.Model.ViewModel
             AtualizarValor();
             ConfiguraAtualizacao();
         }
-        public void Apagar(Guid id)
+        public async void Apagar(Guid id)
         {
-            var cryptoMoeda = _cryptoMoedas.Where(cm => cm.Id.Equals(id)).FirstOrDefault();
-            if (cryptoMoeda != null)
+            if (await MessageService.DisplayAlert_CONFIRMAR_CANCELAR("Deseja realmente apagar esse registro?") == true)
             {
-                _cryptoMoedaRepositorio.Deletar(cryptoMoeda);
-                _cryptoMoedas.Remove(cryptoMoeda);
-            }
+                var cryptoMoeda = _cryptoMoedas.Where(cm => cm.Id.Equals(id)).FirstOrDefault();
+                if (cryptoMoeda != null)
+                {
+                    _cryptoMoedaRepositorio.Deletar(cryptoMoeda);
+                    _cryptoMoedas.Remove(cryptoMoeda);
+                }
+            }            
         }
         private void AtualizarValor()
         {
