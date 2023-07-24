@@ -45,8 +45,8 @@
 
                             <Grid Grid.Row="3" ColumnDefinitions="*,55,51" RowDefinitions="Auto,Auto">
                                 <Label Grid.Row="0" Grid.Column="0" Text="{Binding ValorTotalStr}" TextColor="{Binding ValorTotal, Converter={StaticResource valueToColorConverter}}" HorizontalOptions="Start" FontSize="16" FontAttributes="Bold"/>
-                                <dxco:SimpleButton Grid.Row="1" Grid.Column="1" Clicked="Editar" CommandParameter="{Binding Id}" Icon="pencil" IconColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" BackgroundColor="Transparent"/>
-                                <dxco:SimpleButton Grid.Row="1" Grid.Column="2" Clicked="Apagar" CommandParameter="{Binding Id}" Icon="bin2" IconColor="DarkRed" BackgroundColor="Transparent"/>
+                                <dxco:SimpleButton Grid.Row="1" Grid.Column="1" Clicked="Editar" CommandParameter="{Binding Id}" Icon="edit1" IconColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" BackgroundColor="Transparent" />
+                                <dxco:SimpleButton Grid.Row="1" Grid.Column="2" Clicked="Apagar" CommandParameter="{Binding Id}" Icon="bin3" IconColor="DarkRed" BackgroundColor="Transparent"/>
                             </Grid>
 
                         </Grid>
