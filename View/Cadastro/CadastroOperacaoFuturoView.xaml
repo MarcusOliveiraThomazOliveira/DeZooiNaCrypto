@@ -13,7 +13,7 @@
              BackgroundColor="{AppThemeBinding Light={StaticResource Gray50}, Dark={StaticResource Gray925}}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="btnApresentarMenu" IconImageSource="verticaldots" Clicked="ApresentaMenu"/>
+        <ToolbarItem x:Name="btnApresentarMenu" IconImageSource="verticaldots" Clicked="Cadastrar"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Resources>
@@ -58,7 +58,7 @@
         <dxco:DXPopup x:Name="actionsPopup"  CornerRadius="8" ShadowRadius="5" BackgroundColor="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}" ShadowColor="{AppThemeBinding Light={StaticResource Gray500}, Dark=Black}">
             <ScrollView HeightRequest="350">
                 <StackLayout Padding="8,6">
-                    <dxe:ChoiceChipGroup x:Name="ccgMoedaPar" BoxMode="Outlined" ChipTapCommand="{Binding SetTipoOperacaoFuturo}" Padding="3">
+                    <dxe:ChoiceChipGroup x:Name="ccgMoedaPar" BoxMode="Outlined" Padding="3" SelectedIndex="{Binding SetTipoOperacaoFuturo, Mode=TwoWay}">
                         <dxe:Chip x:Name="ccgLong" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Long"/>
                         <dxe:Chip x:Name="ccgShort" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Short"/>
                     </dxe:ChoiceChipGroup>

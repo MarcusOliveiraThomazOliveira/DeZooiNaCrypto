@@ -14,7 +14,9 @@ namespace DeZooiNaCrypto.Model.ViewModel
     {
         OperacaoFuturoRepositorio _operacaoFuturoRepositorio = new OperacaoFuturoRepositorio();
         Guid _idCryptoMoeda;
+        Guid _idOperacaoFuturoCryptoMoeda;
         ObservableCollection<OperacaoFuturoCryptoMoeda> _operacaoFuturoCryptoMoedas;
+        int setTipoOperacaoFuturo;
 
         public ObservableCollection<OperacaoFuturoCryptoMoeda> OperacaoFuturoCryptoMoedas
         {
@@ -24,27 +26,30 @@ namespace DeZooiNaCrypto.Model.ViewModel
         public OperacaoFuturoCryptoMoeda OperacaoFuturoCryptoMoeda { get; set; }
         public string valorRetorno { get; set; }
         public string valorTaxa { get; set; }
-        public ICommand SetTipoOperacaoFuturo { get; set; }
+        public int SetTipoOperacaoFuturo { get { return setTipoOperacaoFuturo; } set { setTipoOperacaoFuturo = value; InformaTipoOperacaoFuturo(value); } }
         public OperacaoFuturoViewModel()
         {
+            _idOperacaoFuturoCryptoMoeda = Guid.Empty;
             OperacaoFuturoCryptoMoeda = new OperacaoFuturoCryptoMoeda();
             valorRetorno = string.Empty;
             valorTaxa = string.Empty;
             _idCryptoMoeda = new(Preferences.Get(Constantes.Id, string.Empty));
 
             _operacaoFuturoCryptoMoedas = _operacaoFuturoRepositorio.Listar(_idCryptoMoeda);
-
-            SetTipoOperacaoFuturo = new Command<string>((string arg) => { InformaTipoOperacaoFuturo(arg); });
         }
-        private void InformaTipoOperacaoFuturo(string arg)
+        private void InformaTipoOperacaoFuturo(int arg)
         {
-            if (arg == "Short")
+
+            switch (arg)
             {
-                OperacaoFuturoCryptoMoeda.TipoOperacaoFuturo = TipoOperacaoFuturoEnum.Short;
-            }
-            else if (arg == "Long")
-            {
-                OperacaoFuturoCryptoMoeda.TipoOperacaoFuturo = TipoOperacaoFuturoEnum.Long;
+                case 0:
+                    OperacaoFuturoCryptoMoeda.TipoOperacaoFuturo = TipoOperacaoFuturoEnum.Long; 
+                    break;
+                case 1:
+                    OperacaoFuturoCryptoMoeda.TipoOperacaoFuturo = TipoOperacaoFuturoEnum.Short;
+                    break;
+                default:
+                    break;
             }
         }
         public async void Gravar()
@@ -62,7 +67,12 @@ namespace DeZooiNaCrypto.Model.ViewModel
             valorRetorno = string.Empty;
             valorTaxa = string.Empty;
 
-            _operacaoFuturoRepositorio.Salvar(OperacaoFuturoCryptoMoeda);
+            if (!_idOperacaoFuturoCryptoMoeda.Equals(OperacaoFuturoCryptoMoeda.Id))
+                _operacaoFuturoRepositorio.Salvar(OperacaoFuturoCryptoMoeda);
+            else 
+                _operacaoFuturoRepositorio.Atualizar(OperacaoFuturoCryptoMoeda);
+
+            _idOperacaoFuturoCryptoMoeda = Guid.Empty;
 
             _operacaoFuturoCryptoMoedas.Clear();
             _operacaoFuturoCryptoMoedas.InsertRange<OperacaoFuturoCryptoMoeda>(0, _operacaoFuturoRepositorio.Listar(_idCryptoMoeda));
@@ -83,12 +93,27 @@ namespace DeZooiNaCrypto.Model.ViewModel
         {
             var operacaoFuturoCryptoMoeda = _operacaoFuturoCryptoMoedas.Where(x => x.Id == idOperacaoFuturo).FirstOrDefault();
             OperacaoFuturoCryptoMoeda.Id = operacaoFuturoCryptoMoeda.Id;
+            _idOperacaoFuturoCryptoMoeda = OperacaoFuturoCryptoMoeda.Id;
             OperacaoFuturoCryptoMoeda.DataOperacaoFuturo = operacaoFuturoCryptoMoeda.DataOperacaoFuturo;
             OperacaoFuturoCryptoMoeda.ValorRetorno = operacaoFuturoCryptoMoeda.ValorRetorno;
             valorRetorno = operacaoFuturoCryptoMoeda.ValorRetorno.ToString();
+            RaisePropertyChanged("valorRetorno");
             OperacaoFuturoCryptoMoeda.ValorTaxa = operacaoFuturoCryptoMoeda.ValorTaxa;
             valorTaxa = operacaoFuturoCryptoMoeda.ValorTaxa.ToString();
+            RaisePropertyChanged("valorTaxa");
             OperacaoFuturoCryptoMoeda.IdCryptoMoeda = OperacaoFuturoCryptoMoeda.IdCryptoMoeda;
+            SetTipoOperacaoFuturo = (int)OperacaoFuturoCryptoMoeda.TipoOperacaoFuturo;
+            RaisePropertyChanged("SetTipoOperacaoFuturo");
+        }
+        public void CriarObjetoInsercao()
+        {
+            OperacaoFuturoCryptoMoeda = new();
+            valorRetorno = 0.ToString();
+            RaisePropertyChanged("valorRetorno");
+            valorTaxa = 0.ToString();
+            RaisePropertyChanged("valorTaxa");
+            SetTipoOperacaoFuturo = 0;
+            RaisePropertyChanged("SetTipoOperacaoFuturo");
         }
 
     }

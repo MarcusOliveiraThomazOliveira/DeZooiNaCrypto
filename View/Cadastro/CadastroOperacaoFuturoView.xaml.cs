@@ -55,4 +55,10 @@ public partial class CadastroOperacaoFuturoView : ContentPage
         _operacaoFuturoViewModel.Editar((Guid)((SimpleButton)sender).CommandParameter);
         ApresentaMenu(null, null);
     }
+
+    private void Cadastrar(object sender, EventArgs e)
+    {
+        _operacaoFuturoViewModel.CriarObjetoInsercao();
+        ApresentaMenu(null, null);
+    }
 }

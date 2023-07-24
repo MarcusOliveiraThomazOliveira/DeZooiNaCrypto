@@ -102,5 +102,17 @@ namespace DeZooiNaCrypto.Data
             }
         }
 
+        public int Atualizar(T objeto)
+        {
+            try
+            {
+                return _connection.UpdateAsync(objeto).Result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.Message);
+            }
+        }
+
     }
 }
