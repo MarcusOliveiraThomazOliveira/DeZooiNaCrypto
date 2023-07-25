@@ -34,5 +34,13 @@ namespace DeZooiNaCrypto.Util
         {
             return new DateTime(date.Year, 12, 31);
         }
+        public static DateTime InitialDayHour(this DateTime date)
+        {
+            return date.Date;
+        }
+        public static DateTime FinalDayHour(this DateTime date)
+        {
+            return new DateTime(date.Year, date.Month, date.Day, 23, 59, 59);
+        }
     }
 }
