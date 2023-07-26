@@ -23,10 +23,14 @@ namespace DeZooiNaCrypto.Model.ViewModel
         int filtrarPeriodo;
         decimal valorTotal;
         string valorTotalStr;
+        string quantidadeOperacoes;
+        string quantidadeOperacoesPositivasNegativas;
         public ObservableCollection<OperacaoDTO> OperacoesDTO { get { return operacoesDTO; } set { operacoesDTO = value; RaisePropertyChanged(); } }
         public OperacaoDTO OperacaoDTO { get; set; }
         public decimal ValorTotal { get { return valorTotal; } set { valorTotal = value; RaisePropertyChanged(); } }
         public string ValorTotalStr { get { return valorTotalStr; } set { valorTotalStr = value; RaisePropertyChanged(); } }
+        public string QuantidadeOperacoes { get { return quantidadeOperacoes; } set { quantidadeOperacoes = value; RaisePropertyChanged(); } }
+        public string QuantidadeOperacoesPositivasNegativas { get { return quantidadeOperacoesPositivasNegativas; } set { quantidadeOperacoesPositivasNegativas = value; RaisePropertyChanged(); } }
         public int Filtrar
         {
             get { return filtrarPeriodo; }
@@ -68,17 +72,22 @@ namespace DeZooiNaCrypto.Model.ViewModel
             }
             foreach (var operacaoFuturoCrypto in listaRetorno)
             {
-                OperacaoDTO operacaoDTO = new()
+                if (operacaoFuturoCrypto != null)
                 {
-                    DataOperacao = operacaoFuturoCrypto.DataOperacaoFuturo.ToString("dd/MM/yyyy"),
-                    NomeCryptoMoeda = cryptoMoedaRepositorio.Obter(operacaoFuturoCrypto.IdCryptoMoeda)?.NomeLongo,
-                    ValorOperacao = operacaoFuturoCrypto.ValorTotal
-                };
-
-                operacoesDTO.Add(operacaoDTO);
+                    OperacaoDTO operacaoDTO = new()
+                    {
+                        DataOperacao = operacaoFuturoCrypto?.DataOperacaoFuturo.ToString("dd/MM/yyyy"),
+                        NomeCryptoMoeda = cryptoMoedaRepositorio.Obter(operacaoFuturoCrypto.IdCryptoMoeda)?.NomeLongo,
+                        ValorOperacao = operacaoFuturoCrypto.ValorTotal
+                    };
+                    operacoesDTO.Add(operacaoDTO);
+                }                
             }
             ValorTotal = operacoesDTO.Sum(x => x.ValorOperacao);
-            ValorTotalStr = "Total : " + ValorTotal.ToString();
+            ValorTotalStr = "Total : " + ValorTotal;
+            QuantidadeOperacoes = "Qtd. Operações : " + operacoesDTO.Count();
+            QuantidadeOperacoesPositivasNegativas = "Qtd. Positivas " + operacoesDTO.Where(x => x.ValorOperacao > 0).Count() + 
+                " Qtd. Negativas " + operacoesDTO.Where(x => x.ValorOperacao < 0).Count();
         }
     }
 }

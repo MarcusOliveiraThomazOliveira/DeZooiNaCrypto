@@ -72,6 +72,7 @@ namespace DeZooiNaCrypto.Model.ViewModel
             else 
                 _operacaoFuturoRepositorio.Atualizar(OperacaoFuturoCryptoMoeda);
 
+            OperacaoFuturoCryptoMoeda = new();
             _idOperacaoFuturoCryptoMoeda = Guid.Empty;
 
             _operacaoFuturoCryptoMoedas.Clear();
