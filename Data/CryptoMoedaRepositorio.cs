@@ -20,7 +20,7 @@ namespace DeZooiNaCrypto.Data
         {
             try
             {
-                var queryString = $"[{string.Join(",", cryptoMoedas.Where(x => x.TipoCorretora == TipoCorretoraEnum.Binance && x.TipoMoedaPar == TipoMoedaParEnum.USDT).Select(x => $"\"{x.Nome + x.NomeMoedaPar}\""))}]";
+                var queryString = $"[{string.Join(",", cryptoMoedas.Where(x => x.TipoCorretora == TipoExchangeEnum.Binance && x.TipoMoedaPar == TipoMoedaParEnum.USDT).Select(x => $"\"{x.Nome + x.NomeMoedaPar}\""))}]";
 
                 try
                 {

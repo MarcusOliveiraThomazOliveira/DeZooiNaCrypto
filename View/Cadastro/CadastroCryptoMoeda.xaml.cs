@@ -26,17 +26,17 @@ public partial class CadastroCryptoMoeda : ContentPage
         if (ccgMoedaPar.SelectedItem == null) { DisplayAlert("Cadastro Crypto Moedas", "É preciso informar uma moeda par.", "Ok"); return; }
         if (_cryptoMoedaRepositorio.Obter(_usuario, txtNome.Text, ccgCorretora.SelectedIndex, ccgMoedaPar.SelectedIndex) == null)
         {
-            TipoCorretoraEnum tipoCorretoraEnum = TipoCorretoraEnum.NaoDefinida;
+            TipoExchangeEnum TipoExchangeEnum = TipoExchangeEnum.NaoDefinida;
             switch (ccgCorretora.SelectedIndex)
             {
-                case (int)TipoCorretoraEnum.Binance:
-                    tipoCorretoraEnum = TipoCorretoraEnum.Binance;
+                case (int)TipoExchangeEnum.Binance:
+                    TipoExchangeEnum = TipoExchangeEnum.Binance;
                     break;
-                case (int)TipoCorretoraEnum.BitGet:
-                    tipoCorretoraEnum = TipoCorretoraEnum.BitGet;
+                case (int)TipoExchangeEnum.BitGet:
+                    TipoExchangeEnum = TipoExchangeEnum.BitGet;
                     break;
-                case (int)TipoCorretoraEnum.CoinMarketCap:
-                    tipoCorretoraEnum = TipoCorretoraEnum.CoinMarketCap;
+                case (int)TipoExchangeEnum.CoinMarketCap:
+                    TipoExchangeEnum = TipoExchangeEnum.CoinMarketCap;
                     break;
             }
 
@@ -55,7 +55,7 @@ public partial class CadastroCryptoMoeda : ContentPage
                 .Salvar(new CryptoMoeda()
                 {
                     Nome = txtNome.Text.Trim().ToUpper(),
-                    TipoCorretora = tipoCorretoraEnum,
+                    TipoCorretora = TipoExchangeEnum,
                     TipoMoedaPar = tipoMoedaParEnum,
                     IdUsuario = _usuario.Id,
                     Usuario = _usuario

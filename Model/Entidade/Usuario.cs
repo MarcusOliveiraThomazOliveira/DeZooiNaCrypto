@@ -14,5 +14,7 @@ namespace DeZooiNaCrypto.Model.Entidade
         public string Senha { get; set; }
         [OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<CryptoMoeda> CryptoMoedas { get; set; }
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        public List<ConfiguracaoExchange> ConfiguracoesExchange { get; set; }
     }
 }

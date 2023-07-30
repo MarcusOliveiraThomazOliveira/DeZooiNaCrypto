@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using DeZooiNaCrypto.Model.Enumerador;
+using SQLite;
 using SQLiteNetExtensions.Attributes;
 using System.ComponentModel;
 using Required = System.ComponentModel.DataAnnotations.RequiredAttribute;
@@ -17,40 +18,18 @@ namespace DeZooiNaCrypto.Model.Entidade
         [Ignore]
         public decimal Valor { get { return _valor; } set { _valor = value; OnPropertyChanged("Valor"); } }
         [Required]
-        public TipoCorretoraEnum TipoCorretora { get; set; }
+        public TipoExchangeEnum TipoCorretora { get; set; }
         [Ignore]
-        public string NomeCorretora { get { return Enum.GetName(typeof(TipoCorretoraEnum), (int)TipoCorretora); } }
+        public string NomeCorretora { get { return Enum.GetName(typeof(TipoExchangeEnum), (int)TipoCorretora); } }
         [Required]
         public TipoMoedaParEnum TipoMoedaPar { get; set; }
         [Ignore]
         public string NomeMoedaPar { get { return Enum.GetName(typeof(TipoMoedaParEnum), (int)TipoMoedaPar); } }
         [Required, Column("IdUsuario"), ForeignKey(typeof(Usuario))]
         public Guid IdUsuario { get; set; }
-        [ManyToOne]
+        [Required, ManyToOne]
         public Usuario Usuario { get; set; }
         [OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<OperacaoFuturoCryptoMoeda> OperacoesFuturo { get; set; }
-    }
-
-    public enum TipoCorretoraEnum
-    {
-        [Description("Binance")]
-        Binance = 0,
-        [Description("BitGet")]
-        BitGet = 1,
-        [Description("CoinMarketCap")]
-        CoinMarketCap = 2,
-        [Description("Não Definida")]
-        NaoDefinida = 999
-    }
-
-    public enum TipoMoedaParEnum
-    {
-        [Description("USD")]
-        USD = 0,
-        [Description("USDT")]
-        USDT = 1,
-        [Description("Não Definida")]
-        NaoDefinida = 999
-    }
+    }    
 }
