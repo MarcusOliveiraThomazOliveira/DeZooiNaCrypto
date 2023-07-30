@@ -1,12 +1,8 @@
-﻿using DevExpress.Maui.Controls;
-using DevExpress.Maui.Core.Internal;
-using DevExpress.Maui.Editors;
+﻿using DevExpress.Maui.Core.Internal;
 using DeZooiNaCrypto.Data;
 using DeZooiNaCrypto.Model.Entidade;
 using DeZooiNaCrypto.Util;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows.Input;
 
 namespace DeZooiNaCrypto.Model.ViewModel
 {

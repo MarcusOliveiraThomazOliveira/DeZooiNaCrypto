@@ -72,9 +72,10 @@
         <dxco:DXPopup x:Name="actionsPopup" CornerRadius="8" ShadowRadius="5" BackgroundColor="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}" ShadowColor="{AppThemeBinding Light={StaticResource Gray500}, Dark=Black}">
             <StackLayout Padding="8,6">
                 <dxco:SimpleButton Text="Cadastrar Crypto Moeda" Clicked="CadastrarCryptoMoeda" Style="{StaticResource popupButtonStyle}"  PressedTextColor="{AppThemeBinding Light=Black, Dark={StaticResource Popup_Icon_Dark}}"/>
-                <dxco:SimpleButton Text="Extrato" Clicked="Extrato" Style="{StaticResource popupButtonStyle}"  PressedTextColor="{AppThemeBinding Light=Black, Dark={StaticResource Popup_Icon_Dark}}"/>
-                <dxco:SimpleButton Text="Sair" Clicked="Sair" Style="{StaticResource popupButtonStyle}"  PressedTextColor="{AppThemeBinding Light=Black, Dark={StaticResource Popup_Icon_Dark}}"/>
+                <dxco:SimpleButton Text="Extrato" Clicked="Extrato" Style="{StaticResource popupButtonStyle}"  PressedTextColor="{AppThemeBinding Light=Black, Dark={StaticResource Popup_Icon_Dark}}"/>                                
+                <dxco:SimpleButton Text="Perfil" Clicked="Perfil" Style="{StaticResource popupButtonStyle}"  PressedTextColor="{AppThemeBinding Light=Black, Dark={StaticResource Popup_Icon_Dark}}"/>
                 <dxco:SimpleButton Text="Teste" Clicked="Teste" Style="{StaticResource popupButtonStyle}"  PressedTextColor="{AppThemeBinding Light=Black, Dark={StaticResource Popup_Icon_Dark}}"/>
+                <dxco:SimpleButton Text="Sair" Clicked="Sair" Style="{StaticResource popupButtonStyle}"  PressedTextColor="{AppThemeBinding Light=Black, Dark={StaticResource Popup_Icon_Dark}}"/>
             </StackLayout>
         </dxco:DXPopup>
         <dxco:BottomSheet x:Name="bsDetalheCryptoMoeda" ShowGrabber="True" AllowDismiss="True" IsModal="false" HalfExpandedRatio="0.4">

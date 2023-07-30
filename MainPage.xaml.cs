@@ -96,5 +96,11 @@ public partial class MainPage : ContentPage
         ApresentaMenu(null, null);
         Navigation.PushAsync(new TesteView());
     }
+
+    private void Perfil(object sender, EventArgs e)
+    {
+        ApresentaMenu(null, null);
+        Navigation.PushAsync(new PerfilView());
+    }
 }
 

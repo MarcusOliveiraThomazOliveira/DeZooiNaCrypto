@@ -1,12 +1,8 @@
 ﻿using DeZooiNaCrypto.Model;
 using DeZooiNaCrypto.Model.Entidade;
-using System;
-using System.Collections.Generic;
+using DeZooiNaCrypto.Model.Enumerador;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DeZooiNaCrypto.Data
 {

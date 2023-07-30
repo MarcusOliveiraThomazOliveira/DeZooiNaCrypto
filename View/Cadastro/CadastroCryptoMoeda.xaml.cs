@@ -1,5 +1,6 @@
 using DeZooiNaCrypto.Data;
 using DeZooiNaCrypto.Model.Entidade;
+using DeZooiNaCrypto.Model.Enumerador;
 
 namespace DeZooiNaCrypto.View.Cadastro;
 
