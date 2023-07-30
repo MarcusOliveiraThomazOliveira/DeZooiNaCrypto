@@ -15,7 +15,9 @@ namespace DeZooiNaCrypto.Model.Entidade
         [Required]
         public TipoExchangeEnum TipoExchange { get;set; }
         [Required] 
-        public string UrlBase { get;set; }
+        public string UrlFuturoBase { get;set; }
+        [Required]
+        public string UrlSpotBase { get; set; }
         [Required]
         public string ChaveDaAPI { get;set; }
         [Required]

@@ -6,4 +6,9 @@ public partial class PerfilView : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private void CadastrarExchange(object sender, EventArgs e)
+    {
+
+    }
 }

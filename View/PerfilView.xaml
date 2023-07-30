@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
              x:Class="DeZooiNaCrypto.View.PerfilView" 
              xmlns:local="clr-namespace:DeZooiNaCrypto.Model.Entidade"
              xmlns:viewmodel="clr-namespace:DeZooiNaCrypto.Model.ViewModel"
-             Title="Perfil">
+             Title="Perfil"
+             BackgroundColor="{AppThemeBinding Light={StaticResource Gray50}, Dark={StaticResource Gray925}}">
 
     <ContentPage.BindingContext>
         <viewmodel:PerfilViewModel/>
     </ContentPage.BindingContext>
 
     <VerticalStackLayout>
-        <Label 
-            Text="{Binding Nome}"
-            FontSize="20"
-            FontAttributes="Bold"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Grid ColumnDefinitions="*" RowDefinitions="Auto,Auto,Auto">
+            <Label Text="{Binding Nome}" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="15"/>
+            <dxco:SimpleButton Clicked="CadastrarExchange" Text="Cadastrar Exchange" BackgroundColor="Transparent" HorizontalOptions="Start" TextColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" Grid.Row="2"/>
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>
