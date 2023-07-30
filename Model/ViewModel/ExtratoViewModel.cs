@@ -85,9 +85,9 @@ namespace DeZooiNaCrypto.Model.ViewModel
             }
             ValorTotal = operacoesDTO.Sum(x => x.ValorOperacao);
             ValorTotalStr = "Total : " + ValorTotal;
-            QuantidadeOperacoes = "Qtd. Operações : " + operacoesDTO.Count();
-            QuantidadeOperacoesPositivasNegativas = "Qtd. Positivas " + operacoesDTO.Where(x => x.ValorOperacao > 0).Count() + 
-                " Qtd. Negativas " + operacoesDTO.Where(x => x.ValorOperacao < 0).Count();
+            QuantidadeOperacoes = "Operações : " + operacoesDTO.Count();
+            QuantidadeOperacoesPositivasNegativas = "Positivas : " + operacoesDTO.Where(x => x.ValorOperacao > 0).Count() + 
+                " / Negativas : " + operacoesDTO.Where(x => x.ValorOperacao < 0).Count();
         }
     }
 }

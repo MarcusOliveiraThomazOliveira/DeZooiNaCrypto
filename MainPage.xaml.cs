@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using DeZooiNaCrypto.Util;
 using DeZooiNaCrypto.View.Lista;
 using DeZooiNaCrypto.Util.DriveGoogle;
+using DeZooiNaCrypto.Testes;
 
 namespace DeZooiNaCrypto;
 
@@ -88,6 +89,12 @@ public partial class MainPage : ContentPage
     {
         ApresentaMenu(null, null);
         Navigation.PushAsync(new ListaExtrato());
+    }
+
+    private void Teste(object sender, EventArgs e)
+    {
+        ApresentaMenu(null, null);
+        Navigation.PushAsync(new TesteView());
     }
 }
 

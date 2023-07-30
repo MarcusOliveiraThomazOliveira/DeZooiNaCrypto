@@ -93,6 +93,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Testes\TesteView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\Cadastro\CadastroOperacaoFuturoView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
