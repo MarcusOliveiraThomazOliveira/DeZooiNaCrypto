@@ -3,19 +3,14 @@ using DeZooiNaCrypto.Data;
 using DeZooiNaCrypto.Model.Entidade;
 using DeZooiNaCrypto.Util;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DeZooiNaCrypto.Model.ViewModel
 {
     public class PerfilViewModel : ViewModelBase
     {
-        UsuarioRepositorio _usuarioRepositorio = new UsuarioRepositorio();
-        Usuario _usuario;
+        readonly ConfiguracaoExchangeRepositorio _configuracaoExchangeRepositorio = new();
+        readonly Usuario _usuario;
         string _nome;
 
         public string Nome { get { return _nome; } private set { _nome = value; OnPropertyChanged("Nome"); } }
@@ -28,9 +23,20 @@ namespace DeZooiNaCrypto.Model.ViewModel
             _nome = _usuario.Nome;
             ConfiguracaoExchange = new();
         }
-        public void Gravar()
+        public async Task<bool> Gravar()
         {
+            if (string.IsNullOrEmpty(ConfiguracaoExchange.UrlFuturoBase)) { await MessageService.DisplayAlert_OK("Iforme a URL da API Futuro."); return false; }
+            if (string.IsNullOrEmpty(ConfiguracaoExchange.UrlSpotBase)) { await MessageService.DisplayAlert_OK("Iforme a URL da API Spot."); return false; }
+            if (string.IsNullOrEmpty(ConfiguracaoExchange.ChaveDaAPI)) { await MessageService.DisplayAlert_OK("Iforme a chave da API."); return false; }
+            if (string.IsNullOrEmpty(ConfiguracaoExchange.ChaveSecretaDaAPI)) { await MessageService.DisplayAlert_OK("Iformea chave secreta da API."); return false; }
 
+            _configuracaoExchangeRepositorio.Salvar(ConfiguracaoExchange);
+
+            ConfiguracoesExchange.Add(_configuracaoExchangeRepositorio.Obter(ConfiguracaoExchange.Id));
+
+            ConfiguracaoExchange = new();
+
+            return true;
         }
     }
 }
