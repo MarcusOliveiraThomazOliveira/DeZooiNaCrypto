@@ -1,4 +1,5 @@
 ﻿using DeZooiNaCrypto.Model.Enumerador;
+using SQLite;
 using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace DeZooiNaCrypto.Model.Entidade
     {
         [Required]
         public TipoExchangeEnum TipoExchange { get;set; }
+        [Ignore]
+        public string NomeExchange { get { return Enum.GetName(typeof(TipoExchangeEnum), (int)TipoExchange); } }
         [Required] 
         public string UrlFuturoBase { get;set; }
         [Required]
@@ -24,6 +27,8 @@ namespace DeZooiNaCrypto.Model.Entidade
         public string ChaveSecretaDaAPI { get; set; }
         [Required] 
         public DateTime DataUltimaAtualizacao { get;set; }
+        [Required, Column("IdUsuario"), ForeignKey(typeof(Usuario))]
+        public Guid IdUsuario { get; set; }
         [Required, ManyToOne]
         public Usuario Usuario { get; set; }
     }

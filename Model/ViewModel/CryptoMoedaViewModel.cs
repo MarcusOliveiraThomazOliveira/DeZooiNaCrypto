@@ -56,6 +56,10 @@ namespace DeZooiNaCrypto.Model.ViewModel
             timerAtualizaDados.Tick += (sender, e) => AtualizarValor();
             timerAtualizaDados.Start();
         }
+        public void PararAtualizacaoValorCryptoMoeda()
+        {
+            timerAtualizaDados.Stop();
+        }
         private void PreencheValores()
         {
             Saldo = _operacaoFuturoRepositorio.TotalOperacaoFuturo(CryptoMoedaSelecionada.Id);

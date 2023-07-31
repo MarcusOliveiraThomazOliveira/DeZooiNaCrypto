@@ -13,19 +13,31 @@
         <viewmodel:PerfilViewModel/>
     </ContentPage.BindingContext>
 
-    <VerticalStackLayout>
-        <Grid ColumnDefinitions="*" RowDefinitions="Auto,Auto,Auto">
-            <Label Text="{Binding Nome}" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="15"/>
-            <dxco:SimpleButton Clicked="CadastrarExchange" Text="Cadastrar Exchange" BackgroundColor="Transparent" HorizontalOptions="Start" TextColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" Grid.Row="2"/>
+    <Grid ColumnDefinitions="*" RowDefinitions="Auto,Auto,Auto">
+        <Label Grid.Row="0" Text="{Binding Nome}" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="15"/>
+        <dxco:SimpleButton Grid.Row="1" Clicked="CadastrarExchange" Text="Cadastrar Exchange" BackgroundColor="Transparent" HorizontalOptions="Start" TextColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}"/>
+        <Grid Grid.Row="2" ColumnDefinitions="*" RowDefinitions="Auto">
+            <CollectionView Grid.Row="0" ItemsSource="{Binding ConfiguracoesExchange}" SelectionMode="Single" Margin="10,10,10,0">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate >
+                    <DataTemplate x:DataType="{x:Type local:ConfiguracaoExchange}">
+                        <Border StrokeShape="{OnPlatform RoundRectangle 10, iOS=RoundRectangle 1}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Card_Background_Dark}}" StrokeThickness="1">
+                            <Label Text="{Binding NomeExchange}" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="15"/>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+        <dxco:DXPopup x:Name="popupConfiguracaoExchange" CornerRadius="8" ShadowRadius="5" BackgroundColor="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}" ShadowColor="{AppThemeBinding Light={StaticResource Gray500}, Dark=Black}">
+            <ScrollView HeightRequest="430">
+                <StackLayout Padding="8,6">
+                    <dxe:ChoiceChipGroup x:Name="ccgMoedaPar" BoxMode="Outlined" Padding="3" SelectedIndex="{Binding SetTipoExchange, Mode=TwoWay}">
+                        <dxe:Chip x:Name="ccgBinance" IsSelected="True" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Binance"/>
+                    </dxe:ChoiceChipGroup>
 
-            <dxco:DXPopup x:Name="popupConfiguracaoExchange" CornerRadius="8" ShadowRadius="5" BackgroundColor="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}" ShadowColor="{AppThemeBinding Light={StaticResource Gray500}, Dark=Black}">
-                <ScrollView HeightRequest="430">
-                    <StackLayout Padding="8,6">
-                        <dxe:ChoiceChipGroup x:Name="ccgMoedaPar" BoxMode="Outlined" Padding="3" SelectedIndex="{Binding SetTipoOperacaoFuturo, Mode=TwoWay}">
-                            <dxe:Chip x:Name="ccgBinance" IsSelected="True" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Binance"/>
-                        </dxe:ChoiceChipGroup>
-                        
-                        <dxe:TextEdit
+                    <dxe:TextEdit
                             x:Name="txtURLFuturoBase"
                             Text="{Binding ConfiguracaoExchange.UrlFuturoBase, Mode=TwoWay}"
                             LabelText="URL Futuro"
@@ -35,7 +47,7 @@
                             CornerRadius="10" 
                             Margin="3"/>
 
-                        <dxe:TextEdit
+                    <dxe:TextEdit
                             x:Name="txtURLSpotBase"
                             Text="{Binding ConfiguracaoExchange.UrlSpotBase, Mode=TwoWay}"
                             LabelText="URL Spot"
@@ -45,7 +57,7 @@
                             CornerRadius="10" 
                             Margin="3"/>
 
-                        <dxe:TextEdit
+                    <dxe:TextEdit
                             x:Name="txtChaveAPI"
                             Text="{Binding ConfiguracaoExchange.ChaveDaAPI, Mode=TwoWay}"
                             LabelText="Chave API"
@@ -55,7 +67,7 @@
                             CornerRadius="10" 
                             Margin="3"/>
 
-                        <dxe:TextEdit
+                    <dxe:TextEdit
                             x:Name="txtChaveSecretaAPI"
                             Text="{Binding ConfiguracaoExchange.ChaveSecretaDaAPI, Mode=TwoWay}"
                             LabelText="Chave Secreta API"
@@ -65,11 +77,11 @@
                             CornerRadius="10" 
                             Margin="3"/>
 
-                        <dxco:SimpleButton Text="Gravar" Clicked="Gravar" BackgroundColor="blue" Margin="1"/>
-                        <dxco:SimpleButton Text="Cancelar" Clicked="Cancelar" BackgroundColor="PaleVioletRed" Margin="1"/>
-                    </StackLayout>
-                </ScrollView>
-            </dxco:DXPopup>
-        </Grid>
-    </VerticalStackLayout>
+                    <dxco:SimpleButton Text="Gravar" Clicked="Gravar" BackgroundColor="blue" Margin="1"/>
+                    <dxco:SimpleButton Text="Cancelar" Clicked="Cancelar" BackgroundColor="PaleVioletRed" Margin="1"/>
+                </StackLayout>
+            </ScrollView>
+        </dxco:DXPopup>
+    </Grid>
+
 </ContentPage>

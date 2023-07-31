@@ -18,7 +18,7 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         _usuario = JsonConvert.DeserializeObject<Usuario>(Preferences.Get(Constantes.Usuario_Logado, string.Empty));
-        _cryptoMoedaViewModel = new CryptoMoedaViewModel();
+        
 
         InitializeComponent();
     }
@@ -29,6 +29,7 @@ public partial class MainPage : ContentPage
         {
             base.OnAppearing();
 
+            _cryptoMoedaViewModel = new CryptoMoedaViewModel();
             this.BindingContext = _cryptoMoedaViewModel;
         }
         catch (Exception ex)
@@ -100,6 +101,7 @@ public partial class MainPage : ContentPage
     private void Perfil(object sender, EventArgs e)
     {
         ApresentaMenu(null, null);
+        _cryptoMoedaViewModel.PararAtualizacaoValorCryptoMoeda();
         Navigation.PushAsync(new PerfilView());
     }
 }

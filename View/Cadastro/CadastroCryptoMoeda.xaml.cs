@@ -65,7 +65,7 @@ public partial class CadastroCryptoMoeda : ContentPage
         }
         else
         {
-            DisplayAlert("Cadastro Crypto Moeda", "Crypto Moeda já cadastrda.", "Ok");
+            DisplayAlert("Cadastro Crypto Moeda", "Crypto Moeda já cadastrada.", "Ok");
         }
     }
 

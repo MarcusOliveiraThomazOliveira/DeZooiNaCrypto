@@ -49,6 +49,9 @@ namespace DeZooiNaCrypto.Data
             //_connection.DropTableAsync<OperacaoSpotVendaCryptoMoeda>().Wait();
             _connection.CreateTableAsync<OperacaoSpotVendaCryptoMoeda>().Wait();
 
+            //_connection.DropTableAsync<ConfiguracaoExchange>().Wait();
+            _connection.CreateTableAsync<ConfiguracaoExchange>().Wait();
+
             _connection.ExecuteAsync("PRAGMA foreign_keys = ON");
         }
 
