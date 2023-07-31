@@ -18,7 +18,7 @@
             <Label Text="{Binding Nome}" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="15"/>
             <dxco:SimpleButton Clicked="CadastrarExchange" Text="Cadastrar Exchange" BackgroundColor="Transparent" HorizontalOptions="Start" TextColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" Grid.Row="2"/>
 
-            <dxco:DXPopup x:Name="popupConfiguracaoExchange"  CornerRadius="8" ShadowRadius="5" BackgroundColor="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}" ShadowColor="{AppThemeBinding Light={StaticResource Gray500}, Dark=Black}">
+            <dxco:DXPopup x:Name="popupConfiguracaoExchange" CornerRadius="8" ShadowRadius="5" BackgroundColor="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}" ShadowColor="{AppThemeBinding Light={StaticResource Gray500}, Dark=Black}">
                 <ScrollView HeightRequest="430">
                     <StackLayout Padding="8,6">
                         <dxe:ChoiceChipGroup x:Name="ccgMoedaPar" BoxMode="Outlined" Padding="3" SelectedIndex="{Binding SetTipoOperacaoFuturo, Mode=TwoWay}">
@@ -27,7 +27,7 @@
                         
                         <dxe:TextEdit
                             x:Name="txtURLFuturoBase"
-                            Text="{Binding valorRetorno, Mode=TwoWay}"
+                            Text="{Binding ConfiguracaoExchange.UrlFuturoBase, Mode=TwoWay}"
                             LabelText="URL Futuro"
                             TextHorizontalAlignment="End"
                             BorderColor="Blue"
@@ -37,7 +37,7 @@
 
                         <dxe:TextEdit
                             x:Name="txtURLSpotBase"
-                            Text="{Binding valorRetorno, Mode=TwoWay}"
+                            Text="{Binding ConfiguracaoExchange.UrlSpotBase, Mode=TwoWay}"
                             LabelText="URL Spot"
                             TextHorizontalAlignment="End"
                             BorderColor="Blue"
@@ -47,7 +47,7 @@
 
                         <dxe:TextEdit
                             x:Name="txtChaveAPI"
-                            Text="{Binding valorRetorno, Mode=TwoWay}"
+                            Text="{Binding ConfiguracaoExchange.ChaveDaAPI, Mode=TwoWay}"
                             LabelText="Chave API"
                             TextHorizontalAlignment="End"
                             BorderColor="Blue"
@@ -57,7 +57,7 @@
 
                         <dxe:TextEdit
                             x:Name="txtChaveSecretaAPI"
-                            Text="{Binding valorRetorno, Mode=TwoWay}"
+                            Text="{Binding ConfiguracaoExchange.ChaveSecretaDaAPI, Mode=TwoWay}"
                             LabelText="Chave Secreta API"
                             TextHorizontalAlignment="End"
                             BorderColor="Blue"

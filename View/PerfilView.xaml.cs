@@ -1,3 +1,5 @@
+using DeZooiNaCrypto.Model.ViewModel;
+
 namespace DeZooiNaCrypto.View;
 
 public partial class PerfilView : ContentPage
@@ -14,7 +16,7 @@ public partial class PerfilView : ContentPage
 
     private void Gravar(object sender, EventArgs e)
     {
-
+        ((PerfilViewModel)this.BindingContext).Gravar();
     }
 
     private void Cancelar(object sender, EventArgs e)
