@@ -26,7 +26,7 @@ namespace DeZooiNaCrypto.Model.Entidade
         [Required]
         public string ChaveSecretaDaAPI { get; set; }
         [Required] 
-        public DateTime DataUltimaAtualizacao { get;set; }
+        public DateTime? DataUltimaAtualizacao { get;set; }
         [Required, Column("IdUsuario"), ForeignKey(typeof(Usuario))]
         public Guid IdUsuario { get; set; }
         [Required, ManyToOne]

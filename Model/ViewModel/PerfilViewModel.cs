@@ -3,6 +3,7 @@ using DevExpress.Office.Forms;
 using DeZooiNaCrypto.Data;
 using DeZooiNaCrypto.Model.Entidade;
 using DeZooiNaCrypto.Util;
+using DeZooiNaCrypto.Util.Binance;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -39,14 +40,17 @@ namespace DeZooiNaCrypto.Model.ViewModel
         }
         public async Task<bool> Gravar()
         {
+            var configuracaoExchangeJaExiste = _configuracaoExchangeRepositorio.Obter(_usuario.Id, ConfiguracaoExchange.TipoExchange);
+
+            //REMOVER 
+            ConfiguracaoExchange = configuracaoExchangeJaExiste;
+
             if (string.IsNullOrEmpty(ConfiguracaoExchange.UrlFuturoBase)) { await MessageService.DisplayAlert_OK("Iforme a URL da API Futuro."); return false; }
             if (string.IsNullOrEmpty(ConfiguracaoExchange.UrlSpotBase)) { await MessageService.DisplayAlert_OK("Iforme a URL da API Spot."); return false; }
             if (string.IsNullOrEmpty(ConfiguracaoExchange.ChaveDaAPI)) { await MessageService.DisplayAlert_OK("Iforme a chave da API."); return false; }
             if (string.IsNullOrEmpty(ConfiguracaoExchange.ChaveSecretaDaAPI)) { await MessageService.DisplayAlert_OK("Iformea chave secreta da API."); return false; }
 
             ConfiguracaoExchange.IdUsuario = _usuario.Id;
-
-            var configuracaoExchangeJaExiste = _configuracaoExchangeRepositorio.Obter(_usuario.Id, ConfiguracaoExchange.TipoExchange);
 
             if (configuracaoExchangeJaExiste == null)
                 _configuracaoExchangeRepositorio.Salvar(ConfiguracaoExchange);
@@ -59,6 +63,9 @@ namespace DeZooiNaCrypto.Model.ViewModel
             ConfiguracoesExchange.Add(_configuracaoExchangeRepositorio.Obter(ConfiguracaoExchange.Id));
 
             ConfiguracaoExchange = new();
+
+            BinanceService binanceService = new();
+            binanceService.RecuperaMovimentacaoFuturo(_usuario);
 
             return true;
         }

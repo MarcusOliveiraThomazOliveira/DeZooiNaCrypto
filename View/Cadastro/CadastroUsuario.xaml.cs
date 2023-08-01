@@ -16,7 +16,7 @@ public partial class CadastroUsuario : ContentPage
     {
         try
         {
-            var senhaCriptografada = Criptografia.GerarCriptografia(txtSenha.Text);
+            var senhaCriptografada = Criptografia.GerarCriptografiaMD5(txtSenha.Text);
             var retorno = _usuarioRepositorio.Salvar(new Usuario() { Nome = txtNome.Text, Email = txtEmail.Text.ToLower(), Senha = senhaCriptografada });
             Navigation.PushAsync(new View.LoginUsuario());
         }
