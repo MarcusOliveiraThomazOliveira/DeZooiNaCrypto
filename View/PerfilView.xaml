@@ -13,7 +13,7 @@
         <viewmodel:PerfilViewModel/>
     </ContentPage.BindingContext>
 
-    <Grid ColumnDefinitions="*" RowDefinitions="Auto,Auto,Auto">
+    <Grid ColumnDefinitions="*" RowDefinitions="Auto,Auto,Auto,Auto">
         <Label Grid.Row="0" Text="{Binding Nome}" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="15"/>
         <dxco:SimpleButton Grid.Row="1" Clicked="CadastrarExchange" Text="Cadastrar Exchange" BackgroundColor="Transparent" HorizontalOptions="Start" TextColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}"/>
         <Grid Grid.Row="2" ColumnDefinitions="*" RowDefinitions="Auto">
@@ -29,6 +29,9 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+        </Grid>
+        <Grid Grid.Row="3" ColumnDefinitions="*" RowDefinitions="Auto">
+            <dxco:SimpleButton Grid.Row="1" Clicked="ApagarOperacoesFuturo" Text="Apagar Operações Futuro" BackgroundColor="Transparent" HorizontalOptions="Start" TextColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}"/>
         </Grid>
         <dxco:DXPopup x:Name="popupConfiguracaoExchange" CornerRadius="8" ShadowRadius="5" BackgroundColor="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}" ShadowColor="{AppThemeBinding Light={StaticResource Gray500}, Dark=Black}">
             <ScrollView HeightRequest="430">

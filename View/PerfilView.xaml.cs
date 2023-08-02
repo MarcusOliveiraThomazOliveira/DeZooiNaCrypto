@@ -26,4 +26,9 @@ public partial class PerfilView : ContentPage
     {
         popupConfiguracaoExchange.IsOpen = !popupConfiguracaoExchange.IsOpen;
     }
+
+    private void ApagarOperacoesFuturo(object sender, EventArgs e)
+    {
+        ((PerfilViewModel)this.BindingContext).ApagarOperacoesFuturo();
+    }
 }

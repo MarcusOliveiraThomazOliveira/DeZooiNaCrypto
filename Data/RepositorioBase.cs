@@ -105,6 +105,18 @@ namespace DeZooiNaCrypto.Data
             }
         }
 
+        public int DeletarTudo()
+        {
+            try
+            {
+                return _connection.DeleteAllAsync<T>().Result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.Message);
+            }
+        }
+
         public int Atualizar(T objeto)
         {
             try

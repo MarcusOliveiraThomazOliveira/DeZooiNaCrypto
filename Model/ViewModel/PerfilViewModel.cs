@@ -13,6 +13,7 @@ namespace DeZooiNaCrypto.Model.ViewModel
     public class PerfilViewModel : ViewModelBase
     {
         readonly ConfiguracaoExchangeRepositorio _configuracaoExchangeRepositorio = new();
+        readonly OperacaoFuturoRepositorio _operacaoFuturoRepositorio = new();
         readonly Usuario _usuario;
         ObservableCollection<ConfiguracaoExchange> _configuracaoExchange = new();
         string _nome;
@@ -68,6 +69,10 @@ namespace DeZooiNaCrypto.Model.ViewModel
             binanceService.RecuperaMovimentacaoFuturo(_usuario);
 
             return true;
+        }
+        public void ApagarOperacoesFuturo()
+        {
+            _operacaoFuturoRepositorio.DeletarTudo();
         }
     }
 }
