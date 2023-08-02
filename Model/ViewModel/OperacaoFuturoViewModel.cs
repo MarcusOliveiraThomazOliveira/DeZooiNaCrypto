@@ -1,6 +1,7 @@
 ﻿using DevExpress.Maui.Core.Internal;
 using DeZooiNaCrypto.Data;
 using DeZooiNaCrypto.Model.Entidade;
+using DeZooiNaCrypto.Model.Enumerador;
 using DeZooiNaCrypto.Util;
 using System.Collections.ObjectModel;
 

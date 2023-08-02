@@ -18,5 +18,10 @@ namespace DeZooiNaCrypto.Util
         public const string Caption_DisplayAlert_OK = "Ok";
         public const string Caption_DisplayAlert_Cancelar = "Cancelar";
         public const string Caption_DisplayAlert_Confirmar = "Confirmar";
+
+        public const string Tipo_Operacao_Futuro_SELL = "SELL";
+        public const string Tipo_Operacao_Futuro_SHORT = "Short";
+        public const string Tipo_Operacao_Futuro_BUY = "BUY";
+        public const string Tipo_Operacao_Futuro_LONG = "Long";
     }
 }

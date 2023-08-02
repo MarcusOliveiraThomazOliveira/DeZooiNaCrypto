@@ -1,4 +1,5 @@
 ﻿using DeZooiNaCrypto.Model.Entidade;
+using DeZooiNaCrypto.Model.Enumerador;
 using DeZooiNaCrypto.Util;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,11 @@ namespace DeZooiNaCrypto.Data
         public List<OperacaoFuturoCryptoMoeda> Listar(DateTime dataInicial, DateTime dataFinal)
         {
             return _connection.QueryAsync<OperacaoFuturoCryptoMoeda>("select * from OperacaoFuturoCryptoMoeda inner join CryptoMoeda on(OperacaoFuturoCryptoMoeda.IdCryptoMoeda = CryptoMoeda.Id) where DataOperacaoFuturo >= @dataInicial and DataOperacaoFuturo <= @dataFinal order by DataOperacaoFuturo desc", dataInicial.InitialDayHour(), dataFinal.FinalDayHour()).Result;
+        }
+        public OperacaoFuturoCryptoMoeda Obter(long idOperacaoCorretora, TipoExchangeEnum tipoExchangeEnum)
+        {
+            var parametroTipoExchangeEnum = (int)tipoExchangeEnum;
+            return _connection.QueryAsync<OperacaoFuturoCryptoMoeda>("select operacaoFuturoCryptoMoeda.* from OperacaoFuturoCryptoMoeda operacaoFuturoCryptoMoeda inner join CryptoMoeda cryptoMoeda on (cryptoMoeda.Id = operacaoFuturoCryptoMoeda.IdCryptoMoeda)  where IdOperacaoCorretora = @idOperacaoCorretora and cryptoMoeda.TipoCorretora = @parametroTipoExchangeEnum", idOperacaoCorretora, parametroTipoExchangeEnum).Result.FirstOrDefault();
         }
     }
 }

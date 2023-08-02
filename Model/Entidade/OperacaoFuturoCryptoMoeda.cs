@@ -1,12 +1,7 @@
-﻿using SQLite;
+﻿using DeZooiNaCrypto.Model.Enumerador;
+using SQLite;
 using SQLiteNetExtensions.Attributes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DeZooiNaCrypto.Model.Entidade
 {
@@ -16,6 +11,9 @@ namespace DeZooiNaCrypto.Model.Entidade
         DateTime dataOperacaoFuturo;
         decimal valorRetorno;
         decimal valorTaxa;
+        long idOperacaoCorretora;
+        decimal preco;
+        decimal quantidade;
         public OperacaoFuturoCryptoMoeda()
         {
             DataOperacaoFuturo = DateTime.Now.Date;
@@ -31,8 +29,6 @@ namespace DeZooiNaCrypto.Model.Entidade
         public string DataOperacaoFuturoStr { get { return DataOperacaoFuturo.ToString("dd/MM/yyyy"); } }
         [Ignore]
         public string TipoOperacaoFuturoDataOperacaoStr { get { return NomeOperacaoFuturo + " em " + DataOperacaoFuturoStr; } }
-
-
         [Required]
         public decimal ValorRetorno { get { return valorRetorno; } set { valorRetorno = value; OnPropertyChanged(); } }
         [Ignore]
@@ -49,15 +45,11 @@ namespace DeZooiNaCrypto.Model.Entidade
         public Guid IdCryptoMoeda { get; set; }
         [ManyToOne]
         public CryptoMoeda CryptoMoeda { get; set; }
-    }
-
-    public enum TipoOperacaoFuturoEnum
-    {
-        [Description("Long")]
-        Long = 0,
-        [Description("Short")]
-        Short = 1,
-        [Description("Não Definida")]
-        NaoDefinida = 999
-    }
+        [Required]
+        public long IdOperacaoCorretora { get { return idOperacaoCorretora; } set { idOperacaoCorretora = value; OnPropertyChanged(); } }
+        [Required] 
+        public decimal Preco { get { return preco; } set { preco = value; OnPropertyChanged(); } }
+        [Required] 
+        public decimal Quantidade { get { return quantidade; } set { quantidade = value; OnPropertyChanged(); } } 
+    }  
 }

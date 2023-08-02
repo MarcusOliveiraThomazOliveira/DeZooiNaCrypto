@@ -42,5 +42,15 @@ namespace DeZooiNaCrypto.Util
         {
             return new DateTime(date.Year, date.Month, date.Day, 23, 59, 59);
         }
+
+        public static T ToEnum<T>(this string value)
+        {
+            return (T)Enum.Parse(typeof(T), value, true);
+        }
+        public static T ToEnum<T>(this int value)
+        {
+            var name = Enum.GetName(typeof(T), value);
+            return name.ToEnum<T>();
+        }
     }
 }
