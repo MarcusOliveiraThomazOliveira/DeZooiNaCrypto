@@ -14,17 +14,19 @@ namespace DeZooiNaCrypto.Model.ViewModel
     {
         readonly ConfiguracaoExchangeRepositorio _configuracaoExchangeRepositorio = new();
         readonly OperacaoFuturoRepositorio _operacaoFuturoRepositorio = new();
+        readonly BinanceService _binanceService = new();
         readonly Usuario _usuario;
-        ObservableCollection<ConfiguracaoExchange> _configuracaoExchange = new();
+        ObservableCollection<ConfiguracaoExchange> _configuracoesExchange = new();
         string _nome;
         int _setTipoExchange;
+        ConfiguracaoExchange _configuracaoExchange;
 
         public string Nome { get { return _nome; } private set { _nome = value; OnPropertyChanged("Nome"); } }
-        public ConfiguracaoExchange ConfiguracaoExchange { get; private set; }
+        public ConfiguracaoExchange ConfiguracaoExchange { get { return _configuracaoExchange; } private set{_configuracaoExchange = value; OnPropertyChanged("ConfiguracaoExchange"); } }
         public ObservableCollection<ConfiguracaoExchange> ConfiguracoesExchange
         {
-            get { return _configuracaoExchange; }
-            set { _configuracaoExchange = value; OnPropertyChanged("ConfiguracoesExchange"); }
+            get { return _configuracoesExchange; }
+            set { _configuracoesExchange = value; OnPropertyChanged("ConfiguracoesExchange"); }
         }
         public int SetTipoExchange { get { return _setTipoExchange; } private set { _setTipoExchange = value; TipoExchange(value); } }
 
@@ -43,13 +45,11 @@ namespace DeZooiNaCrypto.Model.ViewModel
         {
             var configuracaoExchangeJaExiste = _configuracaoExchangeRepositorio.Obter(_usuario.Id, ConfiguracaoExchange.TipoExchange);
 
-            //REMOVER 
-            ConfiguracaoExchange = configuracaoExchangeJaExiste;
-
-            if (string.IsNullOrEmpty(ConfiguracaoExchange.UrlFuturoBase)) { await MessageService.DisplayAlert_OK("Iforme a URL da API Futuro."); return false; }
-            if (string.IsNullOrEmpty(ConfiguracaoExchange.UrlSpotBase)) { await MessageService.DisplayAlert_OK("Iforme a URL da API Spot."); return false; }
-            if (string.IsNullOrEmpty(ConfiguracaoExchange.ChaveDaAPI)) { await MessageService.DisplayAlert_OK("Iforme a chave da API."); return false; }
-            if (string.IsNullOrEmpty(ConfiguracaoExchange.ChaveSecretaDaAPI)) { await MessageService.DisplayAlert_OK("Iformea chave secreta da API."); return false; }
+            if (ConfiguracaoExchange.DataInicioOperacaoExchange == DateTime.MinValue) { await MessageService.DisplayAlert_OK("Informe a data que começou a operara na exchange."); return false; }
+            if (string.IsNullOrEmpty(ConfiguracaoExchange.UrlFuturoBase)) { await MessageService.DisplayAlert_OK("Informe a URL da API Futuro."); return false; }
+            if (string.IsNullOrEmpty(ConfiguracaoExchange.UrlSpotBase)) { await MessageService.DisplayAlert_OK("Informe a URL da API Spot."); return false; }
+            if (string.IsNullOrEmpty(ConfiguracaoExchange.ChaveDaAPI)) { await MessageService.DisplayAlert_OK("Informe a chave da API."); return false; }
+            if (string.IsNullOrEmpty(ConfiguracaoExchange.ChaveSecretaDaAPI)) { await MessageService.DisplayAlert_OK("Informea chave secreta da API."); return false; }
 
             ConfiguracaoExchange.IdUsuario = _usuario.Id;
 
@@ -66,13 +66,21 @@ namespace DeZooiNaCrypto.Model.ViewModel
             ConfiguracaoExchange = new();
 
             BinanceService binanceService = new();
-            binanceService.RecuperaMovimentacaoFuturo(_usuario);
+            await binanceService.Sincronizar();
 
             return true;
         }
         public void ApagarOperacoesFuturo()
         {
             _operacaoFuturoRepositorio.DeletarTudo();
+        }
+        public async Task<bool> Sincronizar()
+        {
+            return await _binanceService.Sincronizar();
+        }
+        internal void CarregarConfiguracaoExchange(Guid idConfiguracaoExchange)
+        {
+            ConfiguracaoExchange = _configuracaoExchangeRepositorio.Obter(idConfiguracaoExchange);
         }
     }
 }

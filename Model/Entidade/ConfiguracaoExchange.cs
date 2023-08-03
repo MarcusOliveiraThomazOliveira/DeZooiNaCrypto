@@ -13,6 +13,12 @@ namespace DeZooiNaCrypto.Model.Entidade
     [SQLite.Table("ConfiguracaoExchange")]
     public class ConfiguracaoExchange : EntidadeBase
     {
+        public ConfiguracaoExchange()
+        {
+            DataInicioOperacaoExchange = DateTime.Now.Date;
+        }
+        [Required]
+        public DateTime DataInicioOperacaoExchange { get; set; }
         [Required]
         public TipoExchangeEnum TipoExchange { get;set; }
         [Ignore]

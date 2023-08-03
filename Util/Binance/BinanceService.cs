@@ -1,4 +1,5 @@
-﻿using DeZooiNaCrypto.Data;
+﻿using DevExpress.XtraPrinting.Native;
+using DeZooiNaCrypto.Data;
 using DeZooiNaCrypto.Model.DTO;
 using DeZooiNaCrypto.Model.Entidade;
 using DeZooiNaCrypto.Model.Enumerador;
@@ -21,26 +22,70 @@ namespace DeZooiNaCrypto.Util.Binance
         public BinanceService()
         {
         }
-
-        public void RecuperaMovimentacaoFuturo(Usuario usuario)
+        public async Task<bool> Sincronizar()
         {
             try
             {
-                ConfiguracaoExchange configuracaoExchange = _configuracaoExchangeRepositorio.Obter(usuario.Id, TipoExchangeEnum.Binance);
+                ConfiguracaoExchange configuracaoExchange = _configuracaoExchangeRepositorio.Obter(_usuario.Id, TipoExchangeEnum.Binance);
+
+                DateTimeOffset dataInicialSincronizacao =
+                    (configuracaoExchange.DataUltimaAtualizacao.HasValue && configuracaoExchange.DataUltimaAtualizacao.Value != DateTime.MinValue ?
+                    new DateTimeOffset(configuracaoExchange.DataUltimaAtualizacao.Value)
+                    : configuracaoExchange.DataInicioOperacaoExchange != DateTime.MinValue ? 
+                        configuracaoExchange.DataInicioOperacaoExchange : new DateTimeOffset(new DateTime(2017, 7, 1)));
+
+                DateTimeOffset dataFinalSincronizacao;
+                if (configuracaoExchange.DataUltimaAtualizacao.HasValue && configuracaoExchange.DataUltimaAtualizacao.Value != DateTime.MinValue)
+                    dataFinalSincronizacao = new DateTimeOffset(new DateTime(configuracaoExchange.DataUltimaAtualizacao.Value.Year, configuracaoExchange.DataUltimaAtualizacao.Value.Month, configuracaoExchange.DataUltimaAtualizacao.Value.Day, 23, 59, 59));
+                else
+                    dataFinalSincronizacao = dataInicialSincronizacao.AddDays(6);
+
+                while (dataInicialSincronizacao.Date <= DateTime.Now.Date)
+                {
+                    if (dataFinalSincronizacao.Date > DateTime.Now.Date)
+                        dataFinalSincronizacao = new DateTimeOffset(new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59));
+
+                    try
+                    {
+                        var periodoConsulta = "startTime=" + dataInicialSincronizacao.ToUnixTimeMilliseconds() + "&endTime=" + dataFinalSincronizacao.ToUnixTimeMilliseconds();
+                        await RecuperaMovimentacaoFuturo(periodoConsulta + "&");
+                    }
+                    catch { }
+
+                    dataInicialSincronizacao = dataFinalSincronizacao.AddDays(1);
+                    dataFinalSincronizacao = dataInicialSincronizacao.AddDays(6);
+                }
+
+                configuracaoExchange.DataUltimaAtualizacao = DateTime.Now.Date;
+                _configuracaoExchangeRepositorio.Salvar(configuracaoExchange);
+            }
+            catch
+            {
+
+                throw;
+            }
+
+            return true;
+        }
+        private async Task<bool> RecuperaMovimentacaoFuturo(string periodoConsulta = "")
+        {
+            try
+            {
+                ConfiguracaoExchange configuracaoExchange = _configuracaoExchangeRepositorio.Obter(_usuario.Id, TipoExchangeEnum.Binance);
                 var client = new HttpClient();
                 client.DefaultRequestHeaders.Add("X-MBX-APIKEY", configuracaoExchange.ChaveDaAPI);
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-                string periodoConsulta = "timestamp=" + DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                string momentoConsulta = "timestamp=" + DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
-                var assinatura = Util.Criptografia.GerarCriptografiaHMACSHA256(periodoConsulta, configuracaoExchange.ChaveSecretaDaAPI);
+                var assinatura = Util.Criptografia.GerarCriptografiaHMACSHA256(periodoConsulta + momentoConsulta, configuracaoExchange.ChaveSecretaDaAPI);
 
                 var url = new Uri(configuracaoExchange.UrlFuturoBase + "/fapi/v1/userTrades?" +
-                     periodoConsulta +
+                     periodoConsulta + momentoConsulta +
                     "&signature=" + assinatura);
 
-                var listaBinanceAccountTradeListDTO = client.GetFromJsonAsync<List<BinanceAccountTradeListDTO>>(url).Result;
-                if (listaBinanceAccountTradeListDTO != null)
+                var listaBinanceAccountTradeListDTO = await client.GetFromJsonAsync<List<BinanceAccountTradeListDTO>>(url);
+                if (listaBinanceAccountTradeListDTO != null && listaBinanceAccountTradeListDTO.Count > 0)
                 {
                     string symbolAtual = "";
                     CryptoMoeda cryptoMoeda = null;
@@ -55,9 +100,9 @@ namespace DeZooiNaCrypto.Util.Binance
 
                         if (_operacaoFuturoRepositorio.Obter(binanceAccountTradeListDTO.OrderId, TipoExchangeEnum.Binance) == null)
                         {
-                            TipoOperacaoFuturoEnum tipoOperacaoFuturoEnum = 
+                            TipoOperacaoFuturoEnum tipoOperacaoFuturoEnum =
                                 ExtensionMethods.
-                                ToEnum<TipoOperacaoFuturoEnum>(binanceAccountTradeListDTO.Side.Equals(Constantes.Tipo_Operacao_Futuro_SELL) ? Constantes.Tipo_Operacao_Futuro_SHORT : Constantes.Tipo_Operacao_Futuro_LONG );
+                                ToEnum<TipoOperacaoFuturoEnum>(binanceAccountTradeListDTO.Side.Equals(Constantes.Tipo_Operacao_Futuro_SELL) ? Constantes.Tipo_Operacao_Futuro_SHORT : Constantes.Tipo_Operacao_Futuro_LONG);
 
                             OperacaoFuturoCryptoMoeda operacaoFuturoCryptoMoeda = new();
                             operacaoFuturoCryptoMoeda.IdCryptoMoeda = cryptoMoeda.Id;
@@ -78,7 +123,9 @@ namespace DeZooiNaCrypto.Util.Binance
                 throw;
             }
 
-        }
+            return true;
+
+        }        
         private CryptoMoeda CriaCryptoMoedaSeNaoExistir(string symbol, string marginAsset)
         {
             TipoMoedaParEnum tipoMoedaParEnum = ExtensionMethods.ToEnum<TipoMoedaParEnum>(marginAsset);

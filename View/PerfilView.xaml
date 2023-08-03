@@ -24,21 +24,34 @@
                 <CollectionView.ItemTemplate >
                     <DataTemplate x:DataType="{x:Type local:ConfiguracaoExchange}">
                         <Border StrokeShape="{OnPlatform RoundRectangle 10, iOS=RoundRectangle 1}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Card_Background_Dark}}" StrokeThickness="1">
+                            <Grid ColumnDefinitions="*" RowDefinitions="Auto,Auto">
                             <Label Text="{Binding NomeExchange}" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="15"/>
+                            <dxco:SimpleButton Grid.Row="1" Grid.Column="1" Clicked="Editar" CommandParameter="{Binding Id}" Icon="edit1" IconColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" BackgroundColor="Transparent" />
+                            </Grid>
                         </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Grid>
-        <Grid Grid.Row="3" ColumnDefinitions="*" RowDefinitions="Auto">
-            <dxco:SimpleButton Grid.Row="1" Clicked="ApagarOperacoesFuturo" Text="Apagar Operações Futuro" BackgroundColor="Transparent" HorizontalOptions="Start" TextColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}"/>
+        <Grid Grid.Row="3" ColumnDefinitions="*" RowDefinitions="Auto,Auto">
+            <dxco:SimpleButton Grid.Row="0" Clicked="ApagarOperacoesFuturo" Text="Apagar Operações Futuro" BackgroundColor="Transparent" HorizontalOptions="Start" TextColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}"/>
+            <dxco:SimpleButton Grid.Row="1" Clicked="Sincronizar" Text="Sincronizar" BackgroundColor="Transparent" HorizontalOptions="Start" TextColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}"/>
         </Grid>
         <dxco:DXPopup x:Name="popupConfiguracaoExchange" CornerRadius="8" ShadowRadius="5" BackgroundColor="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}" ShadowColor="{AppThemeBinding Light={StaticResource Gray500}, Dark=Black}">
-            <ScrollView HeightRequest="430">
+            <ScrollView HeightRequest="490">
                 <StackLayout Padding="8,6">
                     <dxe:ChoiceChipGroup x:Name="ccgMoedaPar" BoxMode="Outlined" Padding="3" SelectedIndex="{Binding SetTipoExchange, Mode=TwoWay}">
                         <dxe:Chip x:Name="ccgBinance" IsSelected="True" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Binance"/>
                     </dxe:ChoiceChipGroup>
+
+                    <dxe:DateEdit
+                        x:Name="dtDataVenda"
+                        Date="{Binding ConfiguracaoExchange.DataInicioOperacaoExchange, Mode=TwoWay}"
+                        PlaceholderText="Início da operação na exchange"
+                        BorderColor="Blue"
+                        BoxMode="Outlined"
+                        CornerRadius="10" 
+                        Margin="3"/>
 
                     <dxe:TextEdit
                             x:Name="txtURLFuturoBase"
