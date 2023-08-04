@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace DeZooiNaCrypto.Util
 {
-
     public class ValueToColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

@@ -49,8 +49,8 @@
         </ScrollView>
         <Grid Grid.Row="2" ColumnDefinitions="*" RowDefinitions="Auto,Auto,Auto">
             <Label Grid.Row="0" Text="{Binding ValorTotalStr, Mode=TwoWay}" TextColor="{Binding ValorTotal, Converter={StaticResource valueToColorConverter}}" FontSize="16" FontAttributes="Bold" HorizontalOptions="End"/>
-            <Label Grid.Row="1" Text="{Binding QuantidadeOperacoes, Mode=TwoWay}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Start"/>
-            <Label Grid.Row="2" Text="{Binding QuantidadeOperacoesPositivasNegativas, Mode=TwoWay}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Start"/>
+            <!--<Label Grid.Row="1" Text="{Binding QuantidadeOperacoes, Mode=TwoWay}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Start"/>
+            <Label Grid.Row="2" Text="{Binding QuantidadeOperacoesPositivasNegativas, Mode=TwoWay}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Start"/>-->
         </Grid>        
     </Grid>
 

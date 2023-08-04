@@ -26,7 +26,7 @@ namespace DeZooiNaCrypto.Model.Entidade
         [Required]
         public DateTime DataOperacaoFuturo { get { return dataOperacaoFuturo; } set { dataOperacaoFuturo = value; OnPropertyChanged(); } }
         [Ignore]
-        public string DataOperacaoFuturoStr { get { return DataOperacaoFuturo.ToString("dd/MM/yyyy"); } }
+        public string DataOperacaoFuturoStr { get { return DataOperacaoFuturo.ToString("dd/MM/yyyy HH:mm:ss"); } }
         [Ignore]
         public string TipoOperacaoFuturoDataOperacaoStr { get { return NomeOperacaoFuturo + " em " + DataOperacaoFuturoStr; } }
         [Required]

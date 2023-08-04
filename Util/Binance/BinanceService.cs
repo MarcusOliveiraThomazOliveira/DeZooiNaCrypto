@@ -31,7 +31,7 @@ namespace DeZooiNaCrypto.Util.Binance
                 DateTimeOffset dataInicialSincronizacao =
                     (configuracaoExchange.DataUltimaAtualizacao.HasValue && configuracaoExchange.DataUltimaAtualizacao.Value != DateTime.MinValue ?
                     new DateTimeOffset(configuracaoExchange.DataUltimaAtualizacao.Value)
-                    : configuracaoExchange.DataInicioOperacaoExchange != DateTime.MinValue ? 
+                    : configuracaoExchange.DataInicioOperacaoExchange != DateTime.MinValue ?
                         configuracaoExchange.DataInicioOperacaoExchange : new DateTimeOffset(new DateTime(2017, 7, 1)));
 
                 DateTimeOffset dataFinalSincronizacao;
@@ -57,7 +57,7 @@ namespace DeZooiNaCrypto.Util.Binance
                 }
 
                 configuracaoExchange.DataUltimaAtualizacao = DateTime.Now.Date;
-                _configuracaoExchangeRepositorio.Salvar(configuracaoExchange);
+                _configuracaoExchangeRepositorio.Atualizar(configuracaoExchange);
             }
             catch
             {
@@ -106,7 +106,7 @@ namespace DeZooiNaCrypto.Util.Binance
 
                             OperacaoFuturoCryptoMoeda operacaoFuturoCryptoMoeda = new();
                             operacaoFuturoCryptoMoeda.IdCryptoMoeda = cryptoMoeda.Id;
-                            operacaoFuturoCryptoMoeda.DataOperacaoFuturo = DateTimeOffset.FromUnixTimeMilliseconds(binanceAccountTradeListDTO.Time).DateTime;
+                            operacaoFuturoCryptoMoeda.DataOperacaoFuturo = UnixTimeToDateTime(binanceAccountTradeListDTO.Time);//DateTimeOffset.FromUnixTimeMilliseconds(binanceAccountTradeListDTO.Time).DateTime.AddHours(-3);
                             operacaoFuturoCryptoMoeda.ValorRetorno = binanceAccountTradeListDTO.RealizedPnl;
                             operacaoFuturoCryptoMoeda.ValorTaxa = binanceAccountTradeListDTO.Commission;
                             operacaoFuturoCryptoMoeda.Preco = binanceAccountTradeListDTO.Price;
@@ -125,7 +125,7 @@ namespace DeZooiNaCrypto.Util.Binance
 
             return true;
 
-        }        
+        }
         private CryptoMoeda CriaCryptoMoedaSeNaoExistir(string symbol, string marginAsset)
         {
             TipoMoedaParEnum tipoMoedaParEnum = ExtensionMethods.ToEnum<TipoMoedaParEnum>(marginAsset);
@@ -142,6 +142,12 @@ namespace DeZooiNaCrypto.Util.Binance
             }
             else
                 return cryptoMoeda;
+        }
+
+        public static DateTime UnixTimeToDateTime(long unixtime)
+        {
+            var dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            return dtDateTime.AddMilliseconds(unixtime).ToLocalTime();
         }
     }
 }

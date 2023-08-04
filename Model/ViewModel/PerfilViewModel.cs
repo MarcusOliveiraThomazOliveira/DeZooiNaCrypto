@@ -73,6 +73,9 @@ namespace DeZooiNaCrypto.Model.ViewModel
         public void ApagarOperacoesFuturo()
         {
             _operacaoFuturoRepositorio.DeletarTudo();
+            var configuracaoExchange= _configuracaoExchangeRepositorio.Obter(_usuario.Id, ConfiguracaoExchange.TipoExchange);
+            configuracaoExchange.DataUltimaAtualizacao = null;
+            _configuracaoExchangeRepositorio.Atualizar(configuracaoExchange);
         }
         public async Task<bool> Sincronizar()
         {
