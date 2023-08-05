@@ -18,7 +18,7 @@ namespace DeZooiNaCrypto.Data
         }
         public decimal TotalOperacaoFuturo(Guid idCryptoMoeda)
         {
-            return _connection.QueryScalarsAsync<decimal>("select sum(valorretorno - valortaxa) from OperacaoFuturoCryptoMoeda where IdCryptoMoeda = @idCryptoMoeda", idCryptoMoeda).Result.FirstOrDefault();
+            return _connection.QueryScalarsAsync<decimal>("select sum(valorretorno) from OperacaoFuturoCryptoMoeda where IdCryptoMoeda = @idCryptoMoeda", idCryptoMoeda).Result.FirstOrDefault();
         }
         public int QuantidadeOperacoes(Guid idCryptoMoeda)
         {

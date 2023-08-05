@@ -78,7 +78,7 @@ namespace DeZooiNaCrypto.Model.ViewModel
                     {
                         DataOperacao = operacaoFuturoCrypto?.DataOperacaoFuturo.ToString("dd/MM/yyyy"),
                         NomeCryptoMoeda = cryptoMoedaRepositorio.Obter(operacaoFuturoCrypto.IdCryptoMoeda)?.NomeLongo,
-                        ValorOperacao = operacaoFuturoCrypto.ValorTotal
+                        ValorOperacao = operacaoFuturoCrypto.ValorRetorno
                     };
                     operacoesDTO.Add(operacaoDTO);
                 }                

@@ -59,10 +59,9 @@ namespace DeZooiNaCrypto.Util.Binance
                 configuracaoExchange.DataUltimaAtualizacao = DateTime.Now.Date;
                 _configuracaoExchangeRepositorio.Atualizar(configuracaoExchange);
             }
-            catch
+            catch (Exception ex)
             {
-
-                throw;
+                Console.WriteLine(ex.ToString());
             }
 
             return true;
@@ -91,36 +90,39 @@ namespace DeZooiNaCrypto.Util.Binance
                     CryptoMoeda cryptoMoeda = null;
                     foreach (var binanceAccountTradeListDTO in listaBinanceAccountTradeListDTO.OrderBy(x => x.Symbol))
                     {
-                        if (!symbolAtual.Equals(binanceAccountTradeListDTO.Symbol))
+                        if (!binanceAccountTradeListDTO.RealizedPnl.Equals(0))
                         {
-                            symbolAtual = binanceAccountTradeListDTO.Symbol;
-                            binanceAccountTradeListDTO.Symbol = binanceAccountTradeListDTO.Symbol.Replace(binanceAccountTradeListDTO.MarginAsset, "");
-                            cryptoMoeda = CriaCryptoMoedaSeNaoExistir(binanceAccountTradeListDTO.Symbol, binanceAccountTradeListDTO.MarginAsset);
-                        }
+                            if (!symbolAtual.Equals(binanceAccountTradeListDTO.Symbol))
+                            {
+                                symbolAtual = binanceAccountTradeListDTO.Symbol;
+                                binanceAccountTradeListDTO.Symbol = binanceAccountTradeListDTO.Symbol.Replace(binanceAccountTradeListDTO.MarginAsset, "");
+                                cryptoMoeda = CriaCryptoMoedaSeNaoExistir(binanceAccountTradeListDTO.Symbol, binanceAccountTradeListDTO.MarginAsset);
+                            }
 
-                        if (_operacaoFuturoRepositorio.Obter(binanceAccountTradeListDTO.OrderId, TipoExchangeEnum.Binance) == null)
-                        {
-                            TipoOperacaoFuturoEnum tipoOperacaoFuturoEnum =
-                                ExtensionMethods.
-                                ToEnum<TipoOperacaoFuturoEnum>(binanceAccountTradeListDTO.Side.Equals(Constantes.Tipo_Operacao_Futuro_SELL) ? Constantes.Tipo_Operacao_Futuro_SHORT : Constantes.Tipo_Operacao_Futuro_LONG);
+                            if (_operacaoFuturoRepositorio.Obter(binanceAccountTradeListDTO.OrderId, TipoExchangeEnum.Binance) == null)
+                            {
+                                TipoOperacaoFuturoEnum tipoOperacaoFuturoEnum =
+                                    ExtensionMethods.
+                                    ToEnum<TipoOperacaoFuturoEnum>(binanceAccountTradeListDTO.Side.Equals(Constantes.Tipo_Operacao_Futuro_SELL) ? Constantes.Tipo_Operacao_Futuro_SHORT : Constantes.Tipo_Operacao_Futuro_LONG);
 
-                            OperacaoFuturoCryptoMoeda operacaoFuturoCryptoMoeda = new();
-                            operacaoFuturoCryptoMoeda.IdCryptoMoeda = cryptoMoeda.Id;
-                            operacaoFuturoCryptoMoeda.DataOperacaoFuturo = UnixTimeToDateTime(binanceAccountTradeListDTO.Time);//DateTimeOffset.FromUnixTimeMilliseconds(binanceAccountTradeListDTO.Time).DateTime.AddHours(-3);
-                            operacaoFuturoCryptoMoeda.ValorRetorno = binanceAccountTradeListDTO.RealizedPnl;
-                            operacaoFuturoCryptoMoeda.ValorTaxa = binanceAccountTradeListDTO.Commission;
-                            operacaoFuturoCryptoMoeda.Preco = binanceAccountTradeListDTO.Price;
-                            operacaoFuturoCryptoMoeda.Quantidade = binanceAccountTradeListDTO.Qty;
-                            operacaoFuturoCryptoMoeda.IdOperacaoCorretora = binanceAccountTradeListDTO.OrderId;
-                            operacaoFuturoCryptoMoeda.TipoOperacaoFuturo = tipoOperacaoFuturoEnum;
-                            _operacaoFuturoRepositorio.Salvar(operacaoFuturoCryptoMoeda);
+                                OperacaoFuturoCryptoMoeda operacaoFuturoCryptoMoeda = new();
+                                operacaoFuturoCryptoMoeda.IdCryptoMoeda = cryptoMoeda.Id;
+                                operacaoFuturoCryptoMoeda.DataOperacaoFuturo = UnixTimeToDateTime(binanceAccountTradeListDTO.Time);//DateTimeOffset.FromUnixTimeMilliseconds(binanceAccountTradeListDTO.Time).DateTime.AddHours(-3);
+                                operacaoFuturoCryptoMoeda.ValorRetorno = binanceAccountTradeListDTO.RealizedPnl;
+                                operacaoFuturoCryptoMoeda.ValorTaxa = binanceAccountTradeListDTO.Commission;
+                                operacaoFuturoCryptoMoeda.Preco = binanceAccountTradeListDTO.Price;
+                                operacaoFuturoCryptoMoeda.Quantidade = binanceAccountTradeListDTO.Qty;
+                                operacaoFuturoCryptoMoeda.IdOperacaoCorretora = binanceAccountTradeListDTO.OrderId;
+                                operacaoFuturoCryptoMoeda.TipoOperacaoFuturo = tipoOperacaoFuturoEnum;
+                                _operacaoFuturoRepositorio.Salvar(operacaoFuturoCryptoMoeda);
+                            }
                         }
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                throw;
+                Console.WriteLine(ex.ToString());
             }
 
             return true;
