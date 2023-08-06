@@ -38,7 +38,8 @@ namespace DeZooiNaCrypto.Util.Binance
                 if (configuracaoExchange.DataUltimaAtualizacao.HasValue && configuracaoExchange.DataUltimaAtualizacao.Value != DateTime.MinValue)
                     dataFinalSincronizacao = new DateTimeOffset(new DateTime(configuracaoExchange.DataUltimaAtualizacao.Value.Year, configuracaoExchange.DataUltimaAtualizacao.Value.Month, configuracaoExchange.DataUltimaAtualizacao.Value.Day, 23, 59, 59));
                 else
-                    dataFinalSincronizacao = dataInicialSincronizacao.AddDays(6);
+                    dataFinalSincronizacao = (new DateTimeOffset(new DateTime(dataInicialSincronizacao.Year, dataInicialSincronizacao.Month, dataInicialSincronizacao.Day)).AddDays(6).AddHours(23).AddMinutes(59).AddSeconds(59));
+
 
                 while (dataInicialSincronizacao.Date <= DateTime.Now.Date)
                 {
@@ -52,8 +53,8 @@ namespace DeZooiNaCrypto.Util.Binance
                     }
                     catch { }
 
-                    dataInicialSincronizacao = dataFinalSincronizacao.AddDays(1);
-                    dataFinalSincronizacao = dataInicialSincronizacao.AddDays(6);
+                    dataInicialSincronizacao = new DateTimeOffset(new DateTime(dataFinalSincronizacao.Year, dataFinalSincronizacao.Month, dataFinalSincronizacao.Day, 0, 0, 0)).AddDays(1);
+                    dataFinalSincronizacao = new DateTimeOffset(new DateTime(dataFinalSincronizacao.Year, dataFinalSincronizacao.Month, dataFinalSincronizacao.Day, 23, 59, 59)).AddDays(7);
                 }
 
                 configuracaoExchange.DataUltimaAtualizacao = DateTime.Now.Date;
