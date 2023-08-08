@@ -1,15 +1,9 @@
-﻿using DevExpress.XtraPrinting.Native;
-using DeZooiNaCrypto.Data;
+﻿using DeZooiNaCrypto.Data;
 using DeZooiNaCrypto.Model.DTO;
 using DeZooiNaCrypto.Model.Entidade;
 using DeZooiNaCrypto.Model.Enumerador;
-using Microsoft.Maui.Animations;
 using Newtonsoft.Json;
-using System;
-using System.Net.Http;
 using System.Net.Http.Json;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace DeZooiNaCrypto.Util.Binance
 {
@@ -100,7 +94,8 @@ namespace DeZooiNaCrypto.Util.Binance
                                 cryptoMoeda = CriaCryptoMoedaSeNaoExistir(binanceAccountTradeListDTO.Symbol, binanceAccountTradeListDTO.MarginAsset);
                             }
 
-                            if (_operacaoFuturoRepositorio.Obter(binanceAccountTradeListDTO.OrderId, TipoExchangeEnum.Binance) == null)
+                            var operacaoFuturoCryptoMoedaJaExiste = _operacaoFuturoRepositorio.Obter(binanceAccountTradeListDTO.OrderId, TipoExchangeEnum.Binance);
+                            if (operacaoFuturoCryptoMoedaJaExiste == null)
                             {
                                 TipoOperacaoFuturoEnum tipoOperacaoFuturoEnum =
                                     ExtensionMethods.
@@ -116,6 +111,12 @@ namespace DeZooiNaCrypto.Util.Binance
                                 operacaoFuturoCryptoMoeda.IdOperacaoCorretora = binanceAccountTradeListDTO.OrderId;
                                 operacaoFuturoCryptoMoeda.TipoOperacaoFuturo = tipoOperacaoFuturoEnum;
                                 _operacaoFuturoRepositorio.Salvar(operacaoFuturoCryptoMoeda);
+                            }
+                            else
+                            {
+                                operacaoFuturoCryptoMoedaJaExiste.ValorRetorno += binanceAccountTradeListDTO.RealizedPnl;
+                                operacaoFuturoCryptoMoedaJaExiste.Quantidade += binanceAccountTradeListDTO.Qty;
+                                _operacaoFuturoRepositorio.Atualizar(operacaoFuturoCryptoMoedaJaExiste);
                             }
                         }
                     }
