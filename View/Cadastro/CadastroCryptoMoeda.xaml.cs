@@ -2,7 +2,7 @@ using DeZooiNaCrypto.Data;
 using DeZooiNaCrypto.Model.Entidade;
 using DeZooiNaCrypto.Model.Enumerador;
 
-namespace DeZooiNaCrypto.View.Cadastro;
+namespace DeZooiNaCrypto.View;
 
 public partial class CadastroCryptoMoeda : ContentPage
 {

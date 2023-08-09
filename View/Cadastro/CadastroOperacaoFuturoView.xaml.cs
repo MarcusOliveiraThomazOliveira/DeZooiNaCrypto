@@ -5,7 +5,7 @@ using DeZooiNaCrypto.Model.ViewModel;
 using DeZooiNaCrypto.Util;
 using Newtonsoft.Json;
 
-namespace DeZooiNaCrypto.View.Cadastro;
+namespace DeZooiNaCrypto.View;
 
 public partial class CadastroOperacaoFuturoView : ContentPage
 {

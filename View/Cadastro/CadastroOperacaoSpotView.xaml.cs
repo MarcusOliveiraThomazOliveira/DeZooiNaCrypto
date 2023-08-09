@@ -3,8 +3,7 @@ using DeZooiNaCrypto.Data;
 using DeZooiNaCrypto.Model.ViewModel;
 using DeZooiNaCrypto.Util;
 
-namespace DeZooiNaCrypto.View.Cadastro;
-
+namespace DeZooiNaCrypto.View;
 public partial class CadastroOperacaoSpotView : ContentPage
 {
     OperacaoSpotViewModel _operacaoSpotViewModel;

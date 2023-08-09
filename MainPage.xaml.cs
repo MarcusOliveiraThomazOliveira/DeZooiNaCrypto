@@ -1,15 +1,11 @@
 ﻿using DevExpress.Maui.Controls;
 using DeZooiNaCrypto.Model.Entidade;
 using DeZooiNaCrypto.Model.ViewModel;
-using DeZooiNaCrypto.View;
-using DeZooiNaCrypto.View.Cadastro;
 using Newtonsoft.Json;
 using DeZooiNaCrypto.Util;
-using DeZooiNaCrypto.View.Lista;
-using DeZooiNaCrypto.Util.DriveGoogle;
 using DeZooiNaCrypto.Testes;
 
-namespace DeZooiNaCrypto;
+namespace DeZooiNaCrypto.View;
 
 public partial class MainPage : ContentPage
 {

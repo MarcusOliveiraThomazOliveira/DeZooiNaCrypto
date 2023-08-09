@@ -3,11 +3,23 @@
     x:Class="DeZooiNaCrypto.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:DeZooiNaCrypto"
-    Shell.FlyoutBehavior="Disabled">
+    xmlns:local="clr-namespace:DeZooiNaCrypto.View"
+    xmlns:paginas="clr-namespace:DeZooiNaCrypto.View"
+    Shell.FlyoutBehavior="Flyout">
 
     <ShellContent
-        Title="Home"
+        Title="Principal"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
+
+    <ShellContent
+        Title="Extrato"
+        ContentTemplate="{DataTemplate paginas:ListaExtrato}"
+        Route="ListaExtrato" />
+
+    <ShellContent
+        Title="Perfil"
+        ContentTemplate="{DataTemplate local:PerfilView}"
+        Route="PerfilView" />
+
 </Shell>
