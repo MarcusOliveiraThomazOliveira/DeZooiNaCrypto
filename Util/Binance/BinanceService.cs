@@ -105,26 +105,31 @@ namespace DeZooiNaCrypto.Util.Binance
                         }
                         else
                         {
-                            if (!symbolAtual.Equals(binanceAccountTradeListDTO.Symbol))
+                            var operacaoFuturoCryptoMoedaJaExiste = _operacaoFuturoRepositorio.Obter(binanceAccountTradeListDTO.OrderId, TipoExchangeEnum.Binance);
+
+                            if (operacaoFuturoCryptoMoedaJaExiste == null)
                             {
-                                symbolAtual = binanceAccountTradeListDTO.Symbol;
-                                binanceAccountTradeListDTO.Symbol = symbol;
-                                cryptoMoeda = CriaCryptoMoedaSeNaoExistir(binanceAccountTradeListDTO.Symbol, binanceAccountTradeListDTO.MarginAsset);
+                                if (!symbolAtual.Equals(binanceAccountTradeListDTO.Symbol))
+                                {
+                                    symbolAtual = binanceAccountTradeListDTO.Symbol;
+                                    binanceAccountTradeListDTO.Symbol = symbol;
+                                    cryptoMoeda = CriaCryptoMoedaSeNaoExistir(binanceAccountTradeListDTO.Symbol, binanceAccountTradeListDTO.MarginAsset);
+                                }
+
+                                TipoOperacaoFuturoEnum tipoOperacaoFuturoEnum = ExtensionMethods.
+                                    ToEnum<TipoOperacaoFuturoEnum>(binanceAccountTradeListDTO.Side.Equals(Constantes.Tipo_Operacao_Futuro_SELL) ? Constantes.Tipo_Operacao_Futuro_SHORT : Constantes.Tipo_Operacao_Futuro_LONG);
+
+                                OperacaoFuturoCryptoMoeda operacaoFuturoCryptoMoeda = new();
+                                operacaoFuturoCryptoMoeda.IdCryptoMoeda = cryptoMoeda.Id;
+                                operacaoFuturoCryptoMoeda.DataInicialOperacaoFuturo = UnixTimeToDateTime(binanceAccountTradeListDTO.Time);
+                                operacaoFuturoCryptoMoeda.ValorRetorno = binanceAccountTradeListDTO.RealizedPnl;
+                                operacaoFuturoCryptoMoeda.ValorTaxa = binanceAccountTradeListDTO.Commission;
+                                operacaoFuturoCryptoMoeda.Preco = binanceAccountTradeListDTO.Price;
+                                operacaoFuturoCryptoMoeda.Quantidade = binanceAccountTradeListDTO.Qty;
+                                operacaoFuturoCryptoMoeda.IdOrdemCorretora = binanceAccountTradeListDTO.OrderId;
+                                operacaoFuturoCryptoMoeda.TipoOperacaoFuturo = tipoOperacaoFuturoEnum;
+                                _operacaoFuturoRepositorio.Salvar(operacaoFuturoCryptoMoeda);
                             }
-
-                            TipoOperacaoFuturoEnum tipoOperacaoFuturoEnum = ExtensionMethods.
-                                ToEnum<TipoOperacaoFuturoEnum>(binanceAccountTradeListDTO.Side.Equals(Constantes.Tipo_Operacao_Futuro_SELL) ? Constantes.Tipo_Operacao_Futuro_SHORT : Constantes.Tipo_Operacao_Futuro_LONG);
-
-                            OperacaoFuturoCryptoMoeda operacaoFuturoCryptoMoeda = new();
-                            operacaoFuturoCryptoMoeda.IdCryptoMoeda = cryptoMoeda.Id;
-                            operacaoFuturoCryptoMoeda.DataInicialOperacaoFuturo = UnixTimeToDateTime(binanceAccountTradeListDTO.Time);
-                            operacaoFuturoCryptoMoeda.ValorRetorno = binanceAccountTradeListDTO.RealizedPnl;
-                            operacaoFuturoCryptoMoeda.ValorTaxa = binanceAccountTradeListDTO.Commission;
-                            operacaoFuturoCryptoMoeda.Preco = binanceAccountTradeListDTO.Price;
-                            operacaoFuturoCryptoMoeda.Quantidade = binanceAccountTradeListDTO.Qty;
-                            operacaoFuturoCryptoMoeda.IdOrdemCorretora = binanceAccountTradeListDTO.OrderId;
-                            operacaoFuturoCryptoMoeda.TipoOperacaoFuturo = tipoOperacaoFuturoEnum;
-                            _operacaoFuturoRepositorio.Salvar(operacaoFuturoCryptoMoeda);
                         }
                     }
                 }
