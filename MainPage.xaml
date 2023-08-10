@@ -11,7 +11,8 @@
              xmlns:local="clr-namespace:DeZooiNaCrypto.Model.Entidade"
              xmlns:viewmodel="clr-namespace:DeZooiNaCrypto.Model.ViewModel"
              xmlns:util="clr-namespace:DeZooiNaCrypto.Util"
-             BackgroundColor="{AppThemeBinding Light={StaticResource Gray50}, Dark={StaticResource Gray925}}">
+             BackgroundColor="{AppThemeBinding Light={StaticResource Gray50}, Dark={StaticResource Gray925}}"
+             NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Resources>
         <Style TargetType="dxco:SimpleButton" x:Key="popupButtonStyle">
@@ -27,9 +28,9 @@
         <util:ValueToColorConverter x:Key="valueToColorConverter"/>
     </ContentPage.Resources>
 
-    <ContentPage.ToolbarItems>
+    <!--<ContentPage.ToolbarItems>
         <ToolbarItem x:Name="btnApresentarMenu" IconImageSource="verticaldots" Clicked="ApresentaMenu"/>
-    </ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>-->
 
     <ContentPage.BindingContext>
         <viewmodel:CryptoMoedaViewModel/>
@@ -78,7 +79,7 @@
                 <dxco:SimpleButton Text="Sair" Clicked="Sair" Style="{StaticResource popupButtonStyle}"  PressedTextColor="{AppThemeBinding Light=Black, Dark={StaticResource Popup_Icon_Dark}}"/>
             </StackLayout>
         </dxco:DXPopup>
-        <dxco:BottomSheet x:Name="bsDetalheCryptoMoeda" ShowGrabber="True" AllowDismiss="True" IsModal="false" HalfExpandedRatio="0.4">
+        <!--<dxco:BottomSheet x:Name="bsDetalheCryptoMoeda" ShowGrabber="True" AllowDismiss="True" IsModal="false" HalfExpandedRatio="0.4">
             <Grid x:Name="gridCryptoMoeda" RowDefinitions="Auto, Auto, Auto, *">
                 <Border Grid.Row="0" HeightRequest="2" BackgroundColor="{AppThemeBinding Light={StaticResource BottomSheet_Separator_Light}, Dark={StaticResource BottomSheet_Separator_Dark}}" HorizontalOptions="Fill" StrokeThickness="0" Margin="16,0,16,0"/>
                 <Grid Grid.Row="1" ColumnDefinitions="*,*" RowDefinitions="Auto,Auto">
@@ -94,7 +95,7 @@
                     </VerticalStackLayout>
                 </Grid>
             </Grid>
-        </dxco:BottomSheet>
+        </dxco:BottomSheet>-->
     </Grid>
 
 </ContentPage>

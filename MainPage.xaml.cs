@@ -61,13 +61,13 @@ public partial class MainPage : ContentPage
 
     private void SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        bsDetalheCryptoMoeda.State = BottomSheetState.HalfExpanded;
-        if (bsDetalheCryptoMoeda.HalfExpandedRatio == 0.2) bsDetalheCryptoMoeda.Animate("bottomsheet", x => bsDetalheCryptoMoeda.HalfExpandedRatio = x, 0.2, 0.4);
+        //bsDetalheCryptoMoeda.State = BottomSheetState.HalfExpanded;
+        //if (bsDetalheCryptoMoeda.HalfExpandedRatio == 0.2) bsDetalheCryptoMoeda.Animate("bottomsheet", x => bsDetalheCryptoMoeda.HalfExpandedRatio = x, 0.2, 0.4);
     }
 
     private void Scrolled(object sender, ItemsViewScrolledEventArgs e)
     {
-        if (bsDetalheCryptoMoeda.HalfExpandedRatio == 0.4) bsDetalheCryptoMoeda.Animate("bottomsheet", x => bsDetalheCryptoMoeda.HalfExpandedRatio = x, 0.4, 0.2);
+        //if (bsDetalheCryptoMoeda.HalfExpandedRatio == 0.4) bsDetalheCryptoMoeda.Animate("bottomsheet", x => bsDetalheCryptoMoeda.HalfExpandedRatio = x, 0.4, 0.2);
     }
 
     private void Futuro(object sender, EventArgs e)

@@ -10,7 +10,8 @@
              xmlns:local="clr-namespace:DeZooiNaCrypto.Model.Entidade"
              xmlns:viewmodel="clr-namespace:DeZooiNaCrypto.Model.ViewModel"
              xmlns:util="clr-namespace:DeZooiNaCrypto.Util"
-             BackgroundColor="{AppThemeBinding Light={StaticResource Gray50}, Dark={StaticResource Gray925}}">
+             BackgroundColor="{AppThemeBinding Light={StaticResource Gray50}, Dark={StaticResource Gray925}}"
+             NavigationPage.HasNavigationBar="False">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="btnApresentarMenu" IconImageSource="verticaldots" Clicked="Cadastrar"/>

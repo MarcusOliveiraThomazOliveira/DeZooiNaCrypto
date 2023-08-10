@@ -4,7 +4,8 @@
              x:Class="DeZooiNaCrypto.View.CadastroCryptoMoeda"
              Title="Cadastro Crypto Moeda"
              xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
-             xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls">
+             xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+             NavigationPage.HasNavigationBar="False">
     <ScrollView>
         <StackLayout Padding="3">
             <dxe:TextEdit

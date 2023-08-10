@@ -9,7 +9,8 @@
              xmlns:viewmodel="clr-namespace:DeZooiNaCrypto.Model.ViewModel"
              xmlns:util="clr-namespace:DeZooiNaCrypto.Util"
              Title="Extrato"
-             BackgroundColor="{AppThemeBinding Light={StaticResource Gray50}, Dark={StaticResource Gray925}}">
+             BackgroundColor="{AppThemeBinding Light={StaticResource Gray50}, Dark={StaticResource Gray925}}"
+             NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Resources>
         <util:ValueToColorConverter x:Key="valueToColorConverter"/>

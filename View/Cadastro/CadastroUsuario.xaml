@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DeZooiNaCrypto.View.CadastroUsuario"
              xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
-             Title="Cadastro de Usuário">
+             Title="Cadastro de Usuário"
+             NavigationPage.HasNavigationBar="False">
+    
     <StackLayout VerticalOptions="CenterAndExpand" Margin="16" Padding="16">
         <dxe:TextEdit
             x:Name="txtNome"

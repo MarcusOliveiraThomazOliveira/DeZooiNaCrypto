@@ -115,6 +115,7 @@ namespace DeZooiNaCrypto.Util.Binance
                             else
                             {
                                 operacaoFuturoCryptoMoedaJaExiste.ValorRetorno += binanceAccountTradeListDTO.RealizedPnl;
+                                operacaoFuturoCryptoMoedaJaExiste.ValorTaxa += binanceAccountTradeListDTO.Commission;
                                 operacaoFuturoCryptoMoedaJaExiste.Quantidade += binanceAccountTradeListDTO.Qty;
                                 _operacaoFuturoRepositorio.Atualizar(operacaoFuturoCryptoMoedaJaExiste);
                             }

@@ -7,7 +7,8 @@
              xmlns:local="clr-namespace:DeZooiNaCrypto.Model.Entidade"
              xmlns:viewmodel="clr-namespace:DeZooiNaCrypto.Model.ViewModel"
              Title="Perfil"
-             BackgroundColor="{AppThemeBinding Light={StaticResource Gray50}, Dark={StaticResource Gray925}}">
+             BackgroundColor="{AppThemeBinding Light={StaticResource Gray50}, Dark={StaticResource Gray925}}"
+             NavigationPage.HasNavigationBar="False">
 
     <ContentPage.BindingContext>
         <viewmodel:PerfilViewModel/>
