@@ -28,10 +28,16 @@ namespace DeZooiNaCrypto.Data
         {
             return _connection.QueryAsync<OperacaoFuturoCryptoMoeda>("select * from OperacaoFuturoCryptoMoeda inner join CryptoMoeda on(OperacaoFuturoCryptoMoeda.IdCryptoMoeda = CryptoMoeda.Id) where DataOperacaoFuturo >= @dataInicial and DataOperacaoFuturo <= @dataFinal order by DataOperacaoFuturo desc", dataInicial.InitialDayHour(), dataFinal.FinalDayHour()).Result;
         }
-        public OperacaoFuturoCryptoMoeda Obter(long idOperacaoCorretora, TipoExchangeEnum tipoExchangeEnum)
+        public OperacaoFuturoCryptoMoeda Obter(long idOrdemCorretora, TipoExchangeEnum tipoExchangeEnum)
         {
             var parametroTipoExchangeEnum = (int)tipoExchangeEnum;
-            return _connection.QueryAsync<OperacaoFuturoCryptoMoeda>("select operacaoFuturoCryptoMoeda.* from OperacaoFuturoCryptoMoeda operacaoFuturoCryptoMoeda inner join CryptoMoeda cryptoMoeda on (cryptoMoeda.Id = operacaoFuturoCryptoMoeda.IdCryptoMoeda)  where IdOperacaoCorretora = @idOperacaoCorretora and cryptoMoeda.TipoCorretora = @parametroTipoExchangeEnum", idOperacaoCorretora, parametroTipoExchangeEnum).Result.FirstOrDefault();
+            return _connection.QueryAsync<OperacaoFuturoCryptoMoeda>("select operacaoFuturoCryptoMoeda.* from OperacaoFuturoCryptoMoeda operacaoFuturoCryptoMoeda inner join CryptoMoeda cryptoMoeda on (cryptoMoeda.Id = operacaoFuturoCryptoMoeda.IdCryptoMoeda)  where IdOrdemCorretora = @idOperacaoCorretora and cryptoMoeda.TipoCorretora = @parametroTipoExchangeEnum", idOrdemCorretora, parametroTipoExchangeEnum).Result.FirstOrDefault();
+        }
+        public OperacaoFuturoCryptoMoeda Obter(TipoExchangeEnum tipoExchangeEnum, string nomeCryptoMoeda, TipoMoedaParEnum tipoMoedaParEnum)
+        {
+            var parametroTipoExchangeEnum = (int)tipoExchangeEnum;
+            var parametroTipoMoedaParEnum = (int)tipoMoedaParEnum;
+            return _connection.QueryAsync<OperacaoFuturoCryptoMoeda>("select operacaoFuturoCryptoMoeda.* from OperacaoFuturoCryptoMoeda operacaoFuturoCryptoMoeda inner join CryptoMoeda cryptoMoeda on (cryptoMoeda.Id = operacaoFuturoCryptoMoeda.IdCryptoMoeda) where cryptoMoeda.Nome = @nomeCryptoMoeda and cryptoMoeda.TipoMoedaPar = @parametroTipoMoedaParEnum and cryptoMoeda.TipoCorretora = @parametroTipoExchangeEnum and valorretorno = 0", nomeCryptoMoeda, parametroTipoMoedaParEnum, parametroTipoExchangeEnum).Result.FirstOrDefault();
         }
     }
 }

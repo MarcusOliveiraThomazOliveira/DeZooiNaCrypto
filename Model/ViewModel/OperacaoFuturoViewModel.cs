@@ -40,7 +40,7 @@ namespace DeZooiNaCrypto.Model.ViewModel
             switch (arg)
             {
                 case 0:
-                    OperacaoFuturoCryptoMoeda.TipoOperacaoFuturo = TipoOperacaoFuturoEnum.Long; 
+                    OperacaoFuturoCryptoMoeda.TipoOperacaoFuturo = TipoOperacaoFuturoEnum.Long;
                     break;
                 case 1:
                     OperacaoFuturoCryptoMoeda.TipoOperacaoFuturo = TipoOperacaoFuturoEnum.Short;
@@ -51,7 +51,7 @@ namespace DeZooiNaCrypto.Model.ViewModel
         }
         public async void Gravar()
         {
-            if (OperacaoFuturoCryptoMoeda.DataOperacaoFuturo == DateTime.MinValue) { await MessageService.DisplayAlert_OK("E preciso infomar a data da venda válida"); return; }
+            if (OperacaoFuturoCryptoMoeda.DataInicialOperacaoFuturo == DateTime.MinValue) { await MessageService.DisplayAlert_OK("E preciso infomar a data da venda válida"); return; }
 
             if (string.IsNullOrEmpty(valorRetorno) || !Util.Validacao.ehDecimal(valorRetorno)) { await MessageService.DisplayAlert_OK("E preciso infomar o valor investido"); return; }
 
@@ -66,7 +66,7 @@ namespace DeZooiNaCrypto.Model.ViewModel
 
             if (!_idOperacaoFuturoCryptoMoeda.Equals(OperacaoFuturoCryptoMoeda.Id))
                 _operacaoFuturoRepositorio.Salvar(OperacaoFuturoCryptoMoeda);
-            else 
+            else
                 _operacaoFuturoRepositorio.Atualizar(OperacaoFuturoCryptoMoeda);
 
             OperacaoFuturoCryptoMoeda = new();
@@ -92,7 +92,7 @@ namespace DeZooiNaCrypto.Model.ViewModel
             var operacaoFuturoCryptoMoeda = _operacaoFuturoCryptoMoedas.Where(x => x.Id == idOperacaoFuturo).FirstOrDefault();
             OperacaoFuturoCryptoMoeda.Id = operacaoFuturoCryptoMoeda.Id;
             _idOperacaoFuturoCryptoMoeda = OperacaoFuturoCryptoMoeda.Id;
-            OperacaoFuturoCryptoMoeda.DataOperacaoFuturo = operacaoFuturoCryptoMoeda.DataOperacaoFuturo;
+            OperacaoFuturoCryptoMoeda.DataInicialOperacaoFuturo = operacaoFuturoCryptoMoeda.DataInicialOperacaoFuturo;
             OperacaoFuturoCryptoMoeda.ValorRetorno = operacaoFuturoCryptoMoeda.ValorRetorno;
             valorRetorno = operacaoFuturoCryptoMoeda.ValorRetorno.ToString();
             RaisePropertyChanged("valorRetorno");

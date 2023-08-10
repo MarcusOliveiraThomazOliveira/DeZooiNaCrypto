@@ -52,7 +52,7 @@ namespace DeZooiNaCrypto.Model.ViewModel
             switch (tipoFiltro)
             {
                 case 0:
-                    listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>(operacaoFuturoRepositorio.Listar().Result.OrderByDescending(x => x.DataOperacaoFuturo));
+                    listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>(operacaoFuturoRepositorio.Listar().Result.OrderByDescending(x => x.DataInicialOperacaoFuturo));
                     break;
                 case 1:
                     listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>(operacaoFuturoRepositorio.Listar(DateTime.Now.Date, DateTime.Now.Date));
@@ -76,7 +76,7 @@ namespace DeZooiNaCrypto.Model.ViewModel
                 {
                     OperacaoDTO operacaoDTO = new()
                     {
-                        DataOperacao = operacaoFuturoCrypto?.DataOperacaoFuturo.ToString("dd/MM/yyyy"),
+                        DataOperacao = operacaoFuturoCrypto?.DataInicialOperacaoFuturo.ToString("dd/MM/yyyy"),
                         NomeCryptoMoeda = cryptoMoedaRepositorio.Obter(operacaoFuturoCrypto.IdCryptoMoeda)?.NomeLongo,
                         ValorOperacao = operacaoFuturoCrypto.ValorRetorno
                     };

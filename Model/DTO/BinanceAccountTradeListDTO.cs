@@ -10,7 +10,7 @@ namespace DeZooiNaCrypto.Model.DTO
     {
         public string Symbol { get; set; }
         public long Id { get; set; }
-        public long OrderId { get; set; }
+        public long OrderId { get;set; }
         public string Side { get; set; }
         public decimal Price { get; set; }
         public decimal Qty { get; set; }   

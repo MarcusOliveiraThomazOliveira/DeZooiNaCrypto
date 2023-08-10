@@ -2,21 +2,24 @@
 using SQLite;
 using SQLiteNetExtensions.Attributes;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace DeZooiNaCrypto.Model.Entidade
 {
     [Table("OperacaoFuturoCryptoMoeda")]
     public class OperacaoFuturoCryptoMoeda : EntidadeBase
     {
-        DateTime dataOperacaoFuturo;
+        DateTime dataInicialOperacaoFuturo;
+        DateTime dataFinalOperacaoFuturo;
         decimal valorRetorno;
         decimal valorTaxa;
-        long idOperacaoCorretora;
+        long idOrdemCorretora;
         decimal preco;
         decimal quantidade;
         public OperacaoFuturoCryptoMoeda()
         {
-            DataOperacaoFuturo = DateTime.Now.Date;
+            DataInicialOperacaoFuturo = DateTime.Now.Date;
+            DataFinalOperacaoFuturo = DateTime.Now.Date;
         }
 
         [Required]
@@ -24,11 +27,13 @@ namespace DeZooiNaCrypto.Model.Entidade
         [Ignore]
         public string NomeOperacaoFuturo { get { return Enum.GetName(typeof(TipoOperacaoFuturoEnum), (int)TipoOperacaoFuturo); } }
         [Required]
-        public DateTime DataOperacaoFuturo { get { return dataOperacaoFuturo; } set { dataOperacaoFuturo = value; OnPropertyChanged(); } }
+        public DateTime DataInicialOperacaoFuturo { get { return dataInicialOperacaoFuturo; } set { dataInicialOperacaoFuturo = value; OnPropertyChanged(); } }
+        [AllowNull]
+        public DateTime DataFinalOperacaoFuturo { get { return dataFinalOperacaoFuturo; } set { dataFinalOperacaoFuturo = value; OnPropertyChanged(); } }
         [Ignore]
-        public string DataOperacaoFuturoStr { get { return DataOperacaoFuturo.ToString("dd/MM/yyyy HH:mm:ss"); } }
+        public string DataInicialOperacaoFuturoStr { get { return DataInicialOperacaoFuturo.ToString("dd/MM/yyyy HH:mm:ss"); } }
         [Ignore]
-        public string TipoOperacaoFuturoDataOperacaoStr { get { return NomeOperacaoFuturo + " em " + DataOperacaoFuturoStr; } }
+        public string TipoOperacaoFuturoDataOperacaoStr { get { return NomeOperacaoFuturo + " em " + DataInicialOperacaoFuturoStr; } }
         [Required]
         public decimal ValorRetorno { get { return valorRetorno; } set { valorRetorno = value; OnPropertyChanged(); } }
         [Ignore]
@@ -46,7 +51,7 @@ namespace DeZooiNaCrypto.Model.Entidade
         [ManyToOne]
         public CryptoMoeda CryptoMoeda { get; set; }
         [Required]
-        public long IdOperacaoCorretora { get { return idOperacaoCorretora; } set { idOperacaoCorretora = value; OnPropertyChanged(); } }
+        public long IdOrdemCorretora { get { return idOrdemCorretora; } set { idOrdemCorretora = value; OnPropertyChanged(); } }
         [Required] 
         public decimal Preco { get { return preco; } set { preco = value; OnPropertyChanged(); } }
         [Required] 
