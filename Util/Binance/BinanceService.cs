@@ -88,7 +88,7 @@ namespace DeZooiNaCrypto.Util.Binance
                 {
                     string symbolAtual = "";
                     CryptoMoeda cryptoMoeda = null;
-                    foreach (var binanceAccountTradeListDTO in listaBinanceAccountTradeListDTO.OrderBy(x => x.Symbol))
+                    foreach (var binanceAccountTradeListDTO in listaBinanceAccountTradeListDTO.OrderBy(x => x.Symbol).ThenBy(x => x.Time).ToList())
                     {
                         var symbol = binanceAccountTradeListDTO.Symbol.Replace(binanceAccountTradeListDTO.MarginAsset, "");
                         TipoMoedaParEnum tipoMoedaParEnum = ExtensionMethods.ToEnum<TipoMoedaParEnum>(binanceAccountTradeListDTO.MarginAsset);
