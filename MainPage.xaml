@@ -28,10 +28,6 @@
         <util:ValueToColorConverter x:Key="valueToColorConverter"/>
     </ContentPage.Resources>
 
-    <!--<ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="btnApresentarMenu" IconImageSource="verticaldots" Clicked="ApresentaMenu"/>
-    </ContentPage.ToolbarItems>-->
-
     <ContentPage.BindingContext>
         <viewmodel:CryptoMoedaViewModel/>
     </ContentPage.BindingContext>

@@ -22,17 +22,17 @@ namespace DeZooiNaCrypto.Util.Binance
             {
                 ConfiguracaoExchange configuracaoExchange = _configuracaoExchangeRepositorio.Obter(_usuario.Id, TipoExchangeEnum.Binance);
 
-                DateTimeOffset dataInicialSincronizacao = new DateTimeOffset(new DateTime(2023, 8, 10));
-                //(configuracaoExchange.DataUltimaAtualizacao.HasValue && configuracaoExchange.DataUltimaAtualizacao.Value != DateTime.MinValue ?
-                //new DateTimeOffset(configuracaoExchange.DataUltimaAtualizacao.Value)
-                //: configuracaoExchange.DataInicioOperacaoExchange != DateTime.MinValue ?
-                //    configuracaoExchange.DataInicioOperacaoExchange : new DateTimeOffset(new DateTime(2017, 7, 1)));
+                DateTimeOffset dataInicialSincronizacao =
+                (configuracaoExchange.DataUltimaAtualizacao.HasValue && configuracaoExchange.DataUltimaAtualizacao.Value != DateTime.MinValue ?
+                new DateTimeOffset(configuracaoExchange.DataUltimaAtualizacao.Value)
+                : configuracaoExchange.DataInicioOperacaoExchange != DateTime.MinValue ?
+                    configuracaoExchange.DataInicioOperacaoExchange : new DateTimeOffset(new DateTime(2017, 7, 1)));
 
-                DateTimeOffset dataFinalSincronizacao = new DateTimeOffset(new DateTime(2023, 8, 10, 23, 59, 59));
-                //if (configuracaoExchange.DataUltimaAtualizacao.HasValue && configuracaoExchange.DataUltimaAtualizacao.Value != DateTime.MinValue)
-                //    dataFinalSincronizacao = new DateTimeOffset(new DateTime(configuracaoExchange.DataUltimaAtualizacao.Value.Year, configuracaoExchange.DataUltimaAtualizacao.Value.Month, configuracaoExchange.DataUltimaAtualizacao.Value.Day, 23, 59, 59));
-                //else
-                //    dataFinalSincronizacao = (new DateTimeOffset(new DateTime(dataInicialSincronizacao.Year, dataInicialSincronizacao.Month, dataInicialSincronizacao.Day)).AddDays(6).AddHours(23).AddMinutes(59).AddSeconds(59));
+                DateTimeOffset dataFinalSincronizacao;
+                if (configuracaoExchange.DataUltimaAtualizacao.HasValue && configuracaoExchange.DataUltimaAtualizacao.Value != DateTime.MinValue)
+                    dataFinalSincronizacao = new DateTimeOffset(new DateTime(configuracaoExchange.DataUltimaAtualizacao.Value.Year, configuracaoExchange.DataUltimaAtualizacao.Value.Month, configuracaoExchange.DataUltimaAtualizacao.Value.Day, 23, 59, 59));
+                else
+                    dataFinalSincronizacao = (new DateTimeOffset(new DateTime(dataInicialSincronizacao.Year, dataInicialSincronizacao.Month, dataInicialSincronizacao.Day)).AddDays(6).AddHours(23).AddMinutes(59).AddSeconds(59));
 
 
                 while (dataInicialSincronizacao.Date <= DateTime.Now.Date)
@@ -43,15 +43,20 @@ namespace DeZooiNaCrypto.Util.Binance
                     try
                     {
                         var periodoConsulta = "startTime=" + dataInicialSincronizacao.ToUnixTimeMilliseconds() + "&endTime=" + dataFinalSincronizacao.ToUnixTimeMilliseconds();
-                        await RecuperaMovimentacaoFuturo(periodoConsulta + "&");
+                        await AccountTradeList(periodoConsulta + "&");
+
+                        //var retorno = await GetIncomeHistory("startTime=1691636400000&endTime=1691719200000", "FTMUSDT");
                     }
-                    catch { }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.ToString());
+                    }
 
                     dataInicialSincronizacao = new DateTimeOffset(new DateTime(dataFinalSincronizacao.Year, dataFinalSincronizacao.Month, dataFinalSincronizacao.Day, 0, 0, 0)).AddDays(1);
                     dataFinalSincronizacao = new DateTimeOffset(new DateTime(dataFinalSincronizacao.Year, dataFinalSincronizacao.Month, dataFinalSincronizacao.Day, 23, 59, 59)).AddDays(7);
                 }
 
-                configuracaoExchange.DataUltimaAtualizacao = DateTime.Now.Date;
+                configuracaoExchange.DataUltimaAtualizacao = DateTime.Now;
                 _configuracaoExchangeRepositorio.Atualizar(configuracaoExchange);
             }
             catch (Exception ex)
@@ -61,7 +66,7 @@ namespace DeZooiNaCrypto.Util.Binance
 
             return true;
         }
-        private async Task<bool> RecuperaMovimentacaoFuturo(string periodoConsulta = "")
+        private async Task<bool> AccountTradeList(string periodoConsulta = "")
         {
             try
             {
@@ -141,6 +146,24 @@ namespace DeZooiNaCrypto.Util.Binance
 
             return true;
 
+        }
+        private async Task<BinanceGetIncomeHistoryDTO> GetIncomeHistory(string periodoConsulta, string nomeCryptoMoeda)
+        {
+            ConfiguracaoExchange configuracaoExchange = _configuracaoExchangeRepositorio.Obter(_usuario.Id, TipoExchangeEnum.Binance);
+
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("X-MBX-APIKEY", configuracaoExchange.ChaveDaAPI);
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+            string queryString = "symbol=" + nomeCryptoMoeda + "&incomeType=FUNDING_FEE&" + periodoConsulta + "&timestamp=" + DateTimeOffset.Now.ToUnixTimeMilliseconds();
+            
+            var assinatura = Util.Criptografia.GerarCriptografiaHMACSHA256(queryString, configuracaoExchange.ChaveSecretaDaAPI);
+
+            var url = new Uri(configuracaoExchange.UrlFuturoBase + "/fapi/v1/income?" + queryString + "&signature=" + assinatura);
+
+            var binanceGetIncomeHistoryDTO = await client.GetFromJsonAsync<List<BinanceGetIncomeHistoryDTO>>(url);
+
+            return binanceGetIncomeHistoryDTO.FirstOrDefault();
         }
         private CryptoMoeda CriaCryptoMoedaSeNaoExistir(string symbol, string marginAsset)
         {
