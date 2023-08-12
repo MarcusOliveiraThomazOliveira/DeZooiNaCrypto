@@ -20,12 +20,15 @@ namespace DeZooiNaCrypto.Util
 
                 if (decimalValue > 0) { return Color.FromArgb("#039C23"); }
                 else if (decimalValue < 0) { return Color.FromArgb("#f44336"); }
+                else { return Color.FromArgb("#141414"); }
+
             } else if (type == typeof(int))
             {
                 int intValue = (int)value;
 
                 if (intValue > 0) { return Color.FromArgb("#039C23"); }
                 else if (intValue < 0) { return Color.FromArgb("#f44336"); }
+                else { return Color.FromArgb("#141414"); }
             }
 
                 return null;
