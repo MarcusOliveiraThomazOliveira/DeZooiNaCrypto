@@ -23,7 +23,7 @@ public partial class CadastroOperacaoFuturoView : ContentPage
 
     private void ApresentaMenu(object sender, EventArgs e)
     {
-        actionsPopup.IsOpen = !actionsPopup.IsOpen;
+        //actionsPopup.IsOpen = !actionsPopup.IsOpen;
     }
 
     private void Gravar(object sender, EventArgs e)
@@ -34,26 +34,26 @@ public partial class CadastroOperacaoFuturoView : ContentPage
 
     private void Cancelar(object sender, EventArgs e)
     {
-        LimparTela();
-        actionsPopup.IsOpen = false;
+        //LimparTela();
+        //actionsPopup.IsOpen = false;
     }
 
     private void LimparTela()
     {
-        txtValorRetorno.Text = string.Empty;
-        txtValorTaxa.Text = string.Empty;
-        dtDataVenda.Focus();
+        //txtValorRetorno.Text = string.Empty;
+        //txtValorTaxa.Text = string.Empty;
+        //dtDataVenda.Focus();
     }
 
     private void Apagar(object sender, EventArgs e)
     {
-        _operacaoFuturoViewModel.Apagar((Guid)((SimpleButton)sender).CommandParameter);
+        //_operacaoFuturoViewModel.Apagar((Guid)((SimpleButton)sender).CommandParameter);
     }
 
     private void Editar(object sender, EventArgs e)
     {
-        _operacaoFuturoViewModel.Editar((Guid)((SimpleButton)sender).CommandParameter);
-        ApresentaMenu(null, null);
+        //_operacaoFuturoViewModel.Editar((Guid)((SimpleButton)sender).CommandParameter);
+        //ApresentaMenu(null, null);
     }
 
     private void Cadastrar(object sender, EventArgs e)
