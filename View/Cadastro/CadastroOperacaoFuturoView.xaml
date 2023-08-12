@@ -33,7 +33,7 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="{x:Type local:OperacaoFuturoCryptoMoeda}">
                     <Border StrokeShape="{OnPlatform RoundRectangle 10, iOS=RoundRectangle 1}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Card_Background_Dark}}" StrokeThickness="1">
-                        <Grid ColumnDefinitions="*" RowDefinitions="Auto,Auto,Auto,Auto" Padding="10">
+                        <Grid ColumnDefinitions="*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" Padding="10">
                             <Label Text="{Binding TipoOperacaoFuturoDataOperacaoStr}" HorizontalOptions="Start" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.ColumnSpan="4"/>
 
                             <Grid Grid.Row="1" ColumnDefinitions="*" RowDefinitions="Auto">
@@ -41,13 +41,21 @@
                             </Grid>
 
                             <Grid Grid.Row="2" ColumnDefinitions="*" RowDefinitions="Auto">
+                                <Label Text="{Binding ValorTaxaFinanciamentoStr}" TextColor="{Binding ValorTaxaFinanciamento, Converter={StaticResource valueToColorConverter}}" FontSize="16" FontAttributes="Bold" Grid.Column="2"/>
+                            </Grid>
+
+                            <Grid Grid.Row="3" ColumnDefinitions="*" RowDefinitions="Auto">
                                 <Label Text="{Binding ValorTaxaStr}" TextColor="#f44336" FontSize="16" FontAttributes="Bold" Grid.Column="2"/>
                             </Grid>
 
-                            <Grid Grid.Row="3" ColumnDefinitions="*,55,51" RowDefinitions="Auto,Auto">
+                            <Grid Grid.Row="4" ColumnDefinitions="*" RowDefinitions="Auto">
+                                <Label Text="{Binding ValorDescontoTaxaStr}" FontSize="16" FontAttributes="Bold" Grid.Column="2"/>
+                            </Grid>
+
+                            <Grid Grid.Row="5" ColumnDefinitions="*,55,51" RowDefinitions="Auto,Auto">
                                 <Label Grid.Row="0" Grid.Column="0" Text="{Binding ValorTotalStr}" TextColor="{Binding ValorTotal, Converter={StaticResource valueToColorConverter}}" HorizontalOptions="Start" FontSize="16" FontAttributes="Bold"/>
-                                <dxco:SimpleButton Grid.Row="1" Grid.Column="1" Clicked="Editar" CommandParameter="{Binding Id}" Icon="edit1" IconColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" BackgroundColor="Transparent" />
-                                <dxco:SimpleButton Grid.Row="1" Grid.Column="2" Clicked="Apagar" CommandParameter="{Binding Id}" Icon="bin3" IconColor="DarkRed" BackgroundColor="Transparent"/>
+                                <!--<dxco:SimpleButton Grid.Row="1" Grid.Column="1" Clicked="Editar" CommandParameter="{Binding Id}" Icon="edit1" IconColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" BackgroundColor="Transparent" />
+                                <dxco:SimpleButton Grid.Row="1" Grid.Column="2" Clicked="Apagar" CommandParameter="{Binding Id}" Icon="bin3" IconColor="DarkRed" BackgroundColor="Transparent"/>-->
                             </Grid>
 
                         </Grid>
@@ -56,7 +64,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <dxco:DXPopup x:Name="actionsPopup"  CornerRadius="8" ShadowRadius="5" BackgroundColor="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}" ShadowColor="{AppThemeBinding Light={StaticResource Gray500}, Dark=Black}">
+        <!--<dxco:DXPopup x:Name="actionsPopup"  CornerRadius="8" ShadowRadius="5" BackgroundColor="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}" ShadowColor="{AppThemeBinding Light={StaticResource Gray500}, Dark=Black}">
             <ScrollView HeightRequest="350">
                 <StackLayout Padding="8,6">
                     <dxe:ChoiceChipGroup x:Name="ccgMoedaPar" BoxMode="Outlined" Padding="3" SelectedIndex="{Binding SetTipoOperacaoFuturo, Mode=TwoWay}">
@@ -98,6 +106,6 @@
                     <dxco:SimpleButton Text="Cancelar" Clicked="Cancelar" BackgroundColor="PaleVioletRed" Margin="1"/>
                 </StackLayout>
             </ScrollView>
-        </dxco:DXPopup>
+        </dxco:DXPopup>-->
     </Grid>
 </ContentPage>

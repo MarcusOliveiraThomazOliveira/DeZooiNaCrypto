@@ -39,21 +39,23 @@ namespace DeZooiNaCrypto.Model.Entidade
         [Required]
         public decimal ValorRetorno { get { return valorRetorno; } set { valorRetorno = value; OnPropertyChanged(); } }
         [Ignore]
-        public string ValorRetornoStr { get { return "Retorno : " + ValorRetorno.ToString(); } }
+        public string ValorRetornoStr { get { return "Retorno : " + ValorRetorno; } }
         [Required]
         public decimal ValorTaxaFinanciamento { get { return valorTaxaFinanciamento; } set { valorTaxaFinanciamento = value; OnPropertyChanged(); } }
         [Ignore]
-        public string ValorTaxaFinanciamentoStr { get { return "Taxa Financiamento : " + valorTaxaFinanciamento.ToString(); } }
+        public string ValorTaxaFinanciamentoStr { get { return "Taxa Financiamento : " + valorTaxaFinanciamento; } }
         [Required]
         public decimal ValorTaxa { get { return valorTaxa; } set { valorTaxa = value; OnPropertyChanged(); } }
         [Ignore]
-        public string ValorTaxaStr { get { return "Taxa : " + ValorTaxa.ToString(); } }
+        public string ValorTaxaStr { get { return "Comissão : " + ValorTaxa; } }
         [Required]
         public decimal ValorDescontoTaxa { get { return valorDescontoTaxa; } set { valorDescontoTaxa = value; OnPropertyChanged(); } }
         [Ignore]
+        public string ValorDescontoTaxaStr { get { return "Reembolso Comissão : " + valorDescontoTaxa; } }
+        [Ignore]
         public decimal ValorTotal { get { return ((ValorRetorno + ValorTaxaFinanciamento) - (ValorTaxa - ValorDescontoTaxa)); } }
         [Ignore]
-        public string ValorTotalStr { get { return "Ganho/Perda : " + (ValorRetorno - ValorTaxa).ToString(); } }
+        public string ValorTotalStr { get { return "Ganho/Perda : " + ((ValorRetorno + ValorTaxaFinanciamento) - (ValorTaxa - ValorDescontoTaxa)); } }
         [Required, Column("IdCryptoMoeda"), ForeignKey(typeof(CryptoMoeda))]
         public Guid IdCryptoMoeda { get; set; }
         [ManyToOne]
