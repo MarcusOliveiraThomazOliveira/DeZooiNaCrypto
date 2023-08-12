@@ -13,6 +13,8 @@ namespace DeZooiNaCrypto.Model.Entidade
         DateTime dataFinalOperacaoFuturo;
         decimal valorRetorno;
         decimal valorTaxa;
+        decimal valorDescontoTaxa;
+        decimal valorTaxaFinanciamento;
         long idOrdemCorretora;
         decimal preco;
         decimal quantidade;
@@ -39,11 +41,17 @@ namespace DeZooiNaCrypto.Model.Entidade
         [Ignore]
         public string ValorRetornoStr { get { return "Retorno : " + ValorRetorno.ToString(); } }
         [Required]
+        public decimal ValorTaxaFinanciamento { get { return valorTaxaFinanciamento; } set { valorTaxaFinanciamento = value; OnPropertyChanged(); } }
+        [Ignore]
+        public string ValorTaxaFinanciamentoStr { get { return "Taxa Financiamento : " + valorTaxaFinanciamento.ToString(); } }
+        [Required]
         public decimal ValorTaxa { get { return valorTaxa; } set { valorTaxa = value; OnPropertyChanged(); } }
         [Ignore]
         public string ValorTaxaStr { get { return "Taxa : " + ValorTaxa.ToString(); } }
+        [Required]
+        public decimal ValorDescontoTaxa { get { return valorDescontoTaxa; } set { valorDescontoTaxa = value; OnPropertyChanged(); } }
         [Ignore]
-        public decimal ValorTotal { get { return (ValorRetorno - ValorTaxa); } }
+        public decimal ValorTotal { get { return ((ValorRetorno + ValorTaxaFinanciamento) - (ValorTaxa - ValorDescontoTaxa)); } }
         [Ignore]
         public string ValorTotalStr { get { return "Ganho/Perda : " + (ValorRetorno - ValorTaxa).ToString(); } }
         [Required, Column("IdCryptoMoeda"), ForeignKey(typeof(CryptoMoeda))]
@@ -52,9 +60,9 @@ namespace DeZooiNaCrypto.Model.Entidade
         public CryptoMoeda CryptoMoeda { get; set; }
         [Required]
         public long IdOrdemCorretora { get { return idOrdemCorretora; } set { idOrdemCorretora = value; OnPropertyChanged(); } }
-        [Required] 
+        [Required]
         public decimal Preco { get { return preco; } set { preco = value; OnPropertyChanged(); } }
-        [Required] 
-        public decimal Quantidade { get { return quantidade; } set { quantidade = value; OnPropertyChanged(); } } 
-    }  
+        [Required]
+        public decimal Quantidade { get { return quantidade; } set { quantidade = value; OnPropertyChanged(); } }
+    }
 }

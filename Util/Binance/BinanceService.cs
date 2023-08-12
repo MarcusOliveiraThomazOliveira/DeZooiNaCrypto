@@ -43,9 +43,8 @@ namespace DeZooiNaCrypto.Util.Binance
                     try
                     {
                         var periodoConsulta = "startTime=" + dataInicialSincronizacao.ToUnixTimeMilliseconds() + "&endTime=" + dataFinalSincronizacao.ToUnixTimeMilliseconds();
+                        //var periodoConsulta = "startTime=1688612400000&endTime=1688695200000";
                         await AccountTradeList(periodoConsulta + "&");
-
-                        //var retorno = await GetIncomeHistory("startTime=1691636400000&endTime=1691719200000", "FTMUSDT");
                     }
                     catch (Exception ex)
                     {
@@ -88,6 +87,9 @@ namespace DeZooiNaCrypto.Util.Binance
                 {
                     string symbolAtual = "";
                     CryptoMoeda cryptoMoeda = null;
+                    listaBinanceAccountTradeListDTO = listaBinanceAccountTradeListDTO.OrderBy(x => x.Symbol).ThenBy(x => x.Time).ToList();
+                    int indice = 0;
+                    int quantidadeRegistros = listaBinanceAccountTradeListDTO.Count();
                     foreach (var binanceAccountTradeListDTO in listaBinanceAccountTradeListDTO.OrderBy(x => x.Symbol).ThenBy(x => x.Time).ToList())
                     {
                         var symbol = binanceAccountTradeListDTO.Symbol.Replace(binanceAccountTradeListDTO.MarginAsset, "");
@@ -105,6 +107,20 @@ namespace DeZooiNaCrypto.Util.Binance
                                 operacaoFuturoCryptoMoedaJaExiste.ValorTaxa += binanceAccountTradeListDTO.Commission;
                                 operacaoFuturoCryptoMoedaJaExiste.IdOrdemCorretora = binanceAccountTradeListDTO.OrderId;
                                 operacaoFuturoCryptoMoedaJaExiste.DataFinalOperacaoFuturo = UnixTimeToDateTime(binanceAccountTradeListDTO.Time);
+
+                                if (indice.Equals(quantidadeRegistros - 1) ||
+                                   (indice < quantidadeRegistros && !binanceAccountTradeListDTO.Symbol.Equals(listaBinanceAccountTradeListDTO[indice + 1].Symbol)))
+                                {
+                                    var listaGetIncomeHistory =
+                                       await GetIncomeHistory("startTime=" + ((new DateTimeOffset(operacaoFuturoCryptoMoedaJaExiste.DataInicialOperacaoFuturo)).ToUnixTimeMilliseconds() - 1000) + "&endTime=" + (binanceAccountTradeListDTO.Time + 100), binanceAccountTradeListDTO.Symbol);
+
+                                    operacaoFuturoCryptoMoedaJaExiste.ValorTaxaFinanciamento =
+                                        listaGetIncomeHistory.Where(x => x.IncomeType == Constantes.Tipo_Renda_Taxa_Financiamento).Sum(x => x.Income);
+
+                                    operacaoFuturoCryptoMoedaJaExiste.ValorDescontoTaxa =
+                                        listaGetIncomeHistory.Where(x => x.IncomeType == Constantes.Tipo_Renda_Reembolso_Comissao).Sum(x => x.Income);
+                                }
+
                                 _operacaoFuturoRepositorio.Atualizar(operacaoFuturoCryptoMoedaJaExiste);
                             }
                         }
@@ -136,6 +152,8 @@ namespace DeZooiNaCrypto.Util.Binance
                                 _operacaoFuturoRepositorio.Salvar(operacaoFuturoCryptoMoeda);
                             }
                         }
+
+                        indice++;
                     }
                 }
             }
@@ -147,7 +165,7 @@ namespace DeZooiNaCrypto.Util.Binance
             return true;
 
         }
-        private async Task<BinanceGetIncomeHistoryDTO> GetIncomeHistory(string periodoConsulta, string nomeCryptoMoeda)
+        private async Task<List<BinanceGetIncomeHistoryDTO>> GetIncomeHistory(string periodoConsulta, string nomeCryptoMoeda)
         {
             ConfiguracaoExchange configuracaoExchange = _configuracaoExchangeRepositorio.Obter(_usuario.Id, TipoExchangeEnum.Binance);
 
@@ -155,15 +173,15 @@ namespace DeZooiNaCrypto.Util.Binance
             client.DefaultRequestHeaders.Add("X-MBX-APIKEY", configuracaoExchange.ChaveDaAPI);
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-            string queryString = "symbol=" + nomeCryptoMoeda + "&incomeType=FUNDING_FEE&" + periodoConsulta + "&timestamp=" + DateTimeOffset.Now.ToUnixTimeMilliseconds();
-            
+            string queryString = "symbol=" + nomeCryptoMoeda + "&" + periodoConsulta + "&timestamp=" + DateTimeOffset.Now.ToUnixTimeMilliseconds();
+
             var assinatura = Util.Criptografia.GerarCriptografiaHMACSHA256(queryString, configuracaoExchange.ChaveSecretaDaAPI);
 
             var url = new Uri(configuracaoExchange.UrlFuturoBase + "/fapi/v1/income?" + queryString + "&signature=" + assinatura);
 
-            var binanceGetIncomeHistoryDTO = await client.GetFromJsonAsync<List<BinanceGetIncomeHistoryDTO>>(url);
+            var listaBinanceGetIncomeHistoryDTO = await client.GetFromJsonAsync<List<BinanceGetIncomeHistoryDTO>>(url);
 
-            return binanceGetIncomeHistoryDTO.FirstOrDefault();
+            return listaBinanceGetIncomeHistoryDTO;
         }
         private CryptoMoeda CriaCryptoMoedaSeNaoExistir(string symbol, string marginAsset)
         {

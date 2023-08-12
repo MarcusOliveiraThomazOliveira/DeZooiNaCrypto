@@ -23,5 +23,8 @@ namespace DeZooiNaCrypto.Util
         public const string Tipo_Operacao_Futuro_SHORT = "Short";
         public const string Tipo_Operacao_Futuro_BUY = "BUY";
         public const string Tipo_Operacao_Futuro_LONG = "Long";
+
+        public const string Tipo_Renda_Reembolso_Comissao = "COMMISSION_REBATE";
+        public const string Tipo_Renda_Taxa_Financiamento = "FUNDING_FEE";
     }
 }
