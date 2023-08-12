@@ -26,5 +26,8 @@ namespace DeZooiNaCrypto.Util
 
         public const string Tipo_Renda_Reembolso_Comissao = "COMMISSION_REBATE";
         public const string Tipo_Renda_Taxa_Financiamento = "FUNDING_FEE";
+
+        public const string Operacao_Em_Andamento = "Em Andamento";
+        public const string Operacao_Fechada = "Fechada";
     }
 }

@@ -76,17 +76,17 @@ namespace DeZooiNaCrypto.Model.ViewModel
                 {
                     OperacaoDTO operacaoDTO = new()
                     {
-                        DataOperacao = operacaoFuturoCrypto?.DataInicialOperacaoFuturo.ToString("dd/MM/yyyy"),
+                        DataOperacao = operacaoFuturoCrypto?.DataInicialOperacaoFuturo.ToString("dd/MM/yyyy") + "(" + (operacaoFuturoCrypto.DataFinalOperacaoFuturo.HasValue ? Constantes.Operacao_Em_Andamento : Constantes.Operacao_Fechada) + ")",
                         NomeCryptoMoeda = cryptoMoedaRepositorio.Obter(operacaoFuturoCrypto.IdCryptoMoeda)?.NomeLongo,
-                        ValorOperacao = operacaoFuturoCrypto.ValorRetorno
+                        ValorOperacao = operacaoFuturoCrypto.ValorTotal
                     };
                     operacoesDTO.Add(operacaoDTO);
-                }                
+                }
             }
             ValorTotal = operacoesDTO.Sum(x => x.ValorOperacao);
             ValorTotalStr = "Total : " + ValorTotal;
             QuantidadeOperacoes = "Operações : " + operacoesDTO.Count();
-            QuantidadeOperacoesPositivasNegativas = "Positivas : " + operacoesDTO.Where(x => x.ValorOperacao > 0).Count() + 
+            QuantidadeOperacoesPositivasNegativas = "Positivas : " + operacoesDTO.Where(x => x.ValorOperacao > 0).Count() +
                 " / Negativas : " + operacoesDTO.Where(x => x.ValorOperacao < 0).Count();
         }
     }

@@ -10,7 +10,7 @@ namespace DeZooiNaCrypto.Model.Entidade
     public class OperacaoFuturoCryptoMoeda : EntidadeBase
     {
         DateTime dataInicialOperacaoFuturo;
-        DateTime dataFinalOperacaoFuturo;
+        DateTime? dataFinalOperacaoFuturo;
         decimal valorRetorno;
         decimal valorTaxa;
         decimal valorDescontoTaxa;
@@ -21,7 +21,7 @@ namespace DeZooiNaCrypto.Model.Entidade
         public OperacaoFuturoCryptoMoeda()
         {
             DataInicialOperacaoFuturo = DateTime.Now.Date;
-            DataFinalOperacaoFuturo = DateTime.Now.Date;
+            DataFinalOperacaoFuturo = null;
         }
 
         [Required]
@@ -31,7 +31,7 @@ namespace DeZooiNaCrypto.Model.Entidade
         [Required]
         public DateTime DataInicialOperacaoFuturo { get { return dataInicialOperacaoFuturo; } set { dataInicialOperacaoFuturo = value; OnPropertyChanged(); } }
         [AllowNull]
-        public DateTime DataFinalOperacaoFuturo { get { return dataFinalOperacaoFuturo; } set { dataFinalOperacaoFuturo = value; OnPropertyChanged(); } }
+        public DateTime? DataFinalOperacaoFuturo { get { return dataFinalOperacaoFuturo; } set { dataFinalOperacaoFuturo = value; OnPropertyChanged(); } }
         [Ignore]
         public string DataInicialOperacaoFuturoStr { get { return DataInicialOperacaoFuturo.ToString("dd/MM/yyyy HH:mm:ss"); } }
         [Ignore]
