@@ -37,7 +37,7 @@ public partial class MainPage : ContentPage
 
     private void ApresentaMenu(object sender, EventArgs e)
     {
-        actionsPopup.IsOpen = !actionsPopup.IsOpen;
+        //actionsPopup.IsOpen = !actionsPopup.IsOpen;
     }
 
     private void Sair(object sender, EventArgs e)
