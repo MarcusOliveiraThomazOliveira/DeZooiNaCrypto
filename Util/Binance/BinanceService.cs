@@ -119,6 +119,9 @@ namespace DeZooiNaCrypto.Util.Binance
 
                                     operacaoFuturoCryptoMoedaJaExiste.ValorDescontoTaxa =
                                         listaGetIncomeHistory.Where(x => x.IncomeType == Constantes.Tipo_Renda_Reembolso_Comissao).Sum(x => x.Income);
+
+                                    operacaoFuturoCryptoMoedaJaExiste.ValorTaxa =
+                                        listaGetIncomeHistory.Where(x => x.IncomeType == Constantes.Tipo_Renda_Comissao).Sum(x => x.Income);
                                 }
 
                                 _operacaoFuturoRepositorio.Atualizar(operacaoFuturoCryptoMoedaJaExiste);

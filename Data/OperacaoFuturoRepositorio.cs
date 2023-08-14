@@ -18,7 +18,7 @@ namespace DeZooiNaCrypto.Data
         }
         public decimal TotalOperacaoFuturo(Guid idCryptoMoeda)
         {
-            return _connection.QueryScalarsAsync<decimal>("select sum((valorretorno + valortaxafinanciamento) - (valortaxa - valordescontotaxa)) from OperacaoFuturoCryptoMoeda where IdCryptoMoeda = @idCryptoMoeda", idCryptoMoeda).Result.FirstOrDefault();
+            return _connection.QueryScalarsAsync<decimal>("select sum((valorretorno + valortaxafinanciamento) + (valortaxa - valordescontotaxa)) from OperacaoFuturoCryptoMoeda where IdCryptoMoeda = @idCryptoMoeda", idCryptoMoeda).Result.FirstOrDefault();
         }
         public int QuantidadeOperacoes(Guid idCryptoMoeda)
         {
@@ -26,7 +26,7 @@ namespace DeZooiNaCrypto.Data
         }
         public List<OperacaoFuturoCryptoMoeda> Listar(DateTime dataInicial, DateTime dataFinal)
         {
-            return _connection.QueryAsync<OperacaoFuturoCryptoMoeda>("select * from OperacaoFuturoCryptoMoeda inner join CryptoMoeda on(OperacaoFuturoCryptoMoeda.IdCryptoMoeda = CryptoMoeda.Id) where DataInicialOperacaoFuturo >= @dataInicial and DataInicialOperacaoFuturo <= @dataFinal order by DataInicialOperacaoFuturo desc", dataInicial.InitialDayHour(), dataFinal.FinalDayHour()).Result;
+            return _connection.QueryAsync<OperacaoFuturoCryptoMoeda>("select * from OperacaoFuturoCryptoMoeda inner join CryptoMoeda on(OperacaoFuturoCryptoMoeda.IdCryptoMoeda = CryptoMoeda.Id) where (DataInicialOperacaoFuturo >= @dataInicial and DataInicialOperacaoFuturo <= @dataFinal) or (DataFinalOperacaoFuturo >= @dataInicial and DataFinalOperacaoFuturo <= @dataFinal) order by DataInicialOperacaoFuturo desc", dataInicial.InitialDayHour(), dataFinal.FinalDayHour()).Result;
         }
         public OperacaoFuturoCryptoMoeda Obter(long idOrdemCorretora, TipoExchangeEnum tipoExchangeEnum)
         {
