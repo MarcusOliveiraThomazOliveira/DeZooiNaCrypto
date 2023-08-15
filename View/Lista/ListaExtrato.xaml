@@ -59,9 +59,36 @@
         </Grid>
 
         <dxco:BottomSheet x:Name="bsFiltroPersonalizado" ShowGrabber="True" AllowDismiss="True" IsModal="false" HalfExpandedRatio="0.4">
-            <Grid>
-                
-            </Grid>            
+            <StackLayout>
+                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*">
+
+                <dxe:DateEdit
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    x:Name="dtDataInicial"
+                    Date="{Binding DataInicialFiltro, Mode=TwoWay}"
+                    PlaceholderText="Data inicial"
+                    BorderColor="Blue"
+                    BoxMode="Outlined"
+                    CornerRadius="10"
+                    Margin="3"/>
+
+                <dxe:DateEdit
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    x:Name="dtDataFinal"
+                    Date="{Binding DataFinalFiltro, Mode=TwoWay}"
+                    PlaceholderText="Data inicial"
+                    BorderColor="Blue"
+                    BoxMode="Outlined"
+                    CornerRadius="10"
+                    Margin="3"/>
+
+            </Grid>
+            
+                <dxco:SimpleButton Text="Filtrar" Clicked="Filtrar"  BackgroundColor="blue" Margin="1"/>
+                <dxco:SimpleButton Text="Cancelar" Clicked="Cancelar"  BackgroundColor="PaleVioletRed" Margin="1"/>
+            </StackLayout>
         </dxco:BottomSheet>
     </Grid>
 

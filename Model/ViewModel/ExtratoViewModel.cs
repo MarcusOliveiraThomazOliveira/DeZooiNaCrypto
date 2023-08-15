@@ -25,12 +25,17 @@ namespace DeZooiNaCrypto.Model.ViewModel
         string valorTotalStr;
         string quantidadeOperacoes;
         string quantidadeOperacoesPositivasNegativas;
+
         public ObservableCollection<OperacaoDTO> OperacoesDTO { get { return operacoesDTO; } set { operacoesDTO = value; RaisePropertyChanged(); } }
         public OperacaoDTO OperacaoDTO { get; set; }
         public decimal ValorTotal { get { return valorTotal; } set { valorTotal = value; RaisePropertyChanged(); } }
         public string ValorTotalStr { get { return valorTotalStr; } set { valorTotalStr = value; RaisePropertyChanged(); } }
         public string QuantidadeOperacoes { get { return quantidadeOperacoes; } set { quantidadeOperacoes = value; RaisePropertyChanged(); } }
         public string QuantidadeOperacoesPositivasNegativas { get { return quantidadeOperacoesPositivasNegativas; } set { quantidadeOperacoesPositivasNegativas = value; RaisePropertyChanged(); } }
+        
+        public DateTime? DataInicialFiltro { get; set; }
+        public DateTime? DataFinalFiltro { get; set; }
+        
         public int Filtrar
         {
             get { return filtrarPeriodo; }
