@@ -43,51 +43,51 @@ namespace DeZooiNaCrypto.Model.ViewModel
         }
         public void FiltrarPeriodo(int tipoFiltro)
         {
-            for (int i = operacoesDTO.Count - 1; i >= 0; i--)
+            if (tipoFiltro != 4)
             {
-                operacoesDTO.Remove(operacoesDTO[i]);
-            }
-
-            ObservableCollection<OperacaoFuturoCryptoMoeda> listaRetorno;
-            switch (tipoFiltro)
-            {
-                case 0:
-                    listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>(operacaoFuturoRepositorio.Listar().Result.OrderByDescending(x => x.DataInicialOperacaoFuturo));
-                    break;
-                case 1:
-                    listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>(operacaoFuturoRepositorio.Listar(DateTime.Now.Date, DateTime.Now.Date));
-                    break;
-                case 2:
-                    listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>(operacaoFuturoRepositorio.Listar(DateTime.Now.FirstDayOfWeek(), DateTime.Now.LastDayOfWeek()));
-                    break;
-                case 3:
-                    listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>(operacaoFuturoRepositorio.Listar(DateTime.Now.FirstDayOfMonth(), DateTime.Now.Date.LastDayOfMonth()));
-                    break;
-                case 4:
-                    listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>(operacaoFuturoRepositorio.Listar(DateTime.Now.FirstDayOfYear(), DateTime.Now.LastDayOfYear()));
-                    break;
-                default:
-                    listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>();
-                    break;
-            }
-            foreach (var operacaoFuturoCrypto in listaRetorno)
-            {
-                if (operacaoFuturoCrypto != null)
+                for (int i = operacoesDTO.Count - 1; i >= 0; i--)
                 {
-                    OperacaoDTO operacaoDTO = new()
-                    {
-                        DataOperacao = operacaoFuturoCrypto?.DataInicialOperacaoFuturo.ToString("dd/MM/yyyy") + " (" + (operacaoFuturoCrypto.DataFinalOperacaoFuturo.HasValue ? Constantes.Operacao_Fechada : Constantes.Operacao_Em_Andamento) + ")",
-                        NomeCryptoMoeda = cryptoMoedaRepositorio.Obter(operacaoFuturoCrypto.IdCryptoMoeda)?.NomeLongo,
-                        ValorOperacao = operacaoFuturoCrypto.ValorTotal
-                    };
-                    operacoesDTO.Add(operacaoDTO);
+                    operacoesDTO.Remove(operacoesDTO[i]);
                 }
+
+                ObservableCollection<OperacaoFuturoCryptoMoeda> listaRetorno;
+                switch (tipoFiltro)
+                {
+                    case 0:
+                        listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>(operacaoFuturoRepositorio.Listar(DateTime.Now.Date, DateTime.Now.Date));
+                        break;
+                    case 1:
+                        listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>(operacaoFuturoRepositorio.Listar(DateTime.Now.FirstDayOfWeek(), DateTime.Now.LastDayOfWeek()));
+                        break;
+                    case 2:
+                        listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>(operacaoFuturoRepositorio.Listar(DateTime.Now.FirstDayOfMonth(), DateTime.Now.Date.LastDayOfMonth()));
+                        break;
+                    case 3:
+                        listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>(operacaoFuturoRepositorio.Listar(DateTime.Now.FirstDayOfYear(), DateTime.Now.LastDayOfYear()));
+                        break;
+                    default:
+                        listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>();
+                        break;
+                }
+                foreach (var operacaoFuturoCrypto in listaRetorno)
+                {
+                    if (operacaoFuturoCrypto != null)
+                    {
+                        OperacaoDTO operacaoDTO = new()
+                        {
+                            DataOperacao = operacaoFuturoCrypto?.DataInicialOperacaoFuturo.ToString("dd/MM/yyyy") + " (" + (operacaoFuturoCrypto.DataFinalOperacaoFuturo.HasValue ? Constantes.Operacao_Fechada : Constantes.Operacao_Em_Andamento) + ")",
+                            NomeCryptoMoeda = cryptoMoedaRepositorio.Obter(operacaoFuturoCrypto.IdCryptoMoeda)?.NomeLongo,
+                            ValorOperacao = operacaoFuturoCrypto.ValorTotal
+                        };
+                        operacoesDTO.Add(operacaoDTO);
+                    }
+                }
+                ValorTotal = operacoesDTO.Sum(x => x.ValorOperacao);
+                ValorTotalStr = "Total : " + ValorTotal;
+                QuantidadeOperacoes = "Operações : " + operacoesDTO.Count();
+                QuantidadeOperacoesPositivasNegativas = "Positivas : " + operacoesDTO.Where(x => x.ValorOperacao > 0).Count() +
+                    " / Negativas : " + operacoesDTO.Where(x => x.ValorOperacao < 0).Count();
             }
-            ValorTotal = operacoesDTO.Sum(x => x.ValorOperacao);
-            ValorTotalStr = "Total : " + ValorTotal;
-            QuantidadeOperacoes = "Operações : " + operacoesDTO.Count();
-            QuantidadeOperacoesPositivasNegativas = "Positivas : " + operacoesDTO.Where(x => x.ValorOperacao > 0).Count() +
-                " / Negativas : " + operacoesDTO.Where(x => x.ValorOperacao < 0).Count();
         }
     }
 }

@@ -20,15 +20,16 @@
         <viewmodel:ExtratoViewModel/>
     </ContentPage.BindingContext>
 
-    <Grid Margin="20" RowDefinitions="Auto,*,Auto, Auto">
-        <dxe:ChoiceChipGroup x:Name="ccgPeriodo" Grid.Row="0" BoxMode="Outlined" Padding="3" SelectedIndex="{Binding Filtrar}">
-            <dxe:Chip x:Name="ccgTodos" IsSelected="True" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Todos" />
-            <dxe:Chip x:Name="ccgDia" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Dia"/>
+    <Grid Margin="20" RowDefinitions="Auto, Auto,*,Auto, Auto">
+        <dxe:ChoiceChipGroup x:Name="ccgPeriodo" Grid.Row="0" BoxMode="Outlined" Padding="3" SelectedIndex="{Binding Filtrar}">            
+            <dxe:Chip x:Name="ccgDia" IsSelected="True" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Hoje"/>
             <dxe:Chip x:Name="ccgSemana" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Semana"/>
             <dxe:Chip x:Name="ccgMes" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Mês" />
             <dxe:Chip x:Name="ccgAno" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Ano" />
+            <dxe:Chip x:Name="ccgPersonalizar" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="..." Tap="FiltroPersonalizado" />
         </dxe:ChoiceChipGroup>
-        <ScrollView x:Name="scrollView" Grid.Row="1" VerticalOptions="FillAndExpand">
+        
+        <ScrollView x:Name="scrollView" Grid.Row="2" VerticalOptions="FillAndExpand">
             <StackLayout>
                 <CollectionView ItemsSource="{Binding OperacoesDTO, Mode=TwoWay}">
                     <CollectionView.ItemsLayout>
@@ -39,7 +40,7 @@
                             <Border StrokeShape="{OnPlatform RoundRectangle 10, iOS=RoundRectangle 1}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Card_Background_Dark}}" StrokeThickness="1">
                                 <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*">
                                     <Label Grid.Row="0" Text="{Binding DataOperacao}" FontSize="15" FontAttributes="Bold"/>
-                                    <Grid Grid.Row="1" RowDefinitions="Auto" ColumnDefinitions="*,*" Padding="5" BackgroundColor="Transparent">                                        
+                                    <Grid Grid.Row="1" RowDefinitions="Auto" ColumnDefinitions="*,*" Padding="5" BackgroundColor="Transparent">
                                         <Label Grid.Row="0" Grid.Column="0" Text="{Binding NomeCryptoMoeda}" FontSize="15" FontAttributes="Bold" HorizontalOptions="Center"/>
                                         <Label Grid.Row="0" Grid.Column="1" Text="{Binding ValorOperacao}" TextColor="{Binding ValorOperacao, Converter={StaticResource valueToColorConverter}}" FontSize="15" FontAttributes="Bold" HorizontalOptions="End"/>
                                     </Grid>
@@ -50,11 +51,18 @@
                 </CollectionView>
             </StackLayout>
         </ScrollView>
-        <Grid Grid.Row="2" ColumnDefinitions="*" RowDefinitions="Auto,Auto,Auto">
+        
+        <Grid Grid.Row="3" ColumnDefinitions="*" RowDefinitions="Auto,Auto,Auto">
             <Label Grid.Row="0" Text="{Binding ValorTotalStr, Mode=TwoWay}" TextColor="{Binding ValorTotal, Converter={StaticResource valueToColorConverter}}" FontSize="16" FontAttributes="Bold" HorizontalOptions="End"/>
             <Label Grid.Row="1" Text="{Binding QuantidadeOperacoes, Mode=TwoWay}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Start"/>
             <Label Grid.Row="2" Text="{Binding QuantidadeOperacoesPositivasNegativas, Mode=TwoWay}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Start"/>
         </Grid>
+
+        <dxco:BottomSheet x:Name="bsFiltroPersonalizado" ShowGrabber="True" AllowDismiss="True" IsModal="false" HalfExpandedRatio="0.4">
+            <Grid>
+                
+            </Grid>            
+        </dxco:BottomSheet>
     </Grid>
 
 </ContentPage>
