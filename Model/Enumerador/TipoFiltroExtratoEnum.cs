@@ -19,5 +19,7 @@ namespace DeZooiNaCrypto.Model.Enumerador
         Ano = 3,
         [Description("Personalizado")]
         Personalizado = 4,
+        [Description("FiltroPersonalizado")]
+        FiltroPersonalizado = 5
     }
 }

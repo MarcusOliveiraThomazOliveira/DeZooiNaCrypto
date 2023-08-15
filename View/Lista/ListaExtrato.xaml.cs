@@ -1,4 +1,5 @@
 using DevExpress.Maui.Controls;
+using DeZooiNaCrypto.Model.Enumerador;
 using DeZooiNaCrypto.Model.ViewModel;
 
 namespace DeZooiNaCrypto.View;
@@ -14,8 +15,12 @@ public partial class ListaExtrato : ContentPage
         ((ExtratoViewModel)this.BindingContext).FiltrarPeriodo(-1);
         bsFiltroPersonalizado.State = BottomSheetState.FullExpanded;
     }
-    private void Filtrar(object sender, EventArgs e)
+    private async void Filtrar(object sender, EventArgs e)
     {
+        if (await ((ExtratoViewModel)this.BindingContext).FiltrarPeriodo((int)TipoFiltroExtratoEnum.FiltroPersonalizado))
+        {
+            bsFiltroPersonalizado.State = BottomSheetState.Hidden;
+        }
     }
     private void Cancelar(object sender, EventArgs e)
     {

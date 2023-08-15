@@ -42,6 +42,10 @@ namespace DeZooiNaCrypto.Util
         {
             return new DateTime(date.Year, date.Month, date.Day, 23, 59, 59);
         }
+        public static bool IsNullOrMinMaxDate(this DateTime? date)
+        {
+            return !date.HasValue || date.Value.Equals(DateTime.MinValue) || date.Value.Equals(DateTime.MaxValue);            
+        }
 
         public static T ToEnum<T>(this string value)
         {
