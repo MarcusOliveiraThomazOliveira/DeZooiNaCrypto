@@ -13,7 +13,8 @@ public partial class ListaExtrato : ContentPage
     private void FiltroPersonalizado(object sender, System.ComponentModel.HandledEventArgs e)
     {
         ((ExtratoViewModel)this.BindingContext).FiltrarPeriodo(-1);
-        bsFiltroPersonalizado.State = BottomSheetState.FullExpanded;
+        bsFiltroPersonalizado.State = BottomSheetState.HalfExpanded;
+        if (bsFiltroPersonalizado.HalfExpandedRatio == 0.2) bsFiltroPersonalizado.Animate("bottomsheet", x => bsFiltroPersonalizado.HalfExpandedRatio = x, 0.2, 0.4);
     }
     private async void Filtrar(object sender, EventArgs e)
     {

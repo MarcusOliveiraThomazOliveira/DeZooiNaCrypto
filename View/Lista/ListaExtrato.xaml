@@ -21,14 +21,14 @@
     </ContentPage.BindingContext>
 
     <Grid Margin="20" RowDefinitions="Auto, Auto,*,Auto, Auto">
-        <dxe:ChoiceChipGroup x:Name="ccgPeriodo" Grid.Row="0" BoxMode="Outlined" Padding="3" SelectedIndex="{Binding Filtrar}">            
+        <dxe:ChoiceChipGroup x:Name="ccgPeriodo" Grid.Row="0" BoxMode="Outlined" Padding="3" SelectedIndex="{Binding Filtrar}">
             <dxe:Chip x:Name="ccgDia" IsSelected="True" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Hoje"/>
             <dxe:Chip x:Name="ccgSemana" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Semana"/>
             <dxe:Chip x:Name="ccgMes" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Mês" />
             <dxe:Chip x:Name="ccgAno" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Ano" />
             <dxe:Chip x:Name="ccgPersonalizar" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="..." Tap="FiltroPersonalizado" />
         </dxe:ChoiceChipGroup>
-        
+
         <ScrollView x:Name="scrollView" Grid.Row="2" VerticalOptions="FillAndExpand">
             <StackLayout>
                 <CollectionView ItemsSource="{Binding OperacoesDTO, Mode=TwoWay}">
@@ -38,11 +38,17 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="{x:Type local:OperacaoDTO}">
                             <Border StrokeShape="{OnPlatform RoundRectangle 10, iOS=RoundRectangle 1}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Card_Background_Dark}}" StrokeThickness="1">
-                                <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*">
-                                    <Label Grid.Row="0" Text="{Binding DataOperacao}" FontSize="15" FontAttributes="Bold"/>
-                                    <Grid Grid.Row="1" RowDefinitions="Auto" ColumnDefinitions="*,*" Padding="5" BackgroundColor="Transparent">
-                                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding NomeCryptoMoeda}" FontSize="15" FontAttributes="Bold" HorizontalOptions="Center"/>
-                                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding ValorOperacao}" TextColor="{Binding ValorOperacao, Converter={StaticResource valueToColorConverter}}" FontSize="15" FontAttributes="Bold" HorizontalOptions="End"/>
+                                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="150,250" Margin="2">
+                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding NomeCryptoMoeda}" FontSize="15" FontAttributes="Bold"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding NomeTipoOperacao}" TextColor="{Binding NomeTipoOperacao, Converter={StaticResource valueToColorConverter}}" FontSize="15" FontAttributes="Bold" HorizontalOptions="Start"/>
+
+                                    <Grid Grid.Row="1" RowDefinitions="Auto, Auto, Auto" ColumnDefinitions="Auto" Margin="2">
+                                        <Label Grid.Row="0" Text="{Binding DataInicialOperacao}" FontSize="12" FontAttributes="Bold"/>
+                                        <Label Grid.Row="1" Text="{Binding DataFinalOperacao}" FontSize="12" FontAttributes="Bold"/>
+                                        <Grid Grid.Row="2" RowDefinitions="Auto" ColumnDefinitions="*,*,215" Margin="2">
+                                            <Label Grid.Row="0" Grid.Column="0" Text="Ganho/Perda : " FontSize="12" FontAttributes="Bold" HorizontalTextAlignment="Start"/>
+                                            <Label Grid.Row="0" Grid.Column="2" Text="{Binding ValorOperacao}" TextColor="{Binding ValorOperacao, Converter={StaticResource valueToColorConverter}}" FontSize="12" FontAttributes="Bold" HorizontalTextAlignment="End"/>
+                                        </Grid>
                                     </Grid>
                                 </Grid>
                             </Border>
@@ -51,7 +57,7 @@
                 </CollectionView>
             </StackLayout>
         </ScrollView>
-        
+
         <Grid Grid.Row="3" ColumnDefinitions="*" RowDefinitions="Auto,Auto,Auto">
             <Label Grid.Row="0" Text="{Binding ValorTotalStr, Mode=TwoWay}" TextColor="{Binding ValorTotal, Converter={StaticResource valueToColorConverter}}" FontSize="16" FontAttributes="Bold" HorizontalOptions="End"/>
             <Label Grid.Row="1" Text="{Binding QuantidadeOperacoes, Mode=TwoWay}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Start"/>
@@ -59,10 +65,10 @@
         </Grid>
 
         <dxco:BottomSheet x:Name="bsFiltroPersonalizado" ShowGrabber="True" AllowDismiss="True" IsModal="false" HalfExpandedRatio="0.4">
-            <StackLayout>
-                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*">
+            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*">
+                <Grid Grid.Row="0" Grid.Column="0" RowDefinitions="Auto,Auto" ColumnDefinitions="*,*">
 
-                <dxe:DateEdit
+                    <dxe:DateEdit
                     Grid.Row="0"
                     Grid.Column="0"
                     x:Name="dtDataInicial"
@@ -74,7 +80,7 @@
                     CornerRadius="10"
                     Margin="3"/>
 
-                <dxe:DateEdit
+                    <dxe:DateEdit
                     Grid.Row="0"
                     Grid.Column="1"
                     x:Name="dtDataFinal"
@@ -86,11 +92,30 @@
                     CornerRadius="10"
                     Margin="3"/>
 
+                </Grid>
+
+                <!--<ScrollView Grid.Row="1" VerticalOptions="FillAndExpand" HeightRequest="500">
+                    <StackLayout>
+                        <CollectionView x:Name="cvCryptoMoedas" ItemsSource="{Binding CryptoMoedasDTO}" SelectionMode="Multiple" SelectedItems="{Binding CryptoMoedasSelecionadas, Mode=TwoWay}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="{x:Type local:CryptoMoedaDTO}">
+                                    <Border StrokeShape="{OnPlatform RoundRectangle 10, iOS=RoundRectangle 1}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Card_Background_Dark}}" StrokeThickness="1">
+                                        <Label Text="{Binding Nome, Mode=TwoWay}" FontSize="15" FontAttributes="Bold"/>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </ScrollView>-->
+
+                <Grid Grid.Row="2" RowDefinitions="Auto,Auto" ColumnDefinitions="*">
+                    <dxco:SimpleButton Grid.Row="0" Text="Filtrar" Clicked="Filtrar"  BackgroundColor="blue" Margin="1"/>
+                    <dxco:SimpleButton Grid.Row="1" Text="Cancelar" Clicked="Cancelar"  BackgroundColor="PaleVioletRed" Margin="1"/>
+                </Grid>
             </Grid>
-            
-                <dxco:SimpleButton Text="Filtrar" Clicked="Filtrar"  BackgroundColor="blue" Margin="1"/>
-                <dxco:SimpleButton Text="Cancelar" Clicked="Cancelar"  BackgroundColor="PaleVioletRed" Margin="1"/>
-            </StackLayout>
         </dxco:BottomSheet>
     </Grid>
 

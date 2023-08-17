@@ -22,7 +22,8 @@ namespace DeZooiNaCrypto.Util
                 else if (decimalValue < 0) { return Color.FromArgb("#f44336"); }
                 else { return Color.FromArgb("#141414"); }
 
-            } else if (type == typeof(int))
+            }
+            else if (type == typeof(int))
             {
                 int intValue = (int)value;
 
@@ -30,8 +31,16 @@ namespace DeZooiNaCrypto.Util
                 else if (intValue < 0) { return Color.FromArgb("#f44336"); }
                 else { return Color.FromArgb("#141414"); }
             }
+            else if (type == typeof(string))
+            {
+                string strValue = (string)value;
 
-                return null;
+                if (strValue.Equals(Constantes.Tipo_Operacao_Futuro_LONG)) { return Color.FromArgb("#039C23"); }
+                else if (strValue.Equals(Constantes.Tipo_Operacao_Futuro_SHORT)) { return Color.FromArgb("#f44336"); }
+                else { return Color.FromArgb("#141414"); }
+            }
+
+            return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

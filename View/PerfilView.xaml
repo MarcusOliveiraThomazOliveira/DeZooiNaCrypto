@@ -25,9 +25,9 @@
                 <CollectionView.ItemTemplate >
                     <DataTemplate x:DataType="{x:Type local:ConfiguracaoExchange}">
                         <Border StrokeShape="{OnPlatform RoundRectangle 10, iOS=RoundRectangle 1}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Card_Background_Dark}}" StrokeThickness="1">
-                            <Grid ColumnDefinitions="*" RowDefinitions="Auto,Auto">
-                            <Label Text="{Binding NomeExchange}" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="15"/>
-                            <dxco:SimpleButton Grid.Row="1" Grid.Column="1" Clicked="Editar" CommandParameter="{Binding Id}" Icon="edit1" IconColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" BackgroundColor="Transparent" />
+                            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto">
+                                <Label Text="{Binding NomeExchange}" Grid.Row="0" Grid.Column="0"  FontSize="20" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="15"/>
+                                <dxco:SimpleButton Grid.Row="0" Grid.Column="1" Clicked="Editar" HorizontalOptions="End" CommandParameter="{Binding Id}" Icon="edit1" IconColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" BackgroundColor="Transparent" />
                             </Grid>
                         </Border>
                     </DataTemplate>

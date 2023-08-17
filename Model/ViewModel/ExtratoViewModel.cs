@@ -21,6 +21,8 @@ namespace DeZooiNaCrypto.Model.ViewModel
         OperacaoFuturoRepositorio operacaoFuturoRepositorio = new();
         CryptoMoedaRepositorio cryptoMoedaRepositorio = new();
         ObservableCollection<OperacaoDTO> operacoesDTO;
+        ObservableCollection<CryptoMoedaDTO> cryptoMoedasDTO;
+        ObservableCollection<Object> cryptoMoedasSelecionadas;
         int filtrarPeriodo;
         decimal valorTotal;
         string valorTotalStr;
@@ -32,6 +34,20 @@ namespace DeZooiNaCrypto.Model.ViewModel
 
         public ObservableCollection<OperacaoDTO> OperacoesDTO { get { return operacoesDTO; } set { operacoesDTO = value; RaisePropertyChanged(); } }
         public OperacaoDTO OperacaoDTO { get; set; }
+        public ObservableCollection<CryptoMoedaDTO> CryptoMoedasDTO { get { return cryptoMoedasDTO; } set { cryptoMoedasDTO = value; RaisePropertyChanged(); } }
+        public ObservableCollection<Object> CryptoMoedasSelecionadas
+        {
+            get
+            {
+                return cryptoMoedasSelecionadas;
+            }
+            set
+            {
+                if (cryptoMoedasSelecionadas != value)
+                    cryptoMoedasSelecionadas = value;
+                //RaisePropertyChanged();
+            }
+        }
         public decimal ValorTotal { get { return valorTotal; } set { valorTotal = value; RaisePropertyChanged(); } }
         public string ValorTotalStr { get { return valorTotalStr; } set { valorTotalStr = value; RaisePropertyChanged(); } }
         public string QuantidadeOperacoes { get { return quantidadeOperacoes; } set { quantidadeOperacoes = value; RaisePropertyChanged(); } }
@@ -48,7 +64,9 @@ namespace DeZooiNaCrypto.Model.ViewModel
         public ExtratoViewModel()
         {
             OperacoesDTO = new();
-            FiltrarPeriodo(0);
+            CryptoMoedasDTO = new();
+            CarregaCryptoMoedas();
+            //CryptoMoedasSelecionadas = new();
         }
         public async Task<bool> FiltrarPeriodo(int tipoFiltro)
         {
@@ -82,7 +100,7 @@ namespace DeZooiNaCrypto.Model.ViewModel
                             await Util.MessageService.DisplayAlert_OK("Informe a data inicial e final.");
                             return false;
                         }
-                        
+
                         listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>(operacaoFuturoRepositorio.Listar(DataInicialFiltro.Value, DataFinalFiltro.Value));
                         DataInicialFiltro = null;
                         DataFinalFiltro = null;
@@ -98,8 +116,10 @@ namespace DeZooiNaCrypto.Model.ViewModel
                     {
                         OperacaoDTO operacaoDTO = new()
                         {
-                            DataOperacao = operacaoFuturoCrypto?.DataInicialOperacaoFuturo.ToString("dd/MM/yyyy") + " (" + (operacaoFuturoCrypto.DataFinalOperacaoFuturo.HasValue ? Constantes.Operacao_Fechada : Constantes.Operacao_Em_Andamento) + ")",
+                            DataInicialOperacao = "Aberta : " + operacaoFuturoCrypto.DataInicialOperacaoFuturo.ToString("dd/MM/yyyy HH:mm:ss"),
+                            DataFinalOperacao = "Fechada : " + (operacaoFuturoCrypto.DataFinalOperacaoFuturo.HasValue ? operacaoFuturoCrypto.DataFinalOperacaoFuturo.Value.ToString("dd/MM/yyyy HH:mm:ss") : string.Empty),
                             NomeCryptoMoeda = cryptoMoedaRepositorio.Obter(operacaoFuturoCrypto.IdCryptoMoeda)?.NomeLongo,
+                            NomeTipoOperacao = operacaoFuturoCrypto.NomeOperacaoFuturo,
                             ValorOperacao = operacaoFuturoCrypto.ValorTotal
                         };
                         operacoesDTO.Add(operacaoDTO);
@@ -113,6 +133,10 @@ namespace DeZooiNaCrypto.Model.ViewModel
 
             }
             return retorno;
+        }
+        public void CarregaCryptoMoedas()
+        {
+            CryptoMoedasDTO.InsertRange(0, new ObservableCollection<CryptoMoedaDTO>(cryptoMoedaRepositorio.Listar().Result.OrderBy(x => x.Nome).Select(x => new CryptoMoedaDTO { Id = x.Id, Nome = x.Nome })));
         }
     }
 }
