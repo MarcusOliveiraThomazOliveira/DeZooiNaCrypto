@@ -26,4 +26,9 @@
         ContentTemplate="{DataTemplate local:LoginUsuario}"
         Route="LoginUsuario" />
 
+    <ShellContent
+    Title="Teste"
+    ContentTemplate="{DataTemplate local:TesteView}"
+    Route="TesteView" />
+
 </Shell>

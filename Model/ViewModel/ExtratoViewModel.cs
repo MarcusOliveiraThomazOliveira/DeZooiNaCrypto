@@ -45,7 +45,6 @@ namespace DeZooiNaCrypto.Model.ViewModel
             {
                 if (cryptoMoedasSelecionadas != value)
                     cryptoMoedasSelecionadas = value;
-                //RaisePropertyChanged();
             }
         }
         public decimal ValorTotal { get { return valorTotal; } set { valorTotal = value; RaisePropertyChanged(); } }
@@ -66,7 +65,6 @@ namespace DeZooiNaCrypto.Model.ViewModel
             OperacoesDTO = new();
             CryptoMoedasDTO = new();
             CarregaCryptoMoedas();
-            //CryptoMoedasSelecionadas = new();
         }
         public async Task<bool> FiltrarPeriodo(int tipoFiltro)
         {
@@ -79,20 +77,20 @@ namespace DeZooiNaCrypto.Model.ViewModel
                     operacoesDTO.Remove(operacoesDTO[i]);
                 }
 
-                ObservableCollection<OperacaoFuturoCryptoMoeda> listaRetorno;
+                List<OperacaoFuturoCryptoMoeda> listaRetorno;
                 switch (tipoFiltro)
                 {
                     case (int)TipoFiltroExtratoEnum.Hoje:
-                        listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>(operacaoFuturoRepositorio.Listar(DateTime.Now.Date, DateTime.Now.Date));
+                        listaRetorno = operacaoFuturoRepositorio.Listar(DateTime.Now.Date, DateTime.Now.Date);
                         break;
                     case (int)TipoFiltroExtratoEnum.Semana:
-                        listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>(operacaoFuturoRepositorio.Listar(DateTime.Now.FirstDayOfWeek(), DateTime.Now.LastDayOfWeek()));
+                        listaRetorno = operacaoFuturoRepositorio.Listar(DateTime.Now.FirstDayOfWeek(), DateTime.Now.LastDayOfWeek());
                         break;
                     case (int)TipoFiltroExtratoEnum.Mes:
-                        listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>(operacaoFuturoRepositorio.Listar(DateTime.Now.FirstDayOfMonth(), DateTime.Now.Date.LastDayOfMonth()));
+                        listaRetorno = operacaoFuturoRepositorio.Listar(DateTime.Now.FirstDayOfMonth(), DateTime.Now.Date.LastDayOfMonth());
                         break;
                     case (int)TipoFiltroExtratoEnum.Ano:
-                        listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>(operacaoFuturoRepositorio.Listar(DateTime.Now.FirstDayOfYear(), DateTime.Now.LastDayOfYear()));
+                        listaRetorno = operacaoFuturoRepositorio.Listar(DateTime.Now.FirstDayOfYear(), DateTime.Now.LastDayOfYear());
                         break;
                     case (int)TipoFiltroExtratoEnum.FiltroPersonalizado:
                         if (DataInicialFiltro.IsNullOrMinMaxDate() || DataFinalFiltro.IsNullOrMinMaxDate())
@@ -101,35 +99,35 @@ namespace DeZooiNaCrypto.Model.ViewModel
                             return false;
                         }
 
-                        listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>(operacaoFuturoRepositorio.Listar(DataInicialFiltro.Value, DataFinalFiltro.Value));
+                        listaRetorno = operacaoFuturoRepositorio.Listar(DataInicialFiltro.Value, DataFinalFiltro.Value);
                         DataInicialFiltro = null;
                         DataFinalFiltro = null;
                         break;
                     case 4:
                     default:
-                        listaRetorno = new ObservableCollection<OperacaoFuturoCryptoMoeda>();
+                        listaRetorno = new List<OperacaoFuturoCryptoMoeda>();
                         break;
                 }
+
                 foreach (var operacaoFuturoCrypto in listaRetorno)
                 {
-                    if (operacaoFuturoCrypto != null)
+                    operacoesDTO.Add(new()
                     {
-                        OperacaoDTO operacaoDTO = new()
-                        {
-                            DataInicialOperacao = "Aberta : " + operacaoFuturoCrypto.DataInicialOperacaoFuturo.ToString("dd/MM/yyyy HH:mm:ss"),
-                            DataFinalOperacao = "Fechada : " + (operacaoFuturoCrypto.DataFinalOperacaoFuturo.HasValue ? operacaoFuturoCrypto.DataFinalOperacaoFuturo.Value.ToString("dd/MM/yyyy HH:mm:ss") : string.Empty),
-                            NomeCryptoMoeda = cryptoMoedaRepositorio.Obter(operacaoFuturoCrypto.IdCryptoMoeda)?.NomeLongo,
-                            NomeTipoOperacao = operacaoFuturoCrypto.NomeOperacaoFuturo,
-                            ValorOperacao = operacaoFuturoCrypto.ValorTotal
-                        };
-                        operacoesDTO.Add(operacaoDTO);
-                    }
+                        DataInicialOperacao = "Aberta : " + operacaoFuturoCrypto.DataInicialOperacaoFuturo.ToString("dd/MM/yyyy HH:mm:ss"),
+                        DataFinalOperacao = "Fechada : " + (operacaoFuturoCrypto.DataFinalOperacaoFuturo.HasValue ? operacaoFuturoCrypto.DataFinalOperacaoFuturo.Value.ToString("dd/MM/yyyy HH:mm:ss") : string.Empty),
+                        NomeCryptoMoeda = cryptoMoedaRepositorio.Obter(operacaoFuturoCrypto.IdCryptoMoeda)?.NomeLongo,
+                        NomeTipoOperacao = operacaoFuturoCrypto.NomeOperacaoFuturo,
+                        ValorOperacao = operacaoFuturoCrypto.ValorTotal,
+                        Fechada = operacaoFuturoCrypto.DataFinalOperacaoFuturo.HasValue
+                    });
                 }
+
                 ValorTotal = operacoesDTO.Sum(x => x.ValorOperacao);
                 ValorTotalStr = "Total : " + ValorTotal;
                 QuantidadeOperacoes = "Operações : " + operacoesDTO.Count();
-                QuantidadeOperacoesPositivasNegativas = "Positivas : " + operacoesDTO.Where(x => x.ValorOperacao > 0).Count() +
-                    " / Negativas : " + operacoesDTO.Where(x => x.ValorOperacao < 0).Count();
+                QuantidadeOperacoesPositivasNegativas = "Positivas: " + operacoesDTO.Where(x => x.ValorOperacao > 0 && x.Fechada).Count() +
+                    " / Negativas: " + operacoesDTO.Where(x => x.ValorOperacao < 0 && x.Fechada).Count() + 
+                    " / Abertas: " + operacoesDTO.Where(x => !x.Fechada).Count();
 
             }
             return retorno;

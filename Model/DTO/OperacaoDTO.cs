@@ -13,5 +13,6 @@ namespace DeZooiNaCrypto.Model.DTO
         public string NomeCryptoMoeda { get; set; }
         public string NomeTipoOperacao { get;set; }
         public decimal ValorOperacao { get; set; }
+        public bool Fechada { get; set; }
     }
 }

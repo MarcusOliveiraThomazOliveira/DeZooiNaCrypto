@@ -7,61 +7,50 @@ namespace DeZooiNaCrypto.Testes
 {
     public class TesteViewModel : ModelViewBase
     {
+
         public List<RetornoCabecalhoDTO> RetornoCabecalhoDTOs { get; private set; } = new List<RetornoCabecalhoDTO>();
+        public List<RetornoListaSimples> RetornoListaSimples { get; private set; } = new List<RetornoListaSimples>();
 
         public TesteViewModel()
         {
             RetornoCabecalhoDTOs = new();
             CarrgarLista();
+
+            CarregaListaSimples();
         }
 
         private void CarrgarLista()
         {
-            RetornoCabecalhoDTOs
-                .Add(
-                    new RetornoCabecalhoDTO(new DateTime(2023, 1, 1),
+            for (int i = 0; i < 360; i++)
+            {
+                RetornoCabecalhoDTOs.Add(
+                    new RetornoCabecalhoDTO(DateTime.Now,
                         new List<RetornoDetallheDTO> {
                             new RetornoDetallheDTO{
-                                Data = new DateTime(2023, 1, 1).ToString(),
+                                Data =  DateTime.Now.ToString(),
                                 Nome = "Menor que 10",
-                                Descricao = "Descrição 1." },
+                                Descricao = "Descrição " + i },
                             new RetornoDetallheDTO{
-                                Data = new DateTime(2023, 1, 1).ToString(),
+                                Data = DateTime.Now.ToString(),
                                 Nome = "Menor que 10",
-                                Descricao = "Descrição 2." }
-                        }
-                    ));
+                                Descricao = "Descrição " + (i +1) }
+                        })
+                    );
+            }
+        }
 
-            RetornoCabecalhoDTOs
-                .Add(
-                    new RetornoCabecalhoDTO(new DateTime(2023, 3, 1),
-                        new List<RetornoDetallheDTO> {
-                            new RetornoDetallheDTO{
-                                Data = new DateTime(2023, 3, 1).ToString(),
-                                Nome = "Menor que 20",
-                                Descricao = "Descrição 3." },
-                            new RetornoDetallheDTO{
-                                Data = new DateTime(2023, 3, 1).ToString(),
-                                Nome = "Menor que 20",
-                                Descricao = "Descrição 4." }
-                        }
-                    ));
-
-            RetornoCabecalhoDTOs
-                .Add(
-                    new RetornoCabecalhoDTO(new DateTime(2023, 5, 1),
-                        new List<RetornoDetallheDTO> {
-                            new RetornoDetallheDTO{
-                                Data = new DateTime(2023, 5, 1).ToString(),
-                                Nome = "Menor que 30",
-                                Descricao = "Descrição 5." },
-                            new RetornoDetallheDTO{
-                                Data = new DateTime(2023, 5, 1).ToString(),
-                                Nome = "Menor que 30",
-                                Descricao = "Descrição 6." }
-                        }
-                    ));
-
+        private void CarregaListaSimples()
+        {
+            for (int i = 0; i < 360; i++)
+            {
+                RetornoListaSimples.Add(
+                    new RetornoListaSimples()
+                    {
+                        Nome = "Nome " + i.ToString(),
+                        Descricao = "Descrição " + i.ToString()
+                    }
+                    );
+            }
         }
     }
 
@@ -82,5 +71,17 @@ namespace DeZooiNaCrypto.Testes
         public String Data { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
+    }
+
+    public class RetornoListaSimples
+    {
+        public string Nome { get; set; }
+        public string Descricao { get; set; }
+        public DateTime DataCriacao { get; set; }
+
+        public RetornoListaSimples()
+        {
+            DataCriacao = new DateTime();
+        }
     }
 }

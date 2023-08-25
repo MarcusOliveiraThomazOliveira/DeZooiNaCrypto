@@ -1,4 +1,4 @@
-namespace DeZooiNaCrypto.Testes;
+namespace DeZooiNaCrypto.View;
 
 public partial class TesteView : ContentPage
 {

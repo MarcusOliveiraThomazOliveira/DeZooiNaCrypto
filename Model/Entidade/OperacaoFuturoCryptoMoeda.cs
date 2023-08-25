@@ -55,16 +55,7 @@ namespace DeZooiNaCrypto.Model.Entidade
         [Ignore]
         public decimal ValorTotal { get { return ((ValorRetorno + ValorTaxaFinanciamento) + (ValorTaxa - ValorDescontoTaxa)); } }
         [Ignore]
-        public string ValorTotalStr
-        {
-            get
-            {
-                var provento = (ValorRetorno + ValorTaxaFinanciamento);
-                var desconto = (ValorTaxa - ValorDescontoTaxa);
-                var retorno = provento + desconto;
-                return "Ganho/Perda : " + retorno;
-            }
-        }
+        public string ValorTotalStr { get { return "Ganho/Perda : " + (ValorRetorno + ValorTaxaFinanciamento) + (ValorTaxa - ValorDescontoTaxa); } }
         [Required, Column("IdCryptoMoeda"), ForeignKey(typeof(CryptoMoeda))]
         public Guid IdCryptoMoeda { get; set; }
         [ManyToOne]
