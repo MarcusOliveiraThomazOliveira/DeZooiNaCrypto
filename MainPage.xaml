@@ -33,7 +33,7 @@
     </ContentPage.BindingContext>
 
     <Grid>
-        <CollectionView  ItemsSource="{Binding CryptoMoedas}" SelectedItem="{Binding CryptoMoedaSelecionada, Mode=TwoWay}" SelectionMode="Single" Margin="10,10,10,0" SelectionChanged="SelectionChanged" Scrolled="Scrolled">
+        <CollectionView  ItemsSource="{Binding CryptoMoedas}" SelectedItem="{Binding CryptoMoedaSelecionada, Mode=TwoWay}" SelectionMode="Single" Margin="10,10,10,0">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
             </CollectionView.ItemsLayout>
@@ -59,39 +59,12 @@
                                 <Label Text="{Binding NomeCorretora}"  VerticalOptions="Center" FontSize="15" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
                                 <dxco:SimpleButton Clicked="Spot" Text="Spot"  BackgroundColor="Transparent" CommandParameter="{Binding Id}" VerticalContentAlignment="Start" HorizontalContentAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" Grid.Row="0" Grid.Column="3"/>
                                 <dxco:SimpleButton Clicked="Futuro" Text="Futuro"  BackgroundColor="Transparent" CommandParameter="{Binding Id}" VerticalContentAlignment="Start" HorizontalContentAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Blue100Accent}, Dark={StaticResource Card_Background_Dark}}" Grid.Row="0" Grid.Column="4"/>
-                                <!--<dxco:SimpleButton Clicked="Apagar" Icon="bin3" IconColor="DarkRed" BackgroundColor="Transparent" CommandParameter="{Binding Id}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Red}, Dark={StaticResource Card_Background_Dark}}" Grid.Row="1" Grid.Column="4"/>-->
                             </Grid>
                         </Grid>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <!--<dxco:DXPopup x:Name="actionsPopup" CornerRadius="8" ShadowRadius="5" BackgroundColor="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}" ShadowColor="{AppThemeBinding Light={StaticResource Gray500}, Dark=Black}">
-            <StackLayout Padding="8,6">
-                <dxco:SimpleButton Text="Cadastrar Crypto Moeda" Clicked="CadastrarCryptoMoeda" Style="{StaticResource popupButtonStyle}"  PressedTextColor="{AppThemeBinding Light=Black, Dark={StaticResource Popup_Icon_Dark}}"/>
-                <dxco:SimpleButton Text="Extrato" Clicked="Extrato" Style="{StaticResource popupButtonStyle}"  PressedTextColor="{AppThemeBinding Light=Black, Dark={StaticResource Popup_Icon_Dark}}"/>                                
-                <dxco:SimpleButton Text="Perfil" Clicked="Perfil" Style="{StaticResource popupButtonStyle}"  PressedTextColor="{AppThemeBinding Light=Black, Dark={StaticResource Popup_Icon_Dark}}"/>
-                <dxco:SimpleButton Text="Teste" Clicked="Teste" Style="{StaticResource popupButtonStyle}"  PressedTextColor="{AppThemeBinding Light=Black, Dark={StaticResource Popup_Icon_Dark}}"/>
-                <dxco:SimpleButton Text="Sair" Clicked="Sair" Style="{StaticResource popupButtonStyle}"  PressedTextColor="{AppThemeBinding Light=Black, Dark={StaticResource Popup_Icon_Dark}}"/>
-            </StackLayout>
-        </dxco:DXPopup>-->
-        <!--<dxco:BottomSheet x:Name="bsDetalheCryptoMoeda" ShowGrabber="True" AllowDismiss="True" IsModal="false" HalfExpandedRatio="0.4">
-            <Grid x:Name="gridCryptoMoeda" RowDefinitions="Auto, Auto, Auto, *">
-                <Border Grid.Row="0" HeightRequest="2" BackgroundColor="{AppThemeBinding Light={StaticResource BottomSheet_Separator_Light}, Dark={StaticResource BottomSheet_Separator_Dark}}" HorizontalOptions="Fill" StrokeThickness="0" Margin="16,0,16,0"/>
-                <Grid Grid.Row="1" ColumnDefinitions="*,*" RowDefinitions="Auto,Auto">
-                    <VerticalStackLayout Margin="15">
-                        <Grid Grid.Row="0" ColumnDefinitions="60,250" RowDefinitions="Auto">
-                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Source={x:Static util:Constantes.Valor_Saldo}}" TextColor="{Binding Saldo, Converter={StaticResource valueToColorConverter}}" FontSize="15" FontAttributes="Bold"/>
-                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Saldo}" TextColor="{Binding Saldo, Converter={StaticResource valueToColorConverter}}" FontSize="15" FontAttributes="Bold"/>
-                        </Grid>
-                        <Grid Grid.Row="1" ColumnDefinitions="155,250" RowDefinitions="Auto">
-                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Source={x:Static util:Constantes.Quantidade_Operacoes}}"  FontSize="15" FontAttributes="Bold"/>
-                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding QuantidadeOperacoes}"  FontSize="15" FontAttributes="Bold"/>
-                        </Grid>
-                    </VerticalStackLayout>
-                </Grid>
-            </Grid>
-        </dxco:BottomSheet>-->
     </Grid>
 
 </ContentPage>

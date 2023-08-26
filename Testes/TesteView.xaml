@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
-             xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"           
+             xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"           
              x:Class="DeZooiNaCrypto.View.TesteView"
              xmlns:viewmodel="clr-namespace:DeZooiNaCrypto.Testes"
              Title="TesteView">
@@ -12,65 +13,72 @@
     </ContentPage.BindingContext>
 
 
-    <StackLayout>
-        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-            <Grid Margin="20" RowDefinitions="Auto, Auto,*,Auto, Auto">
-                <dxe:ChoiceChipGroup x:Name="ccgPeriodo" Grid.Row="0" BoxMode="Outlined" Padding="3">
-                    <dxe:Chip x:Name="ccgDia" IsSelected="True" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Hoje"/>
-                    <dxe:Chip x:Name="ccgSemana" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Semana"/>
-                    <dxe:Chip x:Name="ccgMes" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Mês" />
-                    <dxe:Chip x:Name="ccgAno" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Ano" />
-                    <dxe:Chip x:Name="ccgPersonalizar" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="..." />
-                </dxe:ChoiceChipGroup>
-            </Grid>
-        </StackLayout>
-        <ListView ItemsSource="{Binding RetornoListaSimples}" RowHeight="200">
-            <ListView.ItemTemplate>
-                <DataTemplate >
-                    <ViewCell>
-                        <Grid ColumnDefinitions="*" RowDefinitions="Auto,Auto,Auto,Auto" Padding="10">
-                            <Label Grid.Row="0"
+    <Grid RowDefinitions="Auto">
+
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Grid Margin="20" RowDefinitions="Auto, Auto,*,Auto, Auto">
+                    <dxe:ChoiceChipGroup x:Name="ccgPeriodo" Grid.Row="0" BoxMode="Outlined" Padding="3" ChipTap="FiltrarPeriodo" >
+                        <dxe:Chip x:Name="ccgDia" IsSelected="True" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Hoje"/>
+                        <dxe:Chip x:Name="ccgSemana" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Semana"/>
+                        <dxe:Chip x:Name="ccgMes" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Mês" />
+                        <dxe:Chip x:Name="ccgAno" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Ano" />
+                        <dxe:Chip x:Name="ccgPersonalizar" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="..." />
+                    </dxe:ChoiceChipGroup>
+                </Grid>
+            </StackLayout>
+            <ListView ItemsSource="{Binding RetornoListaSimples}" RowHeight="200">
+                <ListView.ItemTemplate>
+                    <DataTemplate >
+                        <ViewCell>
+                            <Grid ColumnDefinitions="*" RowDefinitions="Auto,Auto,Auto,Auto" Padding="10">
+                                <Label Grid.Row="0"
                                    Grid.Column="0"
                                    Text="{Binding DataCriacao}"
                                    FontAttributes="Bold"/>
-                            <Label Grid.Row="1"
+                                <Label Grid.Row="1"
                                    Grid.Column="0"
                                    Text="{Binding Nome}"
                                    FontAttributes="Bold" />
-                            <Label Grid.Row="2"
+                                <Label Grid.Row="2"
                                    Grid.Column="0"
                                    Text="{Binding Descricao}"
                                    FontAttributes="Italic"
                                    VerticalOptions="End" />
 
-                            <Grid Grid.Row="3" Grid.Column="0" ColumnDefinitions="*" RowDefinitions="Auto,Auto,Auto" Padding="10">
-                                <Label Grid.Row="0"
+                                <Grid Grid.Row="3" Grid.Column="0" ColumnDefinitions="*" RowDefinitions="Auto,Auto,Auto" Padding="10">
+                                    <Label Grid.Row="0"
                                        Grid.Column="0"
                                        Text="{Binding DataCriacao}"
                                        FontAttributes="Bold" />
-                                <Label Grid.Row="1"
+                                    <Label Grid.Row="1"
                                        Grid.Column="0"
                                        Text="{Binding Nome}"
                                        FontAttributes="Bold" />
-                                <Label Grid.Row="2"
+                                    <Label Grid.Row="2"
                                        Grid.Column="0"
                                        Text="{Binding Descricao}"
                                        FontAttributes="Italic"
                                        VerticalOptions="End" />
+                                </Grid>
                             </Grid>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-            <Grid Grid.Row="3" ColumnDefinitions="*" RowDefinitions="Auto,Auto,Auto">
-                <Label Grid.Row="0" Text="Total : " FontSize="16" FontAttributes="Bold" HorizontalOptions="End"/>
-                <Label Grid.Row="1" Text="Total Operações" FontSize="12" FontAttributes="Bold" HorizontalOptions="Start"/>
-                <Label Grid.Row="2" Text="Somatório do que deu certo ou errado" FontSize="12" FontAttributes="Bold" HorizontalOptions="Start"/>
-            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Grid Grid.Row="3" ColumnDefinitions="*" RowDefinitions="Auto,Auto,Auto">
+                    <Label Grid.Row="0" Text="Total : " FontSize="16" FontAttributes="Bold" HorizontalOptions="End"/>
+                    <Label Grid.Row="1" Text="Total Operações" FontSize="12" FontAttributes="Bold" HorizontalOptions="Start"/>
+                    <Label Grid.Row="2" Text="Somatório do que deu certo ou errado" FontSize="12" FontAttributes="Bold" HorizontalOptions="Start"/>
+                </Grid>
+            </StackLayout>
         </StackLayout>
-    </StackLayout>
+
+
+        <BoxView x:Name="bvCarregando" Color="Black" Opacity="0.5" IsVisible="false"/>
+        <ActivityIndicator x:Name="aiCarregando" Color="White" IsVisible="false" IsRunning="False" Scale="0.2" />
+    </Grid>
 
 
     <!--<CollectionView ItemsSource="{Binding RetornoCabecalhoDTOs}" IsGrouped="true" >

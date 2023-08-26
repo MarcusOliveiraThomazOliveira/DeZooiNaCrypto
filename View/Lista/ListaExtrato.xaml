@@ -20,57 +20,60 @@
         <viewmodel:ExtratoViewModel/>
     </ContentPage.BindingContext>
 
-    <StackLayout>
-        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-            <Grid Margin="20" RowDefinitions="Auto, Auto,*,Auto, Auto">
-                <dxe:ChoiceChipGroup x:Name="ccgPeriodo" Grid.Row="0" BoxMode="Outlined" Padding="3" SelectedIndex="{Binding Filtrar}">
-                    <dxe:Chip x:Name="ccgDia" IsSelected="True" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Hoje"/>
-                    <dxe:Chip x:Name="ccgSemana" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Semana"/>
-                    <dxe:Chip x:Name="ccgMes" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Mês" />
-                    <dxe:Chip x:Name="ccgAno" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Ano" />
-                    <dxe:Chip x:Name="ccgPersonalizar" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="..." Tap="FiltroPersonalizado" />
-                </dxe:ChoiceChipGroup>
-            </Grid>
-        </StackLayout>
-
-        <ListView ItemsSource="{Binding OperacoesDTO}" HasUnevenRows="True">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="120,*" Padding="10" Margin="2">
-                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding NomeCryptoMoeda}" FontSize="15" FontAttributes="Bold"  HorizontalOptions="Start"/>
-                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding NomeTipoOperacao}" TextColor="{Binding NomeTipoOperacao, Converter={StaticResource valueToColorConverter}}" FontSize="15" FontAttributes="Bold" HorizontalOptions="Start"/>
-
-                            <Grid Grid.Row="1" RowDefinitions="Auto, Auto, Auto" ColumnDefinitions="Auto" Margin="2">
-                                <Label Grid.Row="0" Text="{Binding DataInicialOperacao}" FontSize="12" FontAttributes="Bold" HorizontalOptions="Start"/>
-                                <Label Grid.Row="1" Text="{Binding DataFinalOperacao}" FontSize="12" FontAttributes="Bold" HorizontalOptions="Start"/>
-                                <Grid Grid.Row="2" RowDefinitions="Auto" ColumnDefinitions="*,*,215" Margin="2">
-                                    <Label Grid.Row="0" Grid.Column="0" Text="Ganho/Perda : " FontSize="12" FontAttributes="Bold" HorizontalOptions="Start"/>
-                                    <Label Grid.Row="0" Grid.Column="2" Text="{Binding ValorOperacao}" TextColor="{Binding ValorOperacao, Converter={StaticResource valueToColorConverter}}" FontSize="12" FontAttributes="Bold" HorizontalOptions="End"/>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
-        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-            <Grid Grid.Row="3" ColumnDefinitions="315" RowDefinitions="Auto,Auto">
-                <Label Grid.Row="0" Text="{Binding ValorTotalStr, Mode=TwoWay}" TextColor="{Binding ValorTotal, Converter={StaticResource valueToColorConverter}}" FontSize="15" FontAttributes="Bold" HorizontalTextAlignment="End" HorizontalOptions="FillAndExpand"/>
-
-                <Grid Grid.Row="1" ColumnDefinitions="*" RowDefinitions="Auto, Auto">
-                    <Label Grid.Row="0" Text="{Binding QuantidadeOperacoes, Mode=TwoWay}" FontSize="12" FontAttributes="Bold" />
-                    <Label Grid.Row="1" Text="{Binding QuantidadeOperacoesPositivasNegativas, Mode=TwoWay}" FontSize="12" FontAttributes="Bold" />
+    <Grid>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Grid Margin="20" RowDefinitions="Auto, Auto,*,Auto, Auto">
+                    <dxe:ChoiceChipGroup x:Name="ccgPeriodo" Grid.Row="0" BoxMode="Outlined" Padding="3" ChipTap="Filtrar" >
+                        <dxe:Chip x:Name="ccgDia" IsSelected="True" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Hoje"/>
+                        <dxe:Chip x:Name="ccgSemana" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Semana"/>
+                        <dxe:Chip x:Name="ccgMes" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Mês" />
+                        <dxe:Chip x:Name="ccgAno" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="Ano" />
+                        <dxe:Chip x:Name="ccgPersonalizar" SelectedBackgroundColor="Green" SelectedTextColor="White" Text="..." Tap="FiltroPersonalizado" />
+                    </dxe:ChoiceChipGroup>
                 </Grid>
-            </Grid>
-        </StackLayout>
+            </StackLayout>
 
-        <dxco:BottomSheet x:Name="bsFiltroPersonalizado" ShowGrabber="True" AllowDismiss="True" IsModal="false" HalfExpandedRatio="0.4">
-            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*">
-                <Grid Grid.Row="0" Grid.Column="0" RowDefinitions="Auto,Auto" ColumnDefinitions="*,*">
+            <ListView ItemsSource="{Binding OperacoesDTO}" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Border StrokeShape="{OnPlatform RoundRectangle 10, iOS=RoundRectangle 1}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Card_Background_Dark}}" StrokeThickness="1">
+                                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="120,*" Padding="10" Margin="2">
+                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding NomeCryptoMoeda}" FontSize="15" FontAttributes="Bold"  HorizontalOptions="Start"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding NomeTipoOperacao}" TextColor="{Binding NomeTipoOperacao, Converter={StaticResource valueToColorConverter}}" FontSize="15" FontAttributes="Bold" HorizontalOptions="Start"/>
 
-                    <dxe:DateEdit
+                                    <Grid Grid.Row="1" RowDefinitions="Auto, Auto, Auto" ColumnDefinitions="Auto" Margin="2">
+                                        <Label Grid.Row="0" Text="{Binding DataInicialOperacao}" FontSize="12" FontAttributes="Bold" HorizontalOptions="Start"/>
+                                        <Label Grid.Row="1" Text="{Binding DataFinalOperacao}" FontSize="12" FontAttributes="Bold" HorizontalOptions="Start"/>
+                                        <Grid Grid.Row="2" RowDefinitions="Auto" ColumnDefinitions="*,*,215" Margin="2">
+                                            <Label Grid.Row="0" Grid.Column="0" Text="Ganho/Perda : " FontSize="12" FontAttributes="Bold" HorizontalOptions="Start"/>
+                                            <Label Grid.Row="0" Grid.Column="2" Text="{Binding ValorOperacao}" TextColor="{Binding ValorOperacao, Converter={StaticResource valueToColorConverter}}" FontSize="12" FontAttributes="Bold" HorizontalOptions="End"/>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Grid Grid.Row="3" ColumnDefinitions="315" RowDefinitions="Auto,Auto" Margin="2">
+                    <Label Grid.Row="0" Text="{Binding ValorTotalStr, Mode=TwoWay}" TextColor="{Binding ValorTotal, Converter={StaticResource valueToColorConverter}}" FontSize="15" FontAttributes="Bold" HorizontalTextAlignment="End" HorizontalOptions="FillAndExpand"/>
+
+                    <Grid Grid.Row="1" ColumnDefinitions="*" RowDefinitions="Auto, Auto" Margin="2">
+                        <Label Grid.Row="0" Text="{Binding QuantidadeOperacoes, Mode=TwoWay}" FontSize="12" FontAttributes="Bold" />
+                        <Label Grid.Row="1" Text="{Binding QuantidadeOperacoesPositivasNegativas, Mode=TwoWay}" FontSize="12" FontAttributes="Bold" />
+                    </Grid>
+                </Grid>
+            </StackLayout>
+            
+            <dxco:BottomSheet x:Name="bsFiltroPersonalizado" ShowGrabber="True" AllowDismiss="True" IsModal="false" HalfExpandedRatio="0.4">
+                <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*">
+                    <Grid Grid.Row="0" Grid.Column="0" RowDefinitions="Auto,Auto" ColumnDefinitions="*,*">
+
+                        <dxe:DateEdit
                         Grid.Row="0"
                         Grid.Column="0"
                         x:Name="dtDataInicial"
@@ -82,7 +85,7 @@
                         CornerRadius="10"
                         Margin="3"/>
 
-                    <dxe:DateEdit
+                        <dxe:DateEdit
                         Grid.Row="0"
                         Grid.Column="1"
                         x:Name="dtDataFinal"
@@ -93,15 +96,17 @@
                         BoxMode="Outlined"
                         CornerRadius="10"
                         Margin="3"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2" RowDefinitions="Auto,Auto" ColumnDefinitions="*">
+                        <dxco:SimpleButton Grid.Row="0" Text="Filtrar" Clicked="Filtrar"  BackgroundColor="blue" Margin="1"/>
+                        <dxco:SimpleButton Grid.Row="1" Text="Cancelar" Clicked="Cancelar"  BackgroundColor="PaleVioletRed" Margin="1"/>
+                    </Grid>
                 </Grid>
-
-                <Grid Grid.Row="2" RowDefinitions="Auto,Auto" ColumnDefinitions="*">
-                    <dxco:SimpleButton Grid.Row="0" Text="Filtrar" Clicked="Filtrar"  BackgroundColor="blue" Margin="1"/>
-                    <dxco:SimpleButton Grid.Row="1" Text="Cancelar" Clicked="Cancelar"  BackgroundColor="PaleVioletRed" Margin="1"/>
-                </Grid>
-            </Grid>
-        </dxco:BottomSheet>
-
-    </StackLayout>
-
+            </dxco:BottomSheet>
+            
+        </StackLayout>
+        <BoxView x:Name="bvCarregando" Color="Black" Opacity="0.5" IsVisible="false"/>
+        <ActivityIndicator x:Name="aiCarregando" Color="White" IsVisible="false" IsRunning="False" Scale="0.2" />
+    </Grid>
 </ContentPage>

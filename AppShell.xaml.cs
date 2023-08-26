@@ -1,6 +1,5 @@
 ﻿using DeZooiNaCrypto.View;
-
-namespace DeZooiNaCrypto;
+namespace DeZooiNaCrypto.View;
 
 public partial class AppShell : Shell
 {

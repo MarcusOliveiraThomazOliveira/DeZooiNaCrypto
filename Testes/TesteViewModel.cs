@@ -14,9 +14,9 @@ namespace DeZooiNaCrypto.Testes
         public TesteViewModel()
         {
             RetornoCabecalhoDTOs = new();
-            CarrgarLista();
+            //CarrgarLista();
 
-            CarregaListaSimples();
+            //CarregaListaSimples();
         }
 
         private void CarrgarLista()
@@ -39,18 +39,27 @@ namespace DeZooiNaCrypto.Testes
             }
         }
 
-        private void CarregaListaSimples()
+        public async Task<bool> CarregaListaSimples()
         {
-            for (int i = 0; i < 360; i++)
+            try
             {
-                RetornoListaSimples.Add(
-                    new RetornoListaSimples()
-                    {
-                        Nome = "Nome " + i.ToString(),
-                        Descricao = "Descrição " + i.ToString()
-                    }
-                    );
+                for (int i = 0; i < 1000; i++)
+                {
+                    RetornoListaSimples.Add(
+                        new RetornoListaSimples()
+                        {
+                            Nome = "Nome " + i.ToString(),
+                            Descricao = "Descrição " + i.ToString()
+                        }
+                        );
+                }
+                return true;
             }
+            catch
+            {
+                return false;
+            }
+
         }
     }
 
